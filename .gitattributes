@@ -1,0 +1,8 @@
+# Every text file is stored and checked out with LF line endings, on every
+# platform. The .claude/hooks/*.sh scripts run under bash and break on CRLF;
+# a Windows clone with core.autocrlf=true would otherwise convert them.
+* text=auto eol=lf
+*.sh text eol=lf
+*.png binary
+*.jpg binary
+*.pdf binary

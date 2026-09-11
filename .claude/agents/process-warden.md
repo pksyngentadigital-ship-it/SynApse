@@ -92,9 +92,12 @@ Work through these. Each maps to a rule ID you must cite.
       DECISIONS entry — say which.
     - Protection absent, **and** the interim substitute is in place:
       `.githooks/pre-push` exists, starts with `#!/`, refuses `refs/heads/main`,
-      and `git config --get core.hooksPath` prints `.githooks` — **AMBER**.
-      Name the substitute, quote the un-park trigger from DECISIONS
-      ("Pro is connected"), and propose nothing else: the item is parked.
+      and `git config --get core.hooksPath` prints `.githooks` — **AMBER,
+      substitute verified**. The substitute was proven by a live push on
+      2026-09-12 (DECISIONS 2026-09-11, INCIDENT, *Guard proven*): installed,
+      logic correct, invoked by git. Report it as
+      `AMBER [G1] — no branch protection; substitute .githooks/pre-push verified;
+      parked until Ahsan says "Pro is connected"` and propose nothing else.
     - Protection absent **and** the substitute missing — hook file gone, or
       hooksPath unset or pointing elsewhere — **RED**. (G1)
 18. Was a **keystone PR merged by an agent** rather than by Ahsan? Check merged

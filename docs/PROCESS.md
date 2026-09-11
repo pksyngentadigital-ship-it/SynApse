@@ -452,6 +452,22 @@ document, because Ahsan stops checking. Before writing "X is denied" or "X
 cannot happen", find the line in `settings.json` or the hook that makes it
 true. If there is none, write which strength actually applies.
 
+### Proving a guard — two rules, written after the 2026-09-11 incident
+
+**Never prove a guard by performing the dangerous action against the real
+thing while the guard is unverified.** Verify the guard is *active* first, with
+a read command whose output Ahsan can see; only then test it. A push-blocking
+hook is tested by `git push --dry-run`, or by invoking the script directly with
+the refs on stdin — never by a live push to `main` on the assumption that the
+hook will catch it. This was the direct cause of the incident: the probe push
+ran before the hook was wired, succeeded, and marked PR #1 merged with no human
+read (DECISIONS 2026-09-11, INCIDENT).
+
+**Installation and verification are two separate steps with two outputs Ahsan
+can see.** Never chain them with `&&`. A failed `chmod` silently stopped the
+chain before `core.hooksPath` was set, and the probe ran against an inactive
+hook. Install; show the read-back; then, in a separate command, test.
+
 ### Three layers, in order of reliability
 
 **Layer 1 — hooks. The only real guarantee.** They fire whether or not anyone

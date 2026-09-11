@@ -262,3 +262,64 @@ GitHub↔Linear integration's repo access to check. Everything else carries
 forward unchanged from entry 002's "Open at close".
 
 ---
+
+## 004 · 2026-09-12 · Phase 0, session 0.2 continuation · decision and evidence
+
+**Goal.** Get Ahsan's ruling on the incident and his own proof that the pre-push
+guard works, then turn both into written rules and open PR #2 for session 0.2's
+work (SYN-7).
+
+**Shipped.** Nothing merged. Session 0.2's earlier commits (`58b5deb`,
+`973b37c`) sit on `chore/rule-book`; this continuation's edits — PROCESS §13,
+the two DECISIONS updates, STATUS, warden check 17 — were still uncommitted when
+this entry was written, and go to Ahsan as PR #2, "Closes SYN-7", docs only.
+SYN-7 was created after Ahsan authorised it as the one issue beyond his
+two-issue cap.
+
+**What happened.** Ahsan ruled first: accept `main` as it stands, no restore —
+"a force-push to fix a bookkeeping problem is worse than an honest record" — and
+he read PR #1's diff after the fact, which is the PR5 control that PR #1 never
+got at merge time. He then proved the hook from his own terminal in three steps:
+`core.hooksPath` → `.githooks`, the hook at mode `100755`, and a **live**
+`git push origin chore/rule-book:main` — the exact action that caused the
+incident — refused with "pre-push: REFUSED … nothing was pushed". All three
+links verified: installed, logic correct, invoked by git. That output is quoted
+in the INCIDENT entry rather than paraphrased. The incident then became rules:
+PROCESS §13 gained "Proving a guard" — never prove a guard by performing the
+dangerous action against the real thing while it is unverified, and installation
+and verification are two separate steps with two visible outputs, never chained
+with `&&`. The parked GitHub Pro entry gained the measured cost: an unprotected
+`main` lets a direct push silently mark every open PR whose commits it contains
+as merged. It stays parked. Warden check 17's AMBER wording was tightened to
+"substitute verified".
+
+**Went wrong.** Nothing new this continuation. The Base44 MCP loaded on restart
+— its tools appeared — but is not authorised; OAuth needs `/mcp` in an
+interactive session, so STATUS records it as registered, loads, not yet
+authorised.
+
+**Decisions.** "INCIDENT: `main` received a direct push during the pre-push hook
+probe" (2026-09-11), closed 2026-09-12 with accept (b′) plus the guard-proven
+evidence. "PARKED: GitHub Pro for branch protection and the production gate"
+(2026-09-11), amended with the measured cost.
+
+**Learned.** A guard proven by the person it protects, with the live dangerous
+action, is a different kind of fact from one Claude reports as wired: Ahsan's
+terminal output is the evidence, Claude's read-back was only the precondition.
+The other half is that the three-layer design held where it was supposed to —
+the weakest layer, an assumed hook, is what failed; the `settings.json` deny
+caught Claude's next attempt, and the hook now catches Ahsan's.
+
+**Evidence seen by Ahsan.** PR #1's full diff, read after the fact. His own
+terminal output for all three hook checks and the live refused push — produced
+by him, not reported to him. The PROCESS §13 and DECISIONS text built from it,
+which he reads again in PR #2.
+
+**Open at close.** PR #2: Ahsan reads and merges. Linear should then move SYN-7
+to Done; if it does not, the GitHub↔Linear integration is confirmed broken
+rather than merely unverified. Base44 OAuth via `/mcp`, Ahsan, interactive
+session. Still carried and still not done: `close.md` / `journal-writer.md`
+vs PROCESS A1, and the STATUS length cap. Session 0.1's carry-overs (Cropwise
+and AWS access, the Meta app owner) were not touched again.
+
+---

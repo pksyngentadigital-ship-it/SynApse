@@ -133,6 +133,11 @@ from this clone, wired by `core.hooksPath`, plus a deny rule in
 `.claude/settings.json`. It protects this clone only and cannot require a
 status check. See the warden proportionality entry below for how it is audited.
 
+**Cost, measured 2026-09-11, not theoretical.** With `main` unprotected, a
+direct push silently marks every open PR whose commits it contains as merged,
+bypassing every review gate: PR #1 was recorded MERGED by the shared account
+with no human read (INCIDENT entry below). Kept parked; the cost is now named.
+
 ---
 
 ## 2026-09-11 — Open product decisions D1–D7: state, owner, what each blocks
@@ -251,3 +256,29 @@ is not yet verified. This changes the options:
 
 Warden check 18 will see PR #1 merged by a non-human on a non-keystone PR: not
 a RED under PR5, but the journal names it so nobody reads it as a clean merge.
+
+**Decided 2026-09-12 — accept (b′).** Ahsan: "accept main as it stands. Do not
+restore. The content is correct and was going to be merged; a force-push to fix
+a bookkeeping problem is worse than an honest record." **Ahsan read PR #1's
+diff after the fact on 2026-09-12.** That read is the PR5 control for PR #1.
+
+**Guard proven 2026-09-12.** All three links verified from Ahsan's own
+terminal: installed (`git config --get core.hooksPath` → `.githooks`;
+`git ls-files -s .githooks/pre-push` → `100755`), logic correct, and invoked
+by git on a **live** push — the exact action that caused the incident:
+
+```
+PS C:\Users\Abdullah\SynApse> git push origin chore/rule-book:main
+pre-push: REFUSED — this push would update main on 'origin' directly
+          (refs/heads/chore/rule-book -> refs/heads/main).
+pre-push: main changes only through a merged pull request (docs/PROCESS.md PR5, G1).
+pre-push: nothing was pushed.
+error: failed to push some refs to 'https://github.com/pksyngentadigital-ship-it/SynApse.git'
+```
+
+**What went right.** The three-layer design in PROCESS §13 worked as intended.
+The weakest layer, an assumed-but-unwired hook, failed. The stronger layers
+caught it: the `settings.json` deny rule blocked Claude's next push-to-main
+attempt before git ran, and the pre-push hook now blocks Ahsan's. The incident
+cost one unreviewed docs merge and produced two rules (PROCESS §13, *Proving a
+guard*) worth more than it cost.

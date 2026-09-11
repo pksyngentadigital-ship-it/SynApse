@@ -1,0 +1,38 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# env and secrets — never committed
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+
+# build output
+dist/
+build/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+
+# Claude Code local state
+.claude/allow-protected
+.claude/.stop-count
+.claude/settings.local.json
+
+# terraform local state
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+
+# OS and editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/*
+!.vscode/extensions.json

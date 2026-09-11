@@ -1,0 +1,89 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm *)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git show*)",
+      "Bash(git branch*)",
+      "Bash(git add*)",
+      "Bash(git commit*)",
+      "Bash(git checkout*)",
+      "Bash(git switch*)",
+      "Bash(gh pr create*)",
+      "Bash(gh pr list*)",
+      "Bash(gh pr view*)",
+      "Bash(gh run list*)",
+      "Bash(gh run view*)",
+      "Bash(docker compose *)",
+      "Bash(date*)",
+      "Read",
+      "Glob",
+      "Grep",
+      "Bash(gh pr merge --squash*)",
+      "Bash(gh pr checks*)",
+      "Bash(gh pr edit*)",
+      "Bash(gh api*)",
+      "Bash(gh repo view*)",
+      "Bash(gh repo edit*)",
+      "Bash(gh label*)",
+      "Bash(gh workflow*)",
+      "Bash(git push*)"
+    ],
+    "deny": [
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git reset --hard*)",
+      "Bash(rm -rf *)",
+      "Bash(terraform apply*)",
+      "Bash(aws *)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(**/*.pem)",
+      "Read(**/id_rsa*)",
+      "Bash(gh pr merge --admin*)",
+      "Bash(gh api -X DELETE*)",
+      "Bash(gh api --method DELETE*)",
+      "Bash(gh secret*)",
+      "Bash(gh repo delete*)",
+      "Bash(gh repo transfer*)",
+      "Bash(git filter-branch*)",
+      "Bash(git rebase -i*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/protect-paths.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pnpm lint:fix --silent 2>/dev/null; pnpm typecheck --silent 2>/dev/null; true"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/stop-if-red.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

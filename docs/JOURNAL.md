@@ -214,3 +214,51 @@ settles which wins. Session 0.1's other carry-overs (Cropwise and AWS access
 requests, the Meta app owner) were not touched this session.
 
 ---
+
+## 003 · 2026-09-11 · Phase 0, session 0.2 · correction
+
+**Corrects entry 002.** Entry 002 says "PR #1 is still open on `chore/rule-book`"
+and reports the incident as `main` moving. Both were already false when written.
+
+**Goal.** Record what was established about the incident after entry 002 was
+appended (SYN-5).
+
+**Shipped.** Nothing merged by a human. `gh pr view 1` reports PR #1 **MERGED**,
+`mergedAt` 2026-09-11T13:02:13Z, `mergedBy` `pksyngentadigital-ship-it` — the
+shared account — with merge commit `337fb78`. GitHub treated the incident push
+as the merge. No human read the PR before it merged; the merge time is the time
+of the bad push. Session 0.2's own work is one commit, `58b5deb`, on
+`chore/rule-book`, with no PR open for it.
+
+**What happened.** Three further consequences surfaced after entry 002 was
+written. Delete-branch-on-merge removed `chore/rule-book` on the remote, so
+Claude's next push recreated it ("[new branch]") and this was noticed only when
+reading the push output afterwards. Linear did not move SYN-5 to Done: the
+GitHub↔Linear integration Ahsan reported connected did not fire on this merge,
+and STATUS now carries it as not verified. Local `main` was fast-forwarded to
+`origin/main` (`337fb78`) so `/resume`'s reconcile does not report a false
+disagreement. Opening PR #2 for `58b5deb` needs a Linear issue, and Ahsan capped
+the session at two, so Claude stopped and asked rather than creating one.
+
+**Went wrong.** Entry 002 itself: it understated the incident by reporting only
+the branch move, having never checked the PR's state. Nothing else in entry 002
+changes.
+
+**Decisions.** The same-day update to "INCIDENT: `main` received a direct push
+during the pre-push hook probe" (2026-09-11), which withdraws option (a) restore
+and recommends (b′) accept.
+
+**Learned.** After an unintended push, check what the push did to everything
+downstream of it — the PR, the branch, the integration — not just the ref that
+moved. A journal entry that understates an incident is exactly the fiction the
+journal exists to prevent, which is why this entry exists at all.
+
+**Evidence seen by Ahsan.** The `gh pr view 1` output above and the DECISIONS
+update built from it. He has still not read PR #1's diff.
+
+**Open at close.** Ahsan's ruling on (b′) accept, and his after-the-fact read of
+PR #1's diff. One Linear issue to authorise so `58b5deb` can go in as PR #2. The
+GitHub↔Linear integration's repo access to check. Everything else carries
+forward unchanged from entry 002's "Open at close".
+
+---

@@ -231,3 +231,23 @@ next push-to-main attempt, so the second probe was refused by the permission
 layer before git ran. Claude therefore cannot run the git-level probe at all;
 Ahsan runs it from his own terminal (see STATUS). Rule for the future: **wire,
 verify the wiring with a read command, then probe — never in one chain.**
+
+**Update, same day, after the entry above was written.** GitHub treated the
+direct push as the merge of PR #1: the PR is **MERGED**, `mergedAt`
+2026-09-11T13:02:13Z, `mergedBy` the shared account, merge commit `337fb78`,
+no human read it. Delete-branch-on-merge then removed `chore/rule-book`;
+Claude's next push recreated it without noticing. Linear did **not** move
+SYN-5 to Done, so the GitHub↔Linear integration did not fire on this merge and
+is not yet verified. This changes the options:
+
+- **(a) Restore** now leaves GitHub showing a merged PR whose commits are not
+  on `main`. A contradictory record. No longer recommended.
+- **(b′) Accept, recommended.** `main` stays at `337fb78`. PR #1 is recorded as
+  merged by the incident, not by Ahsan. The control PR5 cares about is the
+  *read*: Ahsan reads PR #1's diff after the fact and says so in the journal.
+  Session 0.2's commit (`58b5deb`, on `chore/rule-book`) goes in as PR #2
+  under a new issue, which Ahsan authorises because he capped this session at
+  two issues.
+
+Warden check 18 will see PR #1 merged by a non-human on a non-keystone PR: not
+a RED under PR5, but the journal names it so nobody reads it as a clean merge.

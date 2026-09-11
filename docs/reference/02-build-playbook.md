@@ -1,7 +1,7 @@
 # Synapse build playbook — engineering doctrine
 
 > **What this file is.** The engineering doctrine: the laws, the default stack,
-> the repo shape, the day-one architecture rules, the L1 milestone plan, and the
+> the repo shape, the day-one architecture rules, the Capture milestone plan, and the
 > per-task build cycle. Extracted from the Synapse Build Playbook v1, which is
 > built on the *Prompt to Production* laws.
 >
@@ -41,7 +41,9 @@ because the technical framing made it look like a technical decision.
 ## The division of labour
 
 **You:** write the spec and the invariants · approve every plan before code is
-written · read every piece of evidence · click merge on every PR · own every
+written · read every piece of evidence · merge by tier per `docs/PROCESS.md`
+PR5 (say "merge it" on normal code; merge keystones yourself, in the browser) ·
+own every
 account, credential and publish button · make every product decision · say
 "park that" and "show me it failing first."
 
@@ -67,7 +69,7 @@ means you must be precise; *forgets everything* means the memory lives in files.
 | **Branch** | A parallel line of work named after the task | One per task. Claude creates it; you never touch `main` directly |
 | **Diff** | The exact lines added and removed — the truth about what changed | Ask "diff what changed against what was in scope." Read the summary |
 | **PR** | Pull request — a proposal to merge, with description, diff and CI attached | Your review surface. Read the description and evidence, then Merge |
-| **Merge** | Accepting a PR so its changes join `main` | You click it. Nobody else. Note: *close* rejects a PR — never say close when you mean merge |
+| **Merge** | Accepting a PR so its changes join `main` | Tiered, per `docs/PROCESS.md` PR5: Claude merges docs and chore PRs once CI is green; Claude merges normal code only after you read the evidence and say "merge it"; keystones you merge yourself, in the browser. Note: *close* rejects a PR — never say close when you mean merge |
 | **CI** | GitHub runs your check command on every PR, green tick or red cross | Red means do not merge. Ever |
 | **Migration** | A versioned file that changes database structure, run in order | Ask "does this PR include a migration?" If yes it gets the keystone review |
 | **Env var** | A setting read from the environment — key, URL, flag — never in code | Documented in `.env.example`; real values in the secret manager |
@@ -77,7 +79,7 @@ means you must be precise; *forgets everything* means the memory lives in files.
 **What "200 PRs" means:** granularity, not effort. A PR is one task, one
 concern, reviewable in five minutes. Two hundred of them is a whole product
 built in two hundred reviewable steps, with no step big enough to hide a mistake
-in. L1 alone is roughly 80–110.
+in. Capture alone is roughly 80–110.
 
 ---
 
@@ -99,7 +101,7 @@ manage.
 | Domain + TLS | A stable HTTPS address for webhooks. Meta refuses plain HTTP | First deploy | ~USD 15/yr; TLS free on AWS |
 | Error tracking | Sentry or equivalent — a bad deploy visible in minutes, not in a WhatsApp from the field | First deploy | Free tier |
 | Secret manager | AWS Secrets Manager. Every credential lives here, never in the repo, never in a chat | First deploy | Pennies |
-| Expo / EAS | Builds and distributes the SO app without app stores during pilot | L2 | Free tier |
+| Expo / EAS | Builds and distributes the SO app without app stores during the Pilot | Act | Free tier |
 
 **The split of duties, non-negotiable.** You create every account, enter every
 credential, accept every terms-of-service, and press every publish button.
@@ -130,7 +132,7 @@ which a non-engineer can trust a codebase they cannot read line by line.
 | Scoring engine | `packages/scoring` — pure TS, zero deps, zero I/O | Thousands of test cases in milliseconds. Replay history against a new version. Version-hash every score. This is why the engine is auditable |
 | Intent extraction | Claude API from a queue worker, output validated against the schema | A model call is slow and can fail; it belongs on the queue with retries, never inline in a webhook |
 | Web | Next.js | Boring. Server-rendered where dashboards read heavy queries. Same schema package |
-| Mobile (L2) | Expo / React Native, SQLite on device, sync queue | Offline-first from the first screen. Flutter is a fine alternative if mandated, at the cost of a second language |
+| Mobile (Act) | Expo / React Native, SQLite on device, sync queue | Offline-first from the first screen. Flutter is a fine alternative if mandated, at the cost of a second language |
 | Auth | Email + OTP for pilot; SSO (Azure AD / Okta) via OIDC later | Design the user table for SSO from day one — an `external_id` column costs nothing now and a migration later |
 | Infra | Docker; Terraform in `infra/`; AWS ECS Fargate + RDS + ElastiCache + SQS | Rung 1. Auto-scaling, no servers to patch, reproducible from code |
 | CI | GitHub Actions running `pnpm check` | The same command you run locally. If they differ, one of them is lying |
@@ -174,7 +176,7 @@ synapse/
 │   ├── api/                     ← fastify: webhooks, REST, health
 │   ├── worker/                  ← queue consumers: extraction, enrichment, scoring
 │   ├── web/                     ← next.js: dashboards, admin
-│   └── mobile/                  ← expo (L2)
+│   └── mobile/                  ← expo (Act)
 ├── infra/                       ← terraform (from M1 staging)
 ├── docker-compose.yml           ← postgres + redis locally
 ├── .env.example                 ← every variable that exists, documented
@@ -301,12 +303,19 @@ engine reads the active version; the audit trail is free.
 
 ---
 
-## L1 in milestones
+## Capture in milestones
 
-L1 on the canvas is the capture zone: nine sources, the ingestion layer, and
-Grower 360. Built as nine milestones, each a walking, demonstrable step.
+Build scopes take the name of the canvas zone they deliver. **Capture** is
+Zone 01 — nine sources, the ingestion layer, and Grower 360 — built as nine
+milestones M0–M8, each a walking, demonstrable step. **Act** is the Sales
+Officer app. Later scopes are not named until they exist. The canvas's layer
+labels L1–L9 are architecture, never scope.
 
-L1 cannot be built "alone" — a source that emits events into nothing proves
+**Capture is not the Pilot.** Capture is all nine connectors plus Grower 360.
+The Pilot is the go-live subset: Crop Doctor, WhatsApp and one NPI campaign in
+two zones, on Engine v1.
+
+Capture cannot be built "alone" — a source that emits events into nothing proves
 nothing. So M1 lays a thin pipe all the way through to a minimal score and a
 minimal list, and every later milestone widens the intake.
 
@@ -329,6 +338,11 @@ layer touched once. **Then deployed to staging.**
   visible. Same thing works on staging.
 - **Invariants wired:** INV-3 (unique constraint — post the same event twice, see
   one lead), INV-8 (no score without version and factors).
+- **v0 is deliberate, not an error.** It is the walking-skeleton stub: the five
+  weights only, no modifiers, no tier logic beyond a single threshold. It sits
+  below Engine v1 by design. Engine v1 — the full rules scorecard with the four
+  modifiers and the tier rules — is the Pilot engine and arrives with the
+  scoring milestones, not here.
 - **Gate:** this proves the architecture while changing it is still cheap. If the
   queue, the schema package or the scoring package feel wrong, change them now.
 - *~8–12 PRs · 4–6 sessions*
@@ -367,7 +381,7 @@ queue, mapping to Lead Event, contract test with recorded payloads, health entry
   connector. Test it by regenerating WhatsApp from the template and diffing.
 - **Invariant wired:** INV-9 — kill the WhatsApp worker; the M1 synthetic
   endpoint still works.
-- *~14–18 PRs · 7–10 sessions · the biggest milestone in L1*
+- *~14–18 PRs · 7–10 sessions · the biggest milestone in Capture*
 
 ### M5 — Second connector via the template: Facebook
 Meta lead ads webhook plus page DMs, generated with `/add-connector facebook`.
@@ -402,7 +416,7 @@ from the template, using the M5 campaign attribution convention.
   independent by construction, one per worktree.
 - *~10–14 PRs · 4–6 sessions*
 
-### M8 — Harden L1
+### M8 — Harden Capture
 Realistic-data pass with production-shaped growers — Urdu names, shared numbers,
 40-acre and 2-acre farms, sparse and overflowing rows. The burst test: 10,000
 synthetic webhooks in twenty minutes, queue depth watched, nothing dropped.
@@ -412,8 +426,8 @@ drill on RDS, timed. Security pass on every webhook.
   latency under 100ms; a restore from snapshot into a scratch environment passes
   the smoke test; the vacuity sweep is done and each critical check has a named
   broken state it catches.
-- **Gate:** L1 is done. Monthly cost estimate approved. STATUS says exactly what
-  L2 starts from.
+- **Gate:** Capture is done. Monthly cost estimate approved. STATUS says exactly
+  what Act starts from.
 - *~12–16 PRs · 6–8 sessions*
 
 ### From milestone to task to PR
@@ -449,7 +463,9 @@ temptation to skip lives.*
    them out of the report. The diff is the truth.
 8. **Open the PR.** You read the description and evidence on GitHub — not every
    line of code.
-9. **Merge.** Green CI, evidence seen, findings addressed → you click Merge.
+9. **Merge.** Green CI, evidence seen, findings addressed → merged by tier per
+   `docs/PROCESS.md` PR5: docs and chore by Claude, normal code by Claude on
+   your "merge it", keystones by you in the browser.
 10. **Close the task.** STATUS.md, DECISIONS.md if needed, then `/clear`.
 
 **When you are stuck:** after about two genuine attempts, stop. Write what was
@@ -510,7 +526,7 @@ wide reads · side questions elsewhere · the stuck note and a fresh start.
 |---|---|---|
 | One task | One session, one PR, one `/clear` | Same task across three sessions — decompose it or write the stuck note |
 | One milestone | 4–18 PRs, 2–10 sessions | PR count doubles the plan — scope crept mid-milestone |
-| L1 as scoped | 80–110 PRs, 40–55 sessions, ~3–4 months part-time | Month two with M3 not done — M2's spike found something and the plan was not updated |
+| Capture as scoped | 80–110 PRs, 40–55 sessions, ~3–4 months part-time | Month two with M3 not done — M2's spike found something and the plan was not updated |
 | Reviews | ~15–20% of total usage | Zero — reviews are being skipped, and Law 1 is being violated |
 
 **Product cost, separately.** Once deployed: AWS at rung 1 (~USD 120–250/month

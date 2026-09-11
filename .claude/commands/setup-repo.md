@@ -31,7 +31,7 @@ now, say so, and create a Linear issue to add the check in M0-T1 when CI exists.
 Never invent a check name — a required check that never reports blocks every PR
 permanently.
 
-**3. Labels** — the seven from PROCESS.md L2: `keystone`, `spike`, `bug`,
+**3. Labels** — the seven from PROCESS.md LIN2: `keystone`, `spike`, `bug`,
 `change-request`, `feedback`, `tech-debt`, `parked`. Delete GitHub's defaults
 that we will not use.
 

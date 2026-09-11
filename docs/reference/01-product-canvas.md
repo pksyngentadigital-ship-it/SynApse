@@ -26,8 +26,10 @@ Android, in Urdu or a regional language.
 
 **Scope:** 9 sources · 9 layers · 6 dashboards · 1 closed loop.
 
-**Phase 1:** Crop Doctor + WhatsApp + one NPI campaign, two zones, rules-based
-scoring.
+**Pilot:** Crop Doctor + WhatsApp + one NPI campaign, two zones, Engine v1
+(rules-based scoring). The Pilot is the go-live subset. It is not the same as
+**Capture**, the first build scope, which is all nine connectors plus Grower 360
+(see `02-build-playbook.md` §Capture in milestones).
 
 ---
 
@@ -43,7 +45,7 @@ investment; each produces demand signal today that dies where it lands.
 
 **Architectural rule: every source is optional.** Synapse must run correctly
 with three connected and six disconnected. No source is on another source's
-critical path. This is what lets Phase 1 ship in one crop season rather than
+critical path. This is what lets the Pilot ship in one crop season rather than
 waiting for the slowest system owner.
 
 Confidence flags: `[confirmed]` the capability publicly exists and the pattern
@@ -75,7 +77,7 @@ consent-sensitive, because the grower came for advice, not a sales call.
 | **TikTok** | TikTok Ads lead-generation API / webhook | Lead-form fields, campaign ID | Campaign attribution · intent (30) | `[validate]` confirm lead-gen availability for the PK account |
 
 WhatsApp is the lowest-friction high-intent channel available and the natural
-Phase 1 source. It is also where the acreage callback runs, and where opt-in
+Pilot source. It is also where the acreage callback runs, and where opt-in
 status is cleanest — the grower messaged us first. Lead-form leads arrive
 structured and shallow; DMs arrive unstructured and deep; both need the LLM
 intent step, for different reasons.
@@ -236,11 +238,11 @@ the weights *discussable* with sales leadership rather than imposed on them.
 
 #### Model maturity
 
-| Phase | What it is | When |
+| Engine | What it is | When |
 |---|---|---|
-| **1 — Rules** | Deterministic scorecard, weights set by agronomy and sales. No training data required, live day one, fully explainable. Real job: generating the labelled outcomes everything after depends on. | Months 0–4 |
-| **2 — Supervised** | Gradient-boosted model on officer dispositions and captured conversion value, predicting P(conversion) × expected value. Realistically needs one full season of closed outcomes before it beats the scorecard. | Months 4–9 |
-| **3 — Optimisation** | Per-brand uplift, next-best-product on the lead card, channel choice. | Months 9–18 |
+| **v1 — Rules** | Deterministic scorecard, weights set by agronomy and sales. No training data required, live day one, fully explainable. Real job: generating the labelled outcomes everything after depends on. | Months 0–4 |
+| **v2 — Supervised** | Gradient-boosted model on officer dispositions and captured conversion value, predicting P(conversion) × expected value. Realistically needs one full season of closed outcomes before it beats the scorecard. | Months 4–9 |
+| **v3 — Optimisation** | Per-brand uplift, next-best-product on the lead card, channel choice. | Months 9–18 |
 
 **Guardrail: the scorecard is never switched off.** It is the fallback and the
 explanation layer.
@@ -286,7 +288,7 @@ capture what the sale was actually worth.*
 |---|---|
 | **Territory assignment** | Geo → beat → Sales Officer. Unmapped geography goes to the region pool. **Conflict rule to agree before build:** the officer owns the relationship, the franchise owns fulfilment, and both appear on the lead card. Without a stated rule this becomes a channel conflict in month one. |
 | **Load balancing** | Daily lead cap per officer, configurable in admin; overflow to the region pool, visible to the RSM. Hot fills the cap before High-Potential. **The failure mode of a scoring engine that works** is dumping four hundred leads on one officer in week one — that officer stops opening the app and the pilot is over before the model has seen a single conversion. |
-| **SLA clock & escalation** | Hot 24h · High-Potential 72h · Campaign per campaign. Breach visible to RSM, reassigned within 24h. This is the mechanism that converts a good score into a contacted grower; without it the queue is just a better-sorted list. **SLA compliance is the Phase 1 headline metric** — the cheapest possible proof the system changed field behaviour. Measure compliance before linking anything to incentives. |
+| **SLA clock & escalation** | Hot 24h · High-Potential 72h · Campaign per campaign. Breach visible to RSM, reassigned within 24h. This is the mechanism that converts a good score into a contacted grower; without it the queue is just a better-sorted list. **SLA compliance is the Pilot headline metric** — the cheapest possible proof the system changed field behaviour. Measure compliance before linking anything to incentives. |
 | **Nurture automation** | WhatsApp templates, SMS, in-app content matched to crop, stage and local pest pressure. Any response re-scores the grower immediately. Bound by the same consent and opt-out rules. |
 
 ### L8 · Sales Officer mobile app — the only screen where data is created
@@ -314,7 +316,7 @@ has never seen a failure, and dashboards nobody believes.*
 
 | State | Detail |
 |---|---|
-| **Converted** | SKU, quantity, PKR value, fulfilling franchise, date. **Phase 1: self-declared by the officer.** Phase 2 would reconcile against franchise invoice. |
+| **Converted** | SKU, quantity, PKR value, fulfilling franchise, date. **Pilot: self-declared by the officer.** Wave 2 would reconcile against franchise invoice. |
 | **Lost** | **Mandatory reason code** — no need / no budget / no stock / competitor / wrong contact. Free text optional; the code is not. Losses are more informative than wins for a young model, and "no stock" repeated across a district is a supply-chain finding no other system would surface. |
 | **Unreachable → nurture** | After two failed contact attempts. Returns to the pool, re-scored on the next signal. Unreachable is a fact about the contact data, not about the grower's interest. Also flags contact-data quality back to the source. |
 

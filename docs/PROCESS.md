@@ -80,25 +80,26 @@ migration follows it. The path-protection hook enforces this.
 
 ## 2. Linear
 
-**L1 — Structure.** One project, *Synapse*. Milestones M0–M8 (later L2+).
+**LIN1 — Structure.** One project, *Synapse*. Milestones M0–M8 (Act and later
+scopes only once they exist).
 Issues are tasks. No cycles — a solo builder does not need sprints.
 
-**L2 — Labels.** `keystone` · `spike` · `bug` · `change-request` · `feedback` ·
+**LIN2 — Labels.** `keystone` · `spike` · `bug` · `change-request` · `feedback` ·
 `tech-debt` · `parked`. Priority P1–P3 on bugs only.
 
-**L3 — Status moves itself** through the GitHub integration: branch pushed →
+**LIN3 — Status moves itself** through the GitHub integration: branch pushed →
 In Progress; PR opened → In Review; PR merged → Done. Claude never sets Done by
 hand. If a status looks wrong, the branch or the PR is wrong — fix that, not the
 status.
 
-**L4 — Who writes issues.** Claude creates and updates issues through the
+**LIN4 — Who writes issues.** Claude creates and updates issues through the
 Linear MCP in *planning and triage sessions only*. A build session touches only
 the one issue it is working on.
 
-**L5 — Order.** Order inside a milestone is execution order. `/resume` proposes
+**LIN5 — Order.** Order inside a milestone is execution order. `/resume` proposes
 the top Todo issue in the open milestone. Ahsan may override by naming a key.
 
-**L6 — Parking.** Parked = Backlog + `parked` label + an un-park trigger in the
+**LIN6 — Parking.** Parked = Backlog + `parked` label + an un-park trigger in the
 description + a `DECISIONS.md` entry. A park without a named trigger is a
 deletion that has not admitted it yet. "Revisit later" is not a trigger.
 
@@ -367,8 +368,13 @@ billable service.** Ahsan enters every credential and presses every publish
 button. If Claude finds itself needing a secret, it asks for the variable *name*
 and reads it from env.
 
-`.claude/settings.json` denies `gh pr merge`, `terraform apply`, `aws`, and
-reads of `.env` and key files — so this rule is enforced, not remembered.
+`.claude/settings.json` denies `gh pr merge --admin`, `gh secret`, `gh repo
+delete`, `gh repo transfer`, DELETE calls through `gh api`, `terraform apply`,
+`aws`, force pushes, hard resets, history rewrites, and reads of `.env` and key
+files — so this rule is enforced, not remembered. It does **not** deny
+`gh pr merge --squash`: PR5 needs Claude to merge docs and normal-code PRs.
+"Claude never merges a keystone" is therefore a gated-command rule, not a
+permission — see §13, *Three enforcement strengths*.
 
 **Unattended runs** ("keep going until green", overnight) only with a hard
 iteration cap and a spend cap set *before* the run. A runaway loop is a cost
@@ -418,6 +424,26 @@ by rule rather than by memory.
 
 Ahsan will skip steps. Everyone does — at 6pm, on the fourth task of the day,
 when something nearly works. This section is what catches it.
+
+### Three enforcement strengths — name the one you mean
+
+Every rule in this file is enforced at exactly one of three strengths. A
+sentence that claims a stronger one than exists is a defect, not a typo.
+
+1. **Permissions and hooks — cannot be talked around.** The `deny` list in
+   `.claude/settings.json` and the three hooks fire whether or not anyone
+   remembers, and no prompt changes that.
+2. **Gated commands — bypassed by not using them.** `/pr` refuses to merge a
+   keystone, but nothing stops a raw `gh pr merge --squash` typed outside `/pr`.
+   "Claude never merges a keystone" is this kind. It is *audited*, not
+   *prevented*: warden check 18 reads `mergedBy` on every merged keystone PR.
+3. **Audits — tell you afterwards.** The process warden reports at the next
+   session start. It catches the violation; it does not stop it.
+
+A document that claims an enforcement that does not exist is worse than no
+document, because Ahsan stops checking. Before writing "X is denied" or "X
+cannot happen", find the line in `settings.json` or the hook that makes it
+true. If there is none, write which strength actually applies.
 
 ### Three layers, in order of reliability
 

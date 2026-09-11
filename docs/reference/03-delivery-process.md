@@ -235,7 +235,7 @@ Base44 audit and INVARIANTS. Structure: purpose and users (six personas);
 capabilities by zone - Capture, Decide, Act, See, Platform - each as a
 numbered requirement with one acceptance sentence; entities at field level;
 non-functionals (offline, Urdu, low-end Android, burst of 10,000 events,
-PII, audit); explicitly out of scope for L1; and the open decisions D1-D7 from
+PII, audit); explicitly out of scope for Capture; and the open decisions D1-D7 from
 the canvas, left unresolved. Where the canvas is silent, ask me - one question
 at a time, with your recommendation. Do not assume.
 ```
@@ -394,7 +394,7 @@ anything in the list not in the spec? Does M1 wire INV-3 and INV-8? Push back
 until it is right — approving the plan approves building all of it.
 
 **Gate — scope.** PLAN.md merged; Linear shows every task under a milestone with
-an acceptance sentence. Total in the range 80–110 PRs for L1. From here, a new
+an acceptance sentence. Total in the range 80–110 PRs for Capture. From here, a new
 task is a change request.
 
 ---
@@ -502,8 +502,8 @@ moment to change it. Does the queue feel right? Is the schema package the only
 place a lead is defined? Did deploying to staging take a day or a week? Change
 now what feels wrong; log it in DECISIONS.md.
 
-**Gate — L1 done:** burst test passed on staging, restore drill timed, cost
-estimate approved, STATUS says exactly what L2 starts from.
+**Gate — Capture done:** burst test passed on staging, restore drill timed, cost
+estimate approved, STATUS says exactly what Act starts from.
 
 ---
 

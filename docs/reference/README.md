@@ -31,7 +31,7 @@ block.
 | Why MCP is not in the lead path | *Zone 01 → L2 → The MCP exclusion* |
 | Identity resolution, merge, the shared-number problem | *Zone 01 → L3* |
 | The acreage cascade, product mapping, territory mapping | *Zone 02 → L4* |
-| The five weights, four modifiers, model phases | *Zone 02 → L5* |
+| The five weights, four modifiers, engine versions v1–v3 | *Zone 02 → L5* |
 | Tier rules and their SLA promises | *Zone 02 → L6* |
 | Routing, load balancing, the SLA clock | *Zone 03 → L7* |
 | The SO app's screens and the two-tap rule | *Zone 03 → L8* |
@@ -42,7 +42,7 @@ block.
 | **What was cut, and what that costs** | *Consequences already accepted* |
 
 ### `02-build-playbook.md` — engineering doctrine
-The laws, the default stack, the repo shape, the day-one rules, and the L1
+The laws, the default stack, the repo shape, the day-one rules, and the Capture
 milestone plan.
 
 | If you need | Read |
@@ -55,7 +55,7 @@ milestone plan.
 | Where a file belongs | *Repo shape* |
 | Hook shapes and what each enforces | *The three hooks* |
 | **The A1–A10 architecture rules** | *Day-one architecture rules* |
-| **M0–M8 scope, acceptance and PR estimates** | *L1 in milestones* — the one milestone you need |
+| **M0–M8 scope, acceptance and PR estimates** | *Capture in milestones* — the one milestone you need |
 | The per-task loop | *The task cycle* — superseded by 03 §Phase 7 |
 | When to spawn agents in parallel | *Multiple agents* |
 | Token and money budgets | *Economics* |

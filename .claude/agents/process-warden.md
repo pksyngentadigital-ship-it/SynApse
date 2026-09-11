@@ -52,12 +52,12 @@ Work through these. Each maps to a rule ID you must cite.
 
 **Work tracking**
 4. Does the current branch correspond to a Linear issue? A branch with no issue
-   is a violation. (L3, PR1)
+   is a violation. (LIN3, PR1)
 5. Does that issue satisfy Definition of Ready — acceptance sentence, files,
    invariant IDs, keystone flag, no unresolved decision? Name which is missing. (PR2)
 6. Are there Linear issues sitting In Progress with no branch, or In Review with
-   no open PR? (L3)
-7. Is anything Parked without an un-park trigger, or without a DECISIONS entry? (L6)
+   no open PR? (LIN3)
+7. Is anything Parked without an un-park trigger, or without a DECISIONS entry? (LIN6)
 
 **Pull requests**
 8. For each open PR: does the description contain every heading from the PR3

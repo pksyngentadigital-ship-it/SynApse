@@ -279,7 +279,14 @@ switch mid-conversation, because the builder must start from a clean context.
 |---|---|---|---|---|
 | **A · Document** | SPEC, ARCHITECTURE + INFRA, UX, PLAN, QA-PLAN, release readiness | Review planner writes the lens list and attack plan → 4–6 lens reviewers in parallel → a skeptic per finding tries to refute it against the source → Ahsan triages accept / reject / park | `/adversarial-review <files>` | Max 2 |
 | **B · Keystone PR** | Auth, migrations, identity, consent, scoring, PKR, infra, any hotfix | General + security + data-integrity reviewers in parallel, then skeptics | `/review-keystone` | Until findings are addressed |
-| **C · Normal PR** | Everything else | One fresh-context reviewer against the issue and INVARIANTS | `/pr` runs it | 1 |
+| **C · Normal PR** | Everything else that is code | One fresh-context reviewer against the issue and INVARIANTS | `/pr` runs it | 1 |
+| **Docs-only PR** | Only `docs/**`, `.claude/**`, `.github/**`, README, config with no runtime effect | **Ahsan, by reading it.** Not the reviewer agent | none — the Review line reads `Ahsan read it` | 1 |
+
+**Why docs-only PRs skip the reviewer agent.** The agent is built to check a
+code diff against the issue and the invariants. On prose it produces noise, and
+a noise finding costs the same attention as a real one. Ahsan reading the diff
+is the review; "Review: Ahsan read it" is the correct entry, not a gap. The
+warden does not flag it.
 
 `/pr` picks the tier itself from the issue's keystone flag *and* from the diff,
 and refuses to reach `gh pr create` if a step failed. Use it rather than running

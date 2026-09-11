@@ -108,21 +108,30 @@ rule keeps the approval record honest once there are two people.
 
 ---
 
-## 2026-09-11 — OPEN: GitHub plan blocks branch protection, production gate and secret scanning
+## 2026-09-11 — PARKED: GitHub Pro for branch protection and the production gate
 
 **Finding.** On 2026-09-11 the GitHub API refused branch protection, rulesets,
 required reviewers on the `production` environment, and secret scanning on the
 private repository with "Upgrade to GitHub Pro or make this repository public".
 Merge behaviour, labels, both environments and Dependabot alerts were set.
 
-**State.** Open. Owner: Ahsan. Blocks: PROCESS G1 and G2 in full, SYN-6, and
-the warden's checks 17 and 19, which will report RED at every session start
-until resolved.
+**Decision.** We stay on GitHub, this repository, this account. **GitHub Pro is
+the fix.** It is deferred solely because Ahsan's payment method is failing. It
+is not rejected, and no alternative is being evaluated.
 
-**Options.** GitHub Pro on the personal account (cheapest, immediate); a paid
-organisation plan; or transfer to a Syngenta-owned organisation (G4 says Ahsan
-executes any transfer). Making the repo public is not an option: it will hold
-Syngenta-internal architecture and, later, PII-adjacent code.
+**Un-park trigger, the only one:** Ahsan says "Pro is connected". Until he says
+those words: do not raise it, do not propose workarounds, do not ask about it,
+do not add related tasks. It is parked.
+
+**When he says it:** set branch protection on `main` — pull request required,
+status check required once CI exists, no force push, no deletion, enforced for
+admins — set the required-reviewer rule on the `production` environment with
+Ahsan as the only reviewer, then close SYN-6.
+
+**Interim, not a replacement:** `.githooks/pre-push` refuses any push to `main`
+from this clone, wired by `core.hooksPath`, plus a deny rule in
+`.claude/settings.json`. It protects this clone only and cannot require a
+status check. See the warden proportionality entry below for how it is audited.
 
 ---
 
@@ -141,3 +150,84 @@ Syngenta-internal architecture and, later, PII-adjacent code.
 **Why recorded this way.** The Phase 2 gate allows an open decision to stay open
 if it has an owner and a date. What must never happen is a build assuming an
 answer: D1 in particular is a leadership position, not a product default.
+
+---
+
+## 2026-09-11 — PR #1 size accepted as a one-off Phase 0 exception
+
+**Decision.** PR #1 exceeds the ~400-line ceiling in PR1 (16 files, over 500
+changed lines). Accepted explicitly; not split.
+
+**Why.** Phase 0 seed, docs only, no product code exists. The ceiling exists so
+no code step is big enough to hide a mistake in; a docs seed that lands the
+rule book and its corrections together means `main` has never held the
+ambiguous or untrue versions. Splitting would have cost a review cycle and
+bought nothing.
+
+---
+
+## 2026-09-11 — Docs-only PRs are reviewed by Ahsan reading them
+
+**Decision.** PROCESS §9 gains a docs-only tier: a PR touching only `docs/**`,
+`.claude/**`, `.github/**`, README or runtime-neutral config is reviewed by
+Ahsan reading it, not by the reviewer agent. "Review: Ahsan read it" is the
+correct entry, not a gap. `/pr` launches no reviewer for these.
+
+**Why.** The warden flagged "Review: none ran" on PR #1. That is a rule gap, not
+a miss: the reviewer agent is built for code diffs against invariants and would
+produce noise on prose. Without this rule the same finding recurs on every docs
+PR and trains Ahsan to skim the warden.
+
+---
+
+## 2026-09-11 — Warden proportionality: G1 three-state, G2 phase-aware, Linear checks move to /resume
+
+**Decision.**
+- **Check 17 (G1)** reports RED only while no mitigation exists. With
+  `.githooks/pre-push` present and `core.hooksPath` set to `.githooks`, it
+  reports AMBER, names the substitute, and quotes the un-park trigger. It
+  returns to RED the moment the hook is missing or hooksPath is unset.
+- **Check 19 (G2)**, the production reviewer, is informational before Phase 9
+  and RED from Phase 9 onward, reading the current phase from `docs/STATUS.md`.
+- **Checks 5, 6 and 7** (PR2 readiness, LIN3 status mismatches, LIN6 parks)
+  need Linear. The warden's tools are not widened; `/resume` performs them and
+  the warden states that Linear checks are performed by the caller.
+
+**Why.** A warden that reports RED every session for a parked item is a warden
+Ahsan will start ignoring, and an ignored warden is worse than none because it
+creates the feeling of oversight without the fact. The production reviewer
+protects a deployment that cannot happen before Phase 9. The Linear checks were
+coming back NOT CHECKED every run; moving them to the command that has the tool
+makes them real without giving a read-only auditor a write-capable MCP. The
+softening is recorded here so it is on the record, not silent.
+
+---
+
+## 2026-09-11 — INCIDENT: `main` received a direct push during the pre-push hook probe
+
+**What happened.** While proving the interim pre-push hook, Claude chained the
+hook wiring and the probe in one command. The wiring step failed
+(`git update-index --chmod=+x` on an unstaged file), the chain stopped before
+`core.hooksPath` was set, and the probe `git push origin chore/rule-book:main`
+ran unprotected. It succeeded. `origin/main` moved from `f2bd66e` to `337fb78`:
+the three session-0.1 commits landed on `main` without a merged PR, without
+Ahsan's read, and while PR #1 was open for exactly that content.
+
+**Why it is recorded as a decision.** Restoring `main` to `f2bd66e` is a history
+rewrite. G4 makes that Ahsan's action; PR5 forbids Claude force-pushing, and
+`settings.json` denies it. **Ahsan decides:**
+
+- **(a) Restore, recommended.** Ahsan runs, on his own account:
+  `gh api -X PATCH repos/pksyngentadigital-ship-it/SynApse/git/refs/heads/main -f sha=f2bd66e868c889ad5449196a6b0ef32d584f68c0 -F force=true`.
+  PR #1 then shows its full diff again and merges through the normal path.
+  The audit trail reads as it should: every commit on `main` came from a PR.
+- **(b) Accept.** `main` keeps the three commits. PR #1 carries only session
+  0.2's diff. The journal records that session 0.1's content reached `main`
+  unreviewed.
+
+**What changed because of it.** The permission deny for pushes to `main` in
+`.claude/settings.json` was added in the same session and fired on Claude's
+next push-to-main attempt, so the second probe was refused by the permission
+layer before git ran. Claude therefore cannot run the git-level probe at all;
+Ahsan runs it from his own terminal (see STATUS). Rule for the future: **wire,
+verify the wiring with a read command, then probe — never in one chain.**

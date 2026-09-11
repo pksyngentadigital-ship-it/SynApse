@@ -34,6 +34,11 @@
     "deny": [
       "Bash(git push --force*)",
       "Bash(git push -f*)",
+      "Bash(git push origin main*)",
+      "Bash(git push -u origin main*)",
+      "Bash(git push origin HEAD:main*)",
+      "Bash(git push*:main*)",
+      "Bash(git push*:refs/heads/main*)",
       "Bash(git reset --hard*)",
       "Bash(rm -rf *)",
       "Bash(terraform apply*)",

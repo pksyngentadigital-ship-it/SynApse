@@ -285,16 +285,22 @@ guard*) worth more than it cost.
 
 ---
 
-## 2026-09-13 — Phase 0 documentation PRs may exceed the ~400-line ceiling
+## 2026-09-13 — Docs-only PRs before M0-T1 may exceed the ~400-line ceiling
 
-**Decision.** Phase 0 documentation PRs may exceed the ~400 changed-line
+**Decision.** Docs-only PRs before M0-T1 may exceed the ~400 changed-line
 ceiling in PROCESS PR1. The ceiling applies strictly from M0-T1 onward, when
 product code begins. PR #2 (538 lines, docs and enforcement layer only) is
 accepted under this rule.
 
+*Widened 2026-09-13, same day, by Ahsan:* the class was first written as
+"Phase 0 documentation PRs". It now covers every docs-only PR before M0-T1 —
+Phase 1's Base44 audit note included — for the same reason. One edit to the
+class, not a new precedent per phase.
+
 **Why.** The ceiling exists so that no code step is big enough to hide a
-mistake in. Phase 0 PRs are docs-only with no product code: the rule book,
-its corrections, and the record of how they came to be. Splitting them adds
+mistake in. PRs before M0-T1 are docs-only with no product code: the rule book,
+its corrections, the record of how they came to be, and the audit of what
+existed before. Splitting them adds
 churn — more PRs to read, the same words to review — without adding safety,
 because the risk the ceiling guards against is not present. Scoped as a class
 so the warden stops raising it on every Phase 0 PR, and bounded at M0-T1 so it

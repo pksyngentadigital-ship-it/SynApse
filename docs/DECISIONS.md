@@ -310,3 +310,29 @@ cannot quietly become the norm once code exists.
 #1 size accepted as a one-off Phase 0 exception". PR #1 was the first instance
 of this class; that entry's reasoning stands and its "one-off" scope is
 replaced by this one.
+
+---
+
+## 2026-09-13 — Base44 is read-only reference, enforced by deny rules; the mirror lives outside the repo
+
+**Decision.** Smart Agro Lite on Base44 is read through seven tools only
+(`base44_readme`, `list_user_apps`, `list_directory`, `read_file`, `grep`,
+`list_entity_schemas`, `describe_api`, `list_api_catalog`). The thirteen tools
+that write, run, checkpoint, deploy, execute, mutate schemas or read entity
+records are denied in `.claude/settings.json` under both server-name forms.
+`query_entities` is denied because it returns real grower records (PROCESS
+§12). The source mirror lives at `~/synapse-reference/base44/`, outside the
+repo, and is never committed; the audit note is the only artefact that
+enters `main`. No code is carried across.
+
+**Why.** Smart Agro Lite is a live product with people using it. A prompt
+rule is enforcement strength 3 (PROCESS §13); a deny rule is strength 1.
+The `explorer` agent cannot call MCP tools, so a wide read over Base44 needs
+an on-disk mirror first — which is also what `03-delivery-process.md` Phase 1
+prescribes. Read-only on the Base44 side was proven by the export manifest's
+call log (24 calls, zero forbidden, zero writes). Whether the deny rules took
+effect in the session that wrote them is unproven, deliberately: proving
+them would have meant attempting a forbidden tool.
+
+**Un-park trigger for any change:** none expected. Loosening these rules needs
+a dated entry here first, like G1.

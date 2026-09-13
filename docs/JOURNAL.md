@@ -323,3 +323,72 @@ vs PROCESS A1, and the STATUS length cap. Session 0.1's carry-overs (Cropwise
 and AWS access, the Meta app owner) were not touched again.
 
 ---
+
+## 005 · 2026-09-13 · Phase 0 close · checkpoint and phase close
+
+**Goal.** Run the warden a second time, clear its one actionable finding, and
+close Phase 0 (SYN-7).
+
+**Shipped.** Nothing merged. PR #2, "chore: warden triage, interim push guard,
+incident record" (`chore/rule-book` → `main`, Closes SYN-7), is still open and
+now carries four commits, 10 files, +519 −41. This session added `b967d80`
+(DECISIONS, the Phase 0 PR-size class) and an uncommitted STATUS rewrite
+declaring the phase complete.
+
+**What happened.** `/checkpoint` ran the process warden a second time. No RED.
+Two AMBER: G1 — no branch protection, substitute verified, parked, nothing to
+do — and PR1, PR #2 over the ~400-line ceiling with a size note but no
+DECISIONS entry backing it, because PR #1's exception had been scoped "one-off".
+The two checks rewritten after the last warden run behaved as designed: the new
+three-state check 17 reported AMBER-with-substitute rather than a false RED, and
+the phase-aware check 19 emitted a single informational line. Ahsan ruled on
+PR1 by widening the exception to a class rather than to everything, and PR #2's
+Evidence line and size note were then updated to the current numbers and to
+cite that entry. Phase 0 was declared complete, pending his read and merge.
+
+**Phase 0 in total.** Three calendar days (2026-09-11 to 2026-09-13), three
+sessions plus one continuation, five journal entries of which two were
+corrections, two PRs (#1 merged by the incident, #2 open), eleven DECISIONS
+entries, one incident. The plan budgeted two sessions and two docs-only PRs.
+The overrun came from the incident and from enforcement claims in the starter's
+own documents that turned out to be untrue and had to be corrected before
+anything downstream could rest on them.
+
+**The incident, in one place.** On 2026-09-11 a hook probe pushed session 0.1's
+commits straight to `main` before the hook was wired, and GitHub marked PR #1
+merged by the shared account with no human read. On 2026-09-12 Ahsan accepted
+`main` as it stands rather than force-push a fix, read PR #1's diff after the
+fact, and proved the guard himself: `core.hooksPath` and the `100755` mode
+confirmed first, then a live `git push origin chore/rule-book:main` from his
+own terminal **refused by the hook** — installed, logic correct, invoked by
+git, all three links verified. Two rules came out of it in PROCESS §13,
+"Proving a guard". The three-layer design held: the weakest layer, an assumed
+hook, is the one that failed; the deny rule caught Claude's next attempt and
+the hook caught Ahsan's.
+
+**Went wrong.** Nothing this session — the warden's finding was correct and
+cheap to clear. The honest entry for the phase is in entries 002 to 004, not
+here.
+
+**Decisions.** "Phase 0 documentation PRs may exceed the ~400-line ceiling"
+(2026-09-13), which supersedes the "one-off" scope of "PR #1 size accepted as a
+one-off Phase 0 exception" (2026-09-11) without contradicting its reasoning.
+
+**Learned.** A finding resolved as a bounded class beats a one-off exception:
+it clears the warden for the rest of the phase in one entry, and the M0-T1
+boundary stops it drifting into the code era where the ceiling actually earns
+its keep.
+
+**Evidence seen by Ahsan.** The warden's second report verbatim. PR #2 is his
+to read next.
+
+**Open at close.** PR #2: Ahsan reads and merges; SYN-7 should then move to Done
+via the GitHub↔Linear integration, and if it does not, the integration is
+confirmed broken rather than merely unverified. Base44 OAuth via `/mcp` in an
+interactive session, before Phase 1. Carried and still open: `close.md` and
+`journal-writer.md` contradict PROCESS A1 on pasted context; STATUS exceeds its
+25-line cap because Ahsan asked it to carry the identifiers; the Cropwise and
+AWS access requests and the Meta app-owner question are not yet filed. Phase 1
+next: the Base44 audit.
+
+---

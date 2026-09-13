@@ -1,15 +1,16 @@
 # Synapse status
 
-**Phase 0 complete 2026-09-12, pending PR #2's merge.** Nothing runs yet; no
-commands until M0.
+**Phase 0 complete 2026-09-13.** Second warden run: no RED. PR #2 open,
+awaiting Ahsan's read and merge. Nothing runs yet; no commands until M0.
 
 **Last merged PR:** #1, "docs: rule book and process", on `main` at `337fb78`.
 Merged by the incident, not by a human; Ahsan read its diff after the fact on
 2026-09-12 and accepted `main` as it stands (DECISIONS 2026-09-11, INCIDENT).
 
-**Next task:** SYN-7 — Ahsan reads and merges PR #2 (`chore/rule-book`, docs
-only). Then Phase 1, the Base44 audit, once the Base44 MCP is authorised via
-`/mcp` in an interactive session. SYN-6 is Todo and parked with GitHub Pro.
+**Next task:** SYN-7 — Ahsan reads and merges PR #2 (`chore/rule-book`, four
+commits, docs only, size accepted under DECISIONS 2026-09-13). Then Phase 1,
+the Base44 audit, once the Base44 MCP is authorised via `/mcp` in an
+interactive session. SYN-6 is Todo and parked with GitHub Pro.
 
 **Identifiers.** GitHub `pksyngentadigital-ship-it/SynApse`, private, `main`:
 https://github.com/pksyngentadigital-ship-it/SynApse · shared account; repo-local
@@ -28,7 +29,8 @@ pushes to `main`, seen firing. A fresh clone must run
 `git config core.hooksPath .githooks`.
 
 **Not verified.** GitHub↔Linear integration: it did not move SYN-5 on PR #1's
-merge. Check the integration's repo access in Linear settings.
+merge. Watch SYN-7 when PR #2 merges; if it does not move to Done, fix the
+integration's repo access in Linear settings first.
 
 **Parked.** GitHub Pro (branch protection, production reviewer, secret
 scanning). Un-park trigger: Ahsan says "Pro is connected". Not to be raised.

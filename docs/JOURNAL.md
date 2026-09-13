@@ -132,3 +132,263 @@ Cropwise and AWS access requests, ask who owns the Meta app, and correct the
 `close.md` / `journal-writer.md` conflict with PROCESS A1.
 
 ---
+
+## 002 · 2026-09-11 · Phase 0, session 0.2 · triage and setup (strongest model)
+
+**Goal.** Triage the process warden's first run, park the GitHub Pro question,
+install an interim pre-push hook and prove it bites, make the warden
+proportionate, and finish the Linear and MCP setup left open by session 0.1
+(SYN-5).
+
+**Shipped.** Nothing merged. PR #1 is still open on `chore/rule-book`; this
+session's work is nine files uncommitted at close (+238 −41): `.githooks/pre-push`,
+warden / `pr.md` / `resume.md` / `settings.json` / `.mcp.json` changes, and
+PROCESS, DECISIONS and STATUS edits.
+
+**What happened.** The warden ran for the first time via `/checkpoint` and
+returned RED G1 (no branch protection), RED G2 (no production reviewer), AMBER
+PR3 (PR #1's Evidence line said 15 files/+407/−58 while the branch was
+16/+456/−68 — the `/close` commit landed after the description was written),
+AMBER PR1 (524 lines, no reviewer ran) and AMBER LIN3; checks 5–7 and 18 could
+not run at all. Ahsan ranked the stale-evidence finding first and ruled that the
+Evidence line is written last, against the diff actually being merged. The two
+RED gates were then reclassified rather than chased: Pro was parked with a
+single un-park trigger, and the warden itself was made proportionate. Linear was
+finished — "In Review" verified present, GitHub integration connected, SYN-1–4
+Canceled because the MCP has no delete tool — and the Base44 MCP was registered
+in `.mcp.json` at project scope over OAuth PKCE, unverified until next session.
+Then the hook probe went wrong.
+
+**Went wrong.** The probe intended to prove the pre-push hook pushed session
+0.1's commits to `main` instead. Claude chained the hook wiring and the probe
+into one command; `git update-index --chmod=+x` failed on an unstaged file, the
+`&&` chain stopped before `git config core.hooksPath .githooks` ran, and
+`git push origin chore/rule-book:main` then executed with no hook installed. It
+succeeded. `origin/main` moved from the baseline `f2bd66e` to `337fb78`: three
+commits reached `main` with no merged PR and no read by Ahsan, while PR #1 was
+open for exactly that content. The second probe, `git push origin --delete main`,
+was rejected — but by GitHub, which refuses to delete a default branch on any
+plan, not by the hook; for a few minutes that rejection looked like the hook
+working. No restore was attempted: it is a history rewrite, G4 makes it Ahsan's,
+and `settings.json` denies force pushes. The second attempt wired the hook
+first, verified `core.hooksPath` and the `100755` index mode with read-only
+commands, then tried a dry-run push to `main` — and was refused before git ran
+by the deny rule (`Bash(git push*:main*)`) Claude had added to `settings.json`
+minutes earlier. So the git-level probe could not be run by Claude at all
+without routing around a deny, which it did not do; what was proven instead is
+the script's logic, fed the three cases on stdin: refuses an update of `main`
+(exit 1), refuses a deletion of `main` (exit 1), passes another branch (exit 0).
+Ahsan runs the real probe from his own terminal. Separately, `STATUS.md` broke
+the 25-line cap again (about 33 lines), and `close.md` and `journal-writer.md`
+still expect pasted context in contradiction of PROCESS A1 — worked around with
+a facts file for the second session running.
+
+**Decisions.** All 2026-09-11: "PARKED: GitHub Pro for branch protection and the
+production gate" (replacing the OPEN entry recorded in entry 001, which never
+reached `main`); "PR #1 size accepted as a one-off Phase 0 exception";
+"Docs-only PRs are reviewed by Ahsan reading them"; "Warden proportionality: G1
+three-state, G2 phase-aware, Linear checks move to /resume"; "INCIDENT: `main`
+received a direct push during the pre-push hook probe".
+
+**Learned.** A probe that can do damage must be preceded by a read-only check
+that the guard is actually in place — chaining setup and probe with `&&` turns a
+setup failure into the exact event the guard exists to prevent. In Ahsan's
+words, "a hook that has never blocked anything is a hook I'm assuming works";
+the first probe proved the inverse, that a hook assumed wired was not wired. The
+one enforcement claim tested against reality this session, the permission deny,
+held.
+
+**Evidence seen by Ahsan.** The warden's first report verbatim, relayed through
+`/checkpoint`, and his five rulings on it. He has not yet seen the incident, the
+hook's stdin test output, or PR #1 itself; those reach him through this entry,
+DECISIONS and STATUS.
+
+**Open at close.** The incident decision (a) restore or (b) accept — Ahsan,
+before merging PR #1. The hook probe from Ahsan's terminal (command in STATUS).
+PR #1's Evidence line, to be rewritten by Claude once `main` is settled, then
+read and merged by Ahsan. Deleting the Canceled SYN-1–4 if he wants them gone.
+Base44 MCP verification at next session start. Still carried from entry 001 and
+not done: `close.md` / `journal-writer.md` vs PROCESS A1, and the STATUS length
+cap, which now conflicts with the "never hunt for these" requirement — Ahsan
+settles which wins. Session 0.1's other carry-overs (Cropwise and AWS access
+requests, the Meta app owner) were not touched this session.
+
+---
+
+## 003 · 2026-09-11 · Phase 0, session 0.2 · correction
+
+**Corrects entry 002.** Entry 002 says "PR #1 is still open on `chore/rule-book`"
+and reports the incident as `main` moving. Both were already false when written.
+
+**Goal.** Record what was established about the incident after entry 002 was
+appended (SYN-5).
+
+**Shipped.** Nothing merged by a human. `gh pr view 1` reports PR #1 **MERGED**,
+`mergedAt` 2026-09-11T13:02:13Z, `mergedBy` `pksyngentadigital-ship-it` — the
+shared account — with merge commit `337fb78`. GitHub treated the incident push
+as the merge. No human read the PR before it merged; the merge time is the time
+of the bad push. Session 0.2's own work is one commit, `58b5deb`, on
+`chore/rule-book`, with no PR open for it.
+
+**What happened.** Three further consequences surfaced after entry 002 was
+written. Delete-branch-on-merge removed `chore/rule-book` on the remote, so
+Claude's next push recreated it ("[new branch]") and this was noticed only when
+reading the push output afterwards. Linear did not move SYN-5 to Done: the
+GitHub↔Linear integration Ahsan reported connected did not fire on this merge,
+and STATUS now carries it as not verified. Local `main` was fast-forwarded to
+`origin/main` (`337fb78`) so `/resume`'s reconcile does not report a false
+disagreement. Opening PR #2 for `58b5deb` needs a Linear issue, and Ahsan capped
+the session at two, so Claude stopped and asked rather than creating one.
+
+**Went wrong.** Entry 002 itself: it understated the incident by reporting only
+the branch move, having never checked the PR's state. Nothing else in entry 002
+changes.
+
+**Decisions.** The same-day update to "INCIDENT: `main` received a direct push
+during the pre-push hook probe" (2026-09-11), which withdraws option (a) restore
+and recommends (b′) accept.
+
+**Learned.** After an unintended push, check what the push did to everything
+downstream of it — the PR, the branch, the integration — not just the ref that
+moved. A journal entry that understates an incident is exactly the fiction the
+journal exists to prevent, which is why this entry exists at all.
+
+**Evidence seen by Ahsan.** The `gh pr view 1` output above and the DECISIONS
+update built from it. He has still not read PR #1's diff.
+
+**Open at close.** Ahsan's ruling on (b′) accept, and his after-the-fact read of
+PR #1's diff. One Linear issue to authorise so `58b5deb` can go in as PR #2. The
+GitHub↔Linear integration's repo access to check. Everything else carries
+forward unchanged from entry 002's "Open at close".
+
+---
+
+## 004 · 2026-09-12 · Phase 0, session 0.2 continuation · decision and evidence
+
+**Goal.** Get Ahsan's ruling on the incident and his own proof that the pre-push
+guard works, then turn both into written rules and open PR #2 for session 0.2's
+work (SYN-7).
+
+**Shipped.** Nothing merged. Session 0.2's earlier commits (`58b5deb`,
+`973b37c`) sit on `chore/rule-book`; this continuation's edits — PROCESS §13,
+the two DECISIONS updates, STATUS, warden check 17 — were still uncommitted when
+this entry was written, and go to Ahsan as PR #2, "Closes SYN-7", docs only.
+SYN-7 was created after Ahsan authorised it as the one issue beyond his
+two-issue cap.
+
+**What happened.** Ahsan ruled first: accept `main` as it stands, no restore —
+"a force-push to fix a bookkeeping problem is worse than an honest record" — and
+he read PR #1's diff after the fact, which is the PR5 control that PR #1 never
+got at merge time. He then proved the hook from his own terminal in three steps:
+`core.hooksPath` → `.githooks`, the hook at mode `100755`, and a **live**
+`git push origin chore/rule-book:main` — the exact action that caused the
+incident — refused with "pre-push: REFUSED … nothing was pushed". All three
+links verified: installed, logic correct, invoked by git. That output is quoted
+in the INCIDENT entry rather than paraphrased. The incident then became rules:
+PROCESS §13 gained "Proving a guard" — never prove a guard by performing the
+dangerous action against the real thing while it is unverified, and installation
+and verification are two separate steps with two visible outputs, never chained
+with `&&`. The parked GitHub Pro entry gained the measured cost: an unprotected
+`main` lets a direct push silently mark every open PR whose commits it contains
+as merged. It stays parked. Warden check 17's AMBER wording was tightened to
+"substitute verified".
+
+**Went wrong.** Nothing new this continuation. The Base44 MCP loaded on restart
+— its tools appeared — but is not authorised; OAuth needs `/mcp` in an
+interactive session, so STATUS records it as registered, loads, not yet
+authorised.
+
+**Decisions.** "INCIDENT: `main` received a direct push during the pre-push hook
+probe" (2026-09-11), closed 2026-09-12 with accept (b′) plus the guard-proven
+evidence. "PARKED: GitHub Pro for branch protection and the production gate"
+(2026-09-11), amended with the measured cost.
+
+**Learned.** A guard proven by the person it protects, with the live dangerous
+action, is a different kind of fact from one Claude reports as wired: Ahsan's
+terminal output is the evidence, Claude's read-back was only the precondition.
+The other half is that the three-layer design held where it was supposed to —
+the weakest layer, an assumed hook, is what failed; the `settings.json` deny
+caught Claude's next attempt, and the hook now catches Ahsan's.
+
+**Evidence seen by Ahsan.** PR #1's full diff, read after the fact. His own
+terminal output for all three hook checks and the live refused push — produced
+by him, not reported to him. The PROCESS §13 and DECISIONS text built from it,
+which he reads again in PR #2.
+
+**Open at close.** PR #2: Ahsan reads and merges. Linear should then move SYN-7
+to Done; if it does not, the GitHub↔Linear integration is confirmed broken
+rather than merely unverified. Base44 OAuth via `/mcp`, Ahsan, interactive
+session. Still carried and still not done: `close.md` / `journal-writer.md`
+vs PROCESS A1, and the STATUS length cap. Session 0.1's carry-overs (Cropwise
+and AWS access, the Meta app owner) were not touched again.
+
+---
+
+## 005 · 2026-09-13 · Phase 0 close · checkpoint and phase close
+
+**Goal.** Run the warden a second time, clear its one actionable finding, and
+close Phase 0 (SYN-7).
+
+**Shipped.** Nothing merged. PR #2, "chore: warden triage, interim push guard,
+incident record" (`chore/rule-book` → `main`, Closes SYN-7), is still open and
+now carries four commits, 10 files, +519 −41. This session added `b967d80`
+(DECISIONS, the Phase 0 PR-size class) and an uncommitted STATUS rewrite
+declaring the phase complete.
+
+**What happened.** `/checkpoint` ran the process warden a second time. No RED.
+Two AMBER: G1 — no branch protection, substitute verified, parked, nothing to
+do — and PR1, PR #2 over the ~400-line ceiling with a size note but no
+DECISIONS entry backing it, because PR #1's exception had been scoped "one-off".
+The two checks rewritten after the last warden run behaved as designed: the new
+three-state check 17 reported AMBER-with-substitute rather than a false RED, and
+the phase-aware check 19 emitted a single informational line. Ahsan ruled on
+PR1 by widening the exception to a class rather than to everything, and PR #2's
+Evidence line and size note were then updated to the current numbers and to
+cite that entry. Phase 0 was declared complete, pending his read and merge.
+
+**Phase 0 in total.** Three calendar days (2026-09-11 to 2026-09-13), three
+sessions plus one continuation, five journal entries of which two were
+corrections, two PRs (#1 merged by the incident, #2 open), eleven DECISIONS
+entries, one incident. The plan budgeted two sessions and two docs-only PRs.
+The overrun came from the incident and from enforcement claims in the starter's
+own documents that turned out to be untrue and had to be corrected before
+anything downstream could rest on them.
+
+**The incident, in one place.** On 2026-09-11 a hook probe pushed session 0.1's
+commits straight to `main` before the hook was wired, and GitHub marked PR #1
+merged by the shared account with no human read. On 2026-09-12 Ahsan accepted
+`main` as it stands rather than force-push a fix, read PR #1's diff after the
+fact, and proved the guard himself: `core.hooksPath` and the `100755` mode
+confirmed first, then a live `git push origin chore/rule-book:main` from his
+own terminal **refused by the hook** — installed, logic correct, invoked by
+git, all three links verified. Two rules came out of it in PROCESS §13,
+"Proving a guard". The three-layer design held: the weakest layer, an assumed
+hook, is the one that failed; the deny rule caught Claude's next attempt and
+the hook caught Ahsan's.
+
+**Went wrong.** Nothing this session — the warden's finding was correct and
+cheap to clear. The honest entry for the phase is in entries 002 to 004, not
+here.
+
+**Decisions.** "Phase 0 documentation PRs may exceed the ~400-line ceiling"
+(2026-09-13), which supersedes the "one-off" scope of "PR #1 size accepted as a
+one-off Phase 0 exception" (2026-09-11) without contradicting its reasoning.
+
+**Learned.** A finding resolved as a bounded class beats a one-off exception:
+it clears the warden for the rest of the phase in one entry, and the M0-T1
+boundary stops it drifting into the code era where the ceiling actually earns
+its keep.
+
+**Evidence seen by Ahsan.** The warden's second report verbatim. PR #2 is his
+to read next.
+
+**Open at close.** PR #2: Ahsan reads and merges; SYN-7 should then move to Done
+via the GitHub↔Linear integration, and if it does not, the integration is
+confirmed broken rather than merely unverified. Base44 OAuth via `/mcp` in an
+interactive session, before Phase 1. Carried and still open: `close.md` and
+`journal-writer.md` contradict PROCESS A1 on pasted context; STATUS exceeds its
+25-line cap because Ahsan asked it to carry the identifiers; the Cropwise and
+AWS access requests and the Meta app-owner question are not yet filed. Phase 1
+next: the Base44 audit.
+
+---

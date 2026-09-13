@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# .githooks/pre-push — refuse any push that updates or deletes refs/heads/main.
+#
+# INTERIM MEASURE, NOT A REPLACEMENT. GitHub branch protection on `main` is
+# unavailable until GitHub Pro is active (docs/DECISIONS.md, 2026-09-11,
+# "PARKED: GitHub Pro"). This hook substitutes for it until Ahsan says
+# "Pro is connected", at which point real protection is set and this hook
+# becomes a second line, not the first.
+#
+# What it covers:  every `git push` from a clone whose core.hooksPath points at
+#                  .githooks, whatever refspec is used (origin main,
+#                  branch:main, HEAD:main, --delete main).
+# What it does NOT cover:
+#   - Other clones. It protects THIS clone only. A fresh clone must run
+#       git config core.hooksPath .githooks
+#     before the hook is active. The process warden (check 17) reports RED
+#     when hooksPath is unset.
+#   - Required status checks. A hook cannot make CI a precondition of merging.
+#   - Pushes made through the GitHub web UI or API.
+#
+# Wired by: git config --local core.hooksPath .githooks
+# Audited by: .claude/agents/process-warden.md check 17 (G1)
+
+remote="$1"
+
+blocked=0
+while read -r local_ref local_sha remote_ref remote_sha; do
+  case "$remote_ref" in
+    refs/heads/main)
+      blocked=1
+      if [ "$local_sha" = "0000000000000000000000000000000000000000" ]; then
+        echo "pre-push: REFUSED — this push would DELETE main on '$remote'." >&2
+      else
+        echo "pre-push: REFUSED — this push would update main on '$remote' directly" >&2
+        echo "          ($local_ref -> $remote_ref)." >&2
+      fi
+      ;;
+  esac
+done
+
+if [ "$blocked" -eq 1 ]; then
+  echo "pre-push: main changes only through a merged pull request (docs/PROCESS.md PR5, G1)." >&2
+  echo "pre-push: nothing was pushed." >&2
+  exit 1
+fi
+
+exit 0

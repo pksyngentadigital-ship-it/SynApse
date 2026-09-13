@@ -279,7 +279,14 @@ switch mid-conversation, because the builder must start from a clean context.
 |---|---|---|---|---|
 | **A · Document** | SPEC, ARCHITECTURE + INFRA, UX, PLAN, QA-PLAN, release readiness | Review planner writes the lens list and attack plan → 4–6 lens reviewers in parallel → a skeptic per finding tries to refute it against the source → Ahsan triages accept / reject / park | `/adversarial-review <files>` | Max 2 |
 | **B · Keystone PR** | Auth, migrations, identity, consent, scoring, PKR, infra, any hotfix | General + security + data-integrity reviewers in parallel, then skeptics | `/review-keystone` | Until findings are addressed |
-| **C · Normal PR** | Everything else | One fresh-context reviewer against the issue and INVARIANTS | `/pr` runs it | 1 |
+| **C · Normal PR** | Everything else that is code | One fresh-context reviewer against the issue and INVARIANTS | `/pr` runs it | 1 |
+| **Docs-only PR** | Only `docs/**`, `.claude/**`, `.github/**`, README, config with no runtime effect | **Ahsan, by reading it.** Not the reviewer agent | none — the Review line reads `Ahsan read it` | 1 |
+
+**Why docs-only PRs skip the reviewer agent.** The agent is built to check a
+code diff against the issue and the invariants. On prose it produces noise, and
+a noise finding costs the same attention as a real one. Ahsan reading the diff
+is the review; "Review: Ahsan read it" is the correct entry, not a gap. The
+warden does not flag it.
 
 `/pr` picks the tier itself from the issue's keystone flag *and* from the diff,
 and refuses to reach `gh pr create` if a step failed. Use it rather than running
@@ -444,6 +451,22 @@ A document that claims an enforcement that does not exist is worse than no
 document, because Ahsan stops checking. Before writing "X is denied" or "X
 cannot happen", find the line in `settings.json` or the hook that makes it
 true. If there is none, write which strength actually applies.
+
+### Proving a guard — two rules, written after the 2026-09-11 incident
+
+**Never prove a guard by performing the dangerous action against the real
+thing while the guard is unverified.** Verify the guard is *active* first, with
+a read command whose output Ahsan can see; only then test it. A push-blocking
+hook is tested by `git push --dry-run`, or by invoking the script directly with
+the refs on stdin — never by a live push to `main` on the assumption that the
+hook will catch it. This was the direct cause of the incident: the probe push
+ran before the hook was wired, succeeded, and marked PR #1 merged with no human
+read (DECISIONS 2026-09-11, INCIDENT).
+
+**Installation and verification are two separate steps with two outputs Ahsan
+can see.** Never chain them with `&&`. A failed `chmod` silently stopped the
+chain before `core.hooksPath` was set, and the probe ran against an inactive
+hook. Install; show the read-back; then, in a separate command, test.
 
 ### Three layers, in order of reliability
 

@@ -23,7 +23,10 @@ never propose a feature.
   available — include `mergedBy` on merged PRs, you need it for check 18
 - `gh api repos/{owner}/{repo}/branches/main/protection` and the repo's
   environments, for checks 17 and 19. These are read-only API calls
-- The open milestone's issues from Linear, if the Linear MCP is available
+- `.githooks/pre-push` and `git config --get core.hooksPath`, for check 17
+
+You have **no Linear access** by design. Checks 5–7 are performed by the caller
+(`/resume`), which has the Linear MCP. Say so under NOT CHECKED.
 
 Nothing else. Do not read product source code — you are auditing process, not
 implementation.
@@ -53,11 +56,12 @@ Work through these. Each maps to a rule ID you must cite.
 **Work tracking**
 4. Does the current branch correspond to a Linear issue? A branch with no issue
    is a violation. (LIN3, PR1)
-5. Does that issue satisfy Definition of Ready — acceptance sentence, files,
-   invariant IDs, keystone flag, no unresolved decision? Name which is missing. (PR2)
-6. Are there Linear issues sitting In Progress with no branch, or In Review with
-   no open PR? (LIN3)
-7. Is anything Parked without an un-park trigger, or without a DECISIONS entry? (LIN6)
+5. *(Performed by the caller — `/resume` step 3b.)* Definition of Ready on the
+   current issue. (PR2)
+6. *(Performed by the caller.)* In Progress with no branch, In Review with no
+   open PR. (LIN3)
+7. *(Performed by the caller.)* Parked without a trigger or a DECISIONS entry. (LIN6)
+   For 5–7 write exactly: `Linear checks 5–7: performed by the caller.`
 
 **Pull requests**
 8. For each open PR: does the description contain every heading from the PR3
@@ -80,15 +84,30 @@ Work through these. Each maps to a rule ID you must cite.
     sessions are unlogged. (§14)
 
 **Repository enforcement** — the highest-value checks in this list
-17. **Is branch protection on `main` still enabled**, with a pull request
-    required, the status check required, and force pushes forbidden? Check with
-    `gh api repos/{owner}/{repo}/branches/main/protection`. Any weakening is
-    **RED**, and it is RED even if a DECISIONS entry exists — say which. (G1)
+17. **Branch protection on `main`.** Check with
+    `gh api repos/{owner}/{repo}/branches/main/protection`. Three outcomes:
+    - Protection present — pull request required, status check required once
+      CI exists, no force push, no deletion, enforced for admins — **CLEAR**.
+      Any weakening from a previously verified state is **RED**, even with a
+      DECISIONS entry — say which.
+    - Protection absent, **and** the interim substitute is in place:
+      `.githooks/pre-push` exists, starts with `#!/`, refuses `refs/heads/main`,
+      and `git config --get core.hooksPath` prints `.githooks` — **AMBER,
+      substitute verified**. The substitute was proven by a live push on
+      2026-09-12 (DECISIONS 2026-09-11, INCIDENT, *Guard proven*): installed,
+      logic correct, invoked by git. Report it as
+      `AMBER [G1] — no branch protection; substitute .githooks/pre-push verified;
+      parked until Ahsan says "Pro is connected"` and propose nothing else.
+    - Protection absent **and** the substitute missing — hook file gone, or
+      hooksPath unset or pointing elsewhere — **RED**. (G1)
 18. Was a **keystone PR merged by an agent** rather than by Ahsan? Check merged
     PRs since the last journal entry: if one touched `infra/`, a migration,
     auth, identity, consent, scoring or PKR, and its merge did not come from
     Ahsan, that is **RED**. (PR5)
-19. Is `production` still configured to require a reviewer? (G2)
+19. **Production reviewer, phase-aware.** Read the current phase from the first
+    line of `docs/STATUS.md`. Before Phase 9: if `production` has no required
+    reviewer, report one informational line under CLEAR — not a finding, no
+    severity. From Phase 9 onward: no required reviewer is **RED**. (G2)
 20. Is `.claude/allow-protected` present and non-empty? A leftover allow-list
     entry means a protected path is still unlocked. (§10, A3)
 

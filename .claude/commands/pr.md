@@ -33,7 +33,10 @@ list in PROCESS.md PR6 — auth, migrations, identity, consent, scoring, PKR,
 `infra/`. If the diff is a keystone and the flag says no, correct the flag and
 say so.
 
-- **Not a keystone:** launch `reviewer`.
+- **Docs-only** (the diff touches only `docs/**`, `.claude/**`, `.github/**`,
+  README, or config with no runtime effect): launch nothing. The Review line
+  reads `Ahsan read it` (PROCESS §9). Ahsan's read of the diff is the review.
+- **Not a keystone, code:** launch `reviewer`.
 - **Keystone:** launch `reviewer`, `security-reviewer` and
   `data-integrity-reviewer` in parallel. Then for every finding any of them
   returned, launch a `skeptic` on that one finding. Report only findings that

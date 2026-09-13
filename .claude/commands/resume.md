@@ -33,6 +33,21 @@ Do not soften them, do not fix them, do not act on them without being asked.
 
 If the warden reports RED, say plainly: "Clear these before starting a task."
 
+## 3b. Linear checks — the three the warden cannot run
+
+The warden has no Linear access by design. Using the Linear MCP, check:
+
+- **PR2** — the issue matching the current branch (or the top Todo issue) has
+  an acceptance sentence, files, invariant IDs, a keystone flag and no
+  unresolved decision. Name what is missing.
+- **LIN3** — any issue In Progress with no branch, or In Review with no open PR.
+- **LIN6** — any Parked issue without a named un-park trigger or a DECISIONS
+  entry.
+
+Report findings in the same PROCESS CHECK block, cited by rule ID, same
+severity scale. Onboarding issues Linear created itself (Canceled, outside the
+project) are ignored.
+
 ## 4. State where we are
 
 Two sentences. Current phase or milestone, and what the last merged PR did.
@@ -51,7 +66,7 @@ anything.
 ```
 STATE: <two sentences>
 RECONCILE: consistent | <the disagreement, and the fix>
-PROCESS CHECK: <the warden's findings, or "clear">
+PROCESS CHECK: <the warden's findings plus the Linear checks, or "clear">
 NEXT: <SYN-n> — <title>
   Acceptance: <the sentence>
   Ready: yes | no — <what is missing>

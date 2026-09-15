@@ -285,16 +285,22 @@ guard*) worth more than it cost.
 
 ---
 
-## 2026-09-13 — Phase 0 documentation PRs may exceed the ~400-line ceiling
+## 2026-09-13 — Docs-only PRs before M0-T1 may exceed the ~400-line ceiling
 
-**Decision.** Phase 0 documentation PRs may exceed the ~400 changed-line
+**Decision.** Docs-only PRs before M0-T1 may exceed the ~400 changed-line
 ceiling in PROCESS PR1. The ceiling applies strictly from M0-T1 onward, when
 product code begins. PR #2 (538 lines, docs and enforcement layer only) is
 accepted under this rule.
 
+*Widened 2026-09-13, same day, by Ahsan:* the class was first written as
+"Phase 0 documentation PRs". It now covers every docs-only PR before M0-T1 —
+Phase 1's Base44 audit note included — for the same reason. One edit to the
+class, not a new precedent per phase.
+
 **Why.** The ceiling exists so that no code step is big enough to hide a
-mistake in. Phase 0 PRs are docs-only with no product code: the rule book,
-its corrections, and the record of how they came to be. Splitting them adds
+mistake in. PRs before M0-T1 are docs-only with no product code: the rule book,
+its corrections, the record of how they came to be, and the audit of what
+existed before. Splitting them adds
 churn — more PRs to read, the same words to review — without adding safety,
 because the risk the ceiling guards against is not present. Scoped as a class
 so the warden stops raising it on every Phase 0 PR, and bounded at M0-T1 so it
@@ -304,3 +310,29 @@ cannot quietly become the norm once code exists.
 #1 size accepted as a one-off Phase 0 exception". PR #1 was the first instance
 of this class; that entry's reasoning stands and its "one-off" scope is
 replaced by this one.
+
+---
+
+## 2026-09-13 — Base44 is read-only reference, enforced by deny rules; the mirror lives outside the repo
+
+**Decision.** Smart Agro Lite on Base44 is read through seven tools only
+(`base44_readme`, `list_user_apps`, `list_directory`, `read_file`, `grep`,
+`list_entity_schemas`, `describe_api`, `list_api_catalog`). The thirteen tools
+that write, run, checkpoint, deploy, execute, mutate schemas or read entity
+records are denied in `.claude/settings.json` under both server-name forms.
+`query_entities` is denied because it returns real grower records (PROCESS
+§12). The source mirror lives at `~/synapse-reference/base44/`, outside the
+repo, and is never committed; the audit note is the only artefact that
+enters `main`. No code is carried across.
+
+**Why.** Smart Agro Lite is a live product with people using it. A prompt
+rule is enforcement strength 3 (PROCESS §13); a deny rule is strength 1.
+The `explorer` agent cannot call MCP tools, so a wide read over Base44 needs
+an on-disk mirror first — which is also what `03-delivery-process.md` Phase 1
+prescribes. Read-only on the Base44 side was proven by the export manifest's
+call log (24 calls, zero forbidden, zero writes). Whether the deny rules took
+effect in the session that wrote them is unproven, deliberately: proving
+them would have meant attempting a forbidden tool.
+
+**Un-park trigger for any change:** none expected. Loosening these rules needs
+a dated entry here first, like G1.

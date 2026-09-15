@@ -392,3 +392,87 @@ AWS access requests and the Meta app-owner question are not yet filed. Phase 1
 next: the Base44 audit.
 
 ---
+
+## 006 · 2026-09-13 · Phase 1, session 1.1 · audit (Base44 read-only)
+
+**Goal.** Audit the live Base44 product "Smart Agro Lite" (app
+`69690a59f22f6e749b0986ec`) read-only and turn it into
+`docs/notes/base44-audit.md`.
+
+**Shipped.** PR #3 — Phase 1 Base44 audit of Smart Agro Lite plus deny rules for
+the thirteen forbidden Base44 tools; open, awaiting Ahsan's read and merge.
+946 lines of audit (22 screens, 11 forms, data model, 177 business rules flagged
+UI-ONLY/DATA-ONLY/BOTH, a 74-row gap table, 22 do-not-carry-forward patterns,
+11 unknowns), `.claude/settings.json`, `docs/DECISIONS.md`, `docs/STATUS.md`.
+Nothing merged this session; the last merged PR is still #2. Outside the repo, a
+reference mirror at `~/synapse-reference/base44/` — 150/150 files, 8/8 entity
+schemas, MANIFEST.md carrying the full call log.
+
+**What happened.** `/resume` opened on drift: PR #2 had merged after session
+005's close, STATUS did not know it, and the checkout was sitting on the merged
+branch — warden reported no RED and three AMBER, all housekeeping, all cleared.
+Base44 auth turned out to already work through the desktop connector despite the
+banner saying the `.mcp.json` server needed authorising; two registrations
+exist, one of them live. `list_user_apps` returned exactly one app, which
+removed any question of which product to audit. The plan had to route around a
+hard limit — the explorer agent type has only Read/Grep/Glob/Bash and cannot
+call MCP tools at all — so it proposed exporting first with a general-purpose
+agent limited to seven read tools, denying the thirteen forbidden tools in
+settings, then pointing explorers at the on-disk mirror. Ahsan approved with
+three additions: widen the existing size decision rather than open a new one,
+fix SYN-5 and SYN-6 by hand, and record the sandbox-isolation question honestly
+rather than bury it. The export ran about nine minutes, 24 Base44 calls, zero
+forbidden, zero failures; seven explorers then ran in parallel with one question
+each and their answers became the audit. scope-differ came back CLEAN, PR #3
+opened, and Linear attached it.
+
+**Went wrong.** One `list_directory` call at the repo root ran during planning,
+before "Approved", just to size the job — read-only and permitted, but it spun
+up a Base44 sandbox from the app's last commit, so the first touch of the live
+product's platform happened before the plan was approved; whether that sandbox
+is isolated from the live app cannot be determined, and the question is recorded
+as audit §8.1 at Ahsan's request. The deny rules are on disk and valid JSON but
+unproven live, because proving them means attempting a forbidden tool. The
+reference doc's Phase 1 assumes `~/synapse-reference/base44/` already exists; it
+did not, and inventing the export step cost a decision round. Seven `read_file`
+responses blew past the MCP client's inline display cap and the export agent had
+to pull the saved JSON off disk by script — verified at 0 mismatches, but a
+workaround nobody designed. Linear's integration moved SYN-8 to In Progress on
+PR open, not In Review as PROCESS LIN3 claims. The size exception and the PR it
+excuses ride in the same PR, which is self-authorising; scope-differ flagged it,
+Ahsan instructed it anyway, and it is named here so it stays visible. PR4's
+"`pnpm check` before a PR" is vacuous before M0 because no `package.json`
+exists. And the `/close` skill still says to paste the session narrative into
+the journal-writer's prompt, which PROCESS A1 forbids — worked around this
+session by writing a facts file and passing only its path.
+
+**Decisions.** "Docs-only PRs before M0-T1 may exceed the ~400-line ceiling"
+(2026-09-13, the same entry widened from "Phase 0 documentation PRs"). "Base44
+is read-only reference, enforced by deny rules" (2026-09-13).
+
+**Learned.** A wide read over an MCP source needs an on-disk mirror before any
+explorer can touch it — budget an export step into every audit-shaped task — and
+"read-only" is not the same as "no side effects": a listing call created platform
+state, so size a live target from the plan text, not from a call. Two smaller
+ones: a deny list is strength-1 enforcement for one edit where a prompt-level
+tool ban is only strength 3, and the product's own documentation is a claim, not
+evidence — it asserted a mutation-tested harness that does not exist.
+
+**Evidence seen by Ahsan.** Nothing yet on the deliverable; PR #3 is his to read.
+In session he saw the `list_user_apps` result (one app), the settings.json
+valid-JSON check at 49 deny entries, the DECISIONS and settings diff stat, a
+phone-pattern grep returning 0 in both the audit and the diff, the section
+listing (12 headings, 946 lines), the export manifest counts, and scope-differ's
+CLEAN verdict. He read the plan and the `/resume` block and returned three
+additions.
+
+**Open at close.** PR #3 merge, by Ahsan, after reading §5 and §6 and confirming
+the business-rules list — that confirmation is SYN-8's acceptance. Deny rules to
+be proven live at the next session start at the earliest. Phase 2, session 2.1:
+the SPEC draft, with audit §5–§8 as inputs. The `/close` skill text still
+contradicts PROCESS A1; a small fix for a later docs PR. SYN-6 parked, trigger
+unchanged ("Ahsan says Pro is connected"). SYN-5 was set Done by hand this
+session — an instructed exception to LIN3, since PR #1 merged on 2026-09-11 and
+the integration never moved it.
+
+---

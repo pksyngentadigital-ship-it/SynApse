@@ -1,36 +1,29 @@
 # Synapse status
 
-**Phase 0 complete 2026-09-13.** Second warden run: no RED. PR #2 open,
-awaiting Ahsan's read and merge. Nothing runs yet; no commands until M0.
+**Phase 1 done on paper, 2026-09-13.** `docs/notes/base44-audit.md` is on
+`syn-8-base44-audit` as PR #3 (SYN-8, docs-only), awaiting Ahsan's read and
+merge. Nothing runs yet; no commands until M0.
 
-**Last merged PR:** #1, "docs: rule book and process", on `main` at `337fb78`.
-Merged by the incident, not by a human; Ahsan read its diff after the fact on
-2026-09-12 and accepted `main` as it stands (DECISIONS 2026-09-11, INCIDENT).
+**Last merged PR:** #2, "chore: warden triage, interim push guard, incident
+record", squash-merged to `main` as `ec881da` on 2026-09-13.
 
-**Next task:** SYN-7 — Ahsan reads and merges PR #2 (`chore/rule-book`, four
-commits, docs only, size accepted under DECISIONS 2026-09-13). Then Phase 1,
-the Base44 audit, once the Base44 MCP is authorised via `/mcp` in an
-interactive session. SYN-6 is Todo and parked with GitHub Pro.
+**Next task:** Ahsan reads PR #3 — §5 business rules and §6 gap table hardest —
+confirms every rule he knows is there, and merges. Then Phase 2, session 2.1:
+draft `docs/SPEC.md` from the canvas with the audit's §5, §6, §7 as inputs and
+§8 Unknowns as questions. SYN-6 is parked (trigger: "Pro is connected").
 
-**Identifiers.** GitHub `pksyngentadigital-ship-it/SynApse`, private, `main`:
-https://github.com/pksyngentadigital-ship-it/SynApse · shared account; repo-local
-git identity Ahsan Raza · Linear workspace `syngentadigital`, project `SynApse`
-(In Progress), team key **SYN**:
-https://linear.app/syngentadigital/project/synapse-be473bf50d39 · MCP servers in
-`.mcp.json`, project scope, OAuth: **Linear verified 2026-09-11**; **Base44
-registered, loads on restart, not yet authorised** (`https://app.base44.com/mcp`).
+**Carry forward.** Smart Agro Lite (Base44 app `69690a59f22f6e749b0986ec`):
+client-side authorisation, no consent field, no scoring, no lead event, manual
+Excel ingestion, one scheduled WhatsApp summary. Mirror at
+`~/synapse-reference/base44/`, outside the repo; no record was read. Sandbox
+isolation from the live app: unknown (audit §8.1).
 
-**Verified done.** Squash-only, delete-on-merge · seven GitHub labels ·
-`staging` and `production` environments · Dependabot alerts · Linear M0–M8,
-seven labels, "In Review" status, SYN-5 and SYN-7 In Progress, SYN-6 Todo,
-SYN-1–4 Canceled · **`.githooks/pre-push` proven by a live push from Ahsan's
-terminal 2026-09-12: installed, logic correct, invoked by git** · deny rules for
-pushes to `main`, seen firing. A fresh clone must run
-`git config core.hooksPath .githooks`.
+**Identifiers.** GitHub `pksyngentadigital-ship-it/SynApse` (private, shared
+account, repo-local identity Ahsan Raza) · Linear `syngentadigital` / SynApse /
+team **SYN** · Linear MCP verified 2026-09-11 · Base44 MCP verified 2026-09-13
+via the desktop connector; the `.mcp.json` entry is unauthorised and unused ·
+13 Base44 write/run/record tools denied in `.claude/settings.json`, on disk,
+not yet proven live · fresh clone: `git config core.hooksPath .githooks`.
 
-**Not verified.** GitHub↔Linear integration: it did not move SYN-5 on PR #1's
-merge. Watch SYN-7 when PR #2 merges; if it does not move to Done, fix the
-integration's repo access in Linear settings first.
-
-**Parked.** GitHub Pro (branch protection, production reviewer, secret
-scanning). Un-park trigger: Ahsan says "Pro is connected". Not to be raised.
+**Not verified.** Linear integration on PR open moved SYN-8 to In Progress,
+not In Review as PROCESS LIN3 states; watch what merge does.

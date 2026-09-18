@@ -1,7 +1,7 @@
 # Synapse specification
 
-Version: **v0.1 — Part 1 drafted, awaiting Ahsan's marks** · Owner: Ahsan ·
-Task: SYN-9
+Version: **v0.2 — Parts 1 and 2 approved; Part 3 next** ·
+Owner: Ahsan · Task: SYN-9
 
 > **How this document is built.** Six parts, each written in plain language
 > and marked by Ahsan before the next is drafted. A technical appendix follows
@@ -128,8 +128,8 @@ Any open state → Rejected (SUL, reason) → Admin review
 | P1-27 | Eight states: **New** (routed, untouched), **Contacted**, **Visit planned**, **Follow-up**, **Completed: converted**, **Completed: not converted**, **Closed: unreachable**, **Closed: below threshold**. One way in to each; every move logged. | A lead's history reads like a diary: "New 3 Oct 09:10 · Contacted 3 Oct 11:40 by SUL X · Visit planned 5 Oct …". | Your input (15 Sept); Your answer (17 Sept); Invariant 5 | |
 | P1-28 | **Contacted** is logged automatically when the SUL calls or messages from inside the lead, or with one tap when they contacted the grower another way. Each contact attempt, successful or not, is a line in the history. | The SUL taps Call; the lead moves to Contacted and the call is in the history. | Your input (15 Sept); Audit keeper (call and WhatsApp leave a trace); Canvas | |
 | P1-29 | Only the SUL who owns the lead, or Admin, can move it. Managers flag; they do not move. | An RSM cannot mark a lead Contacted; they can flag it. | Invariant 7; Your answer (17 Sept, escalation) | |
-| P1-30 | **Completed: converted** requires the PKR value and a **receipt photo** (required until point-of-sale integration exists), plus the new/existing mark. The closing SUL and date are recorded automatically. | The SUL cannot save "converted" without a value and a receipt; the record shows who closed it and when. | Your input (15 Sept); Invariant 6 | |
-| P1-31 | Converted also records the **product**, **quantity** and **fulfilling franchise** where the SUL knows them. | Optional fields on the conversion screen; the card shows them when filled. | Canvas — not in your input; see DR-6 | |
+| P1-30 | **Completed: converted** requires the PKR value, a **receipt photo** (required until point-of-sale integration exists), the **product** and **quantity**, and the new/existing mark. The closing SUL and date are recorded automatically. *Revised 18 Sept: product and quantity became required (Part 2, question 7).* | The SUL cannot save "converted" without value, receipt, product and quantity; the record shows who closed it and when. | Your input (15 Sept); Your answer (18 Sept); Invariant 6 | R |
+| P1-31 | No **fulfilling franchise** is recorded on a conversion until point-of-sale integration exists; the receipt shows it. *Revised 18 Sept.* | No franchise field on the conversion screen. | Your answer (18 Sept); see DR-6 | R |
 | P1-32 | **Completed: not converted** requires one reason from a fixed list — no need · no budget · no stock at the franchise · bought a competitor · wrong contact — and an optional comment. | The SUL cannot close a lead as not converted without picking a reason. | Canvas; Your input (15 Sept, "completed once the loop is closed"); see DR-1 | |
 | P1-33 | **Closed: unreachable** — after three failed contact attempts, each logged, the SUL closes the lead with a reason from the dropdown. | After the third failed call the lead offers "Close as unreachable" with a reason list. | Your answer (17 Sept) | |
 | P1-34 | A lead closed this season stays closed this season. A new signal from that grower in the same season creates a new lead under the normal rules, with the closed lead visible in the grower's history. A closed lead never silently re-opens on an SUL's list. | The grower who was unreachable in October messages in November; a new lead appears with "Closed: unreachable, 12 Oct" in its history. | Your mark (18 Sept) | R |
@@ -184,7 +184,7 @@ session 2.2 will see both.
 | DR-3 | Breach notifies SUL, RSM, ZM; managers flag; no reassignment | Breach visible to RSM, lead reassigned within 24 hours | Canvas wanted a mechanism that guarantees a contacted grower. Your choice keeps the human in the decision. |
 | DR-4 | Three segments, no cap, fold for low scores | Four tiers including Nurture (no field task) and a daily cap per officer | Canvas's anti-clutter devices; the failure it feared was 400 leads dumped on one officer in week one. |
 | DR-5 | SUL marks the grower new or existing | Derived from purchase history | Canvas trusted the record over memory; your mark is faster and the field knows its growers. |
-| DR-6 | Conversion = PKR value + receipt (+ product, quantity, franchise if known) | Conversion = product, quantity, PKR, franchise, date, always | Canvas wanted a full sale record for the engine; the receipt gives evidence instead. |
+| DR-6 | Conversion = PKR value + receipt + product + quantity, all required; no franchise | Conversion = product, quantity, PKR, franchise, date, always | Only the franchise differs now (18 Sept); the receipt shows it until point-of-sale integration. |
 | DR-7 | Eight stakeholders | Six dashboards | Head of Sales and Country Leadership exist and read the numbers. |
 | DR-8 | Your 15 Sept note showed campaign leads under the threshold with their acreage; your 16 Sept note hides every under-threshold lead from SULs. The later note is followed (P1-15, P1-20). | — | Input versus input; mark P1-15 if campaign leads should be the exception. |
 
@@ -192,8 +192,210 @@ session 2.2 will see both.
 
 ## Part 2 — The SUL's experience
 
-*To be drafted after Part 1 is marked.* Modules, journeys and the rules that
-hold on every SUL screen.
+### 2.1 What the SUL app is
+
+One app on the SUL's own Android phone. It opens on three segments and
+nothing else. Every lead it shows is in the SUL's territory, ranked, with a
+clock. Everything the SUL needs for a day in the field is on the phone before
+they leave signal; everything they log is kept on the phone and sent when
+signal returns. The app speaks Urdu or English, the SUL's choice. It shows the
+SUL their own progress and never a league table.
+
+### 2.2 Modules
+
+| Module | What it is for | Came from | Mark |
+|---|---|---|---|
+| **Home — three segments** | Hot, Campaign, Potential, each with a count and today's due leads; the only things on the home screen | Your input (15 Sept) | |
+| **Segment list** | The leads in one segment, ranked, today's due first, low scores below a "more" fold; Potential has two tabs, "This season" and "Last season" | Your input; Part 1 | |
+| **Campaign browser** | Inside Campaign: one entry per campaign, then leads grouped by product and by crop | Your input (15 Sept) | |
+| **Lead card** | Everything about one lead on one screen, with the actions | Your input; Canvas | |
+| **Act and log** | Call, WhatsApp, Navigate; log contact, visit planned, follow-up, converted, not converted, unreachable, reject; ask and log acreage; correct a grower's number | Your input; Audit keepers | |
+| **Grower profile and timeline** | Who the grower is, their crops and acreage, and every scan, message, call, visit and outcome across seasons | Canvas | |
+| **My summary** | The SUL's own numbers for today / this week / month to date / quarter / year / custom, one trend line, overdue now, leads flagged by line managers | Your input; Your answer (17 Sept) | |
+| **Notifications** | New lead in Hot, overdue on either clock, flag from a manager, a lead moved up a segment | Part 1 | |
+| **Profile** | Language choice, territory shown, sign out | Your answer (17 Sept, languages) | |
+
+### 2.3 Journeys
+
+Each journey is a numbered list of what the SUL does and what Synapse shows.
+Screen states (empty, loading, error) and layout are Phase 4's work, not this
+document's.
+
+#### J1 — Morning start
+
+| Step | The SUL does | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J1.1 | Opens the app at 7 am, no signal | Home with three segments and counts from last night's sync; "last updated 22:40" | Your input; Canvas (offline) | |
+| J1.2 | Looks at Hot | The Hot list, ranked; leads due today first, each with grower, crop, acreage, both clocks, and the first of its top three reasons | Part 1 | |
+| J1.3 | Sees one lead badged "Flagged by your RSM" | The flag sits above the ranking so it is seen first; tapping shows the RSM's one-line note | Your answer (17 Sept, summary) | |
+| J1.4 | Plans the day from the three lists, or from the map when heading to one area | Nothing else competes for attention on the home screen: no map, no source filters, no points. The map is one tap away from any segment list (P2-20, J13). | Your input (no clutter); Your answer (18 Sept, map, revised) | |
+
+#### J2 — Work a Hot lead
+
+| Step | The SUL does | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J2.1 | Taps a Hot lead | The lead card: grower name and village, crop, problem or need, acreage with estimated/confirmed, why it is Hot (the three conditions), score with top three reasons in the SUL's language, recommended product where known (no PKR estimate), nearest franchise, consent basis, campaign if any, last season's status if any, new/existing mark, two clocks | Your input; Canvas; Your answer (18 Sept, card extras) | R |
+| J2.2 | Taps Call | The phone dials; the lead moves to Contacted; the call is in the history with time; the contact clock stops | Audit keeper (call leaves a trace); Part 1 | |
+| J2.3 | Or taps WhatsApp | WhatsApp opens on the grower's number; the lead moves to Contacted; the message attempt is in the history | Audit keeper; Canvas | |
+| J2.4 | Grower does not answer | Taps "No answer": one failed attempt logged; the lead stays where it was; after the third failed attempt the card offers "Close as unreachable" with a reason list | Your answer (17 Sept) | |
+| J2.5 | Agrees a visit | Taps "Visit planned", picks a day: two taps; the lead moves to Visit planned | Your input; Canvas (two taps) | |
+| J2.6 | Needs to get there | Taps Navigate; directions open to the grower's location where Synapse has one | Audit keeper (navigate) | |
+
+#### J3 — Visit and convert
+
+| Step | The SUL does | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J3.1 | At the farm, taps "Log outcome" | Three choices: Converted · Not converted · Follow-up needed | Your input | |
+| J3.2 | Taps Converted | Asks for, all required: PKR value, receipt photo (camera or gallery), product (pick-list), quantity, new or existing grower (pre-filled if already marked). No franchise field until point-of-sale integration. | Your input (15 Sept); Your answer (18 Sept, converted); Invariant 6 | R |
+| J3.3 | Enters PKR 85,000, picks the product and quantity, takes the receipt photo, confirms | The lead moves to Completed: converted with the SUL's name and time; the summary's converted count and value rise; the grower's timeline records the sale | Your input; Invariant 6 | |
+| J3.4 | Is offline at the farm | Everything above works; the photo and outcome wait on the phone and send on reconnect; the SUL sees "will send when online" | Canvas (offline); Audit keeper (outbox) | |
+
+#### J4 — Not converted
+
+| Step | The SUL does | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J4.1 | Taps "Not converted" | A reason list: no need · no budget · no stock at the franchise · bought a competitor · wrong contact; an optional comment | Canvas; Part 1 (DR-1) | |
+| J4.2 | Picks "No stock at the franchise", confirms | The lead moves to Completed: not converted with the reason; two taps in total | Your input; Canvas | |
+| J4.3 | Later, the same grower messages again this season | A new lead appears with the earlier outcome in its history | Part 1 (P1-34) | |
+
+#### J5 — A lead goes overdue
+
+| Step | The SUL does | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J5.1 | Has not contacted a Hot lead for 24 hours | The lead is badged "Overdue: contact"; a notification reaches the SUL, the RSM and the ZM; the summary's "overdue now" rises | Part 1 (P1-40, P1-41) | |
+| J5.2 | Sees the RSM's flag arrive | "Flagged by your RSM" on the lead and on the summary; the lead sorts to the top | Your answer (17 Sept) | |
+| J5.3 | Contacts the grower | The contact clock stops; the badge clears; the completion clock keeps running | Part 1 (P1-39) | |
+| J5.4 | Has not completed a Hot lead in 7 days | "Overdue: completion" badge and the same notifications | Part 1 (P1-38) | |
+
+#### J6 — A campaign lead
+
+| Step | The SUL does | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J6.1 | Opens Campaign | One entry per live campaign in the territory, with lead counts | Your input (15 Sept) | |
+| J6.2 | Opens "Dhaan ki Shaan" | Leads grouped by product, then by crop; each with acreage; leads that meet the Hot conditions tagged and first | Your input; Part 1 (P1-18) | |
+| J6.3 | Opens a lead | The lead card, with the campaign, its product and its talk track where Marketing supplied one | Canvas | |
+| J6.4 | Works it as in J2 to J4 | Same states, same clocks (the campaign's own promises) | Part 1 | |
+
+#### J7 — Unknown acreage: ask and log
+
+| Step | The SUL does | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J7.1 | Opens a Potential lead marked "acreage unknown" | The card shows "Acreage unknown — ask and log", and whether Synapse's own WhatsApp question has already been sent and answered | Your input (16 Sept); Canvas | |
+| J7.2 | Asks the grower on the call; taps the acreage field | Enters a number, optionally per crop; saved as **confirmed** on the grower | Your input (16 Sept); Part 1 (P1-11) | |
+| J7.3 | Logs 30 acres | The lead re-scores; if the grower also showed clear intent and the crop is known it moves to Hot and the SUL is told | Part 1 (P1-24) | |
+| J7.4 | Logs 12 acres | The lead closes as "Closed: below threshold" and leaves the list; the grower's later leads are not routed to the SUL | Your mark (18 Sept) | |
+
+#### J8 — Correcting a grower's number
+
+One mobile number belongs to one grower. There is no split action in this
+phase (see DR-13).
+
+| Step | The SUL does | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J8.1 | Calls and learns the number on the lead is wrong, or the grower has a new number | Taps "Change number" on the grower's profile, enters the new one | Your answer (18 Sept, shared number) | R |
+| J8.2 | Confirms | The grower's number is updated; the old number and the change are kept in the history with who and when; Admin can see and undo it. If the new number already belongs to another grower, Synapse says so and does not save. | Your answer (18 Sept); Invariant 2 | R |
+
+#### J9 — An offline day
+
+| Step | The SUL does | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J9.1 | Leaves signal for the day | All three segments, every lead card, every grower profile in the territory, and the product list are already on the phone | Canvas (offline-first); Audit lesson (reads were not cached) | |
+| J9.2 | Logs eight outcomes and two acreages, takes three receipt photos | Each is saved on the phone at once with "will send when online"; nothing is lost if the phone restarts | Canvas; Audit keeper (outbox) | |
+| J9.3 | Regains signal | Everything sends in the order it was logged; the app confirms; if the same lead changed on the server meanwhile, the server's version wins on the record but the SUL's entry is kept in the history, never discarded | Canvas | |
+
+#### J10 — Reviewing my progress
+
+| Step | The SUL does | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J10.1 | Opens My summary | For the chosen period: leads received, completed, converted, converted value in PKR; one line of conversions per week; overdue now; leads flagged by line managers; breached timelines | Your input (15 Sept); Your answer (17 Sept) | |
+| J10.2 | Switches the period | Today · this week · month to date · quarter · year · custom | Your input; Audit keeper (presets) | |
+| J10.3 | Looks for a ranking | There is none; the SUL sees their own numbers only | Your answer (17 Sept); Audit lesson (gamification) | |
+
+#### J11 — Rejecting a lead
+
+| Step | The SUL does | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J11.1 | Opens a lead from a village outside the territory | Taps "Not a valid lead"; picks: not my territory · duplicate of another lead · internal or test entry · wrong contact details | Your answer (17 Sept) | |
+| J11.2 | Confirms | The lead leaves the list at once and goes to Admin's review list; the SUL's summary does not count it as pending | Part 1 (P1-35) | |
+
+#### J12 — Finding a grower
+
+| Step | The SUL does | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J12.1 | A grower calls the SUL out of the blue | The SUL searches by name, number or village and opens the grower's profile and timeline | Audit (list search); Canvas (interaction history) | |
+| J12.2 | The grower wants to buy | Not in this phase: an SUL cannot create a lead by hand. The project's first focus is converting leads from the digital streams. The SUL sells as today and the sale is not a Synapse lead. To be reconsidered next year or in the second phase (Part 6, out of scope). | Your answer (18 Sept, walk-in lead) | R |
+
+#### J13 — Planning a village visit from the map
+
+| Step | The SUL does | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J13.1 | Is going to a village or BSA tomorrow; opens the map from a segment list | The territory's open leads as pins, coloured by segment (Hot, Campaign, Potential), marked when overdue or campaign; the SUL's own position | Your note (18 Sept, map) | |
+| J13.2 | Filters to the village or BSA | Only that area's pins remain, with a count by segment | Your note (18 Sept) | |
+| J13.3 | Taps a pin | The lead card (J2.1); "Visit planned" for tomorrow is two taps; the map returns to the remaining pins | Your note (18 Sept); Part 1 | |
+| J13.4 | Selects several leads for the same trip | Each is marked Visit planned for that day; the next morning they sit at the top of their lists as due | Your note (18 Sept); P2-21 | |
+| J13.5 | Is offline in the village | The map, pins and cards work from the phone; the base map for the territory is cached; nothing is lost | Canvas (offline) | |
+
+### 2.4 Rules that hold on every SUL screen
+
+| ID | What Synapse does | What you would see | Came from | Mark |
+|---|---|---|---|---|
+| P2-1 | The home screen shows three segments and nothing else. | No map, no filters, no points on the first screen. | Your input (15 Sept) | |
+| P2-2 | Every list is ranked by score inside its segment, today's due leads first, flagged leads above that, low scores below a "more" fold. No cap. | The SUL never scrolls past a lead that matters to reach one that does not. | Your input; Part 1 (P1-23) | |
+| P2-3 | A normal outcome is logged in two taps. | Contacted, visit planned, follow-up, not converted: two taps each. Converted takes more because value and receipt are required. | Canvas (two-tap rule); see DR-9 | |
+| P2-4 | Every lead shows its top three reasons in plain words, in the SUL's language. | "Asked the price on WhatsApp · 30 acres of cotton · Spray window open now". | Canvas; Invariant 8 | |
+| P2-5 | Both clocks are visible on every lead in every list and on the card. | "Contact by Tue 09:00 · Complete by Mon 25th". | Part 1 (P1-38) | |
+| P2-6 | Acreage is always labelled estimated, confirmed or unknown. | Never a bare number. | Part 1 (P1-11) | |
+| P2-7 | The consent basis and the recommended product are shown on every lead card. No indicative PKR value is shown. | "Consent: messaged us on WhatsApp, 3 Oct" · "Suggested: <product> for <problem>". | Canvas; Invariant 1; Your answer (18 Sept, card extras) | R |
+| P2-8 | The app works fully offline: reads and writes. Everything in the territory is on the phone; every action waits on the phone and sends in order. | J9. | Canvas; Audit lesson | |
+| P2-9 | The app is in Urdu or English, chosen once in Profile and changeable any time; grower messages are shown as sent. | Every label, reason list and notification in the chosen language. | Your answer (17 Sept) | |
+| P2-10 | The app runs on Android 9 or newer with 2 GB of memory, takes under 150 MB with a full territory cached, and is usable on 2G/3G. No iPhone in the Pilot. | Installs and works on the field's current phones. | Your answer (17 Sept) | |
+| P2-11 | No points, badges or leaderboards. The SUL sees their own progress only. | J10.3. | Your answer (17 Sept); Audit lesson | |
+| P2-12 | Call, WhatsApp and Navigate are on the lead card, and each leaves a line in the history. | J2.2, J2.3, J2.6. | Audit keeper | |
+| P2-13 | The grower's full timeline across seasons is one tap from any lead. | Scans, messages, calls, visits, outcomes, in date order, with the season marked. | Canvas | |
+| P2-14 | The new/existing mark is set once per grower and shown on every lead. | Card header. | Your input (15 Sept) | |
+| P2-15 | Notifications: a new Hot lead, a lead moved up a segment, overdue on either clock, a manager's flag. In-app and push only. | A bell count and phone push. | Part 1 (P1-42) | |
+| P2-16 | Period views everywhere a number is shown: today, this week, month to date, quarter, year, custom. | J10.2. | Your input (15 Sept) | |
+| P2-17 | The SUL sees only their own territory's leads and growers. A change of territory by Admin changes what the SUL sees at the next sync, and the old leads are no longer on their phone. | An SUL moved from T1 to T2 opens the app and sees T2. | Invariant 7 | |
+| P2-18 | A lead with unknown acreage always carries a one-tap "ask and log" entry. | J7. | Your input (16 Sept) | |
+| P2-19 | The SUL never sees a lead whose grower's known acreage is below the threshold, and never sees leads from growers without a recorded consent basis. | Such leads are simply absent. | Part 1 (P1-12, P1-20) | |
+| P2-20 | The home screen has no map. A **map view** is one tap from any segment list: the territory's open leads as pins, coloured by segment and marked by category (campaign, crop, overdue), filterable to a village or a BSA. Tapping a pin opens the lead card; the SUL can pick the leads near where they are going and work them from there. The map also serves understanding and analytics. Navigate on the lead card opens directions. *Revised 18 Sept from "view-only" after your note.* | Going to a village, the SUL opens the map, filters to it, sees three Hot and five Potential leads nearby, taps one and starts J2. | Your answer (18 Sept, map, revised); Audit lesson (map never the home screen) | |
+| P2-22 | A **BSA** (Basic Sales Unit Area) is a named area inside a territory, held in the sales master that Admin maintains; each grower's village maps to one BSA. "Nearby" on the map means something the field already uses. | The map's filter lists the territory's BSAs and villages. | Your note (18 Sept); approved with Part 2 | R |
+| P2-21 | Follow-up is a date the SUL sets. On that day the lead comes to the top of its list and counts as due; the completion clock keeps running. A missed follow-up date is shown on the lead and the summary but does not notify managers. | "Follow-up: Thu 12th" on the card; on Thursday it is at the top; on Friday it shows "follow-up missed". | Your answer (18 Sept, follow-up) | R |
+
+### 2.5 Decisions this part rests on
+
+| ID | Decision | State | What it means for this part |
+|---|---|---|---|
+| D1 | Consent for advisory-captured data | Open | P2-19: Cropwise-sourced leads absent until decided. |
+| D4 | Mobile number as the grower's key | Open, recommended yes | J8 number correction; J12 search by number; one number per grower. |
+| D7 | Conversion value: declared or reconciled | Open | J3: receipt required until point-of-sale integration. |
+| — | Three segments; two clocks notify-only; threshold as a setting | Decided | All of 2.3 and 2.4. |
+
+### 2.6 Question log (Part 2)
+
+| # | Question | Answer (date) | Rows |
+|---|---|---|---|
+| 1 | Which languages? | Urdu and English, SUL chooses; regional after the Pilot (17 Sept) | P2-9 |
+| 2 | Which phones? | Android 9+, 2 GB, under 150 MB, 2G/3G, no iPhone (17 Sept) | P2-10 |
+| 3 | What is on My summary? | Received, completed, converted, PKR value, one trend line, overdue now, flagged by line managers, breached timelines; no comparison (17 Sept) | J10 |
+| 4 | Can an SUL create a lead by hand? | No, not in this phase; reconsider next year or in the second phase; focus is digital streams (18 Sept) | J12.2 |
+| 5 | Is there a map? | First answer: view-only. Revised the same day: a working map one tap from any segment list, pins by segment and category, filterable to a village or BSA, tapping a pin opens the lead, so the SUL can plan a visit to one area. Never the home screen (18 Sept) | J1.4, J13, P2-20 |
+| 10 | What is a BSA? | P2-22 as written, approved with Part 2 (18 Sept): a named area inside a territory, in the sales master; villages map to one BSA | P2-22 |
+| 6 | How does follow-up work? | A date the SUL sets; the lead resurfaces that day; a missed date is shown, managers not notified (18 Sept) | P2-21 |
+| 7 | What does Converted require? | PKR value, receipt, product and quantity, all required; no franchise until point-of-sale integration (18 Sept) | J3.2; revises P1-30, P1-31 |
+| 8 | Which canvas extras stay on the card? | Consent basis and recommended product; no PKR estimate (18 Sept) | J2.1, P2-7 |
+| 9 | Who splits a shared number? | Nobody: one number per grower; the SUL can change a grower's number, Admin can see and undo (18 Sept) | J8; see DR-13 |
+
+### 2.7 Where the canvas or the audit differs (Part 2)
+
+| DR | Spec | Canvas or audit | Note |
+|---|---|---|---|
+| DR-9 | Two taps for a normal outcome; converted takes more | Canvas: two taps for a normal outcome; Smart Agro Lite: about three | Converted needs value and receipt by your rule, so it is the exception. |
+| DR-10 | Full offline: reads and writes on the phone | Smart Agro Lite: writes held back, reads not cached, map empty offline | Canvas and your input agree; the audit's version is the mistake not carried. |
+| DR-11 | No points or leaderboards | Smart Agro Lite: points, badges, top-5 leaderboard | Audit lesson; canvas warns visible performance data changes behaviour. |
+| DR-12 | A working map one tap from a segment list, for planning an area visit; never the home screen | Smart Agro Lite: map of scan markers was the home screen | Your note, 18 Sept. The list stays the primary surface; the map is a planning tool. |
+| DR-13 | One number per grower; the SUL corrects a wrong number; no split | Canvas: shared and family numbers are common and need an explicit split action or counts corrupt | Your answer, 18 Sept. Two growers on one family phone will be one grower record in this phase; recorded for the session 2.2 reviewers. |
+| DR-14 | No PKR estimate on the card; product and quantity required on conversion; no franchise | Canvas: indicative value on the card; conversion carries franchise | Your answers, 18 Sept. |
 
 ## Part 3 — Managers, leadership, marketing and admin
 

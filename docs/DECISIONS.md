@@ -336,3 +336,127 @@ them would have meant attempting a forbidden tool.
 
 **Un-park trigger for any change:** none expected. Loosening these rules needs
 a dated entry here first, like G1.
+
+---
+
+## 2026-09-15 — D9 decided: a healthy Crop Doctor scan is a lead only at or above the acreage threshold; D8 is unused
+
+**Decision.** A Crop Doctor scan whose diagnosis is "healthy" becomes a lead
+only when the grower's known acreage is at or above the acreage threshold
+(20 acres, an Admin setting — see the 2026-09-16 entry). Below the threshold
+or with acreage unknown, the scan is recorded on the grower's history and no
+lead is created. The number D8 was proposed for the lost-reason code set and
+withdrawn the same day by Ahsan; D8 is not used and must not be re-assigned.
+Decided by Ahsan in session 2.1; recorded 2026-09-17. Source:
+`docs/notes/spec-input-2026-09-16.md`.
+
+**Why.** A healthy scan carries no need and no intent; on its own it is not
+demand. On a large farm it is still worth a conversation. Tying the rule to
+the same threshold as everything else keeps one number for the field to learn.
+
+**Governs.** The Crop Doctor connector's lead-creation rule (M6) and the
+ordering of the acreage follow-up before a healthy scan can become a lead.
+D1 still gates whether a grower may be created from Cropwise data at all.
+
+---
+
+## 2026-09-15 — Three ranked segments replace the canvas's four tiers; no daily cap
+
+**Decision.** SULs see three segments — Hot, Campaign, Potential — ranked by
+score inside each, today's due leads first, low scores below a fold. There is
+no Nurture tier and no daily cap per SUL. Hot is defined by three conditions
+only: clear purchase intent, crop known, acreage at or above the threshold;
+the score orders leads inside Hot and does not gate it. Decided by Ahsan
+2026-09-15 and confirmed 2026-09-17 (`docs/notes/spec-input-2026-09-15.md`,
+`-17.md`).
+
+**Why.** Smart Agro Lite's lesson was clutter: too many buckets, no clarity on
+what to tap next. Ahsan's answer is fewer, clearer segments rather than a cap
+that hides leads. The canvas's Nurture tier and cap were its own anti-clutter
+devices; the spec records that reasoning in its disagreement register so the
+session 2.2 reviewers can challenge the choice with the argument in front of
+them. Reversible: a cap or a fourth segment is an Admin setting away, and
+would need a new entry here.
+
+---
+
+## 2026-09-15 — The lead clock stays; a breach notifies, it never reassigns
+
+**Decision.** Every routed lead carries two promises, both Admin settings: a
+contact promise (Hot within 24 hours, Campaign per the campaign's own
+promise, Potential within 72 hours) and a completion promise (starting
+proposal: Hot 7 days, Campaign per campaign, Potential 14 days). Both clocks
+start when the lead reaches the SUL; the contact clock stops at the first
+contact, the completion clock when the lead is completed or closed. When
+either promise is missed, the SUL, the RSM and the Zonal Manager are all
+notified, and the managers follow up with their direct report inside Synapse.
+No lead is reassigned automatically or by rule. The on-time rate, reported
+for both clocks, is the Pilot's headline number. Clock kept 2026-09-15;
+notify-only path chosen 2026-09-17; second clock added 2026-09-18 when Ahsan
+ruled the clock runs to completion, not first contact
+(`docs/notes/spec-input-2026-09-17.md`, `-18.md`).
+
+**Why.** The clock is what turns a ranked list into changed field behaviour;
+without it the queue is a better-sorted list. Reassignment was rejected
+because a lead moving without a human deciding punishes an SUL who was about
+to visit; visibility up the line, in the product, is the pressure instead.
+The canvas's "reassigned within 24 hours" is recorded as a disagreement.
+
+---
+
+## 2026-09-16 — One acreage threshold, 20 acres, as an Admin setting; leads below it are never routed to an SUL
+
+**Decision.** There is one acreage threshold, 20 acres, held as an Admin
+setting with every change recorded. A lead whose grower's acreage is known and
+below the threshold is never shown to any sales user; it is kept in the portal
+(Admin "below threshold" list), counted in Marketing and Portfolio Manager
+totals labelled "below threshold", and still builds the grower's record. A
+lead with unknown acreage is routed and marked unknown; when the SUL learns
+the acreage they log it, it stays on the grower, and if it is below the
+threshold that grower's next lead is not routed. Ahsan first wrote 15 and 20
+on 2026-09-16 and settled on one threshold at 20 the same day, with the
+explicit provision that the number may change after the Phase 4 stakeholder
+review (`docs/notes/spec-input-2026-09-16.md`, `-17.md`).
+
+**Why.** Acreage is the strongest signal of sale potential Syngenta has, and a
+field force of one SUL per territory cannot visit every two-acre farm. Holding
+the number as a setting, not a constant, is the provision Ahsan asked for.
+
+---
+
+## 2026-09-16 — Eight personas, not six
+
+**Decision.** Synapse serves eight kinds of user: Sales Unit Lead (SUL — the
+canvas's "Sales Officer"), Regional Sales Manager, Zonal Manager, Head of
+Sales, Country Leadership Team, Portfolio Manager (four portfolios:
+insecticides, fungicides, herbicides, biologicals and seed care), Marketing,
+Admin. Head of Sales sees all zones side by side plus the national on-time
+rate; Country Leadership gets a read-only national dashboard and a monthly
+summary. Admin is the digital team on its own login, never combined with a
+sales or marketing role. The stub and the delivery process said six; the
+canvas listed six dashboards. Ahsan, 2026-09-16 and 2026-09-17.
+
+**Why.** The two added roles exist in Syngenta Pakistan today and will read
+the numbers; a persona that is not specified is a dashboard designed last.
+
+---
+
+## 2026-09-17 — Acreage replaces "order value" as a scoring ingredient; the canvas weights stay as the starting point
+
+**Decision.** The Pilot's scorecard uses the canvas's five ingredients and
+four adjustments, changeable in Admin from day one, with one substitution:
+the "opportunity value" ingredient (acreage × dose × price) is replaced by
+acreage itself, carrying a high weight. Indicative PKR value is still shown on
+the lead card where product and price are known, but it is not scored. The
+proposed starting weights are in the spec, marked for Ahsan. Automated
+WhatsApp follow-up goes only to low-scoring leads whose acreage is unknown.
+Personal data is anonymised after two seasons of inactivity (an Admin
+setting; every removal logged). Ahsan, 2026-09-17
+(`docs/notes/spec-input-2026-09-17.md`).
+
+**Why.** Order value depends on a product-and-price master and a dose table
+that do not exist on day one and would make the first score a guess dressed
+as money. Acreage is known or askable, and in Ahsan's words "tells a lot about
+grower sale potential". The other two items are recorded here because they
+are rules about contacting growers and keeping their data, which the canvas
+leaves to a leadership position.

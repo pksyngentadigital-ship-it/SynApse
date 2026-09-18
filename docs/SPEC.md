@@ -1,6 +1,6 @@
 # Synapse specification
 
-Version: **v0.2 — Parts 1 and 2 approved; Part 3 next** ·
+Version: **v0.3 — Parts 1 to 3 approved; Part 4 next** ·
 Owner: Ahsan · Task: SYN-9
 
 > **How this document is built.** Six parts, each written in plain language
@@ -399,7 +399,176 @@ phase (see DR-13).
 
 ## Part 3 — Managers, leadership, marketing and admin
 
-*To be drafted after Part 2 is marked.*
+### 3.1 What they get
+
+Everyone above the SUL reads the same numbers the SUL's logging produced,
+one level down, by name. An RSM sees SULs; a ZM sees regions and can open a
+territory; Head of Sales sees zones side by side; Leadership sees the country.
+Nobody sees a number they cannot trace to a person or a territory, and nobody
+sees two definitions of the same number. Managers act through one mechanism,
+the flag, which travels one level at a time and lands at the top of the
+report's list. Marketing and Portfolio Managers read campaigns, brands and
+portfolios, never a grower. Admin keeps the machine honest from a desktop
+portal and every Admin action is on the record.
+
+### 3.2 Modules
+
+| Module | Who | What it is for | Came from | Mark |
+|---|---|---|---|---|
+| **RSM dashboard** | RSM | Region's SULs and territories by name; overdue first; SUL-wise and territory-wise numbers; full lead cards; flags to SULs; the regional pool | Your input (15 Sept); Your answers (18 Sept) | |
+| **ZM dashboard** | ZM | Zone → regions → territories; progress, gaps and analytics; no grower details; flags to RSMs | Your input; Your answer (18 Sept, manager view) | |
+| **Head of Sales dashboard** | Head of Sales | All zones side by side on the same numbers; national on-time rates; drill to territory; breach notifications for every zone; flags to ZMs | Your answer (17 Sept) | |
+| **Leadership dashboard and monthly summary** | Country Leadership Team | Read-only national view; a monthly one-page summary | Your answer (17 Sept) | |
+| **Portfolio dashboard** | Portfolio Manager | Own portfolio's brands, campaigns and leads by product and crop; drill zone → region → territory; flags to ZMs | Your input (15 Sept); Your answer (18 Sept) | |
+| **Marketing analytics** | Marketing | Campaigns, portfolios, brands, channels; leads, conversions, PKR, cost per lead; aggregate exports | Your input (15 Sept); Canvas; Your answer (18 Sept, cost) | |
+| **Admin portal** | Admin | Users and roles; territories and BSAs; settings (threshold, clock promises, weights); campaigns; connections and their health; below-threshold list; rejected leads; regional pool sizes; audit trail | Canvas; Your answers (17, 18 Sept) | |
+| **Weekly WhatsApp summary** | RSM, ZM, Head of Sales, PMs | Monday 9 am, last week at the reader's own level | Audit keeper (changed daily → weekly); Your answer (18 Sept) | |
+| **Flags and notifications** | All managers | Flag with note and due-by day, one level down; notifications for breaches, flags actioned, settings changes | Your answers (17, 18 Sept) | |
+
+### 3.3 Journeys
+
+#### J14 — RSM morning
+
+| Step | The RSM does | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J14.1 | Opens the app | The region's overdue leads first, grouped by SUL, with which clock is breached; then the week's on-time rates and this week's numbers by SUL | Your input (15 Sept); Canvas (breaches first) | |
+| J14.2 | Opens an SUL | That SUL's numbers for the period (received, contacted on time, completed, converted, PKR, overdue now) and their three segment counts | Your input (SUL-wise) | |
+| J14.3 | Opens an overdue lead | The full lead card, grower name and number included; every view of a number is logged | Your answer (18 Sept, manager view) | |
+| J14.4 | Taps Flag, writes "Visit before Thursday", sets Thursday | The lead sorts to the top of the SUL's list with the note; the SUL's summary shows it; the flag and the SUL's response are in the lead's history | Your answer (18 Sept, flag) | |
+| J14.5 | Switches to territory view | The same numbers by territory, including any territory with no SUL assigned, shown as a gap | Your input (territory-wise) | |
+
+#### J15 — The regional pool
+
+| Step | The RSM does | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J15.1 | Opens "Unassigned" | Leads in the region whose grower location matched no territory, with what is known (village, district, crop, source) | Canvas (region pool); Your answer (18 Sept) | |
+| J15.2 | Picks an SUL for a lead | The lead is routed to that SUL; both clocks start now; the assignment is in the history | Your answer (18 Sept, pool) | |
+| J15.3 | Sees the same village again next week | Admin has been shown the pool size by region and the unmatched villages, so the territory master can be fixed | Your answer (18 Sept); Canvas (master drift) | |
+
+#### J16 — ZM: short of leads, or short of follow-up
+
+| Step | The ZM does | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J16.1 | Opens the app | The zone's regions side by side: leads received, contacted on time, completed, converted, PKR, overdue — for the chosen period | Your input (15 Sept) | |
+| J16.2 | Sees Region B behind | Two numbers set apart: leads received per territory (supply) and the on-time rates (follow-up), so the ZM can tell which is short | Canvas; Your answer (18 Sept, progress and gaps) | |
+| J16.3 | Opens Region B, then a territory | Territory-level numbers and the SUL's name; no grower names or numbers, no lead cards | Your answer (18 Sept, manager view) | |
+| J16.4 | Flags the RSM | Note and due-by day; lands at the top of the RSM's view; the RSM flags the SUL; the ZM sees when each was actioned | Your answers (17, 18 Sept) | |
+
+#### J17 — Head of Sales
+
+| Step | Head of Sales does | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J17.1 | Opens the app | All zones side by side on the same numbers, plus national on-time rates for both clocks | Your answer (17 Sept) | |
+| J17.2 | Drills | Zone → region → territory, same shape as the ZM's view, no grower details | Your answers (17, 18 Sept) | |
+| J17.3 | Receives breach notifications for every zone | One digest per day at 8 am rather than one per lead: "14 leads breached yesterday: Zone A 9, Zone B 5"; tapping it opens the list | Your answer (17 Sept); Your mark (18 Sept, digest) | R |
+| J17.4 | Flags a ZM | Same flag; one level down | Part 1 (P1-41) | |
+| J17.5 | Is told a setting changed | "Admin changed the acreage threshold from 20 to 25 at 14:02" | Your answer (18 Sept, controls) | |
+
+#### J18 — Country Leadership Team
+
+| Step | Leadership does | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J18.1 | Opens the dashboard | National funnel by source and by campaign; conversions and PKR by zone and by portfolio; on-time rates; leads below threshold as a count; whether the scoring engine beats a plain list | Your answer (17 Sept); Canvas (model lift) | |
+| J18.2 | Receives the monthly summary | One page on the first working day of the month, unflattering numbers included; sent by email as a page and also shown in the dashboard | Your answer (17 Sept); Canvas ("including when unflattering"); approved with Part 3 | R |
+| J18.3 | Looks for a grower | There are none to find; nothing on this view names a grower | Your answer (18 Sept, manager view) | |
+
+#### J19 — Portfolio Manager
+
+| Step | The PM does | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J19.1 | Opens the app | Own portfolio only: its brands and live campaigns with leads, conversions and PKR for the period; below-threshold leads as a labelled count | Your input (15 Sept); Your answer (17 Sept, under-threshold) | |
+| J19.2 | Opens a campaign | Leads by product and by crop; conversions and PKR by each; zone → region → territory drill | Your input (15 Sept) | |
+| J19.3 | Sees a territory behind on a campaign | Flags the ZM with a note and due-by day; the ZM flags the RSM, the RSM the SUL; the PM sees when each was actioned | Your answer (18 Sept, PM follow-up) | |
+| J19.4 | Looks for a grower | No grower names or numbers on any PM view | Canvas; Invariant 7 | |
+
+#### J20 — Marketing
+
+| Step | Marketing does | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J20.1 | Opens analytics | Every campaign: leads (routed and below threshold, labelled), contacted, converted, PKR; by portfolio, by brand, by channel; for the period | Your input (15 Sept) | |
+| J20.2 | Compares campaigns | Cost per lead and cost per converted lead where spend was entered; "no spend entered" otherwise | Canvas; Your answer (18 Sept, cost) | |
+| J20.3 | Defines a new campaign | Gives Admin the name (brand-level or a crop programme), portfolio, brand or programme, product, crop, dates, its contact and completion promises, and budget; Admin creates it | Your answer (17 Sept, campaigns) | |
+| J20.4 | Updates spend | Edits actual spend on the campaign record monthly; the change is logged | Your answer (18 Sept, cost) | |
+| J20.5 | Exports | Aggregate figures to a spreadsheet, never a grower's name, number or village; every export logged with who and when | Your answer (18 Sept, controls); Audit keeper (About sheet, as-of and count) | |
+
+#### J21 — Admin
+
+| Step | Admin does | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J21.1 | A new SUL joins | IT gives the login; Admin sets the role and assigns the territory; the SUL's phone shows that territory at the next sync | Your answer (17 Sept, Admin); Invariant 7 | |
+| J21.2 | Changes the acreage threshold, a clock promise or a scoring weight | Takes effect at once; recorded with who, when and the previous value; Head of Sales notified; the audit trail shows it | Your answer (18 Sept, controls); Canvas (weights audited) | |
+| J21.3 | Creates a campaign from Marketing's definition | Name, portfolio, brand or crop programme, product, crop, dates, promises, budget; leads carrying that campaign appear under it from then on | Your answer (17 Sept, campaigns) | |
+| J21.4 | Opens Connections | Each of the nine streams with its state (connected, failing, not yet connected), last lead received, leads held back for a reason; a failing stream is shown before anyone notices missing leads | Canvas | |
+| J21.5 | Opens Below threshold | Every lead held back for known acreage under the threshold, by source and campaign; nothing to action, everything to count | Your answer (17 Sept) | |
+| J21.6 | Opens Rejected | Leads SULs rejected, with reason and source; Admin reassigns to a territory, merges with another lead, or removes with a logged reason | Your answer (17 Sept, reject) | |
+| J21.7 | Opens Territories | Zones, regions, territories, BSAs and their SULs; unmatched villages from the regional pools; edits here never touch a grower | Your answers (17, 18 Sept) | |
+| J21.8 | Opens the audit trail | Every settings change, every flag, every number change by an SUL (with undo), every removal, every view of a grower's number by a manager, every export, every automated read of grower data | Canvas; Your answers (18 Sept) | |
+
+#### J22 — Monday morning summary
+
+| Step | Who | Synapse shows or does | Came from | Mark |
+|---|---|---|---|---|
+| J22.1 | RSM, ZM, Head of Sales, each PM | One WhatsApp message at 9 am Pakistan time: last week at their own level — leads received, contacted on time, completed, converted, PKR, overdue now, and the one SUL or territory (or brand, for a PM) most behind | Your answer (18 Sept, weekly); Audit keeper | |
+| J22.2 | — | Each send is logged with who received what; the message names no grower | Audit lesson (no record of sends); Invariant 7 | |
+
+### 3.4 Rules that hold on every manager, marketing and admin screen
+
+| ID | What Synapse does | What you would see | Came from | Mark |
+|---|---|---|---|---|
+| P3-1 | Every level sees the level below it **named**, plus its own total. Nothing is aggregated past the person or territory behind it. | A ZM sees regions by name, then territories by name, never "Zone total" alone. | Canvas; Your input (15 Sept) | |
+| P3-2 | One definition per number, everywhere: a "conversion", "on time", "received" mean the same thing on every screen and in every summary. A definitions page states each one, and a reconciliation view shows that the totals agree. | Marketing's converted count for a campaign equals the sum of the RSMs' converted counts for it. | Canvas (one semantic layer); Audit keeper (definitions and sign-off) | |
+| P3-3 | The RSM can open a full lead card, grower number included. ZM, Head of Sales, Leadership, PMs and Marketing see progress, gaps and analytics and never a grower's name, number or village. | J14.3, J16.3, J18.3. | Your answer (18 Sept, manager view) | |
+| P3-4 | The **flag** is the one way a manager acts on a lead: a note and a due-by day, one level down only (Head of Sales → ZM → RSM → SUL; PM → ZM → RSM → SUL). The flagged lead sorts to the top for the report; the flag and the response are in the history; the sender sees when it was actioned. | J14.4, J16.4, J19.3. | Your answers (17, 18 Sept) | |
+| P3-5 | Two on-time rates, contact and completion, contact first, at every level. | "Contacted on time 78% · Completed on time 61%". | Part 1 (P1-43) | |
+| P3-6 | "Short of leads" and "short of follow-up" are shown as separate numbers on every ZM and Head of Sales view: leads received per territory, and the on-time rates. | J16.2. | Canvas; Your answer (18 Sept) | |
+| P3-7 | Period presets everywhere: today, this week, month to date, quarter, year, custom; every number says its period. | A period control at the top of every dashboard. | Your input (15 Sept); Audit keeper | |
+| P3-8 | Honest reporting: a non-dismissible notice when data is incomplete; export off while it is; every export and summary says "as of" and how many records; unresolved rows (unmatched village, unknown acreage) counted openly, never hidden. | "Data as of 08:00 · 4,212 leads · 37 with unmatched village". | Audit keepers | |
+| P3-9 | Exports exist for Marketing (aggregate only) and Admin. No manager or SUL exports a list. Every export is logged. | No export button on RSM, ZM, Head of Sales, PM or SUL screens. | Your answer (18 Sept, controls) | |
+| P3-10 | Settings changes (threshold, clock promises, weights, campaign promises) are made by Admin alone, take effect at once, are recorded with who, when and the previous value, and notify Head of Sales. | J21.2, J17.5. | Your answer (18 Sept, controls); Canvas (weights audited) | |
+| P3-11 | The regional pool is the RSM's: leads with no territory match are assigned by the RSM by hand; clocks start at assignment; Admin sees pool sizes and unmatched villages by region. | J15. | Your answer (18 Sept, pool) | |
+| P3-12 | Below-threshold leads appear only on Admin's list and as labelled counts on Marketing, PM and Leadership views. | J19.1, J20.1, J21.5. | Your answer (17 Sept) | |
+| P3-13 | Every manager's view of a grower's number, every export, every settings change, every flag and every automated read of grower data is in the audit trail. | J21.8. | Canvas; Your answers (18 Sept) | |
+| P3-14 | Notifications to managers: a breach in their scope, a flag actioned, a settings change (Head of Sales). In-app and push. RSM and ZM get one per breached lead; Head of Sales receives breaches as one daily digest at 8 am. | J17.3. | Part 1 (P1-42); Your mark (18 Sept, digest) | R |
+| P3-15 | Connection health is on the Admin portal before anyone notices missing leads: state per stream, last lead received, leads held back and why. | J21.4. | Canvas | |
+| P3-16 | Campaigns are created by Admin from Marketing's definition with: name, portfolio, brand or crop programme, product, crop, start and end dates, contact and completion promises, budget and actual spend. | J20.3, J21.3. | Your answers (17, 18 Sept) | |
+| P3-17 | The weekly WhatsApp summary goes to RSMs, ZMs, Head of Sales and PMs on Monday at 9 am at their own level; Leadership gets the monthly page; SULs get nothing by WhatsApp. Every send is logged; no grower is named. | J22. | Your answer (18 Sept, weekly) | |
+| P3-18 | The monthly leadership summary is produced by Synapse on the first working day of the month, includes the unflattering numbers, and never names a grower. Delivered by email as a one-page document and shown in the dashboard. | J18.2. | Your answer (17 Sept); Canvas; approved with Part 3 | R |
+| P3-19 | Admin's territory edits (zones, regions, territories, BSAs, SUL assignment) never change a grower's record; a boundary change re-routes future leads only. Open leads stay with the SUL who has them. | J21.7. | Your answer (17 Sept, territory); approved with Part 3 | R |
+| P3-20 | Manager and marketing dashboards work on the phone for RSM, ZM, Head of Sales and PMs, and on desktop for Marketing, Admin and Leadership. They need signal; nothing is cached for offline use. | A ZM on the road sees the dashboard when there is signal. | Your input (15 Sept, "mobile dashboard"); Canvas | |
+
+### 3.5 Decisions this part rests on
+
+| ID | Decision | State | What it means for this part |
+|---|---|---|---|
+| D3 | Campaign ID convention | Open — Marketing via Ahsan, decided in M5 | Campaign reporting (J19, J20) depends on the campaign surviving from ad to lead; Admin's campaign record is the Synapse side of it. |
+| D6 | Territory versus franchise catchment conflict | Open — sales leadership | Not needed here; no franchise appears on any manager view in the Pilot. |
+| D7 | Conversion value declared or reconciled | Open | Every PKR figure on every dashboard is self-declared with a receipt; no dashboard number is linked to incentives until D7 is decided. |
+| — | Eight personas; two clocks notify-only; threshold as a setting | Decided | All of Part 3. |
+
+### 3.6 Question log (Part 3)
+
+| # | Question | Answer (date) | Rows |
+|---|---|---|---|
+| 1 | How much of a lead does a manager see? | RSM: full card. ZM and above: progress, gaps and analytics, no grower details (18 Sept) | P3-3, J14.3, J16.3 |
+| 2 | What is a flag? | A note and a due-by day; the lead sorts to the top; one level down (18 Sept) | P3-4 |
+| 3 | Who works the regional pool? | The RSM assigns by hand; clocks start then; Admin sees pool sizes (18 Sept) | P3-11, J15 |
+| 4 | Weekly summary: who and what? | RSM, ZM, Head of Sales, PMs; Monday 9 am; own level (18 Sept) | P3-17, J22 |
+| 5 | How does a PM follow up? | PM flags the ZM, ZM flags the RSM (18 Sept) | P3-4, J19.3 |
+| 6 | Where does campaign spend come from? | Marketing enters it on the campaign record; cost per lead shown; blank shows "no spend entered" (18 Sept) | P3-16, J20.2 |
+| 7 | Second person on settings? Who exports? | Admin alone, logged, Head of Sales notified; exports for Marketing and Admin only (18 Sept) | P3-9, P3-10 |
+| 8 | Head of Sales: what beyond a ZM? | All zones side by side plus national on-time rates (17 Sept) | J17 |
+| 9 | Leadership: screen or report? | Both: dashboard and a monthly summary (17 Sept) | J18, P3-18 |
+| 10 | Head of Sales: one notification per breached lead, or a digest? | Daily digest at 8 am; RSM and ZM still get one per lead (18 Sept) | J17.3, P3-14 |
+| 11 | Two gaps marked ASSUMPTION | Approved with Part 3 (18 Sept): monthly summary by email and in the dashboard (P3-18); open leads stay with their SUL when a boundary changes (P3-19) | P3-18, P3-19 |
+
+### 3.7 Where the canvas or the audit differs (Part 3)
+
+| DR | Spec | Canvas or audit | Note |
+|---|---|---|---|
+| DR-15 | RSM assigns from the pool but never reassigns a routed lead | Canvas: RSM reassigns breached leads within 24 hours | Follows your notify-only rule (DR-3). |
+| DR-16 | Weekly WhatsApp summary, Monday 9 am | Smart Agro Lite: daily at 9 am | Your answer, 17 Sept. |
+| DR-17 | ZM and above see no grower details | Canvas: sales scope is own level and everything beneath, which included grower detail | Your answer, 18 Sept; fewer people can see personal data. |
+| DR-18 | Single sign-on not in the Pilot | Canvas: SSO where available | Left to Part 6's out-of-scope list; IT gives logins. |
 
 ## Part 4 — Where leads come from, and one grower
 

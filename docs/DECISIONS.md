@@ -460,3 +460,55 @@ as money. Acreage is known or askable, and in Ahsan's words "tells a lot about
 grower sale potential". The other two items are recorded here because they
 are rules about contacting growers and keeping their data, which the canvas
 leaves to a leadership position.
+
+---
+
+## 2026-09-18 — D1 decided: any contact with Syngenta is the consent basis for sales contact
+
+**Decision.** A grower who contacts Syngenta through any stream — a Crop
+Doctor scan, a Savera conversation, a community post, a WhatsApp or social
+message, a campaign form, a call to the centre — has thereby given the consent
+basis for a sales contact about that need. Every lead records which stream
+and date the consent came from. There is no opt-out control for growers or
+SULs in this phase (Ahsan, 2026-09-21); a grower's request to stop is a
+message on the lead, left to the SUL. Cropwise-sourced growers are created and routed
+from day one; the M6 gate in PLAN.md ("no grower is created from Cropwise data
+until D1 is decided") is lifted. Ahsan reports this as Syngenta leadership's
+position, 2026-09-18 (`docs/notes/spec-input-2026-09-18.md`). Who took it and
+on what date is not recorded here; Ahsan may add it.
+
+**Why.** The canvas held D1 open because advisory data used for a sales call
+is a change of purpose that needs a leadership position, not a product
+default. Leadership has now taken the position. INV-1 is unchanged: no grower
+is contacted without a recorded consent basis — the basis is now the contact
+itself, and it is still recorded per lead.
+
+**Reversal cost.** If leadership later narrows this, Cropwise-sourced leads
+already routed stay in the history; new ones are held. The spec's consent
+row cites this entry, so the change is one row and one connector rule.
+
+---
+
+## 2026-09-18 — D4 decided: verified mobile number is the grower's key; one number, one grower; no split action
+
+**Decision.** A grower is identified by their verified mobile number. One
+number belongs to exactly one grower. There is no split action for shared or
+family numbers in this phase; if a number is wrong or has changed, the SUL
+corrects it on the grower's profile, the change is kept in the history with
+who and when, and Admin can undo it. A number that already belongs to another
+grower cannot be saved on a second one. A signal that arrives with no number
+is never routed: it is matched to an existing grower by name, village and
+crop when the match is clear, otherwise held on Admin's "no contact" list,
+counted, and merged into a lead when a later signal brings a number. Ahsan,
+2026-09-18 and 2026-09-21 (the no-number rule was first answered "routed
+anyway" and changed the same day on re-asking).
+
+**Why.** Ahsan's rule for the field is simpler than the canvas's split: one
+grower, one number, corrected by the person who knows. The cost, recorded for
+the session 2.2 reviewers: two growers on one family phone will be one record
+in this phase, and INV-2's "unless an officer explicitly split it" clause has
+no user path yet. INV-2 itself still holds — a verified number maps to at
+most one grower.
+
+**Un-park trigger for a split action:** the field reports shared-number
+growers being merged in error; raised as a change request.

@@ -1,6 +1,6 @@
 # Synapse specification
 
-Version: **v0.3 — Parts 1 to 3 approved; Part 4 next** ·
+Version: **v0.4 — Parts 1 to 4 approved; Part 5 next** ·
 Owner: Ahsan · Task: SYN-9
 
 > **How this document is built.** Six parts, each written in plain language
@@ -421,7 +421,7 @@ portal and every Admin action is on the record.
 | **Leadership dashboard and monthly summary** | Country Leadership Team | Read-only national view; a monthly one-page summary | Your answer (17 Sept) | |
 | **Portfolio dashboard** | Portfolio Manager | Own portfolio's brands, campaigns and leads by product and crop; drill zone → region → territory; flags to ZMs | Your input (15 Sept); Your answer (18 Sept) | |
 | **Marketing analytics** | Marketing | Campaigns, portfolios, brands, channels; leads, conversions, PKR, cost per lead; aggregate exports | Your input (15 Sept); Canvas; Your answer (18 Sept, cost) | |
-| **Admin portal** | Admin | Users and roles; territories and BSAs; settings (threshold, clock promises, weights); campaigns; connections and their health; below-threshold list; rejected leads; regional pool sizes; audit trail | Canvas; Your answers (17, 18 Sept) | |
+| **Admin portal** | Admin | Users and roles; territories and BSAs; settings (threshold, clock promises, weights); campaigns; connections and their health; below-threshold list; "no contact" list (signals with no number, Part 4); rejected leads; regional pool sizes; audit trail | Canvas; Your answers (17, 18 Sept) | |
 | **Weekly WhatsApp summary** | RSM, ZM, Head of Sales, PMs | Monday 9 am, last week at the reader's own level | Audit keeper (changed daily → weekly); Your answer (18 Sept) | |
 | **Flags and notifications** | All managers | Flag with note and due-by day, one level down; notifications for breaches, flags actioned, settings changes | Your answers (17, 18 Sept) | |
 
@@ -500,6 +500,7 @@ portal and every Admin action is on the record.
 | J21.3 | Creates a campaign from Marketing's definition | Name, portfolio, brand or crop programme, product, crop, dates, promises, budget; leads carrying that campaign appear under it from then on | Your answer (17 Sept, campaigns) | |
 | J21.4 | Opens Connections | Each of the nine streams with its state (connected, failing, not yet connected), last lead received, leads held back for a reason; a failing stream is shown before anyone notices missing leads | Canvas | |
 | J21.5 | Opens Below threshold | Every lead held back for known acreage under the threshold, by source and campaign; nothing to action, everything to count | Your answer (17 Sept) | |
+| J21.5a | Opens "No contact" | Signals that arrived with no number and matched no grower, by source and campaign, with possible matches for a person to confirm; they merge into a lead when a number arrives (Part 4, P4-18) | Your answer (21 Sept) | |
 | J21.6 | Opens Rejected | Leads SULs rejected, with reason and source; Admin reassigns to a territory, merges with another lead, or removes with a logged reason | Your answer (17 Sept, reject) | |
 | J21.7 | Opens Territories | Zones, regions, territories, BSAs and their SULs; unmatched villages from the regional pools; edits here never touch a grower | Your answers (17, 18 Sept) | |
 | J21.8 | Opens the audit trail | Every settings change, every flag, every number change by an SUL (with undo), every removal, every view of a grower's number by a manager, every export, every automated read of grower data | Canvas; Your answers (18 Sept) | |
@@ -572,7 +573,128 @@ portal and every Admin action is on the record.
 
 ## Part 4 — Where leads come from, and one grower
 
-*To be drafted after Part 3 is marked.*
+### 4.1 How a lead arrives
+
+Nine streams, each its own connection, each optional: Synapse runs correctly
+with three connected and six not. Nothing arrives by upload. A signal is kept
+the moment it arrives and becomes a lead within minutes; reading the grower's
+intent from their words happens after and never delays the arrival. The same
+signal twice never makes a second lead. Nothing is lost silently: a signal
+Synapse cannot accept is held, retried, and shown to Admin with the reason.
+One stream failing never stops another. Every signal is attached to one
+grower, identified by their mobile number, so a grower who scans, chats and
+messages is one grower with one lead and one history.
+
+### 4.2 The streams
+
+Nine at the start, plus e-commerce purchases added on 21 September. The list
+can grow or shrink; each stream has its own row and its own rule. Every
+stream is marked **to confirm with the system owner**: the intended
+connection is stated, and the M2 spike proves the first one.
+
+| Stream | What the grower did | What Synapse learns | How it arrives | Owner to confirm | Blocked by | Came from | Mark |
+|---|---|---|---|---|---|---|---|
+| **Crop Doctor scan** | Photographed a crop in Cropwise and got a diagnosis | Crop, diagnosis, how severe, how sure, location, Cropwise grower ID, number where Cropwise has it | Pulled from the Cropwise platform on a schedule | Cropwise Pakistan tenant owner (global digital or country IT) | D2 (access) | Your input (15 Sept); Canvas | |
+| **Savera conversation** | Talked to the Savera agent for advice; Savera recommended products | Crop, problem, products discussed, acreage if stated, buying questions | Transcripts pulled from the Cropwise platform | As above | D2 | Your input (15 Sept); Canvas | |
+| **Cropwise community post** | Posted or commented in the in-app community | Crop, problem described, intent in the words, engagement | Pulled from the Cropwise platform | As above | D2 | Your answer (17 Sept, sources); Canvas | |
+| **WhatsApp inbound** | Messaged Syngenta's WhatsApp number: asked a price, asked advice, said they want to buy | Message text, intent read from it, the number itself, whether they messaged first | Arrives as each message is received, through the messaging provider | Digital team (the provider account) | — | Your input (15 Sept); Canvas | |
+| **Facebook** | Filled a lead form on an ad, or messaged the page | Form fields, message intent, campaign and ad | Arrives as each form or message is received, from the Meta platform | Marketing (the ad account) | D3 (campaign convention) | Your answer (17 Sept); Canvas | |
+| **TikTok** | Filled a lead form on an ad | Form fields, campaign | Arrives as each form is received, from the TikTok platform | Marketing | D3; TikTok lead forms available for the Pakistan account, to confirm | Your answer (17 Sept); Canvas | |
+| **Call centre** | Called the centre, or was called back | Agent's note: grower, number, crop, acreage, what they asked | The centre's own platform feeds Synapse; if it cannot, a short Synapse form for agents; decided in the M2 spike | Call-centre manager | Which platform the centre runs | Your answer (21 Sept); Canvas | |
+| **NPI campaign** | Responded to a new-product campaign | Campaign, product, creative, what they did on landing | Arrives from the campaign platform, carrying the campaign under the agreed convention | Marketing | D3 | Your input (15 Sept, campaigns); Canvas | |
+| **Brand campaign** | Responded to a brand-level or crop-programme campaign | Campaign, brand or programme, creative, what they did on landing | As above | Marketing | D3 | Your input (15 Sept); Your answer (17 Sept, campaigns); Canvas | |
+| **E-commerce purchase** *(added 21 Sept)* | Bought on Syngenta's e-commerce channel | Product, quantity, value, date — only for growers with confirmed acreage at or above the threshold (P4-27a) | Pulled from the e-commerce platform on a schedule | E-commerce owner, to confirm | Which platform; whether it carries the grower's number | Your answer (21 Sept); Canvas (e-commerce) | |
+
+### 4.3 Rules for every stream
+
+| ID | What Synapse does | What you would see | Came from | Mark |
+|---|---|---|---|---|
+| P4-1 | Every stream is a separate connection and every stream is optional. Synapse runs correctly with any subset connected; no stream waits on another. | Admin's Connections page shows nine rows; three "connected", six "not yet connected", and leads flow from the three. | Your answer (17 Sept, sources); Canvas | |
+| P4-2 | No lead ever arrives by upload. There is no import screen anywhere. | No spreadsheet path exists. | Your input (15 Sept); Audit lesson | |
+| P4-3 | A signal becomes a lead on the SUL's phone within minutes of the grower acting, for streams that push (WhatsApp, Facebook, TikTok, campaigns), and within the schedule for streams that are pulled (Cropwise streams, call centre). | A grower messages at 10:02; the SUL's phone shows the lead by 10:05. | Canvas | |
+| P4-4 | The same signal arriving twice never makes a second lead; it merges into the existing one. | A provider resends yesterday's message; the lead's history shows one signal, not two. | Invariant 3 | |
+| P4-5 | Nothing is lost silently. A signal Synapse cannot accept is held, retried, and listed for Admin with the reason; when the cause is fixed the held signals flow through. | Connections shows "WhatsApp: 12 held — provider error since 09:40"; at 10:10 the count is 0. | Canvas; Audit lesson (silent drops) | |
+| P4-6 | One stream failing never stops another or slows the rest. | Facebook is down for a day; WhatsApp leads keep arriving on time. | Invariant 9 | |
+| P4-7 | A bad value is rejected and reported, never guessed. No made-up location, no "today" for a missing date, no zero for a missing acreage. | A signal with an impossible location is held with "location invalid"; nothing is stored as 0. | Audit lesson (§7.11) | |
+| P4-8 | The grower's original words and the original signal are kept unchanged, so a lead can be re-read and the reading improved later. | The lead card shows the grower's own message under "What they said". | Canvas; Your answer (21 Sept, unsure intent) | |
+| P4-9 | Intent is read from the grower's words in Urdu, English, regional languages and transliterated Urdu. When Synapse is unsure, the lead goes to Potential marked "intent unclear" and cannot be Hot until the SUL confirms intent on the call with one tap ("wants to buy" / "advice only"). The SUL's answer improves the reading. | The card shows "Intent unclear — confirm on call"; after "wants to buy" the lead re-scores. | Your answer (21 Sept); Canvas | |
+| P4-10 | Reading intent never delays a lead. The lead exists first; the reading follows. | A lead arrives with "reading…" and updates within a minute. | Canvas (AI never in the delivery path) | |
+| P4-11 | A campaign lead carries its campaign from the ad to the lead under the one convention agreed with Marketing (D3). If the campaign cannot be read, the lead still arrives, marked "campaign unknown", and is listed for Admin. | Connections shows "3 leads with unknown campaign this week". | Canvas; D3 | |
+| P4-12 | A healthy Crop Doctor scan becomes a lead only when the grower's known acreage is at or above the threshold (Part 1, P1-25). Below it or unknown: history only. | — | Your decision D9 | |
+| P4-13 | Every stream is marked "to confirm with the system owner" with the owner named where known; the M2 spike proves the first stream end to end before the rest are built. | The table in 4.2. | Your answer (17 Sept, live feeds) | |
+| P4-14 | Call-centre capture tries the centre's own platform first; if it has no way out, agents get a short Synapse form (number, crop, acreage, what they asked). The choice is made in the M2 spike. | Either no new screen for agents, or one short one. | Your answer (21 Sept) | |
+| P4-15 | Connection health is visible to Admin before anyone notices missing leads: state per stream, last lead received, signals held and why. | J21.4. | Canvas | |
+
+### 4.4 One grower
+
+| ID | What Synapse does | What you would see | Came from | Mark |
+|---|---|---|---|---|
+| P4-16 | A grower is identified by their mobile number. One number belongs to exactly one grower. | Two signals with the same number are one grower. | Invariant 2; Your answer (18 Sept); Your decision D4 | |
+| P4-17 | There is no split action. A wrong or changed number is corrected by the SUL on the grower's profile; the change is kept with who and when; Admin can undo it; a number already on another grower cannot be saved on a second one. | J8. | Your answer (18 Sept); see DR-13 | |
+| P4-18 | A lead is routed only when the grower has a number. A signal with no number is first matched to an existing grower by name, village and crop; if it matches one who has a number, it joins that grower and is routed normally. If it matches nobody, it is held on Admin's **"no contact"** list, counted in source and campaign totals as "no contact", and merges into a lead the moment a later signal brings a number. Never routed, never lost. | A community post with a name and village but no number sits on Admin's "no contact" list; when the same grower messages on WhatsApp a week later, one lead appears with both signals. | Your answer (21 Sept, re-asked); Canvas (nothing enters unattached) | |
+| P4-19 | A match by name, village and crop is made only when it is clear; a doubtful match is not made, and the signal is held rather than attached to the wrong grower. | Admin's "no contact" list shows "possible match: <name>, <village>" for a person to confirm. | Canvas (secondary matching) | |
+| P4-20 | When two sources give different values for the same thing (name spelling, village, acreage), the most recent verified value wins and Synapse remembers where each value came from. An acreage **confirmed** by an SUL is never overwritten by an **estimated** one from a source. | The profile shows "Acreage 25 (confirmed by SUL X, 4 Oct)"; a later scan saying 18 does not change it. | Canvas; Your input (16 Sept) | |
+| P4-21 | The grower's profile holds: name, number, village and location (province, district, tehsil, village, and map position where a source gave one), crops grown, acreage (per crop where known, with estimated/confirmed), preferred language, the new/existing mark, and last season's status. | One profile screen; the lead card draws from it. | Canvas; Your input (15, 16 Sept) | |
+| P4-22 | Every scan, message, call, visit, campaign touch, purchase and outcome is one timeline on the grower, across seasons, marked by season. | J12.1; P2-13. | Canvas | |
+| P4-23 | **Consent.** Any contact with Syngenta through any stream is the consent basis for a sales contact about that need. Every lead records which stream and date the consent came from; the card shows it. | "Consent: Crop Doctor scan, 3 Oct" · "Consent: WhatsApp message, 5 Oct". | Your decision D1 (18 Sept); Invariant 1 | |
+| P4-24 | There is **no opt-out** in this phase, for growers or for SULs. A grower's request to stop, in any channel, is a message on the lead like any other and is left to the SUL's judgement. Opt-out is reconsidered in a later phase (Part 6, out of scope). | No opt-out control anywhere; the consent basis (P4-23) is the whole consent record. | Your answer (21 Sept, "no opt-out option for now"); see DR-19 | R |
+| P4-25 | A STOP, "band karo" or similar on WhatsApp appears in the lead's history as a message; Synapse takes no action on it. | The message under "What they said". | Your answer (21 Sept) | R |
+| P4-26 | Growers below the acreage threshold and growers with no lead this season keep a profile and a history; only routing changes. | The grower exists on Admin's lists and in totals. | Your answer (17 Sept, under-threshold); Part 1 | |
+| P4-27 | Nothing is stored about a grower that no stream or SUL gave. No purchased lists, no outside enrichment. The list of streams can grow or shrink; each addition is a stream with its own row in 4.2 and its own rule. | The profile holds only what the streams and the SUL put there. | Your answer (21 Sept, re-asked) | R |
+| P4-27a | **E-commerce purchases** are an added stream: a purchase on Syngenta's e-commerce channel becomes a signal only for a grower whose acreage is **confirmed** and at or above the threshold. Purchases by other growers are not brought in. | A confirmed 30-acre grower's online order appears on their timeline and re-scores their lead; a 10-acre or unconfirmed grower's order does not enter Synapse. | Your answer (21 Sept, re-asked); Canvas (e-commerce under pulled sources) | |
+
+### 4.5 The lists Synapse depends on
+
+| List | Holds | Kept by | Refreshed | Came from | Mark |
+|---|---|---|---|---|---|
+| **Sales structure** | Zones, regions, territories, BSAs, and which SUL owns each territory | Owner: Sales Operations; Admin enters changes and has full access | When changed; every change logged | Your answer (17 Sept, territory); Audit keeper (one territory master) | |
+| **Grower location list** | Provinces, districts, tehsils, villages, and which BSA each village belongs to | Owner: Sales Operations; Admin enters changes and has full access | When changed | Your answer (17 Sept); P2-22 | |
+| **Products** | Syngenta products by portfolio and brand, with the crops and problems each treats, for the recommended product and the conversion pick-list | Owner: Marketing with the Portfolio Managers; Admin enters changes and has full access | When changed | Canvas; Your answers (18 Sept) | |
+| **Campaigns** | Every campaign as defined in Part 3 (P3-16) | Admin, from Marketing | When created or edited | Your answer (17 Sept) | |
+| **Users** | Everyone who can log in, their role and scope | IT (login), Admin (role and scope) | When changed | Your answer (17 Sept, Admin) | |
+| **Settings** | The acreage threshold, the six clock promises, the scoring weights, the retention period | Admin | When changed; every change logged and Head of Sales notified | Your answers (17, 18 Sept) | |
+
+| ID | What Synapse does | What you would see | Came from | Mark |
+|---|---|---|---|---|
+| P4-28 | Each list has one named owner who is told when a row is rejected or a value is missing; rejected rows are reported, never dropped. | "Sales structure: 2 territories with no SUL — owner notified". | Canvas (named steward); Audit keeper | |
+| P4-29 | A lead is routed by matching the grower's village to a BSA and territory through these lists. A village not in the list sends the lead to the regional pool and the village to Admin's unmatched list. | J15. | Your answer (17 Sept); Part 3 (P3-11) | |
+| P4-30 | Editing a list never edits a grower. | P3-19. | Your answer (17 Sept) | |
+
+### 4.6 Decisions this part rests on
+
+| ID | Decision | State | What it means for this part |
+|---|---|---|---|
+| D1 | Consent basis for advisory-captured data | **Decided 2026-09-18** — any contact with Syngenta is the consent basis | P4-23; Cropwise-sourced growers routed from day one; the M6 gate in the plan is lifted. |
+| D2 | Who owns Cropwise platform access for Pakistan | Open — action: Ahsan files the request | The three Cropwise streams cannot be connected until answered; they are specified here regardless. |
+| D3 | Campaign ID convention | Open — Marketing via Ahsan, decided in M5 | P4-11; campaign leads arrive marked "campaign unknown" until agreed. |
+| D4 | Mobile number as key; shared-number rule | **Decided 2026-09-18** — one number, one grower, no split, SUL corrects | P4-16 to P4-18. |
+| D9 | Healthy scan rule | Decided | P4-12. |
+
+### 4.7 Question log (Part 4)
+
+| # | Question | Answer (date) | Rows |
+|---|---|---|---|
+| 1 | How is consent recorded per stream? | Any contact with Syngenta is consent (18 Sept) | P4-23 |
+| 2 | Is that leadership's position or an interim default? | Leadership's position; D1 decided (18 Sept) | 4.6 |
+| 3 | How does a grower opt out? | First "via the SUL only"; then, on the STOP-message question: no opt-out option for growers or SULs for now (21 Sept) | P4-24, P4-25 |
+| 4 | Is a signal with no number routed? | First answer "routed anyway"; changed the same day on re-asking: routed only if there is a number, otherwise matched to an existing grower or held on Admin's "no contact" list and merged when a number arrives (21 Sept) | P4-18, P4-19 |
+| 5 | What happens when intent is unclear? | Potential, marked, never Hot until the SUL confirms (21 Sept) | P4-9 |
+| 6 | Call-centre capture? | Platform feed first, Synapse form if it cannot; decided in M2 (21 Sept) | P4-14 |
+| 7 | Named campaigns? | Marketing names them; brand-level or crop programme; Admin creates (17 Sept) | 4.2, P3-16 |
+| 8 | Live feeds today? | Each marked "to confirm with the system owner" (17 Sept) | P4-13 |
+| 9 | Territory shape? | Sales hierarchy separate from grower location (17 Sept) | 4.5, P4-29 |
+| 10 | What happens to a WhatsApp STOP? | Nothing; no opt-out in this phase (21 Sept) | P4-25 |
+| 11 | Any outside data on growers? | First answer pressed by accident; re-asked: none beyond the streams and SULs, but streams may be added or removed — e-commerce purchases added, for confirmed acreage at or above the threshold only (21 Sept) | P4-27, P4-27a, 4.2 |
+| 12 | Who owns the lists? | Sales Operations for structure and locations, Marketing with the PMs for products; Admin also has access (21 Sept) | 4.5 |
+
+### 4.8 Where the canvas or the audit differs (Part 4)
+
+| DR | Spec | Canvas or audit | Note |
+|---|---|---|---|
+| DR-19 | Any contact with Syngenta is the consent basis; no opt-out in this phase | Canvas: consent basis, scope, timestamp, source and opt-out state per grower, explicit consent language at capture recommended; opt-out enforced across every channel | D1 decided by leadership, 18 Sept; no opt-out, 21 Sept. The record per lead is kept (stream and date), so the canvas's register still exists; the basis is broader and there is no way for a grower to withdraw it. The session 2.2 consent lens will raise this; it is recorded here so the reviewers argue against the decision, not discover it. |
+| DR-20 | A signal with no number is matched or held, never routed | Canvas: every signal matches a grower or creates one, "nothing enters unattached" | Consistent after your re-answer of 21 Sept; a held signal is still attached, to the "no contact" list, so nothing enters unattached. Kept here because the first answer differed. |
+| DR-21 | No split action; one number, one grower | Canvas: explicit split for shared and family numbers | DR-13 repeated here; D4 decided. |
+| DR-22 | Product list only; no price or dose list in the Pilot | Canvas: product and price master synced nightly for value mapping | Follows DR-14 (no PKR estimate on the card) and the 17 Sept scoring answer (acreage instead of order value). |
 
 ## Part 5 — Scoring, routing and the clock, in detail
 

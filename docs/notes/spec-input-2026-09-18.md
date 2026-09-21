@@ -55,3 +55,39 @@ Same day, Part 2 approved ("part 2 approved"), then the seven Part 3 questions:
 **Head of Sales breach notifications** (asked to clarify digest versus per lead). Answer: got it, previous approach is fine [the daily digest].
 
 Part 3 approved ("Part 3 approved"), the two remaining assumptions (P3-18, P3-19) approved as written.
+
+---
+
+Same day, Part 4 questions begun:
+
+**Consent per stream.** Answer: Treat any contact with Syngenta as consent.
+
+**D1 status** (asked whether this is leadership's position or an interim product default). Answer: Leadership has taken this position; D1 is decided.
+
+**Opt-out.** Answer: Opt-out via the SUL only [a WhatsApp STOP is not honoured automatically].
+
+**Signal with no phone number.** Answer: Routed anyway; the SUL finds the grower [appears in Potential with "no number"; SUL uses village and name].
+
+**Unsure intent.** Answer: Routed to Potential marked 'intent unclear'; never Hot [SUL confirms intent on the call with one tap; the answer trains the reading].
+
+**Call-centre capture.** Answer: Both: platform feed now, Synapse form if the platform cannot [decided in the M2 spike].
+
+(Answers 2–5 of Part 4 were given on 2026-09-21; recorded here with the rest of Part 4.)
+
+**Signal with no phone number — re-asked at Ahsan's request (21 Sept):** "part 4 question 3 - re-ask; answer need to be changed before we move forward". New answer: Routed only if there is a number; otherwise held and matched later [matched to an existing grower by name, village and crop; else held on Admin's "no contact" list; merges when a later signal brings a number; counted, never lost]. This replaces the earlier "routed anyway".
+
+---
+
+2026-09-21, Part 4 assumptions asked one at a time:
+
+**WhatsApp STOP message (P4-25).** Answer: let's not give any opt out option to growers and SULs for now
+
+**Outside data on growers (P4-27).** Answer: No outside data; streams and SULs only.
+
+**List owners (4.5).** Question dismissed by Ahsan; awaiting instruction.
+
+**Outside data on growers (P4-27) — re-asked at Ahsan's request ("it accidently pressed option 1").** Answer: option 1; but there could be an addition or substraction in streams; like we will also be adding e-commerce purchases with only those farmers who have confirmed their acreage and their acreage is and over 20
+
+**List owners (4.5) — re-asked.** Answer: 1st option with admin would also have an access [Sales Operations for structure and locations; Marketing with PMs for products; Admin has access].
+
+Part 4 approved ("Part 4 approved"), 2026-09-21.

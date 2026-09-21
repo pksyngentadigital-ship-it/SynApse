@@ -512,3 +512,58 @@ most one grower.
 
 **Un-park trigger for a split action:** the field reports shared-number
 growers being merged in error; raised as a change request.
+
+---
+
+## 2026-09-21 — Hina, a third-party AI calling agent, fills lead gaps by phone before routing; an AI first layer of calling in phase 2
+
+**Decision.** Hina is an AI voice agent, developed and managed by a third
+party, that Synapse integrates with. In phase 1, a lead that has a number but
+is missing acreage, crop or purchase intent is held for Hina before any SUL
+sees it: Synapse sends Hina the leads in order (score, then age) with an
+attempt limit (starting setting: 3 calls over 2 days, Admin settings); Hina
+returns structured answers (acreage, crop, intent), the outcome of each
+attempt, and a short plain-words summary, no recording; Synapse then scores
+the lead with what Hina found and routes it into the same three segments, or
+closes it below threshold; the SUL's clocks start at handover. Leads with no
+gap skip Hina. Synapse no longer asks acreage by WhatsApp, and sends no
+automated WhatsApp content in phase 1; Hina is the only automated contact.
+In phase 2, when Hina can close sales, she becomes the first layer of calling
+for every grower before an SUL — an "AI SUL" — with a separate scoring and
+priority layer; that is out of scope for this specification and recorded here
+so it is not forgotten. Ahsan, 2026-09-21 (`docs/notes/spec-input-2026-09-18.md`).
+This was not in the canvas, the audit or Ahsan's earlier notes.
+
+**Why.** Acreage and intent decide Hot and the threshold, and a phone call in
+Urdu reaches growers a WhatsApp template does not. A third party already
+builds the agent. The cost, recorded for the session 2.2 reviewers: a lead
+with a gap waits up to the attempt window before an SUL sees it, which is the
+"model call in the lead path" the canvas warned against; the time limit and
+the "no gap → route at once" rule bound that wait. Consent for an AI call
+rests on D1 (any contact is consent). Every Hina call is an automated read of
+grower data and is logged.
+
+**Un-park trigger for phase 2:** Hina can close a sale end to end on the
+third party's side, proven on real calls; raised as a change request with
+its own spec section.
+
+---
+
+## 2026-09-21 — Scoring details for the Pilot: weights, adjustments, timing table, engine proposals, score visibility
+
+**Decision.** Starting weights, all Admin settings: purchase intent 30,
+acreage 25, crop need 20, season timing 15, grower history 10. Adjustments:
+minus 2 per day after 48 hours with a floor; minus 15 where the grower's
+number has never been confirmed; minus 10 where no franchise is within range,
+which requires a franchise list (name, location, serviceable range) kept in
+Admin; repeat signals merge into the lead and raise its score. The season
+timing table (crop, problem, months) is owned by Marketing and scores neutral
+until a row exists. The engine's proposed weight changes are applied by Admin
+and notified to Head of Sales, ZMs, RSMs and SULs; every change is logged and
+reversible; the scorecard is never switched off. SULs see rank and the top
+three reasons, not the number; managers and Admin see the 0–100 number.
+Ahsan, 2026-09-21.
+
+**Why.** Each of these was a canvas default that needed an owner or a number
+before the walking skeleton can score; Ahsan supplied them. Hiding the number
+from SULs keeps the argument on reasons, not on a 68 versus a 71.

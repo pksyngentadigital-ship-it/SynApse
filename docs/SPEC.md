@@ -1,6 +1,6 @@
 # Synapse specification
 
-Version: **v0.4 — Parts 1 to 4 approved; Part 5 next** ·
+Version: **v0.5 — Parts 1 to 5 approved; Part 6 next** ·
 Owner: Ahsan · Task: SYN-9
 
 > **How this document is built.** Six parts, each written in plain language
@@ -89,7 +89,7 @@ the whole product; the appendix says what Capture builds.
 | P1-9 | The same signal arriving twice never creates a second lead. | A WhatsApp provider resends yesterday's message; nothing new appears. | Invariant 3 | |
 | P1-10 | A lead carries: the grower (name, number, village), crop, problem or need, acreage (estimated, confirmed, or unknown), source stream, campaign if any, score with its top three reasons, segment, clock, territory and SUL, last season's status if any, the new/existing mark, and the grower's history. | An SUL opens a lead and sees all of these on one card without scrolling to another screen. | Your input (15 Sept); Canvas | |
 | P1-11 | Acreage is marked **estimated** when it came from a source or a conversation, **confirmed** when an SUL logged it after asking the grower, and **unknown** otherwise. | The lead card shows "Acreage: 25 (estimated)" or "25 (confirmed)" or "unknown". | Canvas; Your input (16 Sept) | |
-| P1-12 | No SUL is asked to contact a grower whose consent to be contacted is not recorded. Leads from such growers are kept and counted, but not routed, until the consent basis is known. Decision D1 governs data captured for crop advice. | Until D1 is decided, Crop Doctor, Savera and community signals are stored on the grower's history but no SUL is asked to call. | Invariant 1; Canvas — not in your input; D1 | |
+| P1-12 | Every lead records the consent basis for contacting the grower: the stream and date of the grower's own contact with Syngenta. No SUL is asked to contact a grower without one. *Revised 21 Sept: D1 decided — any contact with Syngenta is the basis (Part 4, P4-23); Cropwise-sourced leads are routed from day one.* | "Consent: Crop Doctor scan, 3 Oct" on every card. | Invariant 1; Your decision D1 (18 Sept) | R |
 
 ### 1.4 The three segments and the acreage rule
 
@@ -103,7 +103,7 @@ the whole product; the appendix says what Capture builds.
 | P1-18 | A lead that carries a campaign sits in the **Campaign** segment even when it meets the Hot conditions. Inside the campaign it is tagged "meets Hot conditions" and ranks first; it is never shown in Hot. | A campaign lead whose grower asked the price appears under its campaign with a "Hot" tag at the top of the campaign's list, and not in the Hot segment. | Your mark (18 Sept) | R |
 | P1-19 | The **acreage threshold** is 20 acres, held as an Admin setting; every change is recorded; the same number applies everywhere the threshold is used (Hot, hiding, healthy scans). | Admin changes 20 to 25; from then on Hot needs 25, and the audit trail shows who changed it and when. | Your input (16 Sept); Your answer (17 Sept, one threshold) | |
 | P1-20 | Known acreage **below** the threshold: the lead is never shown to any sales user. It is kept in the portal on Admin's "below threshold" list, counted in Marketing and Portfolio Manager totals labelled "below threshold", and still builds the grower's record. | A 5-acre grower who asked a price never appears on an SUL's phone; Marketing sees the campaign produced 300 below-threshold leads. | Your input (16 Sept); Your answer (17 Sept) | |
-| P1-21 | Acreage **unknown**: the lead is routed to Potential (or Campaign) marked "acreage unknown". Synapse asks the grower once by WhatsApp (Part 5); the SUL is prompted to ask and log it. | The lead card shows "Acreage unknown — ask and log" with a one-tap entry. | Your input (15, 16 Sept); Canvas | |
+| P1-21 | Acreage **unknown**: the lead is first held for Hina, the AI calling agent, who phones the grower to ask (Part 5); if she gets it the lead is scored and routed with it; if she cannot reach the grower the lead is routed to Potential (or Campaign) marked "acreage unknown — ask and log". *Revised 21 Sept: Hina replaces the WhatsApp question.* | The lead card shows "Acreage 30 (confirmed by Hina)" or "Acreage unknown — ask and log" with a one-tap entry. | Your input (15, 16 Sept); Your answer (21 Sept, Hina) | R |
 | P1-22 | When an SUL logs an acreage it stays on the grower and shows on every later lead. If it is below the threshold, the lead the SUL is working is **closed at once** (state "Closed: below threshold"), and that grower's later leads are not routed to the SUL. | The SUL logs 12 acres; the lead closes with "below threshold" in its history and leaves the list; next season the same grower's scan goes to the below-threshold list. | Your input (16 Sept); Your mark (18 Sept) | R |
 | P1-23 | There is **no cap** on how many leads an SUL receives. Inside each segment leads are ranked by score, today's due leads first; leads with low scores sit below a "more leads" fold. | An SUL with 80 Potential leads sees the top ones first and taps "more" to see the rest; nothing is withheld. | Your input (15 Sept); Your decision (segments); see DR-4 | |
 | P1-24 | Any new signal on an existing lead re-scores it and can move it up a segment. | A Potential lead whose grower then asks the price on WhatsApp and gives 30 acres moves to Hot and the SUL is notified. | Canvas | |
@@ -152,7 +152,7 @@ Any open state → Rejected (SUL, reason) → Admin review
 
 | ID | Decision | State | What it means for this part |
 |---|---|---|---|
-| D1 | Consent basis for advisory-captured data (Crop Doctor, Savera, community) used for sales contact | Open — Syngenta leadership via Ahsan | Until decided: those signals are stored on the grower's history and no SUL is asked to call (P1-12). |
+| D1 | Consent basis for advisory-captured data (Crop Doctor, Savera, community) used for sales contact | **Decided 2026-09-18** — any contact with Syngenta is the basis (leadership's position) | P1-12: every lead records the stream and date; Cropwise-sourced leads routed from day one. |
 | D4 | Verified mobile number as the grower's key; the shared-number rule | Open — recommended yes; confirmed in M3 | P1-8 assumes it; a split action exists for shared numbers (Part 4). |
 | D7 | Conversion value: self-declared or reconciled | Open — Ahsan with finance | Self-declared with a receipt in the Pilot (P1-30); point-of-sale integration is the intended reconciliation path (your input, 15 Sept). No conversion value is linked to incentives until then. |
 | D9 | Healthy Crop Doctor scan is a lead only at or above the threshold | **Decided 2026-09-15** | P1-25. |
@@ -280,7 +280,7 @@ document's.
 
 | Step | The SUL does | Synapse shows or does | Came from | Mark |
 |---|---|---|---|---|
-| J7.1 | Opens a Potential lead marked "acreage unknown" | The card shows "Acreage unknown — ask and log", and whether Synapse's own WhatsApp question has already been sent and answered | Your input (16 Sept); Canvas | |
+| J7.1 | Opens a Potential lead marked "acreage unknown" | The card shows "Acreage unknown — ask and log" and Hina's note ("no answer after 3 attempts"); a lead Hina reached arrives with acreage already confirmed and is not marked unknown | Your input (16 Sept); Your answer (21 Sept, Hina) | R |
 | J7.2 | Asks the grower on the call; taps the acreage field | Enters a number, optionally per crop; saved as **confirmed** on the grower | Your input (16 Sept); Part 1 (P1-11) | |
 | J7.3 | Logs 30 acres | The lead re-scores; if the grower also showed clear intent and the crop is known it moves to Hot and the SUL is told | Part 1 (P1-24) | |
 | J7.4 | Logs 12 acres | The lead closes as "Closed: below threshold" and leaves the list; the grower's later leads are not routed to the SUL | Your mark (18 Sept) | |
@@ -421,7 +421,7 @@ portal and every Admin action is on the record.
 | **Leadership dashboard and monthly summary** | Country Leadership Team | Read-only national view; a monthly one-page summary | Your answer (17 Sept) | |
 | **Portfolio dashboard** | Portfolio Manager | Own portfolio's brands, campaigns and leads by product and crop; drill zone → region → territory; flags to ZMs | Your input (15 Sept); Your answer (18 Sept) | |
 | **Marketing analytics** | Marketing | Campaigns, portfolios, brands, channels; leads, conversions, PKR, cost per lead; aggregate exports | Your input (15 Sept); Canvas; Your answer (18 Sept, cost) | |
-| **Admin portal** | Admin | Users and roles; territories and BSAs; settings (threshold, clock promises, weights); campaigns; connections and their health; below-threshold list; "no contact" list (signals with no number, Part 4); rejected leads; regional pool sizes; audit trail | Canvas; Your answers (17, 18 Sept) | |
+| **Admin portal** | Admin | Users and roles; territories and BSAs; settings (threshold, clock promises, weights); campaigns; connections and their health (the streams and Hina); franchise list; timing table; below-threshold list; "no contact" list (signals with no number, Part 4); rejected leads; regional pool sizes; audit trail | Canvas; Your answers (17, 18 Sept) | |
 | **Weekly WhatsApp summary** | RSM, ZM, Head of Sales, PMs | Monday 9 am, last week at the reader's own level | Audit keeper (changed daily → weekly); Your answer (18 Sept) | |
 | **Flags and notifications** | All managers | Flag with note and due-by day, one level down; notifications for breaches, flags actioned, settings changes | Your answers (17, 18 Sept) | |
 
@@ -531,7 +531,7 @@ portal and every Admin action is on the record.
 | P3-13 | Every manager's view of a grower's number, every export, every settings change, every flag and every automated read of grower data is in the audit trail. | J21.8. | Canvas; Your answers (18 Sept) | |
 | P3-14 | Notifications to managers: a breach in their scope, a flag actioned, a settings change (Head of Sales). In-app and push. RSM and ZM get one per breached lead; Head of Sales receives breaches as one daily digest at 8 am. | J17.3. | Part 1 (P1-42); Your mark (18 Sept, digest) | R |
 | P3-15 | Connection health is on the Admin portal before anyone notices missing leads: state per stream, last lead received, leads held back and why. | J21.4. | Canvas | |
-| P3-16 | Campaigns are created by Admin from Marketing's definition with: name, portfolio, brand or crop programme, product, crop, start and end dates, contact and completion promises, budget and actual spend. | J20.3, J21.3. | Your answers (17, 18 Sept) | |
+| P3-16 | Campaigns are created by Admin from Marketing's definition with: name, portfolio, brand or crop programme, product, crop, start and end dates, contact and completion promises (required; a campaign cannot be saved without them), budget and actual spend. | J20.3, J21.3. | Your answers (17, 18 Sept) | |
 | P3-17 | The weekly WhatsApp summary goes to RSMs, ZMs, Head of Sales and PMs on Monday at 9 am at their own level; Leadership gets the monthly page; SULs get nothing by WhatsApp. Every send is logged; no grower is named. | J22. | Your answer (18 Sept, weekly) | |
 | P3-18 | The monthly leadership summary is produced by Synapse on the first working day of the month, includes the unflattering numbers, and never names a grower. Delivered by email as a one-page document and shown in the dashboard. | J18.2. | Your answer (17 Sept); Canvas; approved with Part 3 | R |
 | P3-19 | Admin's territory edits (zones, regions, territories, BSAs, SUL assignment) never change a grower's record; a boundary change re-routes future leads only. Open leads stay with the SUL who has them. | J21.7. | Your answer (17 Sept, territory); approved with Part 3 | R |
@@ -617,7 +617,7 @@ connection is stated, and the M2 spike proves the first one.
 | P4-6 | One stream failing never stops another or slows the rest. | Facebook is down for a day; WhatsApp leads keep arriving on time. | Invariant 9 | |
 | P4-7 | A bad value is rejected and reported, never guessed. No made-up location, no "today" for a missing date, no zero for a missing acreage. | A signal with an impossible location is held with "location invalid"; nothing is stored as 0. | Audit lesson (§7.11) | |
 | P4-8 | The grower's original words and the original signal are kept unchanged, so a lead can be re-read and the reading improved later. | The lead card shows the grower's own message under "What they said". | Canvas; Your answer (21 Sept, unsure intent) | |
-| P4-9 | Intent is read from the grower's words in Urdu, English, regional languages and transliterated Urdu. When Synapse is unsure, the lead goes to Potential marked "intent unclear" and cannot be Hot until the SUL confirms intent on the call with one tap ("wants to buy" / "advice only"). The SUL's answer improves the reading. | The card shows "Intent unclear — confirm on call"; after "wants to buy" the lead re-scores. | Your answer (21 Sept); Canvas | |
+| P4-9 | Intent is read from the grower's words in Urdu, English, regional languages and transliterated Urdu. When Synapse is unsure, the lead is held for Hina, who asks the grower (Part 5); if Hina cannot reach them, the lead goes to Potential marked "intent unclear" and cannot be Hot until the SUL confirms intent on the call with one tap ("wants to buy" / "advice only"). Hina's and the SUL's answers improve the reading. *Revised 21 Sept for Hina.* | The card shows "Intent unclear — confirm on call"; after "wants to buy" the lead re-scores. | Your answer (21 Sept); Canvas | |
 | P4-10 | Reading intent never delays a lead. The lead exists first; the reading follows. | A lead arrives with "reading…" and updates within a minute. | Canvas (AI never in the delivery path) | |
 | P4-11 | A campaign lead carries its campaign from the ad to the lead under the one convention agreed with Marketing (D3). If the campaign cannot be read, the lead still arrives, marked "campaign unknown", and is listed for Admin. | Connections shows "3 leads with unknown campaign this week". | Canvas; D3 | |
 | P4-12 | A healthy Crop Doctor scan becomes a lead only when the grower's known acreage is at or above the threshold (Part 1, P1-25). Below it or unknown: history only. | — | Your decision D9 | |
@@ -647,8 +647,8 @@ connection is stated, and the M2 spike proves the first one.
 
 | List | Holds | Kept by | Refreshed | Came from | Mark |
 |---|---|---|---|---|---|
-| **Sales structure** | Zones, regions, territories, BSAs, and which SUL owns each territory | Owner: Sales Operations; Admin enters changes and has full access | When changed; every change logged | Your answer (17 Sept, territory); Audit keeper (one territory master) | |
-| **Grower location list** | Provinces, districts, tehsils, villages, and which BSA each village belongs to | Owner: Sales Operations; Admin enters changes and has full access | When changed | Your answer (17 Sept); P2-22 | |
+| **Sales structure** | Zones, regions, territories, BSAs, and which SUL owns each territory | Owner: Digital Business Operations (DBO) — *revised 21 Sept from Sales Operations: "anything operational is owned by DBO"*; Admin has full access | When changed; every change logged | Your answer (17 Sept, territory); Audit keeper (one territory master) | |
+| **Grower location list** | Provinces, districts, tehsils, villages, and which BSA each village belongs to | Owner: DBO — *revised 21 Sept*; Admin has full access | When changed | Your answer (17 Sept); P2-22 | |
 | **Products** | Syngenta products by portfolio and brand, with the crops and problems each treats, for the recommended product and the conversion pick-list | Owner: Marketing with the Portfolio Managers; Admin enters changes and has full access | When changed | Canvas; Your answers (18 Sept) | |
 | **Campaigns** | Every campaign as defined in Part 3 (P3-16) | Admin, from Marketing | When created or edited | Your answer (17 Sept) | |
 | **Users** | Everyone who can log in, their role and scope | IT (login), Admin (role and scope) | When changed | Your answer (17 Sept, Admin) | |
@@ -685,7 +685,7 @@ connection is stated, and the M2 spike proves the first one.
 | 9 | Territory shape? | Sales hierarchy separate from grower location (17 Sept) | 4.5, P4-29 |
 | 10 | What happens to a WhatsApp STOP? | Nothing; no opt-out in this phase (21 Sept) | P4-25 |
 | 11 | Any outside data on growers? | First answer pressed by accident; re-asked: none beyond the streams and SULs, but streams may be added or removed — e-commerce purchases added, for confirmed acreage at or above the threshold only (21 Sept) | P4-27, P4-27a, 4.2 |
-| 12 | Who owns the lists? | Sales Operations for structure and locations, Marketing with the PMs for products; Admin also has access (21 Sept) | 4.5 |
+| 12 | Who owns the lists? | First: Sales Operations for structure and locations. Revised later the same day when the franchise list was asked: "anything operational is owned and managed by the Digital Business Operations team (DBO)" — so DBO owns structure, locations and franchises; Marketing with the PMs owns products and the timing table; Admin has access (21 Sept) | 4.5, P5-25 |
 
 ### 4.8 Where the canvas or the audit differs (Part 4)
 
@@ -698,7 +698,153 @@ connection is stated, and the M2 spike proves the first one.
 
 ## Part 5 — Scoring, routing and the clock, in detail
 
-*To be drafted after Part 4 is marked.*
+### 5.1 From signal to SUL
+
+A signal has become a lead attached to one grower (Part 4). Before it reaches
+an SUL, three things happen in order. **Gaps are filled:** if the lead has a
+number but no acreage, no crop or no clear purchase intent, Hina, the AI
+calling agent, phones the grower and asks; a lead with no gap skips this
+step. **The lead is scored** from five ingredients and four adjustments, and
+placed in Hot, Campaign or Potential, or closed below the threshold. **The
+lead is routed** to the SUL who owns the grower's territory, and its two
+clocks start. What the SUL logs comes back as an outcome the engine learns
+from. Every step is recorded; nothing waits on a person except the SUL.
+
+### 5.2 Filling the gaps — Hina (phase 1)
+
+Hina is an AI voice agent built and run by a third party and connected to
+Synapse. In this phase she asks; in the next she sells (see 5.8).
+
+| ID | What Synapse does | What you would see | Came from | Mark |
+|---|---|---|---|---|
+| P5-1 | A lead that has a number and is missing acreage, crop or clear purchase intent is **held for Hina** before any SUL sees it. A lead with no gap is routed at once. | A Crop Doctor scan with no acreage does not appear on the SUL's phone yet; a WhatsApp "what is the price, I have 30 acres of cotton" appears at once. | Your answers (21 Sept, Hina 1 and 2) | |
+| P5-2 | Synapse decides which leads Hina calls, in what order (score, then age) and with what limit: **3 attempts over 2 days**, both Admin settings. Hina decides only how she runs each call. | Admin's settings show "Hina: 3 attempts, 2 days"; Hina's call list is ordered by Synapse. | Your answer (21 Sept, Hina 4) | |
+| P5-3 | Hina returns, per lead: acreage, crop, purchase intent (wants to buy / advice only / unclear), the outcome of each attempt (answered, no answer, wrong number, refused), and a short plain-words summary. No recording and no transcript enter Synapse. | The lead's history shows "Hina, 4 Oct 11:20: answered — 30 acres cotton, asked about price. Summary: grower has whitefly on 30 acres, wants to know price before deciding." | Your answer (21 Sept, Hina 3) | |
+| P5-4 | Acreage from Hina is marked **confirmed by Hina** and treated like an SUL's confirmation: it stays on the grower and is not overwritten by a later estimate. | "Acreage 30 (confirmed by Hina, 4 Oct)". | Your answer (21 Sept); Part 4 (P4-20) | |
+| P5-5 | When Hina finishes — data obtained, or attempts exhausted — the lead is scored with what she found and goes into Hot, Campaign or Potential, or is closed below threshold. The SUL's two clocks start at handover. | Two days after arrival at most, the lead is on the SUL's phone or closed. | Your answers (21 Sept, Hina 2 and 3); Part 1 | |
+| P5-6 | A lead Hina could not reach is routed anyway, with its gaps still open, marked "Hina: no answer after 3 attempts"; the SUL asks on the call. | Potential lead with "acreage unknown — Hina could not reach". | Your answer (21 Sept, Hina 2) | |
+| P5-7 | Hina never calls below-threshold growers, held signals, or leads with no gap, in this phase. | Hina's call list holds only routed-eligible leads with a gap. | Your answer (21 Sept, Hina 1) | |
+| P5-8 | Every Hina call is logged as an automated contact with the grower and is visible on the lead, on Admin's audit trail and in Connections (Hina as a connection with health). | Connections shows "Hina: connected, 41 leads waiting, 12 returned today". | Canvas (automated reads logged); Part 3 (P3-13) | |
+| P5-9 | Synapse sends **no automated WhatsApp message** to growers in phase 1. Hina is the only automated contact. Marketing may run its own WhatsApp campaigns outside Synapse to qualify leads; their responses arrive as campaign signals like any other. | No template, no nurture content, no acreage question by WhatsApp. | Your answer (21 Sept, WhatsApp auto) | |
+| P5-10 | Hina's contact does not count as the SUL's contact; the SUL's contact clock starts at handover and stops at the SUL's first contact. | On-time rates measure the SUL, not Hina. | Part 1 (P1-39); Your answer (21 Sept) | |
+
+### 5.3 The score
+
+0 to 100 from five ingredients, then four adjustments. Weights are Admin
+settings; every change is logged and reversible. The first engine is a
+rule-based scorecard; it is never switched off.
+
+| Weight | Ingredient | What it measures | Read from | Low → high | Came from | Mark |
+|---:|---|---|---|---|---|---|
+| **30** | Purchase intent | How explicitly the grower asked to buy | The grower's words (message, transcript, form, call-centre note, Hina's answer), read with a confidence; the SUL's one-tap confirmation | Passive scan → problem question → product question → price or purchase question | Canvas; Your answer (21 Sept, weights) | |
+| **25** | Acreage | Sale potential | Confirmed (SUL or Hina) or estimated acreage; unknown scores zero here | Under threshold → threshold → large | Your answer (17 and 21 Sept) | |
+| **20** | Crop need | How badly the crop needs treatment now | Crop Doctor diagnosis, severity and confidence; agronomic words in the message | Healthy or preventive → confirmed early → active and spreading | Canvas | |
+| **15** | Season timing | Whether the treatment window is open | A crop-and-window table (crop, problem, months) owned by Marketing in Admin; scores the middle value until a row exists | Window closed → opens soon → open now | Canvas; Your answer (21 Sept, timing) | |
+| **10** | Grower history | Past relationship | Last season's status, prior outcomes, the new/existing mark, e-commerce purchases | New → known → previous buyer | Canvas; Your input (15 Sept) | |
+
+| Adjustment | Effect | When | Came from | Mark |
+|---|---|---|---|---|
+| **Age** | −2 per day after the first 48 hours, down to a floor so age alone never reaches zero; any new signal from the grower resets the age | Every lead, daily | Canvas; Your answer (21 Sept, decay) | |
+| **Reachability** | −15 while the grower's number has never been confirmed: no message received from it, no Hina or SUL contact that reached the grower | Numbers typed into forms until confirmed | Canvas; Your answer (21 Sept, adjustments) | |
+| **Serviceability** | −10 where no franchise is within serviceable range of the grower's location | Needs the franchise list (5.5) | Canvas; Your answer (21 Sept, adjustments) | |
+| **Repeat signals** | A new signal from the same grower merges into the open lead and raises its score; never a second lead | Every repeat | Canvas; Invariant 3 | |
+
+| ID | What Synapse does | What you would see | Came from | Mark |
+|---|---|---|---|---|
+| P5-11 | Every score carries its version and its breakdown, and shows its **top three reasons** in plain words in the SUL's language. | "Asked the price on WhatsApp · 30 acres, confirmed by Hina · Spray window open for cotton whitefly". | Invariant 8; Canvas | |
+| P5-12 | SULs see the order and the reasons, not the number. Managers and Admin see the 0–100 number. | No score number on any SUL screen; "Score 72" on the RSM's lead card. | Your answer (21 Sept, engine + score) | |
+| P5-13 | A lead is re-scored on every new signal, on every answer from Hina or the SUL (acreage, intent), and daily for age. Re-scoring can move a lead up a segment; the SUL is told when it does. | P1-24; J7.3. | Canvas; Part 1 | |
+| P5-14 | Weights, the age floor, the two adjustment sizes and Hina's limits are Admin settings; every change is recorded with who, when and the previous value, takes effect at once for new scores, and notifies Head of Sales. | J21.2. | Canvas; Your answer (18 Sept, controls) | |
+| P5-15 | The first engine is a rule-based scorecard with these weights; a learning engine may follow after a season of outcomes; the scorecard stays as the fallback and the explanation and is never switched off. | Every lead always has its reasons. | Canvas | |
+
+### 5.4 Segments, precisely
+
+| ID | What Synapse does | What you would see | Came from | Mark |
+|---|---|---|---|---|
+| P5-16 | **Below threshold**: known acreage under the threshold → not routed; Admin's list; counted for Marketing, PMs and Leadership; the grower keeps a profile. Applies before segmenting. | P1-20. | Your input (16 Sept) | |
+| P5-17 | **Campaign**: the lead carries a campaign → Campaign segment, whatever else is true; tagged "meets Hot conditions" and first in its campaign when it does. | P1-15, P1-18. | Your input; Your mark (18 Sept) | |
+| P5-18 | **Hot**: no campaign, and clear purchase intent (price, nearest franchise, or "I need it"), and crop known, and acreage confirmed or estimated at or above the threshold. The number does not gate it. | P1-14. | Your input (15 Sept); Your answer (17 Sept) | |
+| P5-19 | **Potential**: everything else routed. Inside it, "Last season" holds this season's leads from growers converted or never touched last season. | P1-16, P1-17. | Your input; Your answer (17 Sept) | |
+| P5-20 | Inside every segment: flagged leads first, then today's due leads (contact promise, completion promise or follow-up date today), then by score, then by age. The first **20** leads are on the list; the rest sit under "more leads", one tap away. | P2-2. | Your input (no cap); Your answer (21 Sept, fold) | R |
+| P5-21 | Unclear intent after Hina and before the SUL's confirmation is shown as "intent unclear" and cannot make a lead Hot. | P4-9. | Your answer (21 Sept) | |
+
+### 5.5 Routing
+
+| ID | What Synapse does | What you would see | Came from | Mark |
+|---|---|---|---|---|
+| P5-22 | A lead is routed by the grower's village → BSA → territory → the SUL who owns it, through the sales structure list. One SUL per territory; no lead has two owners. | P1-3, P4-29. | Your input; Your answer (17 Sept) | |
+| P5-23 | No village match → the regional pool; the RSM assigns by hand; clocks start at assignment. | J15. | Your answer (18 Sept) | |
+| P5-24 | Routing happens after Hina (if the lead had a gap) and after scoring, so the SUL receives a complete, scored lead. | P5-5. | Your answers (21 Sept) | |
+| P5-25 | The **franchise list** (name, location, serviceable range, and which territory it serves) is kept in Admin; it feeds "nearest franchise" on the lead card and the serviceability adjustment. Owner: the Digital Business Operations team (DBO), which owns everything operational; Admin has access. | J21.7 gains a Franchises tab. | Your answer (21 Sept, adjustments and franchise list) | R |
+| P5-26 | A territory boundary change re-routes future leads only; open leads stay with their SUL. | P3-19. | Approved with Part 3 | |
+
+### 5.6 The two clocks, precisely
+
+| ID | What Synapse does | What you would see | Came from | Mark |
+|---|---|---|---|---|
+| P5-27 | Both clocks start when the lead reaches the SUL (routing, pool assignment, or handover from Hina). Contact stops at the SUL's first contact; completion stops at Completed or Closed. Rejected stops both. | P1-39. | Your mark (18 Sept) | |
+| P5-28 | Promises, all Admin settings: contact — Hot 24 h, Campaign per campaign, Potential 72 h; completion — Hot 7 days, Campaign per campaign, Potential 14 days. A campaign cannot be created without both of its promises. | P1-38; P3-16. | Canvas; Your mark (18 Sept); Your answer (21 Sept, campaign clock) | R |
+| P5-29 | Overdue on either clock: badge on the lead and summary; one notification each to the SUL, RSM and ZM per lead; a daily 8 am digest for Head of Sales. No reassignment. | P1-41, P3-14. | Your answers (17, 18 Sept) | |
+| P5-30 | Clocks count calendar hours and days but **pause on Sundays**; public holidays count. | A Hot lead routed Saturday 18:00 is due for contact Monday 18:00. | Your answer (21 Sept, calendar) | R |
+| P5-31 | On-time rates: contacted within the contact promise ÷ leads that reached the SUL; completed within the completion promise ÷ leads that reached the SUL; both at every level, contact first. Leads waiting for Hina, held, below threshold or rejected are not in the denominator. | P1-43, P3-5. | Canvas; Your mark (18 Sept) | |
+
+### 5.7 Learning from outcomes
+
+| ID | What Synapse does | What you would see | Came from | Mark |
+|---|---|---|---|---|
+| P5-32 | Every completed or closed lead — converted with value, product and quantity; not converted with reason; unreachable; below threshold — is kept as a labelled example with the score, reasons and segment it had. | Nothing visible; the engine's memory. | Canvas | |
+| P5-33 | Conversion by segment, by source, by campaign, by crop, by acreage band and by district is watched continuously; Leadership's "does the engine beat a plain list" is the conversion rate of the top-scored tenth of leads against the bottom tenth. | J18.1. | Canvas (model lift) | |
+| P5-34 | After a season, the engine may **propose** weight changes with the evidence. Admin applies or rejects; Head of Sales, ZMs, RSMs and SULs are all notified of an applied change; every change is logged and reversible. Nothing retunes itself. | "Scoring weights changed on 1 Mar: acreage 25 → 30. Reason: …" on every user's notifications. | Your answer (21 Sept, engine + score); Canvas (no silent self-retuning) | |
+| P5-35 | The SUL's one-tap intent confirmation and Hina's answers are kept as examples that improve intent reading. | P4-9. | Your answer (21 Sept, unsure intent) | |
+
+### 5.8 Hina in phase 2 — recorded, not specified
+
+When Hina can close a sale, she becomes the first layer of calling for every
+grower before an SUL, an "AI SUL", with her own scoring and priority layer:
+she calls every routed lead, converts what she can in one call or several,
+and hands the rest to SULs with what she learned. This is **out of scope for
+this specification** and lives here so it is not forgotten; it returns as a
+change request with its own section when the third party proves a closed
+sale on real calls. Until then, everything in 5.2 holds.
+
+### 5.9 Decisions this part rests on
+
+| ID | Decision | State | What it means for this part |
+|---|---|---|---|
+| D1 | Consent | Decided 18 Sept | Hina may call any grower who contacted Syngenta. |
+| D3 | Campaign convention | Open | Campaign segment and promises depend on it. |
+| D6 | Territory vs franchise conflict | Open — sales leadership | The franchise list (P5-25) names which territory a franchise serves; the conflict rule is still open and no routing depends on a franchise. |
+| D7 | Conversion value | Open | Learning uses self-declared values with receipts. |
+| — | Hina phase 1 rules; weights and adjustments; timing table by Marketing; engine proposals applied by Admin with notifications; no automated WhatsApp | Decided 21 Sept | 5.2, 5.3, 5.7. Recorded in `docs/DECISIONS.md`. |
+
+### 5.10 Question log (Part 5)
+
+| # | Question | Answer (date) | Rows |
+|---|---|---|---|
+| 1 | Starting weights? | Intent 30 · Acreage 25 · Crop need 20 · Timing 15 · History 10 (21 Sept) | 5.3 |
+| 2 | Keep age decay? | Yes, −2 per day after 48 h (21 Sept) | 5.3 |
+| 3 | Reachability and serviceability? | Keep both; add a franchise list (21 Sept) | 5.3, P5-25 |
+| 4 | Acreage by WhatsApp? | No; Hina, the AI calling agent, asks by phone (21 Sept) | 5.2 |
+| 5 | What is Hina? | AI voice agent by a third party; phase 1 fills gaps (acreage, crop, intent) before routing; phase 2 first layer of calling for all growers (21 Sept) | 5.2, 5.8 |
+| 6 | Which leads does Hina call? | Phase 1: only those with missing data (21 Sept) | P5-1, P5-7 |
+| 7 | Where is the lead while Hina calls? | Held; SUL sees nothing until handover; leads with no gap route at once (21 Sept) | P5-1, P5-5 |
+| 8 | What does Hina hand back? | Structured answers and a short summary; no recording; leads land in the same three segments (21 Sept) | P5-3 |
+| 9 | Who orders Hina's calls? | Synapse sends the order and the attempt limit (21 Sept) | P5-2 |
+| 10 | Any automated WhatsApp in phase 1? | None from Synapse; Marketing may run its own WhatsApp campaigns to qualify leads (21 Sept) | P5-9 |
+| 11 | Timing table owner? | Marketing; neutral until filled (21 Sept) | 5.3 |
+| 12 | Engine proposals and score visibility? | Admin applies; Head of Sales, ZMs, RSMs and SULs notified; SUL sees rank and reasons, not the number (21 Sept) | P5-12, P5-34 |
+| 13 | Four gaps marked ASSUMPTION | Answered 21 Sept: fold = top 20 per segment (P5-20) · franchise list owned by DBO (P5-25) · promises required to create a campaign (P5-28) · clocks pause on Sundays only (P5-30) | P5-20, P5-25, P5-28, P5-30 |
+
+### 5.11 Where the canvas or the audit differs (Part 5)
+
+| DR | Spec | Canvas or audit | Note |
+|---|---|---|---|
+| DR-23 | Leads with a gap wait for Hina, up to 2 days, before an SUL sees them | Canvas: lead delivery must never depend on a model call; "a dropped lead is a lost sale nobody sees" | Your decision, 21 Sept. Bounded by the attempt limit and by "no gap → route at once"; a lead is never dropped, only delayed. The session 2.2 delivery lens will weigh the delay against the value of confirmed acreage. |
+| DR-24 | Acreage asked by Hina on the phone; no WhatsApp question | Canvas: acreage cascade step 3 is an automated WhatsApp callback, max 2 attempts | Your answer, 21 Sept. Same intent, different channel, three attempts. |
+| DR-25 | No automated nurture or WhatsApp content from Synapse in phase 1 | Canvas: nurture automation matched to crop and season | Your answers, 17 and 21 Sept; Marketing's own WhatsApp campaigns feed signals in. |
+| DR-26 | Acreage is an ingredient; no order-value calculation | Canvas: opportunity value = acreage × dose × price | Your answer, 17 Sept; recorded in DECISIONS. |
+| DR-27 | Franchise list added for serviceability and "nearest franchise" | Canvas "consequences accepted": franchise data removed | The list is locations and range only, not sales or invoices; D6 stays open. |
+| DR-28 | Hina's future role as an AI SUL | Not in the canvas | Recorded in 5.8 and DECISIONS; not specified. |
 
 ## Part 6 — What is recorded, how well it must work, what it must never do, and the decisions
 

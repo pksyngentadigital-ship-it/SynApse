@@ -91,3 +91,43 @@ Same day, Part 4 questions begun:
 **List owners (4.5) — re-asked.** Answer: 1st option with admin would also have an access [Sales Operations for structure and locations; Marketing with PMs for products; Admin has access].
 
 Part 4 approved ("Part 4 approved"), 2026-09-21.
+
+---
+
+2026-09-21, Part 5 questions:
+
+**Weights.** Answer: Intent 30 · Acreage 25 · Crop need 20 · Season timing 15 · History 10.
+
+**Age decay.** Answer: Keep it: minus 2 per day after 48 hours.
+
+**Reachability and serviceability adjustments.** Answer: Keep both, and add a franchise list.
+
+**Acreage question by WhatsApp.** Answer: we won't ask growers acreage through whatsapp; instead we will use Hina "Our AI Agent"
+
+**What Hina is** (asked). Answer: 2nd option; Hina Calls the grower by phone (AI voice); One more things which is not mentioned earlier in any document which we recently explored and decided; to use Hina AI Calling Agent to call the leads first and try to close them itself in one call or multiple follow ups; basically Hina would be acting as our AI SUL; Hina would decide if leads cannot be converted by her; she would route the leads to SULs with the additional data if missing earlier and captured during the call like acreage or purchase intent; and the additional information will be used for scoring for SULs; Hina is being developed and managed by the 3rd party; we will be integrating it with SynApse; and also there would be separate scoring and priority layer that would be defined to Hina
+
+**Hina 1 — which leads.** Answer: In phase 1; she will only be calling those with missing data; like acreage/crop/purchase intent; in the 2nd phase when we will be able to enhance its capabilities in terms of closing the call and getting conversions...we will use it as a complete first layer of calling...acting as a AI SUL and calling all growers before passing to the SULs
+
+**Hina 2 — timing.** Answer: yes option 1: we will only held those with missing info like acreage/crop [held for Hina first, up to 3 calls over 2 days, then scored and routed or closed; SUL sees nothing until handover; leads without gaps route at once]
+
+**Hina 3 — handback.** Answer: 1st option: no call call recordings; just the leads in the same 3 segments; hot, campaigns and potential; also with a quick summary from Hina
+
+**Hina 4 — priority.** Answer: Synapse sends the order and the attempt limit; Hina follows it.
+
+**Automated WhatsApp in phase 1.** Answer: option1: but marketing team may be running their whatsapp campaign to further qualify leads for SULs routing [no automated WhatsApp from Synapse; Hina is the only automated contact]
+
+**Season-timing table.** Answer: option 1 but marketing owns that table [crop, problem, months; in Admin; neutral score until a row exists]
+
+**Engine proposals and score visibility.** Answer: option1 but admin will do it and head of sales and ZMs/RSMs and Even SULs will be notified [SUL sees rank and reasons, not the number; managers and Admin see the number; changes logged and reversible]
+
+2026-09-21, Part 5 assumptions asked one at a time:
+
+**Fold (P5-20).** Answer: Show the top 20 per segment; the rest under the fold.
+
+**Franchise list owner (P5-25).** Answer: Anything operational will be owned and managed by the digital business operations team; DBOs
+
+**Campaign promises default (P5-28).** Answer: Promises are required to create a campaign.
+
+**Calendar (P5-30).** Answer: Skip Sundays only.
+
+Part 5 approved ("Part 5 approved"), 2026-09-21.

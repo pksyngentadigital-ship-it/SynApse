@@ -1,6 +1,6 @@
 # Synapse specification
 
-Version: **v0.5 — Parts 1 to 5 approved; Part 6 next** ·
+Version: **v0.9 — all six parts and the Appendix approved by Ahsan, 2026-09-21; next: session 2.2 adversarial review** ·
 Owner: Ahsan · Task: SYN-9
 
 > **How this document is built.** Six parts, each written in plain language
@@ -10,7 +10,7 @@ Owner: Ahsan · Task: SYN-9
 >
 > **Inputs, in order of precedence.** `docs/INVARIANTS.md` (nine rules that
 > change only through a DECISIONS entry) · Ahsan's product input
-> (`docs/notes/spec-input-2026-09-15.md`, `-16.md`, `-17.md`) ·
+> (`docs/notes/spec-input-2026-09-15.md`, `-16.md`, `-17.md`, `-18.md`) ·
 > `docs/reference/01-product-canvas.md` · `docs/notes/base44-audit.md`.
 > Where Ahsan's input and the canvas differ, the spec follows Ahsan and
 > records the canvas's position in the part's disagreement register.
@@ -78,7 +78,7 @@ the whole product; the appendix says what Capture builds.
 | P1-3 | Every SUL owns exactly one territory and every territory has exactly one SUL; leads for a territory go to its SUL. | Admin assigns territory T to SUL X; a new lead in T appears on X's phone, nobody else's. | Your input (15 Sept) | |
 | P1-4 | Marketing and Portfolio Managers see campaigns, brands and totals, never a grower's name, number or village. | A Marketing user opens a campaign and sees 1,240 leads by product and crop; no row names a grower. | Canvas; Invariant 7 | |
 | P1-5 | Admin is the digital team on its own login, never combined with a sales or marketing role; every Admin action is recorded with who and when. | A Portfolio Manager who also administers Synapse has two logins; the audit trail shows which one changed a weight. | Your answer (17 Sept) | |
-| P1-6 | Country IT manages who may log in; Admin manages everything else. | A new SUL is given access by IT; Admin then assigns their territory. | Your answer (17 Sept) | |
+| P1-6 | Country IT confirms who may have an account; users register and log in with their Syngenta email; Admin manages everything else. *Revised 21 Sept.* | A new SUL registers with their Syngenta email; Admin then assigns their territory. | Your answers (17, 21 Sept) | R |
 
 ### 1.3 What a lead is
 
@@ -569,7 +569,7 @@ portal and every Admin action is on the record.
 | DR-15 | RSM assigns from the pool but never reassigns a routed lead | Canvas: RSM reassigns breached leads within 24 hours | Follows your notify-only rule (DR-3). |
 | DR-16 | Weekly WhatsApp summary, Monday 9 am | Smart Agro Lite: daily at 9 am | Your answer, 17 Sept. |
 | DR-17 | ZM and above see no grower details | Canvas: sales scope is own level and everything beneath, which included grower detail | Your answer, 18 Sept; fewer people can see personal data. |
-| DR-18 | Single sign-on not in the Pilot | Canvas: SSO where available | Left to Part 6's out-of-scope list; IT gives logins. |
+| DR-18 | Single sign-on not in the Pilot; Syngenta email plus a Synapse password | Canvas: SSO where available | Your answer, 21 Sept; in Part 6's out-of-scope list. |
 
 ## Part 4 — Where leads come from, and one grower
 
@@ -848,11 +848,567 @@ sale on real calls. Until then, everything in 5.2 holds.
 
 ## Part 6 — What is recorded, how well it must work, what it must never do, and the decisions
 
-*To be drafted after Part 5 is marked.*
+### 6.1 What Synapse records
+
+Plain lists of what each record holds. Items marked **(personal)** are
+personal data: they are hidden from anyone outside the rules in Parts 2 and
+3, never appear in an export or a summary, never appear in a log line, and
+are removed under the retention rule (6.2). Field-level detail with types is
+in the Appendix.
+
+| Record | What it holds | Came from | Mark |
+|---|---|---|---|
+| **Grower** | Name (personal) · mobile number (personal; one per grower; history of changes with who and when) · village and location: province, district, tehsil, village, map position where a source gave it (personal) · crops grown · acreage, per crop where known, each marked estimated / confirmed by SUL / confirmed by Hina, with source and date · preferred language · new/existing mark · last season's status · the date of last activity | Parts 1, 4 | |
+| **Consent basis** (one per lead) | The stream and the date of the grower's own contact with Syngenta that the lead came from | Part 4 (P4-23); D1 | |
+| **Signal** | Which stream · when the grower acted · what they did (scan, message, post, form, call, purchase) · the grower's own words where there are any (personal) · crop, problem, severity and confidence where the stream gives them · campaign where carried · the original as received, unchanged · whether it was held (no number, campaign unknown, invalid) and why | Part 4 | |
+| **Lead** | The grower · the signals it merges · crop and need · acreage and its status · purchase intent and how sure (from words, Hina, or the SUL's tap) · source stream · campaign · segment · state and every state change with who and when · territory and SUL · both clocks: start, promise, stop, overdue · follow-up date · flags received · Hina's attempts and summary · last season's tag · rejection reason if any | Parts 1, 2, 5 | |
+| **Score** | The number · which weights version produced it · each ingredient's contribution · each adjustment applied · the top three reasons, in Urdu and English · when it was calculated | Part 5; Invariant 8 | |
+| **Outcome** | Converted: PKR value, product, quantity, receipt photo (personal), closing SUL, date · Not converted: reason, comment, SUL, date · Closed: unreachable (attempts, reason) or below threshold · Rejected: reason, SUL, Admin's action | Part 1 | |
+| **Hina call** | Lead · attempt number · when · outcome (answered, no answer, wrong number, refused) · acreage, crop, intent returned · the short summary (personal) · no recording, no transcript | Part 5 | |
+| **Flag** | From whom to whom · lead · note · due-by day · when sent · when actioned | Part 3 | |
+| **Campaign** | Name · kind (brand-level or crop programme) · portfolio · brand or programme · product · crop · start and end · contact and completion promises · budget · actual spend, with change history · NPI flag (from the canvas) | Parts 3, 4 | |
+| **Product** | Name · portfolio · brand · crops and problems it treats | Part 4 | |
+| **Sales structure** | Zones · regions · territories · BSAs · which SUL owns each territory · change history | Part 4 | |
+| **Grower location list** | Provinces · districts · tehsils · villages · which BSA each village belongs to | Part 4 | |
+| **Franchise** | Name · location · serviceable range · territory served | Part 5 | |
+| **Timing table** | Crop · problem · months when treatment applies | Part 5 | |
+| **User** | Name · Syngenta email (the login) · role · scope (territory, region, zone, portfolio, or all) · language · active or not | Parts 1, 3 | |
+| **Settings** | Acreage threshold · six clock promises · scoring weights, age floor, adjustment sizes · fold size · Hina attempts and days · season start date · retention period · every change with who, when and the previous value | Parts 1, 5, 6 | |
+| **Audit entry** | Who · when · what (a settings change, a flag, a number change and its undo, a removal, a manager opening a grower's number or a receipt, an export, a Hina call, an automated read, a login) · on which record | Part 3 | |
+
+| ID | What Synapse does | What you would see | Came from | Mark |
+|---|---|---|---|---|
+| P6-1 | Every record above is kept in one place, and every screen, summary and export reads from that one place. No screen keeps its own copy of a number. | Two screens never disagree about a count. | Canvas (one data platform); Audit lesson (§7.12, §7.22) | |
+| P6-2 | A diagnosis is recorded as "healthy" only when the source said so. A blank diagnosis is "unknown", never healthy and never diseased. | A Crop Doctor scan with no diagnosis shows "diagnosis unknown". | Audit keeper (healthy is affirmative) | |
+| P6-3 | Every item marked (personal) is marked in the record itself, so exports, summaries and logs leave it out by rule, not by memory. | An export never contains a name or number, whoever runs it. | Canvas (PII tagged); Audit lesson (§7.4) | |
+| P6-4 | One user list, one sales structure. A role or territory is stored once and read from there by every screen. | Changing a territory in Admin changes it everywhere at once. | Audit lesson (§7.13) | |
+| P6-5 | Money is recorded and shown in PKR, whole rupees, never as a rounded estimate. Time is shown in Pakistan time everywhere. | "PKR 85,000", never "PKR 85k" or "≈ 85,000". | Rule book (`CLAUDE.md`) | |
+
+### 6.2 How well it must work
+
+| ID | What Synapse does | What you would see | Came from | Mark |
+|---|---|---|---|---|
+| P6-6 | **Offline.** The SUL app works fully without signal: every lead, grower and list in the territory is on the phone; every action waits on the phone and sends in order when signal returns; the SUL's entry is never lost, even if the phone restarts or the same lead changed on the server meanwhile. | J9. | Canvas; Your input (15 Sept) | |
+| P6-7 | **Languages.** The SUL app in Urdu or English, chosen by the SUL; every reason list, notification and summary in both. Manager, marketing and Admin screens in English. Grower words shown as sent. Regional languages later. | P2-9. | Your answer (17 Sept) | |
+| P6-8 | **Phones.** Android 9 or newer, 2 GB memory, under 150 MB with a full territory on the phone, usable on 2G/3G. No iPhone in the Pilot. | P2-10. | Your answer (17 Sept) | |
+| P6-9 | **Volume.** Up to 1,000 leads a day on a normal day. A campaign launch of 10,000 leads in twenty minutes loses nothing and slows nothing the SUL sees. Every lead arrives, in order, whatever the volume. | Connections shows the burst arriving and clearing; no SUL notices. | Your answer (21 Sept, volumes); Plan M8 (the burst) | |
+| P6-10 | **Personal data.** Only what the streams and SULs gave; marked in the record; visible only inside each user's scope; every opening of a name, number or receipt by a manager is logged. | P3-13, P6-3. | Canvas; Your answers (18, 21 Sept) | |
+| P6-11 | **Retention.** After two seasons (two crop years) with no signal, contact or purchase, the grower's name, number, location and receipts are removed; crops, acreage band, district and outcomes stay without identity. The period is an Admin setting; every removal is logged. | Admin's audit trail shows "anonymised: 312 growers inactive since Kharif 2024". | Your answer (17 Sept, retention); Canvas | |
+| P6-12 | **Residency.** Grower data is stored in Pakistan. | Confirmed in Phase 3 with the hosting choice; IT can be shown where. | Your answer (21 Sept) | |
+| P6-13 | **Season.** One season a year: a crop year of twelve months from a start date Admin sets. "Last season" is the previous crop year; "two seasons of inactivity" is two crop years. | Admin's settings show "Season starts 1 April". | Your answer (21 Sept, season) | |
+| P6-14 | **Receipts.** A receipt photo can be opened by the SUL who logged it and by everyone above them in the sales line up to Head of Sales; each opening is logged. Marketing, PMs and Leadership see that a receipt exists, never the image. | An RSM opens a receipt; the audit trail records it. | Your answer (21 Sept, receipts) | |
+| P6-15 | **Audit.** Every settings change, flag, number change and undo, removal, manager view of personal data, export, login, Hina call and automated read is recorded and readable by Admin; nothing in the audit trail can be edited or deleted. | J21.8. | Canvas; Your answers (18 Sept) | |
+| P6-16 | **Login.** Staff register and log in with their Syngenta email address and a Synapse password. Country IT confirms who may have an account; Admin sets role and scope. Single sign-on with the corporate identity is out of scope for now (6.3.2). | The login screen asks for a Syngenta email; a non-Syngenta address cannot register. | Your answer (21 Sept, login); Canvas (SSO where available, deferred) | R |
+| P6-17 | **Running it.** DBO watches the portal daily and handles the below-threshold, no-contact, rejected and pool lists and SUL support; the digital team (Admin) owns settings and is the escalation point to the third parties (Hina, hosting). Support on working days, 9 to 6; the app and the clocks run every day. | A failing stream is noticed by DBO the same morning. | Your answer (21 Sept, operations) | |
+| P6-18 | **No clutter.** Every SUL screen answers one question; three segments and nothing else on home; the first 20 per segment; every manager sees one level down, named. | Parts 2, 3. | Your input (15 Sept) | |
+| P6-19 | **Honest numbers.** A screen with incomplete data says so and cannot be dismissed; exports are off while data is incomplete; every summary says "as of" and how many; unresolved rows are counted openly. | P3-8. | Audit keepers | |
+| P6-20 | **Nothing invented.** No default replaces a missing value: no zero acreage, no "today" for a missing date, no guessed location, no PKR estimate. Unknown is shown as unknown. | "Acreage unknown", never "0". | Audit lesson (§7.11); Your answer (18 Sept, no PKR estimate) | |
+| P6-21 | **Evidence.** Every rule in this document is proven by something Ahsan can watch: a screen, a count, a test that names the rule. "It should work" is not evidence. | Every part's rows have a "What you would see". | Rule book (`CLAUDE.md`); Audit lesson (§7.21) | |
+
+### 6.3 Out of scope, and what Synapse must never do
+
+**6.3.1 Specified here, built after Capture.** Capture, the first build scope,
+is the streams, the one-grower record, the first scorecard, a one-page list,
+Hina's phase 1 connection and the acreage rules. Built after Capture, as
+specified in Parts 2, 3 and 5: the full SUL app, the manager, leadership,
+marketing and Admin dashboards, flags, the weekly and monthly summaries, the
+franchise list and serviceability, the learning engine's proposals. The
+Appendix marks each row with its build milestone.
+
+**6.3.2 Out of scope for this phase**, by your decision, each with the date
+and a note on when it returns.
+
+| Item | Decided | Returns when |
+|---|---|---|
+| SUL creates a lead by hand (walk-in growers) | 18 Sept | Next year or phase 2; the focus is leads from the digital streams |
+| Grower opt-out, by grower or by SUL | 21 Sept | Reconsidered in a later phase; recorded for the consent reviewer |
+| Splitting a shared number into two growers | 18 Sept | If the field reports shared-number growers merged in error |
+| A PKR estimate on the lead card | 18 Sept | With a product-and-price list, if wanted |
+| Fulfilling franchise on a conversion | 18 Sept | With point-of-sale integration |
+| Point-of-sale integration (conversion from sales data, no receipt) | 15 Sept | When POS exists; the intended answer to D7 |
+| Automated WhatsApp messages from Synapse to growers | 21 Sept | Phase 2, alongside Hina's wider role |
+| Hina as an AI SUL: first layer of calling for every grower, closing sales | 21 Sept | Phase 2, when the third party proves a closed sale on real calls; its own spec section |
+| Regional-language UI (Punjabi, Sindhi, Saraiki, Pashto) | 17 Sept | After the Pilot, as a change request |
+| The canvas's Nurture tier and daily cap | 15 Sept | Not planned; an Admin setting away if the field asks |
+| Single sign-on with the Syngenta corporate identity | 21 Sept | When Syngenta IT connects its identity system; until then, Syngenta email plus a Synapse password |
+
+**6.3.3 Removed from the product** by the canvas, not to be re-opened: IVR as
+a source (growers without the app or WhatsApp reach Synapse through the call
+centre); franchise invoice data and reconciliation (until POS); farm mapping
+(acreage comes from profile, conversation, Hina or the SUL, and nothing else).
+
+**6.3.4 What Synapse must never do.** One row per pattern in Smart Agro Lite
+that must not cross (audit §7, 22 patterns, and §9, three more), plus four
+from this specification. Each names the rule that forbids it.
+
+| AR | Synapse must never… | Forbidden by | Audit |
+|---|---|---|---|
+| AR-1 | …let a screen decide who sees what. Scope is decided once, centrally, and every screen, summary and export obeys it. | P1-1, P3-3; Invariant 7 | §7.1 |
+| AR-2 | …have a page or export reachable by address that shows more than the user's scope. | P3-9, P1-1 | §7.2 |
+| AR-3 | …ask anyone to contact a grower without a recorded consent basis. | P1-12, P4-23; Invariant 1 | §7.3 |
+| AR-4 | …copy a grower's name or number into a second record, log line or export, or leave personal data unmarked. | P6-3, P6-10 | §7.4 |
+| AR-5 | …treat a phone number as free text, keep two growers on one number, or let the newest spelling silently win. | P4-16, P4-17, P4-20; Invariant 2 | §7.5 |
+| AR-6 | …count the same signal twice or make a second lead from a resent one. | P4-4; Invariant 3 | §7.6 |
+| AR-7 | …call a lead Hot from a typed flag, or show a score without its reasons and version. | P5-18, P5-11; Invariants 4, 8 | §7.7 |
+| AR-8 | …change a lead's state from more than one place, or in two ways that disagree. | P1-27; Invariant 5 | §7.8 |
+| AR-9 | …record a conversion as a bare number: without product, quantity and the SUL who closed it. | P1-30; Invariant 6 | §7.9 |
+| AR-10 | …use a tick-box (reported, converted) as a hidden state beside the real one. | P1-27 | §7.10 |
+| AR-11 | …take leads from a spreadsheet, let a failed check through, or fill a bad value with a default. | P4-2, P4-7, P6-20 | §7.11 |
+| AR-12 | …count a dashboard from whatever a screen managed to download. | P6-1, P3-2 | §7.12 |
+| AR-13 | …keep a user's role or territory in two places. | P6-4 | §7.13 |
+| AR-14 | …swallow a failure. A write that fails is shown and retried, never dropped. | P4-5 | §7.14 |
+| AR-15 | …keep weights or thresholds in code, or score the same action two ways. | P5-14, P3-10 | §7.15 |
+| AR-16 | …work offline for writes only, or leave a failed action stuck forever. | P2-8, P6-6 | §7.16 |
+| AR-17 | …find a territory by matching text. Routing goes through the sales structure and location lists. | P4-29, P5-22 | §7.17 |
+| AR-18 | …let an automated process read grower data without a log line. | P5-8, P6-15 | §7.18 |
+| AR-19 | …run with a setting nobody has written down. | P6-1, Appendix | §7.19 |
+| AR-20 | …leave dead screens, dead guards or unused parts in place; a guard that is not wired looks like a guard. | Appendix (quality) | §7.20 |
+| AR-21 | …claim a test or a check that does not exist. | P6-21 | §7.21, §9 |
+| AR-22 | …compute a number from whichever record happened to be loaded. | P6-1, P3-2 | §7.22 |
+| AR-23 | …use a manual spreadsheet as the way leads enter. | P4-2 | §9 |
+| AR-24 | …show points, badges or leaderboards, or hard-code the weights behind them. | P2-11 | §9 |
+| AR-25 | …let reading a message with AI delay or block a lead's arrival. Hina's hold is bounded by the attempt limit and never applies to a lead with no gap. | P4-10, P5-1, P5-5 | Canvas |
+| AR-26 | …route a lead whose grower's known acreage is below the threshold to any sales user. | P1-20, P5-16 | — |
+| AR-27 | …hide a lead behind a cap or a Nurture tier. | P1-23, P5-20 | Canvas (declined) |
+| AR-28 | …show a PKR estimate nobody can stand behind. | P2-7, P6-20 | — |
+
+### 6.4 Decisions
+
+| ID | Decision | State | Owner | What it blocks or governs |
+|---|---|---|---|---|
+| D1 | Consent basis for advisory-captured data used for sales contact | **Decided 2026-09-18**: any contact with Syngenta is the basis; no opt-out this phase | Leadership, via Ahsan | Cropwise-sourced growers routed from day one |
+| D2 | Who owns Cropwise platform access for the Pakistan tenant | **Filed, awaiting reply** (21 Sept); recipient and date to be added | Ahsan | Connecting the three Cropwise streams; the M2 spike may use WhatsApp instead |
+| D3 | Campaign ID convention | Open; decided in M5 | Marketing, via Ahsan | Campaign segment and every marketing number; leads arrive "campaign unknown" until then |
+| D4 | Mobile number as the grower's key; shared-number rule | **Decided 2026-09-18**: one number, one grower; no split; SUL corrects; no-number signals held | Ahsan | One-grower rules, Part 4 |
+| D5 | Syngenta's recommended stack | Decided 2026-09-11: default stack, revisit Phase 3 | Ahsan | Nothing here |
+| D6 | Territory vs franchise catchment conflict | Open; confirm before rollout | Sales leadership, via Ahsan | Nothing in this phase; no routing depends on a franchise |
+| D7 | Conversion value: declared or reconciled | Open; point-of-sale integration is the intended path | Ahsan with finance | No PKR figure is linked to incentives until decided |
+| D8 | — | Not used; withdrawn 16 Sept | — | — |
+| D9 | Healthy Crop Doctor scan is a lead only at or above the threshold | **Decided 2026-09-15** | Ahsan | Crop Doctor connector rule |
+
+Session decisions, all recorded in `docs/DECISIONS.md` with the date: three
+segments and no cap · two clocks, notify-only · acreage threshold 20 as a
+setting · eight personas · acreage replaces order value · Hina phase 1 ·
+scoring details · D1 · D4.
+
+### 6.5 Question log (Part 6)
+
+| # | Question | Answer (date) | Rows |
+|---|---|---|---|
+| 1 | What is a season? | One per year, a crop year from an Admin-set date (21 Sept) | P6-13 |
+| 2 | Who can open a receipt photo? | Everyone in the sales line up to Head of Sales (21 Sept) | P6-14 |
+| 3 | Where is data stored? | In Pakistan (21 Sept) | P6-12 |
+| 4 | Normal-day volume? | 1,000 leads a day (21 Sept) | P6-9 |
+| 5 | Who runs it day to day? | DBO; the digital team owns settings and escalation (21 Sept) | P6-17 |
+| 6 | D2 status? | Filed, awaiting a reply (21 Sept) | 6.4 |
+| 7 | Is the out-of-scope list right? | Aligned. Single sign-on was first kept in, then put back out the same day: staff use their Syngenta email to register and log in, without corporate SSO (21 Sept) | 6.3.2, P6-16 |
+| 8 | Retention? | Two seasons of inactivity, then anonymise (17 Sept) | P6-11 |
+| 9 | Who is Admin? | The digital team, own login (17 Sept), with a Syngenta email like everyone else | P1-5, P6-16 |
+| 10 | Support hours? | Working days 9 am to 6 pm; the app and clocks run every day (21 Sept) | P6-17 |
+| 11 | Manager, PM, Marketing and Admin screen language? | English only; grower words and lead reasons as written (21 Sept) | P6-7 |
+
+### 6.6 Where the canvas or the audit differs (Part 6)
+
+| DR | Spec | Canvas or audit | Note |
+|---|---|---|---|
+| DR-29 | Receipts visible up to Head of Sales | Canvas: sales scope own level and below (consistent); ZM and above otherwise see no personal data (DR-17) | The receipt is the one personal item ZM and Head of Sales can open, by your answer, 21 Sept. |
+| DR-30 | One season a year | Canvas: seasons unspecified; the field runs Kharif and Rabi | Your answer, 21 Sept. "Last season" means last crop year. |
+| DR-31 | Data in Pakistan | Canvas: residency governed by consent, no rule | Your answer, 21 Sept; a Phase 3 hosting rule. |
 
 ## Appendix — technical detail
 
-*Written with Part 6. You can stop reading before this point.* Traceability
-to the exact canvas layer, audit rule, invariant and milestone; field-level
-records; technical non-functionals; keeper map; mistake map; full
-disagreement register; question log.
+*You can stop reading before this point.* This appendix exists for the
+session 2.2 reviewers, for Phase 3 (architecture) and for the builders. It
+adds nothing a product reader needs.
+
+### A.1 Traceability — every row, its canvas layer, invariants and build milestone
+
+Canvas layers are those of `docs/reference/01-product-canvas.md` (L1–L8,
+Z00, Z04). Milestones are those of `docs/PLAN.md` (M0–M8 = Capture);
+"Post-Capture" means specified now, built in the Act scope after M8. The
+"Came from" column repeats the row's own attribution verbatim so the two
+never drift.
+
+| ID | Canvas layer | Invariants cited | Build milestone | Came from (as written) |
+|---|---|---|---|---|
+| P1-1 | Z00 identity & access; Z04 grain | INV-7 | Post-Capture; M1 list scope | Your input (15, 16 Sept); Canvas; Invariant 7 |
+| P1-2 | Z00 identity & access; Z04 grain | - | Post-Capture; M1 list scope | Audit §1.5; Canvas |
+| P1-3 | Z00 identity & access; Z04 grain | - | Post-Capture; M1 list scope | Your input (15 Sept) |
+| P1-4 | Z00 identity & access; Z04 grain | INV-7 | Post-Capture; M1 list scope | Canvas; Invariant 7 |
+| P1-5 | Z00 identity & access; Z04 grain | - | Post-Capture; M1 list scope | Your answer (17 Sept) |
+| P1-6 | Z00 identity & access; Z04 grain | - | Post-Capture; M1 list scope | Your answer (17 Sept) |
+| P1-7 | L2 ingestion; L3 Grower 360 | - | Capture: M1, M3 | Your input (15 Sept); Canvas; Audit lesson |
+| P1-8 | L2 ingestion; L3 Grower 360 | INV-2, INV-3 | Capture: M1, M3 | Invariant 2; Invariant 3; Canvas |
+| P1-9 | L2 ingestion; L3 Grower 360 | INV-3 | Capture: M1, M3 | Invariant 3 |
+| P1-10 | L2 ingestion; L3 Grower 360 | - | Capture: M1, M3 | Your input (15 Sept); Canvas |
+| P1-11 | L2 ingestion; L3 Grower 360 | - | Capture: M1, M3 | Canvas; Your input (16 Sept) |
+| P1-12 | L2 ingestion; L3 Grower 360 | INV-1 | Capture: M1, M3 | Invariant 1; Your decision D1 (18 Sept) |
+| P1-13 | L5 engine; L6 tiers | - | Capture: M1 (v0 stub), M8 (acreage); segments post-Capture | Your input (15 Sept); Your decision (segments) |
+| P1-14 | L5 engine; L6 tiers | - | Capture: M1 (v0 stub), M8 (acreage); segments post-Capture | Your input (15 Sept); Your answer (17 Sept); see DR-2 |
+| P1-15 | L5 engine; L6 tiers | - | Capture: M1 (v0 stub), M8 (acreage); segments post-Capture | Your input (15 Sept); Your answer (17 Sept, campaigns) |
+| P1-16 | L5 engine; L6 tiers | - | Capture: M1 (v0 stub), M8 (acreage); segments post-Capture | Your input (15 Sept) |
+| P1-17 | L5 engine; L6 tiers | - | Capture: M1 (v0 stub), M8 (acreage); segments post-Capture | Your answer (17 Sept, lifecycle) |
+| P1-18 | L5 engine; L6 tiers | - | Capture: M1 (v0 stub), M8 (acreage); segments post-Capture | Your mark (18 Sept) |
+| P1-19 | L5 engine; L6 tiers | - | Capture: M1 (v0 stub), M8 (acreage); segments post-Capture | Your input (16 Sept); Your answer (17 Sept, one threshold) |
+| P1-20 | L5 engine; L6 tiers | - | Capture: M1 (v0 stub), M8 (acreage); segments post-Capture | Your input (16 Sept); Your answer (17 Sept) |
+| P1-21 | L5 engine; L6 tiers | - | Capture: M1 (v0 stub), M8 (acreage); segments post-Capture | Your input (15, 16 Sept); Your answer (21 Sept, Hina) |
+| P1-22 | L5 engine; L6 tiers | - | Capture: M1 (v0 stub), M8 (acreage); segments post-Capture | Your input (16 Sept); Your mark (18 Sept) |
+| P1-23 | L5 engine; L6 tiers | - | Capture: M1 (v0 stub), M8 (acreage); segments post-Capture | Your input (15 Sept); Your decision (segments); see DR-4 |
+| P1-24 | L5 engine; L6 tiers | - | Capture: M1 (v0 stub), M8 (acreage); segments post-Capture | Canvas |
+| P1-25 | L5 engine; L6 tiers | - | Capture: M1 (v0 stub), M8 (acreage); segments post-Capture | Your decision D9 |
+| P1-26 | L5 engine; L6 tiers | - | Capture: M1 (v0 stub), M8 (acreage); segments post-Capture | Your answer (17 Sept, lifecycle) |
+| P1-27 | L8 outcome | INV-5 | Post-Capture | Your input (15 Sept); Your answer (17 Sept); Invariant 5 |
+| P1-28 | L8 outcome | - | Post-Capture | Your input (15 Sept); Audit keeper (call and WhatsApp leave a trace); Canvas |
+| P1-29 | L8 outcome | INV-7 | Post-Capture | Invariant 7; Your answer (17 Sept, escalation) |
+| P1-30 | L8 outcome | INV-6 | Post-Capture | Your input (15 Sept); Your answer (18 Sept); Invariant 6 |
+| P1-31 | L8 outcome | - | Post-Capture | Your answer (18 Sept); see DR-6 |
+| P1-32 | L8 outcome | - | Post-Capture | Canvas; Your input (15 Sept, "completed once the loop is closed"); see DR-1 |
+| P1-33 | L8 outcome | - | Post-Capture | Your answer (17 Sept) |
+| P1-34 | L8 outcome | - | Post-Capture | Your mark (18 Sept) |
+| P1-35 | L8 outcome | - | Post-Capture | Your answer (17 Sept); Audit keeper (report with reason, admin-only removal) |
+| P1-36 | L8 outcome | - | Post-Capture | Audit keeper; Canvas |
+| P1-37 | L8 outcome | - | Post-Capture | Your input (15 Sept); see DR-5 |
+| P1-38 | L7 routing & SLA | - | Post-Capture | Canvas (contact numbers); Your mark (18 Sept, two clocks); completion numbers are a starting proposal |
+| P1-39 | L7 routing & SLA | - | Post-Capture | Your mark (18 Sept) |
+| P1-40 | L7 routing & SLA | - | Post-Capture | Your answer (17 Sept, summary); Canvas |
+| P1-41 | L7 routing & SLA | - | Post-Capture | Your answer (17 Sept, escalation); see DR-3 |
+| P1-42 | L7 routing & SLA | - | Post-Capture | Your mark (18 Sept) |
+| P1-43 | L7 routing & SLA | - | Post-Capture | Canvas; Your decision (clock kept); Your mark (18 Sept, two clocks) |
+| J1.1 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your input; Canvas (offline) |
+| J1.2 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Part 1 |
+| J1.3 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your answer (17 Sept, summary) |
+| J1.4 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your input (no clutter); Your answer (18 Sept, map, revised) |
+| J2.1 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your input; Canvas; Your answer (18 Sept, card extras) |
+| J2.2 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Audit keeper (call leaves a trace); Part 1 |
+| J2.3 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Audit keeper; Canvas |
+| J2.4 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your answer (17 Sept) |
+| J2.5 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your input; Canvas (two taps) |
+| J2.6 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Audit keeper (navigate) |
+| J3.1 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your input |
+| J3.2 | L8 SUL app | INV-6 | Post-Capture (M1 has the one-page list only) | Your input (15 Sept); Your answer (18 Sept, converted); Invariant 6 |
+| J3.3 | L8 SUL app | INV-6 | Post-Capture (M1 has the one-page list only) | Your input; Invariant 6 |
+| J3.4 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Canvas (offline); Audit keeper (outbox) |
+| J4.1 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Canvas; Part 1 (DR-1) |
+| J4.2 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your input; Canvas |
+| J4.3 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Part 1 (P1-34) |
+| J5.1 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Part 1 (P1-40, P1-41) |
+| J5.2 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your answer (17 Sept) |
+| J5.3 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Part 1 (P1-39) |
+| J5.4 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Part 1 (P1-38) |
+| J6.1 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your input (15 Sept) |
+| J6.2 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your input; Part 1 (P1-18) |
+| J6.3 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Canvas |
+| J6.4 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Part 1 |
+| J7.1 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your input (16 Sept); Your answer (21 Sept, Hina) |
+| J7.2 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your input (16 Sept); Part 1 (P1-11) |
+| J7.3 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Part 1 (P1-24) |
+| J7.4 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your mark (18 Sept) |
+| J8.1 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your answer (18 Sept, shared number) |
+| J8.2 | L8 SUL app | INV-2 | Post-Capture (M1 has the one-page list only) | Your answer (18 Sept); Invariant 2 |
+| J9.1 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Canvas (offline-first); Audit lesson (reads were not cached) |
+| J9.2 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Canvas; Audit keeper (outbox) |
+| J9.3 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Canvas |
+| J10.1 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your input (15 Sept); Your answer (17 Sept) |
+| J10.2 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your input; Audit keeper (presets) |
+| J10.3 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your answer (17 Sept); Audit lesson (gamification) |
+| J11.1 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your answer (17 Sept) |
+| J11.2 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Part 1 (P1-35) |
+| J12.1 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Audit (list search); Canvas (interaction history) |
+| J12.2 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your answer (18 Sept, walk-in lead) |
+| J13.1 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your note (18 Sept, map) |
+| J13.2 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your note (18 Sept) |
+| J13.3 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your note (18 Sept); Part 1 |
+| J13.4 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your note (18 Sept); P2-21 |
+| J13.5 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Canvas (offline) |
+| P2-1 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your input (15 Sept) |
+| P2-2 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your input; Part 1 (P1-23) |
+| P2-3 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Canvas (two-tap rule); see DR-9 |
+| P2-4 | L8 SUL app | INV-8 | Post-Capture (M1 has the one-page list only) | Canvas; Invariant 8 |
+| P2-5 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Part 1 (P1-38) |
+| P2-6 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Part 1 (P1-11) |
+| P2-7 | L8 SUL app | INV-1 | Post-Capture (M1 has the one-page list only) | Canvas; Invariant 1; Your answer (18 Sept, card extras) |
+| P2-8 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Canvas; Audit lesson |
+| P2-9 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your answer (17 Sept) |
+| P2-10 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your answer (17 Sept) |
+| P2-11 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your answer (17 Sept); Audit lesson |
+| P2-12 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Audit keeper |
+| P2-13 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Canvas |
+| P2-14 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your input (15 Sept) |
+| P2-15 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Part 1 (P1-42) |
+| P2-16 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your input (15 Sept) |
+| P2-17 | L8 SUL app | INV-7 | Post-Capture (M1 has the one-page list only) | Invariant 7 |
+| P2-18 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your input (16 Sept) |
+| P2-19 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Part 1 (P1-12, P1-20) |
+| P2-20 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your answer (18 Sept, map, revised); Audit lesson (map never the home screen) |
+| P2-22 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your note (18 Sept); approved with Part 2 |
+| P2-21 | L8 SUL app | - | Post-Capture (M1 has the one-page list only) | Your answer (18 Sept, follow-up) |
+| J14.1 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your input (15 Sept); Canvas (breaches first) |
+| J14.2 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your input (SUL-wise) |
+| J14.3 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answer (18 Sept, manager view) |
+| J14.4 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answer (18 Sept, flag) |
+| J14.5 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your input (territory-wise) |
+| J15.1 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Canvas (region pool); Your answer (18 Sept) |
+| J15.2 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answer (18 Sept, pool) |
+| J15.3 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answer (18 Sept); Canvas (master drift) |
+| J16.1 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your input (15 Sept) |
+| J16.2 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Canvas; Your answer (18 Sept, progress and gaps) |
+| J16.3 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answer (18 Sept, manager view) |
+| J16.4 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answers (17, 18 Sept) |
+| J17.1 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answer (17 Sept) |
+| J17.2 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answers (17, 18 Sept) |
+| J17.3 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answer (17 Sept); Your mark (18 Sept, digest) |
+| J17.4 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Part 1 (P1-41) |
+| J17.5 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answer (18 Sept, controls) |
+| J18.1 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answer (17 Sept); Canvas (model lift) |
+| J18.2 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answer (17 Sept); Canvas ("including when unflattering"); approved with Part 3 |
+| J18.3 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answer (18 Sept, manager view) |
+| J19.1 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your input (15 Sept); Your answer (17 Sept, under-threshold) |
+| J19.2 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your input (15 Sept) |
+| J19.3 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answer (18 Sept, PM follow-up) |
+| J19.4 | Z04 dashboards / Z00 admin | INV-7 | Post-Capture (M1 has the one-page list only) | Canvas; Invariant 7 |
+| J20.1 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your input (15 Sept) |
+| J20.2 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Canvas; Your answer (18 Sept, cost) |
+| J20.3 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answer (17 Sept, campaigns) |
+| J20.4 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answer (18 Sept, cost) |
+| J20.5 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answer (18 Sept, controls); Audit keeper (About sheet, as-of and count) |
+| J21.1 | Z04 dashboards / Z00 admin | INV-7 | Post-Capture (M1 has the one-page list only) | Your answer (17 Sept, Admin); Invariant 7 |
+| J21.2 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answer (18 Sept, controls); Canvas (weights audited) |
+| J21.3 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answer (17 Sept, campaigns) |
+| J21.4 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Canvas |
+| J21.5 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answer (17 Sept) |
+| J21.5a | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answer (21 Sept) |
+| J21.6 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answer (17 Sept, reject) |
+| J21.7 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answers (17, 18 Sept) |
+| J21.8 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Canvas; Your answers (18 Sept) |
+| J22.1 | Z04 dashboards / Z00 admin | - | Post-Capture (M1 has the one-page list only) | Your answer (18 Sept, weekly); Audit keeper |
+| J22.2 | Z04 dashboards / Z00 admin | INV-7 | Post-Capture (M1 has the one-page list only) | Audit lesson (no record of sends); Invariant 7 |
+| P3-1 | Z04 dashboards; Z00 admin console | - | Post-Capture; connection health from M4 | Canvas; Your input (15 Sept) |
+| P3-2 | Z04 dashboards; Z00 admin console | - | Post-Capture; connection health from M4 | Canvas (one semantic layer); Audit keeper (definitions and sign-off) |
+| P3-3 | Z04 dashboards; Z00 admin console | - | Post-Capture; connection health from M4 | Your answer (18 Sept, manager view) |
+| P3-4 | Z04 dashboards; Z00 admin console | - | Post-Capture; connection health from M4 | Your answers (17, 18 Sept) |
+| P3-5 | Z04 dashboards; Z00 admin console | - | Post-Capture; connection health from M4 | Part 1 (P1-43) |
+| P3-6 | Z04 dashboards; Z00 admin console | - | Post-Capture; connection health from M4 | Canvas; Your answer (18 Sept) |
+| P3-7 | Z04 dashboards; Z00 admin console | - | Post-Capture; connection health from M4 | Your input (15 Sept); Audit keeper |
+| P3-8 | Z04 dashboards; Z00 admin console | - | Post-Capture; connection health from M4 | Audit keepers |
+| P3-9 | Z04 dashboards; Z00 admin console | - | Post-Capture; connection health from M4 | Your answer (18 Sept, controls) |
+| P3-10 | Z04 dashboards; Z00 admin console | - | Post-Capture; connection health from M4 | Your answer (18 Sept, controls); Canvas (weights audited) |
+| P3-11 | Z04 dashboards; Z00 admin console | - | Post-Capture; connection health from M4 | Your answer (18 Sept, pool) |
+| P3-12 | Z04 dashboards; Z00 admin console | - | Post-Capture; connection health from M4 | Your answer (17 Sept) |
+| P3-13 | Z04 dashboards; Z00 admin console | - | Post-Capture; connection health from M4 | Canvas; Your answers (18 Sept) |
+| P3-14 | Z04 dashboards; Z00 admin console | - | Post-Capture; connection health from M4 | Part 1 (P1-42); Your mark (18 Sept, digest) |
+| P3-15 | Z04 dashboards; Z00 admin console | - | Post-Capture; connection health from M4 | Canvas |
+| P3-16 | Z04 dashboards; Z00 admin console | - | Post-Capture; connection health from M4 | Your answers (17, 18 Sept) |
+| P3-17 | Z04 dashboards; Z00 admin console | - | Post-Capture; connection health from M4 | Your answer (18 Sept, weekly) |
+| P3-18 | Z04 dashboards; Z00 admin console | - | Post-Capture; connection health from M4 | Your answer (17 Sept); Canvas; approved with Part 3 |
+| P3-19 | Z04 dashboards; Z00 admin console | - | Post-Capture; connection health from M4 | Your answer (17 Sept, territory); approved with Part 3 |
+| P3-20 | Z04 dashboards; Z00 admin console | - | Post-Capture; connection health from M4 | Your input (15 Sept, "mobile dashboard"); Canvas |
+| P4-1 | L1 sources; L2 ingestion | - | Capture: M2, M4-M7, M8 | Your answer (17 Sept, sources); Canvas |
+| P4-2 | L1 sources; L2 ingestion | - | Capture: M2, M4-M7, M8 | Your input (15 Sept); Audit lesson |
+| P4-3 | L1 sources; L2 ingestion | - | Capture: M2, M4-M7, M8 | Canvas |
+| P4-4 | L1 sources; L2 ingestion | INV-3 | Capture: M2, M4-M7, M8 | Invariant 3 |
+| P4-5 | L1 sources; L2 ingestion | - | Capture: M2, M4-M7, M8 | Canvas; Audit lesson (silent drops) |
+| P4-6 | L1 sources; L2 ingestion | INV-9 | Capture: M2, M4-M7, M8 | Invariant 9 |
+| P4-7 | L1 sources; L2 ingestion | - | Capture: M2, M4-M7, M8 | Audit lesson (§7.11) |
+| P4-8 | L1 sources; L2 ingestion | - | Capture: M2, M4-M7, M8 | Canvas; Your answer (21 Sept, unsure intent) |
+| P4-9 | L1 sources; L2 ingestion | - | Capture: M2, M4-M7, M8 | Your answer (21 Sept); Canvas |
+| P4-10 | L1 sources; L2 ingestion | - | Capture: M2, M4-M7, M8 | Canvas (AI never in the delivery path) |
+| P4-11 | L1 sources; L2 ingestion | - | Capture: M2, M4-M7, M8 | Canvas; D3 |
+| P4-12 | L1 sources; L2 ingestion | - | Capture: M2, M4-M7, M8 | Your decision D9 |
+| P4-13 | L1 sources; L2 ingestion | - | Capture: M2, M4-M7, M8 | Your answer (17 Sept, live feeds) |
+| P4-14 | L1 sources; L2 ingestion | - | Capture: M2, M4-M7, M8 | Your answer (21 Sept) |
+| P4-15 | L1 sources; L2 ingestion | - | Capture: M2, M4-M7, M8 | Canvas |
+| P4-16 | L3 Grower 360 | INV-2 | Capture: M3, M6 | Invariant 2; Your answer (18 Sept); Your decision D4 |
+| P4-17 | L3 Grower 360 | - | Capture: M3, M6 | Your answer (18 Sept); see DR-13 |
+| P4-18 | L3 Grower 360 | - | Capture: M3, M6 | Your answer (21 Sept, re-asked); Canvas (nothing enters unattached) |
+| P4-19 | L3 Grower 360 | - | Capture: M3, M6 | Canvas (secondary matching) |
+| P4-20 | L3 Grower 360 | - | Capture: M3, M6 | Canvas; Your input (16 Sept) |
+| P4-21 | L3 Grower 360 | - | Capture: M3, M6 | Canvas; Your input (15, 16 Sept) |
+| P4-22 | L3 Grower 360 | - | Capture: M3, M6 | Canvas |
+| P4-23 | L3 Grower 360 | INV-1 | Capture: M3, M6 | Your decision D1 (18 Sept); Invariant 1 |
+| P4-24 | L3 Grower 360 | - | Capture: M3, M6 | Your answer (21 Sept, "no opt-out option for now"); see DR-19 |
+| P4-25 | L3 Grower 360 | - | Capture: M3, M6 | Your answer (21 Sept) |
+| P4-26 | L3 Grower 360 | - | Capture: M3, M6 | Your answer (17 Sept, under-threshold); Part 1 |
+| P4-27 | L3 Grower 360 | - | Capture: M3, M6 | Your answer (21 Sept, re-asked) |
+| P4-27a | L3 Grower 360 | - | Capture: M3, M6 | Your answer (21 Sept, re-asked); Canvas (e-commerce under pulled sources) |
+| P4-28 | L2 batch sync; L4 territory | - | Capture: M3, M7 | Canvas (named steward); Audit keeper |
+| P4-29 | L2 batch sync; L4 territory | - | Capture: M3, M7 | Your answer (17 Sept); Part 3 (P3-11) |
+| P4-30 | L2 batch sync; L4 territory | - | Capture: M3, M7 | Your answer (17 Sept) |
+| P5-1 | L4 acreage cascade (Hina replaces the WhatsApp step) | - | Capture: M8 (Hina connection) | Your answers (21 Sept, Hina 1 and 2) |
+| P5-2 | L4 acreage cascade (Hina replaces the WhatsApp step) | - | Capture: M8 (Hina connection) | Your answer (21 Sept, Hina 4) |
+| P5-3 | L4 acreage cascade (Hina replaces the WhatsApp step) | - | Capture: M8 (Hina connection) | Your answer (21 Sept, Hina 3) |
+| P5-4 | L4 acreage cascade (Hina replaces the WhatsApp step) | - | Capture: M8 (Hina connection) | Your answer (21 Sept); Part 4 (P4-20) |
+| P5-5 | L4 acreage cascade (Hina replaces the WhatsApp step) | - | Capture: M8 (Hina connection) | Your answers (21 Sept, Hina 2 and 3); Part 1 |
+| P5-6 | L4 acreage cascade (Hina replaces the WhatsApp step) | - | Capture: M8 (Hina connection) | Your answer (21 Sept, Hina 2) |
+| P5-7 | L4 acreage cascade (Hina replaces the WhatsApp step) | - | Capture: M8 (Hina connection) | Your answer (21 Sept, Hina 1) |
+| P5-8 | L4 acreage cascade (Hina replaces the WhatsApp step) | - | Capture: M8 (Hina connection) | Canvas (automated reads logged); Part 3 (P3-13) |
+| P5-9 | L4 acreage cascade (Hina replaces the WhatsApp step) | - | Capture: M8 (Hina connection) | Your answer (21 Sept, WhatsApp auto) |
+| P5-10 | L4 acreage cascade (Hina replaces the WhatsApp step) | - | Capture: M8 (Hina connection) | Part 1 (P1-39); Your answer (21 Sept) |
+| P5-11 | L5 scoring engine | INV-8 | Capture: M1 (v0 stub), weights M8; learning post-Capture | Invariant 8; Canvas |
+| P5-12 | L5 scoring engine | - | Capture: M1 (v0 stub), weights M8; learning post-Capture | Your answer (21 Sept, engine + score) |
+| P5-13 | L5 scoring engine | - | Capture: M1 (v0 stub), weights M8; learning post-Capture | Canvas; Part 1 |
+| P5-14 | L5 scoring engine | - | Capture: M1 (v0 stub), weights M8; learning post-Capture | Canvas; Your answer (18 Sept, controls) |
+| P5-15 | L5 scoring engine | - | Capture: M1 (v0 stub), weights M8; learning post-Capture | Canvas |
+| P5-16 | L6 tiers | - | Post-Capture; M1 shows segment | Your input (16 Sept) |
+| P5-17 | L6 tiers | - | Post-Capture; M1 shows segment | Your input; Your mark (18 Sept) |
+| P5-18 | L6 tiers | - | Post-Capture; M1 shows segment | Your input (15 Sept); Your answer (17 Sept) |
+| P5-19 | L6 tiers | - | Post-Capture; M1 shows segment | Your input; Your answer (17 Sept) |
+| P5-20 | L6 tiers | - | Post-Capture; M1 shows segment | Your input (no cap); Your answer (21 Sept, fold) |
+| P5-21 | L6 tiers | - | Post-Capture; M1 shows segment | Your answer (21 Sept) |
+| P5-22 | L4 territory; L7 routing | - | Capture: M3 routing; pool post-Capture | Your input; Your answer (17 Sept) |
+| P5-23 | L4 territory; L7 routing | - | Capture: M3 routing; pool post-Capture | Your answer (18 Sept) |
+| P5-24 | L4 territory; L7 routing | - | Capture: M3 routing; pool post-Capture | Your answers (21 Sept) |
+| P5-25 | L4 territory; L7 routing | - | Capture: M3 routing; pool post-Capture | Your answer (21 Sept, adjustments and franchise list) |
+| P5-26 | L4 territory; L7 routing | - | Capture: M3 routing; pool post-Capture | Approved with Part 3 |
+| P5-27 | L7 SLA clock | - | Post-Capture | Your mark (18 Sept) |
+| P5-28 | L7 SLA clock | - | Post-Capture | Canvas; Your mark (18 Sept); Your answer (21 Sept, campaign clock) |
+| P5-29 | L7 SLA clock | - | Post-Capture | Your answers (17, 18 Sept) |
+| P5-30 | L7 SLA clock | - | Post-Capture | Your answer (21 Sept, calendar) |
+| P5-31 | L7 SLA clock | - | Post-Capture | Canvas; Your mark (18 Sept) |
+| P5-32 | L5 continuous learning | - | Post-Capture | Canvas |
+| P5-33 | L5 continuous learning | - | Post-Capture | Canvas (model lift) |
+| P5-34 | L5 continuous learning | - | Post-Capture | Your answer (21 Sept, engine + score); Canvas (no silent self-retuning) |
+| P5-35 | L5 continuous learning | - | Post-Capture | Your answer (21 Sept, unsure intent) |
+| P6-1 | Z00 data platform | - | Capture: M1, M3 | Canvas (one data platform); Audit lesson (§7.12, §7.22) |
+| P6-2 | Z00 data platform | - | Capture: M1, M3 | Audit keeper (healthy is affirmative) |
+| P6-3 | Z00 data platform | - | Capture: M1, M3 | Canvas (PII tagged); Audit lesson (§7.4) |
+| P6-4 | Z00 data platform | - | Capture: M1, M3 | Audit lesson (§7.13) |
+| P6-5 | Z00 data platform | - | Capture: M1, M3 | Rule book (`CLAUDE.md`) |
+| P6-6 | Z00 platform & control | - | Capture: M8 (burst, offline, PII); login M0/M1 | Canvas; Your input (15 Sept) |
+| P6-7 | Z00 platform & control | - | Capture: M8 (burst, offline, PII); login M0/M1 | Your answer (17 Sept) |
+| P6-8 | Z00 platform & control | - | Capture: M8 (burst, offline, PII); login M0/M1 | Your answer (17 Sept) |
+| P6-9 | Z00 platform & control | - | Capture: M8 (burst, offline, PII); login M0/M1 | Your answer (21 Sept, volumes); Plan M8 (the burst) |
+| P6-10 | Z00 platform & control | - | Capture: M8 (burst, offline, PII); login M0/M1 | Canvas; Your answers (18, 21 Sept) |
+| P6-11 | Z00 platform & control | - | Capture: M8 (burst, offline, PII); login M0/M1 | Your answer (17 Sept, retention); Canvas |
+| P6-12 | Z00 platform & control | - | Capture: M8 (burst, offline, PII); login M0/M1 | Your answer (21 Sept) |
+| P6-13 | Z00 platform & control | - | Capture: M8 (burst, offline, PII); login M0/M1 | Your answer (21 Sept, season) |
+| P6-14 | Z00 platform & control | - | Capture: M8 (burst, offline, PII); login M0/M1 | Your answer (21 Sept, receipts) |
+| P6-15 | Z00 platform & control | - | Capture: M8 (burst, offline, PII); login M0/M1 | Canvas; Your answers (18 Sept) |
+| P6-16 | Z00 platform & control | - | Capture: M8 (burst, offline, PII); login M0/M1 | Canvas (SSO where available); Your answer (21 Sept, keep SSO) |
+| P6-17 | Z00 platform & control | - | Capture: M8 (burst, offline, PII); login M0/M1 | Your answer (21 Sept, operations) |
+| P6-18 | Z00 platform & control | - | Capture: M8 (burst, offline, PII); login M0/M1 | Your input (15 Sept) |
+| P6-19 | Z00 platform & control | - | Capture: M8 (burst, offline, PII); login M0/M1 | Audit keepers |
+| P6-20 | Z00 platform & control | - | Capture: M8 (burst, offline, PII); login M0/M1 | Audit lesson (§7.11); Your answer (18 Sept, no PKR estimate) |
+| P6-21 | Z00 platform & control | - | Capture: M8 (burst, offline, PII); login M0/M1 | Rule book (`CLAUDE.md`); Audit lesson (§7.21) |
+
+### A.2 Records at field level
+
+Types: text · number · whole number · money (PKR, stored as whole paisa, shown as
+whole rupees) · date-time (stored UTC, shown Asia/Karachi) · date · yes/no ·
+choice (fixed list) · reference (points at another record) · photo · position
+(latitude, longitude). **PII** marks personal data (P6-3). **Req** = required.
+
+**Grower** — id · name (text, PII, req) · mobile (text, PII, req, unique across growers; change history: old value, new value, who, when, undone-by) · province, district, tehsil, village (choice from the location list, PII) · position (PII, optional) · language (choice: ur, en) · new_or_existing (choice, set by SUL) · crops (list of choice) · acreage (list of: crop, acres number, status choice estimated/confirmed_sul/confirmed_hina, source reference, when) · last_season_status (choice: converted / not converted / unreachable / untouched / none) · last_activity (date-time) · anonymised_at (date-time, optional).
+
+**Signal** — id · stream (choice: the ten in 4.2) · source_event_id (text, req; unique together with stream — INV-3, A4) · grower (reference, optional until matched) · occurred_at (date-time, req) · kind (choice: scan, message, post, form, call, purchase, campaign_response) · words (text, PII, optional) · crop, problem (choice/text) · severity, confidence (number, optional) · campaign (reference, optional) · raw (the original as received, unchanged) · held_reason (choice: none, no_number, campaign_unknown, invalid; text detail) · consent_basis: stream + occurred_at (derived; never null on a lead — INV-1, A6).
+
+**Lead** — id · grower (reference, req) · signals (list of references) · crop · need · acreage_status (derived) · intent (choice: buy, advice, unclear; confidence number; source choice words/hina/sul) · stream (first signal's) · campaign (reference, optional) · segment (choice: hot, campaign, potential) · below_threshold (yes/no) · state (choice, the eight of P1-27; transitions only through one function — INV-5, A5) · state_history (who, when, from, to) · territory, sul (reference) · contact_clock, completion_clock (start, promise_at, stopped_at, overdue yes/no) · follow_up_date (date) · flags (list) · hina_attempts (list) · last_season_tag · rejection (reason choice, who, when, admin_action).
+
+**Score** — lead (reference) · value (whole number 0–100) · weights_version (reference) · engine_version_hash (text, req — INV-8, A1) · contributions (list of ingredient, points) · adjustments (list of adjustment, points) · reasons (three, text, ur and en) · scored_at.
+
+**Outcome** — lead · kind (choice: converted, not_converted, unreachable, below_threshold, rejected) · value (money, req for converted — INV-6) · product (reference, req for converted) · quantity (whole number, req for converted) · receipt (photo, PII, req for converted until POS) · reason (choice, req for not_converted; the five of P1-32) · comment (text) · closed_by (reference, req) · closed_at (date-time, req).
+
+**Hina call** — lead · attempt (whole number 1–3) · at · outcome (choice: answered, no_answer, wrong_number, refused) · acreage, crop, intent returned · summary (text, PII) · no audio, no transcript.
+
+**Flag** — from_user, to_user, lead · note (text) · due (date) · sent_at · actioned_at.
+
+**Campaign** — id · name · kind (choice: brand, crop_programme) · portfolio (choice: insecticides, fungicides, herbicides, biologicals_seed_care) · brand or programme (text) · product (reference) · crop · starts, ends (date) · contact_promise, completion_promise (hours/days, req) · budget, spend (money; change history) · npi (yes/no) · campaign_id_convention (text, per D3).
+
+**Product** — id · name · portfolio · brand · treats (list of crop, problem).
+
+**Sales structure** — zone · region · territory · bsa · sul (reference; exactly one per territory) · change history. **Location** — province · district · tehsil · village · bsa. **Franchise** — name · position · range_km (number) · territory. **Timing** — crop · problem · months (list).
+
+**User** — id · name · syngenta_email (text, unique, must be a Syngenta address; the login) · role (choice: sul, rsm, zm, head_of_sales, leadership, pm, marketing, admin) · scope (territory / region / zone / portfolio / all) · language · active.
+
+**Settings** (each versioned: value, previous, who, when) — acreage_threshold (20) · contact_promise_hot (24 h), _potential (72 h) · completion_promise_hot (7 d), _potential (14 d) · weights (30/25/20/15/10) · age_decay_per_day (2), age_grace_hours (48), age_floor · reachability_penalty (15) · serviceability_penalty (10) · fold_size (20) · hina_attempts (3), hina_days (2) · season_start (date) · retention_seasons (2).
+
+**Audit entry** — who · when · action (choice) · record (reference) · before, after (for settings) — append-only, never edited.
+
+### A.3 Technical non-functionals
+
+- Webhook streams acknowledge within 100 ms and hand the work to a queue; extraction, Hina hand-off, scoring and routing run in workers with retries and a dead-letter queue that is replayable and alerted (A3). P6-9's burst is a queue-depth number, not an outage.
+- Idempotency is a unique constraint on (stream, source_event_id) at the write, not a check in code (A4, INV-3).
+- Consent basis is a NOT NULL column derived from the signal (A6, INV-1). Every grower row carries it from the first migration.
+- Scope is enforced in the query layer: one function reads leads for a user and applies the hierarchy filter; no screen queries leads any other way (A8, INV-7).
+- Lifecycle transitions live in one function; states are an enum (A5, INV-5, INV-6).
+- Scoring is a pure function `score(lead, weights, now) → {value, segment, reasons, engineVersion}` with no database, network or clock inside (A1, INV-8); a season can be replayed against a new weights version before it ships.
+- Weights and every setting live in the database, versioned; the engine reads the active version (A10).
+- PII columns are tagged in the schema; logs, exports and the warehouse redact by rule; a phone number never appears in a log line (A7, PROCESS §12).
+- The SUL app is offline-first from its first screen: local store, an outbox of actions, sync on reconnect, server timestamp wins on the record, the officer's entry is kept in the history (A9).
+- Money is integer paisa in storage, whole rupees on screen; time is UTC in storage, Asia/Karachi on screen (`CLAUDE.md`).
+- Config from environment only, every variable documented in `.env.example` (`CLAUDE.md`; AR-19). No dead code, no swallowed errors (AR-14, AR-20).
+- Residency: all grower data at rest in Pakistan (P6-12) — a Phase 3 hosting constraint.
+- Login: Syngenta email address plus a Synapse password, registration restricted to the Syngenta email domain (P6-16); SSO deferred (6.3.2).
+- Hina: an outbound integration (Synapse → third party: ordered lead batch with attempt limit) and an inbound one (third party → Synapse: structured answers per attempt, summary text); every inbound is idempotent on (lead, attempt); every call is an audit entry (P5-8).
+
+### A.4 Keeper map — audit §9 behaviours, where each landed
+
+| Keeper | Row(s) | Note |
+|---|---|---|
+| K1 Call and Navigate inline, each leaving a trace | P2-12, J2.2, J2.3, J2.6 | WhatsApp added |
+| K2 Structured reason on non-conversion; proof photo on conversion | P1-30, P1-32, J3.2, J4.1 | Reasons are the canvas five (DR-1); receipt required until POS |
+| K3 "Report this scan" with reason; admin-only removal | P1-35, P1-36, J11 | Four fixed reasons; Admin review list |
+| K4 Honest reporting: incomplete-data banner, export off on partial read, About sheet, "as of" + count, unresolved rows counted | P3-8, P6-19, J20.5 | — |
+| K5 Revenue stated as a floor with the unvalued count beside it | P3-8, P6-19 | Re-read: under INV-6 every conversion has a value; the "floor" idea survives as unresolved rows (unknown acreage, unmatched village) counted openly beside every total |
+| K6 KPI definitions in one place; a sign-off page that reconciles them | P3-2 | — |
+| K7 One territory master as the single source of truth | 4.5 sales structure, P4-29, P6-4 | Owner DBO |
+| K8 Healthy is affirmative; blank is unknown | P6-2, P4-12 | — |
+| K9 A daily summary to management on WhatsApp | P3-17, J22 | Changed to weekly, Monday 9 am (17 Sept) |
+| K10 The idea of an offline outbox | P2-8, P6-6, J9 | Full offline-first, reads included |
+| K11 Date presets that match the field: this week, month to date | P2-16, P3-7, J10.2 | Plus quarter, year, custom |
+
+### A.5 Mistake map — audit §7 and §9, each to the row that forbids it
+
+| Audit | Pattern | Forbidden by |
+|---|---|---|
+| §7.1 | Authorisation in the browser | AR-1 |
+| §7.2 | Hidden unscoped routes | AR-2 |
+| §7.3 | No consent basis anywhere | AR-3 |
+| §7.4 | PII duplicated and unmarked | AR-4 |
+| §7.5 | Phone as free text; newest spelling wins | AR-5 |
+| §7.6 | No source event id; duplicates by design | AR-6 |
+| §7.7 | hot_lead as a typed flag; no score, factors or version | AR-7 |
+| §7.8 | Lifecycle by direct updates from five places | AR-8 |
+| §7.9 | Conversion as a float PKR only | AR-9 |
+| §7.10 | Flags as pseudo-states | AR-10 |
+| §7.11 | One manual import; errors do not block; silent defaults | AR-11 |
+| §7.12 | Full-table fetch and in-browser metrics | AR-12 |
+| §7.13 | Two sources of truth for role and territory | AR-13 |
+| §7.14 | Swallowed errors | AR-14 |
+| §7.15 | Hard-coded gamification weights; two formulas | AR-15 |
+| §7.16 | Offline queue with fake ids, reads not cached | AR-16 |
+| §7.17 | Territory by fuzzy text matching | AR-17 |
+| §7.18 | Scheduled service-role read of grower data, unlogged | AR-18 |
+| §7.19 | No `.env.example`; undocumented variables | AR-19 |
+| §7.20 | Dead code, dead guards, dead dependencies | AR-20 |
+| §7.21 | Documentation asserting tests that do not exist | AR-21 |
+| §7.22 | Numbers from whichever entity happened to load | AR-22 |
+| §9 a | Manual spreadsheet as the ingestion layer | AR-23 (and AR-11) |
+| §9 b | Gamification with hard-coded weights | AR-24 (and AR-15) |
+| §9 c | Documentation claiming verification it does not have | AR-21 |
+
+25 of 25 mapped.
+
+### A.6 Disagreement register — index
+
+DR-1 to DR-8 in 1.9 · DR-9 to DR-14 in 2.7 · DR-15 to DR-18 in 3.7 · DR-19
+to DR-22 in 4.8 · DR-23 to DR-28 in 5.11 · DR-29 to DR-31 in 6.6. Each
+records the spec's position, the canvas's or the audit's, and why; none is
+resolved in a row. The session 2.2 review reads this index first.
+
+### A.7 Question log — index
+
+Every question asked in session 2.1, its answer and date, is in the part it
+belongs to (1.8, 2.6, 3.6, 4.7, 5.10, 6.5). Ahsan's words are verbatim in
+`docs/notes/spec-input-2026-09-15.md`, `-16.md`, `-17.md`, `-18.md`.
+
+### A.8 Audit §8 unknowns carried into this specification
+
+| Audit §8 | Carried as |
+|---|---|
+| 8.6 Where the spreadsheets came from | Every stream "to confirm with the system owner" (P4-13); the M2 spike proves the first |
+| 8.7 The intent behind Isabion Gold Campaign | Campaigns are records Marketing defines and Admin creates (P3-16); no campaign is named in the spec |
+| 8.1–8.5, 8.8–8.11 | Base44-specific (sandbox isolation, run history, platform defaults, live data, build, `functionsVersion`, MCP consent page, deny rules, master currency); not specification questions |
+
+### A.9 Quality and evidence rules the build inherits
+
+`pnpm check` green on every PR; test run count non-zero; schema package 100% type coverage; scoring package 100% test coverage; every invariant-guarding test names the invariant; no real grower name or number anywhere; PR descriptions carry evidence (PROCESS.md §1, §11, §12).

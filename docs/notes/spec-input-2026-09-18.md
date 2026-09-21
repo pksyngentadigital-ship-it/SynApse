@@ -131,3 +131,29 @@ Part 4 approved ("Part 4 approved"), 2026-09-21.
 **Calendar (P5-30).** Answer: Skip Sundays only.
 
 Part 5 approved ("Part 5 approved"), 2026-09-21.
+
+---
+
+2026-09-21, Part 6 questions:
+
+**Season.** Answer: One per year: a crop year [twelve months from an Admin-set date].
+
+**Receipt photos — who can open one.** Answer: Everyone in the sales line up to Head of Sales.
+
+**Data residency.** Answer: Must be stored in Pakistan.
+
+**Normal-day volume.** Answer: 1000 leads a day
+
+**Who runs it day to day.** Answer: DBO runs it; the digital team (Admin) owns settings and escalation.
+
+**D2 status.** Answer: Filed; waiting for an answer [recipient and date not given].
+
+**Out-of-scope list.** Answer: can you clarify hina as an AI SUL and single sign-on; rest is aligned. After clarification: aligned but keep single sign-on [SSO is in scope; Hina as an AI SUL stays out].
+
+**Support hours (P6-17).** Answer: Working days, 9 am to 6 pm; the app and clocks run every day.
+
+**Manager screen language (P6-7).** Answer: English only.
+
+**Single sign-on — revised.** Answer: let's keep single sign on out of scope for now; however, they will be using syngenta's email ID for registration and login
+
+Part 6 approved ("Part 6 approved"), 2026-09-21. SPEC.md v0.9.

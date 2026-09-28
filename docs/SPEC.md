@@ -1,16 +1,16 @@
 # Synapse specification
 
-Version: **v0.9 — all six parts and the Appendix approved by Ahsan, 2026-09-21; next: session 2.2 adversarial review** ·
+Version: **v0.9 — all seven parts and the Appendix approved by Ahsan (Parts 1–6 on 2026-09-21, Part 7 on 2026-09-28); next: session 2.2 adversarial review** ·
 Owner: Ahsan · Task: SYN-9
 
-> **How this document is built.** Six parts, each written in plain language
+> **How this document is built.** Seven parts, each written in plain language
 > and marked by Ahsan before the next is drafted. A technical appendix follows
 > Part 6 and can be skipped. After v1.0, a change to this file is a change
 > request (`docs/PROCESS.md` §3), never an edit.
 >
 > **Inputs, in order of precedence.** `docs/INVARIANTS.md` (nine rules that
 > change only through a DECISIONS entry) · Ahsan's product input
-> (`docs/notes/spec-input-2026-09-15.md`, `-16.md`, `-17.md`, `-18.md`) ·
+> (`docs/notes/spec-input-2026-09-15.md`, `-16.md`, `-17.md`, `-18.md`, `-25.md`) ·
 > `docs/reference/01-product-canvas.md` · `docs/notes/base44-audit.md`.
 > Where Ahsan's input and the canvas differ, the spec follows Ahsan and
 > records the canvas's position in the part's disagreement register.
@@ -64,7 +64,7 @@ the whole product; the appendix says what Capture builds.
 |---|---|---|---|---|
 | **Sales Unit Lead (SUL)** | Convert the leads in my territory, in order, without missing one | Phone, in the field, patchy signal, Urdu or English | Own territory's leads in three segments; own summary | Every lead's state and outcome; the grower's acreage and new/existing mark |
 | **Regional Sales Manager (RSM)** | Know which SUL is letting leads go cold, and follow up | Phone first | Region's SULs and territories, by name; overdue first | Flags a lead for an SUL to act on |
-| **Zonal Manager (ZM)** | Know whether a region is short of leads or short of follow-up | Phone first | Zone → regions → territories, by name | Flags a lead for an RSM |
+| **Zonal Manager (ZM; Zonal Sales Manager in the field)** | Know whether a region is short of leads or short of follow-up | Phone first | Zone → regions → territories, by name | Flags a lead for an RSM |
 | **Head of Sales** | Compare zones on the same numbers and the national on-time rate | Phone and desktop | All zones side by side; drill zone → region → territory; breach notifications for every zone | Flags, as above |
 | **Country Leadership Team** | See whether the funnel is growing and whether the engine beats a plain list | Desktop; a monthly one-page summary | National funnel by source and campaign; conversions and PKR by zone and portfolio; on-time rate; engine versus plain list | Nothing; read-only |
 | **Portfolio Manager** | Know whether my portfolio's brands and campaigns produced leads that converted, and chase the field where they did not | Phone first | Own portfolio (insecticides, fungicides, herbicides, or biologicals and seed care); its brands, campaigns and leads; drill zone → region → territory | Nothing on a lead; can follow up with the team |
@@ -359,7 +359,7 @@ phase (see DR-13).
 | P2-18 | A lead with unknown acreage always carries a one-tap "ask and log" entry. | J7. | Your input (16 Sept) | |
 | P2-19 | The SUL never sees a lead whose grower's known acreage is below the threshold, and never sees leads from growers without a recorded consent basis. | Such leads are simply absent. | Part 1 (P1-12, P1-20) | |
 | P2-20 | The home screen has no map. A **map view** is one tap from any segment list: the territory's open leads as pins, coloured by segment and marked by category (campaign, crop, overdue), filterable to a village or a BSA. Tapping a pin opens the lead card; the SUL can pick the leads near where they are going and work them from there. The map also serves understanding and analytics. Navigate on the lead card opens directions. *Revised 18 Sept from "view-only" after your note.* | Going to a village, the SUL opens the map, filters to it, sees three Hot and five Potential leads nearby, taps one and starts J2. | Your answer (18 Sept, map, revised); Audit lesson (map never the home screen) | |
-| P2-22 | A **BSA** (Basic Sales Unit Area) is a named area inside a territory, held in the sales master that Admin maintains; each grower's village maps to one BSA. "Nearby" on the map means something the field already uses. | The map's filter lists the territory's BSAs and villages. | Your note (18 Sept); approved with Part 2 | R |
+| P2-22 | A **BSA** (Basic Sales Unit Area) is a named area inside a territory made of villages, generally with one Naya Savera franchisee; held in the sales structure DBO maintains (Part 7). "Nearby" on the map means something the field already uses. | The map's filter lists the territory's BSAs and villages. | Your notes (18, 25 Sept); approved with Part 2 | R |
 | P2-21 | Follow-up is a date the SUL sets. On that day the lead comes to the top of its list and counts as due; the completion clock keeps running. A missed follow-up date is shown on the lead and the summary but does not notify managers. | "Follow-up: Thu 12th" on the card; on Thursday it is at the top; on Friday it shows "follow-up missed". | Your answer (18 Sept, follow-up) | R |
 
 ### 2.5 Decisions this part rests on
@@ -502,7 +502,7 @@ portal and every Admin action is on the record.
 | J21.5 | Opens Below threshold | Every lead held back for known acreage under the threshold, by source and campaign; nothing to action, everything to count | Your answer (17 Sept) | |
 | J21.5a | Opens "No contact" | Signals that arrived with no number and matched no grower, by source and campaign, with possible matches for a person to confirm; they merge into a lead when a number arrives (Part 4, P4-18) | Your answer (21 Sept) | |
 | J21.6 | Opens Rejected | Leads SULs rejected, with reason and source; Admin reassigns to a territory, merges with another lead, or removes with a logged reason | Your answer (17 Sept, reject) | |
-| J21.7 | Opens Territories | Zones, regions, territories, BSAs and their SULs; unmatched villages from the regional pools; edits here never touch a grower | Your answers (17, 18 Sept) | |
+| J21.7 | Opens Territories | The tree from zone to village; each BSA with its franchise; each territory's SUL; the gaps (villages in no BSA, BSAs without a franchise, territories without an SUL, leads placed by nearest franchise, pools); boundary file versions; edits here never touch a grower | Your answers (17, 18, 28 Sept); Part 7 | |
 | J21.8 | Opens the audit trail | Every settings change, every flag, every number change by an SUL (with undo), every removal, every view of a grower's number by a manager, every export, every automated read of grower data | Canvas; Your answers (18 Sept) | |
 
 #### J22 — Monday morning summary
@@ -647,8 +647,8 @@ connection is stated, and the M2 spike proves the first one.
 
 | List | Holds | Kept by | Refreshed | Came from | Mark |
 |---|---|---|---|---|---|
-| **Sales structure** | Zones, regions, territories, BSAs, and which SUL owns each territory | Owner: Digital Business Operations (DBO) — *revised 21 Sept from Sales Operations: "anything operational is owned by DBO"*; Admin has full access | When changed; every change logged | Your answer (17 Sept, territory); Audit keeper (one territory master) | |
-| **Grower location list** | Provinces, districts, tehsils, villages, and which BSA each village belongs to | Owner: DBO — *revised 21 Sept*; Admin has full access | When changed | Your answer (17 Sept); P2-22 | |
+| **Sales structure** | Zones (four), regions, territories, BSAs with their franchise name and point, which villages belong to each BSA, and which SUL owns each territory | Owner: Digital Business Operations (DBO) — *revised 21 Sept from Sales Operations: "anything operational is owned by DBO"*; Admin has full access | When changed; every change logged | Your answer (17 Sept, territory); Audit keeper (one territory master) | |
+| **Grower location list and boundaries** | Provinces, districts, tehsils, villages; the digitised village boundaries for Punjab and Sindh; SUL location points | Owner: the digital team (Admin) for the boundary files, address conversion and SUL points — *revised 28 Sept*; DBO for village-to-BSA assignment | Boundary file loaded as a whole, previous version kept | Your answer (17 Sept); P2-22 | |
 | **Products** | Syngenta products by portfolio and brand, with the crops and problems each treats, for the recommended product and the conversion pick-list | Owner: Marketing with the Portfolio Managers; Admin enters changes and has full access | When changed | Canvas; Your answers (18 Sept) | |
 | **Campaigns** | Every campaign as defined in Part 3 (P3-16) | Admin, from Marketing | When created or edited | Your answer (17 Sept) | |
 | **Users** | Everyone who can log in, their role and scope | IT (login), Admin (role and scope) | When changed | Your answer (17 Sept, Admin) | |
@@ -657,7 +657,7 @@ connection is stated, and the M2 spike proves the first one.
 | ID | What Synapse does | What you would see | Came from | Mark |
 |---|---|---|---|---|
 | P4-28 | Each list has one named owner who is told when a row is rejected or a value is missing; rejected rows are reported, never dropped. | "Sales structure: 2 territories with no SUL — owner notified". | Canvas (named steward); Audit keeper | |
-| P4-29 | A lead is routed by matching the grower's village to a BSA and territory through these lists. A village not in the list sends the lead to the regional pool and the village to Admin's unmatched list. | J15. | Your answer (17 Sept); Part 3 (P3-11) | |
+| P4-29 | A lead is placed by the grower's coordinate: inside a digitised village boundary it takes that village's BSA and territory; elsewhere the nearest franchise point within a cap; with no coordinate a complete address is converted to one; otherwise the regional pool. *Revised 28 Sept; the full rules are Part 7.* | J15; Part 7. | Your answers (17, 28 Sept); Part 3 (P3-11) | R |
 | P4-30 | Editing a list never edits a grower. | P3-19. | Your answer (17 Sept) | |
 
 ### 4.6 Decisions this part rests on
@@ -717,7 +717,7 @@ Synapse. In this phase she asks; in the next she sells (see 5.8).
 
 | ID | What Synapse does | What you would see | Came from | Mark |
 |---|---|---|---|---|
-| P5-1 | A lead that has a number and is missing acreage, crop or clear purchase intent is **held for Hina** before any SUL sees it. A lead with no gap is routed at once. | A Crop Doctor scan with no acreage does not appear on the SUL's phone yet; a WhatsApp "what is the price, I have 30 acres of cotton" appears at once. | Your answers (21 Sept, Hina 1 and 2) | |
+| P5-1 | A lead that has a number and is missing acreage, crop, clear purchase intent or a usable location (Part 7, P7-6) is **held for Hina** before any SUL sees it. A lead with no gap is routed at once. | A Crop Doctor scan with no acreage does not appear on the SUL's phone yet; a WhatsApp "what is the price, I have 30 acres of cotton" appears at once. | Your answers (21 Sept, Hina 1 and 2) | |
 | P5-2 | Synapse decides which leads Hina calls, in what order (score, then age) and with what limit: **3 attempts over 2 days**, both Admin settings. Hina decides only how she runs each call. | Admin's settings show "Hina: 3 attempts, 2 days"; Hina's call list is ordered by Synapse. | Your answer (21 Sept, Hina 4) | |
 | P5-3 | Hina returns, per lead: acreage, crop, purchase intent (wants to buy / advice only / unclear), the outcome of each attempt (answered, no answer, wrong number, refused), and a short plain-words summary. No recording and no transcript enter Synapse. | The lead's history shows "Hina, 4 Oct 11:20: answered — 30 acres cotton, asked about price. Summary: grower has whitefly on 30 acres, wants to know price before deciding." | Your answer (21 Sept, Hina 3) | |
 | P5-4 | Acreage from Hina is marked **confirmed by Hina** and treated like an SUL's confirmation: it stays on the grower and is not overwritten by a later estimate. | "Acreage 30 (confirmed by Hina, 4 Oct)". | Your answer (21 Sept); Part 4 (P4-20) | |
@@ -772,10 +772,10 @@ rule-based scorecard; it is never switched off.
 
 | ID | What Synapse does | What you would see | Came from | Mark |
 |---|---|---|---|---|
-| P5-22 | A lead is routed by the grower's village → BSA → territory → the SUL who owns it, through the sales structure list. One SUL per territory; no lead has two owners. | P1-3, P4-29. | Your input; Your answer (17 Sept) | |
+| P5-22 | A lead is routed by the grower's coordinate → village boundary (or nearest franchise point) → BSA → territory → the SUL who owns it (Part 7). One SUL per territory; no lead has two owners. | P1-3, P7-7, P7-8. | Your input; Your answers (17, 28 Sept) | |
 | P5-23 | No village match → the regional pool; the RSM assigns by hand; clocks start at assignment. | J15. | Your answer (18 Sept) | |
 | P5-24 | Routing happens after Hina (if the lead had a gap) and after scoring, so the SUL receives a complete, scored lead. | P5-5. | Your answers (21 Sept) | |
-| P5-25 | The **franchise list** (name, location, serviceable range, and which territory it serves) is kept in Admin; it feeds "nearest franchise" on the lead card and the serviceability adjustment. Owner: the Digital Business Operations team (DBO), which owns everything operational; Admin has access. | J21.7 gains a Franchises tab. | Your answer (21 Sept, adjustments and franchise list) | R |
+| P5-25 | The franchise is a property of the BSA in the sales structure (name and coordinate; zero, one or more per BSA); it feeds "nearest franchise" on the lead card, the serviceability adjustment, and routing outside the digitised areas. Owner: DBO, edited in Admin. *Revised 28 Sept: the separate franchise list became a BSA property (Part 7, P7-3).* | The BSA row on the Territories page carries its franchise. | Your answers (21, 28 Sept) | R |
 | P5-26 | A territory boundary change re-routes future leads only; open leads stay with their SUL. | P3-19. | Approved with Part 3 | |
 
 ### 5.6 The two clocks, precisely
@@ -868,9 +868,8 @@ in the Appendix.
 | **Flag** | From whom to whom · lead · note · due-by day · when sent · when actioned | Part 3 | |
 | **Campaign** | Name · kind (brand-level or crop programme) · portfolio · brand or programme · product · crop · start and end · contact and completion promises · budget · actual spend, with change history · NPI flag (from the canvas) | Parts 3, 4 | |
 | **Product** | Name · portfolio · brand · crops and problems it treats | Part 4 | |
-| **Sales structure** | Zones · regions · territories · BSAs · which SUL owns each territory · change history | Part 4 | |
-| **Grower location list** | Provinces · districts · tehsils · villages · which BSA each village belongs to | Part 4 | |
-| **Franchise** | Name · location · serviceable range · territory served | Part 5 | |
+| **Sales structure** | Zones · regions · territories · BSAs, each with its villages and its franchise (name, coordinate) · which SUL owns each territory · SUL location points · change history | Parts 4, 7 | |
+| **Grower location list** | Provinces · districts · tehsils · villages · which BSA each village belongs to · the digitised village boundaries (Punjab and Sindh), versioned | Parts 4, 7 | |
 | **Timing table** | Crop · problem · months when treatment applies | Part 5 | |
 | **User** | Name · Syngenta email (the login) · role · scope (territory, region, zone, portfolio, or all) · language · active or not | Parts 1, 3 | |
 | **Settings** | Acreage threshold · six clock promises · scoring weights, age floor, adjustment sizes · fold size · Hina attempts and days · season start date · retention period · every change with who, when and the previous value | Parts 1, 5, 6 | |
@@ -1014,6 +1013,84 @@ scoring details · D1 · D4.
 | DR-29 | Receipts visible up to Head of Sales | Canvas: sales scope own level and below (consistent); ZM and above otherwise see no personal data (DR-17) | The receipt is the one personal item ZM and Head of Sales can open, by your answer, 21 Sept. |
 | DR-30 | One season a year | Canvas: seasons unspecified; the field runs Kharif and Rabi | Your answer, 21 Sept. "Last season" means last crop year. |
 | DR-31 | Data in Pakistan | Canvas: residency governed by consent, no rule | Your answer, 21 Sept; a Phase 3 hosting rule. |
+
+## Part 7 — Geo hierarchy and routing
+
+### 7.1 The hierarchy
+
+Pakistan is divided into four zones: **Lahore, Multan, Bahawalpur,
+Hyderabad**. A zone has regions; a region has territories; a territory has
+BSAs (Basic Sales Unit Areas); a BSA has villages. One Zonal Sales Manager
+per zone, one RSM per region, one SUL per territory, and generally one Naya
+Savera franchisee per BSA. The village is the smallest unit and the one a
+coordinate lands in.
+
+| Level | Made of | Looked after by | Came from | Mark |
+|---|---|---|---|---|
+| Zone (4) | Regions | Zonal Sales Manager | Your note (25 Sept) | |
+| Region | Territories | Regional Sales Manager | Your note (25 Sept) | |
+| Territory | BSAs | Sales Unit Lead — exactly one | Your note (25 Sept); Your input (15 Sept) | |
+| BSA | Villages; generally one Naya Savera franchisee, with its location | — | Your note (25 Sept); Your answer (28 Sept, franchise per BSA) | |
+| Village | The digitised boundary a coordinate falls in (Punjab and Sindh) | — | Your note (25 Sept) | |
+
+| ID | What Synapse does | What you would see | Came from | Mark |
+|---|---|---|---|---|
+| P7-1 | Holds the five-level hierarchy as one structure: every village belongs to one BSA, every BSA to one territory, every territory to one region, every region to one zone. The four zones are named above; a fifth would be a structure change by DBO. | Admin's Territories page shows the tree from zone to village. | Your note (25 Sept) | |
+| P7-2 | Every territory has exactly one SUL, every region one RSM, every zone one Zonal Sales Manager. A level with nobody assigned is shown as a gap. | "Territory T-14: no SUL" on the Territories page and on the RSM's view. | Your note (25 Sept); Part 1 (P1-3) | |
+| P7-3 | The franchise is a property of the BSA: its name and coordinate, zero, one or occasionally more per BSA. This replaces the separate franchise list of Part 5; "nearest franchise" on the lead card is the grower's BSA's franchise, and a BSA with no franchise takes the serviceability adjustment and shows the nearest franchise in the territory. | The BSA row on the Territories page carries its franchise. | Your answer (28 Sept, franchise per BSA); revises P5-25 | |
+| P7-4 | The digitised village boundaries for Punjab and Sindh, about 95% of Syngenta's sales area, are held in Synapse and drawn on the SUL's map. Elsewhere only points exist: each franchise's coordinate and each SUL's coordinate. | The map shows village and BSA outlines in Punjab and Sindh, and franchise pins everywhere. | Your note (25 Sept); Your answer (28 Sept, outside areas) | |
+
+### 7.2 Placing a lead
+
+| ID | What Synapse does | What you would see | Came from | Mark |
+|---|---|---|---|---|
+| P7-5 | A lead is placed only by a **coordinate**. Streams that give one (Crop Doctor, a shared WhatsApp location) use it. A stream that gives none must give a complete address — village, tehsil, district — which Synapse converts to a coordinate and records how sure the conversion is. | The lead shows "Placed by: coordinate" or "Placed by: address (converted)". | Your answer (28 Sept, placement) | |
+| P7-6 | A lead with neither a coordinate nor a complete address goes to the regional pool, and the missing location is one of the gaps Hina asks the grower for (Part 5, P5-1). | Hina's summary: "village: Chak 12, tehsil Sahiwal"; the lead then places. | Your answer (28 Sept, placement); Part 5 | |
+| P7-7 | Inside Punjab and Sindh: the coordinate is matched to the digitised village boundary it falls in; the village's BSA and territory give the SUL. | "Village Chak 12 → BSA Sahiwal-3 → Territory T-14 → SUL X". | Your note (25 Sept) | |
+| P7-8 | Outside the digitised areas: the lead goes to the territory of the BSA whose **franchise point is nearest** to the coordinate, within a distance cap (starting setting 50 km, an Admin setting); the lead is marked "placed by nearest franchise". Beyond the cap it goes to the regional pool of the region whose franchise was nearest, however far, with its distance shown, so the nearest RSM decides. | "Placed by nearest franchise, 31 km" · pool entry "74 km from the nearest franchise". | Your answers (25, 28 Sept) | R |
+| P7-9 | A **structure gap** — a village in no BSA, a BSA in no territory, a territory with no SUL — sends the lead to the regional pool for the RSM and the gap to DBO on the Territories page. A coordinate outside Pakistan or in no zone goes to Admin's list and is not routed. | "Unassigned: village Chak 9 is in no BSA" on the Territories page. | Your answer (28 Sept, structure gaps) | |
+| P7-10 | The grower's location is the **most recent** coordinate from any signal, unless an SUL has **confirmed** the location on the profile; a confirmed location is not overwritten. Every change is kept in the history with its source. | Profile: "Location confirmed by SUL X, 4 Oct" or "Location from Crop Doctor scan, 12 Nov". | Your answer (28 Sept, which point) | |
+| P7-11 | A lead is placed when it is routed, by the grower's location at that moment; a later change of location or of the structure moves future leads only. Open leads stay with their SUL. | P3-19. | Your answer (28 Sept); approved with Part 3 | |
+| P7-12 | Every lead records how it was placed (village boundary, converted address, nearest franchise, pool assignment by the RSM), the village, BSA and territory, and the distance where a nearest-point rule was used. | The lead's history shows its placement. | Your note (25 Sept) | |
+| P7-13 | A grower's coordinate and address are personal data: on the profile and the lead card inside the SUL's and RSM's scope, on the map as a pin, never in an export, summary or log line. | P6-3. | Part 6 | |
+| P7-14 | Address-to-coordinate conversion is built in this phase, not left to Phase 3. It sends only the address text — village, tehsil, district — never the grower's name, number or anything else. It may be an internal service built by Syngenta and shared with Synapse, or an outside mapping service; Synapse keeps the provision for both and Ahsan names the choice later. Every conversion is logged. | Nothing visible; recorded in the audit trail as an automated read. | Your answer (28 Sept, address service) | R |
+
+### 7.3 Who keeps it, and how it changes
+
+| ID | What Synapse does | What you would see | Came from | Mark |
+|---|---|---|---|---|
+| P7-15 | **DBO owns the structure**: zones, regions, territories, BSAs, village-to-BSA assignment, SUL assignment, and the franchise name and point per BSA. Edited in the Admin portal; every change logged; a change re-routes future leads only. | J21.7. | Your answer (28 Sept, ownership) | |
+| P7-16 | **Admin (the digital team) owns** the digitised boundary files, the address conversion, and the SUL location points. A new boundary file is loaded as a whole; the load is logged and the previous version kept. | Admin's Territories page: "Boundaries: Punjab v3, Sindh v2, loaded 2 Oct". | Your answer (28 Sept, ownership) | |
+| P7-17 | Gaps are always visible: villages in no BSA, BSAs with no franchise, territories with no SUL, unmatched addresses, leads placed by nearest franchise, leads in pools — each as a count and a list for DBO. | The Territories page opens on its gaps. | Your answer (28 Sept, structure gaps); Audit keeper (unresolved rows counted) | |
+
+### 7.4 Decisions this part rests on
+
+| ID | Decision | State | What it means for this part |
+|---|---|---|---|
+| D6 | Territory vs franchise catchment conflict | Open — sales leadership | The franchise now sits inside the BSA inside the territory, so the SUL and the franchise share a geography by construction; the rule for who owns the relationship is still open and nothing here depends on it. |
+| — | Geo hierarchy and routing rules | Decided 25 and 28 Sept | All of Part 7. Recorded in `docs/DECISIONS.md`. |
+
+### 7.5 Question log (Part 7)
+
+| # | Question | Answer (date) | Rows |
+|---|---|---|---|
+| 1 | Outside Punjab and Sindh, which point routes? | Nearest franchise point with a distance cap; first answered 25 Sept, re-asked and confirmed 28 Sept | P7-8 |
+| 2 | What must a lead have to be placed? | A coordinate; a full address is converted to one; else the pool and Hina asks (28 Sept) | P7-5, P7-6 |
+| 3 | Which coordinate places the grower? | The most recent, unless an SUL confirmed one (28 Sept) | P7-10 |
+| 4 | Franchise list or franchise per BSA? | One list: a property of the BSA (28 Sept) | P7-3 |
+| 5 | Who owns the geo data? | DBO the structure; Admin the boundary files, conversion and SUL points (28 Sept) | P7-15, P7-16 |
+| 6 | Structure gaps? | Regional pool, gap shown to DBO (28 Sept) | P7-9, P7-17 |
+| 7 | Beyond the cap, which pool? | The region of the nearest franchise, however far (28 Sept) | P7-8 |
+| 8 | Address conversion service? | Built in this phase; internal service or an outside one, provision for both, choice to be named later (28 Sept) | P7-14 |
+
+### 7.6 Where the canvas or the audit differs (Part 7)
+
+| DR | Spec | Canvas or audit | Note |
+|---|---|---|---|
+| DR-32 | Coordinate → digitised village boundary → BSA → territory; nearest franchise point elsewhere | Canvas: geo → beat → SO, nearest serviceable franchise and its stock position; Smart Agro Lite: territory by fuzzy text matching across six fields | Consistent with the canvas ("beat" = territory, BSA below it); the audit's text matching is AR-17. Franchise stock position is not in scope. |
+| DR-33 | Franchise is a property of the BSA; no separate list | Part 5 (this spec, 21 Sept): a separate franchise list | Your answer, 28 Sept; P5-25 revised. |
+
+---
 
 ## Appendix — technical detail
 
@@ -1289,6 +1366,23 @@ never drift.
 | P6-19 | Z00 platform & control | - | Capture: M8 (burst, offline, PII); login M0/M1 | Audit keepers |
 | P6-20 | Z00 platform & control | - | Capture: M8 (burst, offline, PII); login M0/M1 | Audit lesson (§7.11); Your answer (18 Sept, no PKR estimate) |
 | P6-21 | Z00 platform & control | - | Capture: M8 (burst, offline, PII); login M0/M1 | Rule book (`CLAUDE.md`); Audit lesson (§7.21) |
+| P7-1 | L4 territory mapping; L7 routing | - | Capture: M3 (routing), M7 (masters); boundaries and conversion M3 | Your note (25 Sept) |
+| P7-2 | L4 territory mapping; L7 routing | - | Capture: M3 (routing), M7 (masters); boundaries and conversion M3 | Your note (25 Sept); Part 1 (P1-3) |
+| P7-3 | L4 territory mapping; L7 routing | - | Capture: M3 (routing), M7 (masters); boundaries and conversion M3 | Your answer (28 Sept, franchise per BSA); revises P5-25 |
+| P7-4 | L4 territory mapping; L7 routing | - | Capture: M3 (routing), M7 (masters); boundaries and conversion M3 | Your note (25 Sept); Your answer (28 Sept, outside areas) |
+| P7-5 | L4 territory mapping; L7 routing | - | Capture: M3 (routing), M7 (masters); boundaries and conversion M3 | Your answer (28 Sept, placement) |
+| P7-6 | L4 territory mapping; L7 routing | - | Capture: M3 (routing), M7 (masters); boundaries and conversion M3 | Your answer (28 Sept, placement); Part 5 |
+| P7-7 | L4 territory mapping; L7 routing | - | Capture: M3 (routing), M7 (masters); boundaries and conversion M3 | Your note (25 Sept) |
+| P7-8 | L4 territory mapping; L7 routing | - | Capture: M3 (routing), M7 (masters); boundaries and conversion M3 | Your answers (25, 28 Sept) |
+| P7-9 | L4 territory mapping; L7 routing | - | Capture: M3 (routing), M7 (masters); boundaries and conversion M3 | Your answer (28 Sept, structure gaps) |
+| P7-10 | L4 territory mapping; L7 routing | - | Capture: M3 (routing), M7 (masters); boundaries and conversion M3 | Your answer (28 Sept, which point) |
+| P7-11 | L4 territory mapping; L7 routing | - | Capture: M3 (routing), M7 (masters); boundaries and conversion M3 | Your answer (28 Sept); approved with Part 3 |
+| P7-12 | L4 territory mapping; L7 routing | - | Capture: M3 (routing), M7 (masters); boundaries and conversion M3 | Your note (25 Sept) |
+| P7-13 | L4 territory mapping; L7 routing | - | Capture: M3 (routing), M7 (masters); boundaries and conversion M3 | Part 6 |
+| P7-14 | L4 territory mapping; L7 routing | - | Capture: M3 (routing), M7 (masters); boundaries and conversion M3 | Your answer (28 Sept, address service) |
+| P7-15 | L4 territory mapping; L7 routing | - | Capture: M3 (routing), M7 (masters); boundaries and conversion M3 | Your answer (28 Sept, ownership) |
+| P7-16 | L4 territory mapping; L7 routing | - | Capture: M3 (routing), M7 (masters); boundaries and conversion M3 | Your answer (28 Sept, ownership) |
+| P7-17 | L4 territory mapping; L7 routing | - | Capture: M3 (routing), M7 (masters); boundaries and conversion M3 | Your answer (28 Sept, structure gaps); Audit keeper (unresolved rows counted) |
 
 ### A.2 Records at field level
 
@@ -1315,11 +1409,11 @@ choice (fixed list) · reference (points at another record) · photo · position
 
 **Product** — id · name · portfolio · brand · treats (list of crop, problem).
 
-**Sales structure** — zone · region · territory · bsa · sul (reference; exactly one per territory) · change history. **Location** — province · district · tehsil · village · bsa. **Franchise** — name · position · range_km (number) · territory. **Timing** — crop · problem · months (list).
+**Sales structure** — zone (choice of four) · region · territory · bsa · sul (reference; exactly one per territory) · sul_position (position) · change history. **BSA** — id · territory · franchises (list of: name, position) · villages (list). **Location** — province · district · tehsil · village · bsa. **Boundary** — village · polygon · file_version · loaded_at. **Timing** — crop · problem · months (list). **Lead placement** — lead · method (choice: boundary, converted_address, nearest_franchise, pool_assigned) · village · bsa · territory · distance_km (number, optional) · conversion_confidence (number, optional).
 
 **User** — id · name · syngenta_email (text, unique, must be a Syngenta address; the login) · role (choice: sul, rsm, zm, head_of_sales, leadership, pm, marketing, admin) · scope (territory / region / zone / portfolio / all) · language · active.
 
-**Settings** (each versioned: value, previous, who, when) — acreage_threshold (20) · contact_promise_hot (24 h), _potential (72 h) · completion_promise_hot (7 d), _potential (14 d) · weights (30/25/20/15/10) · age_decay_per_day (2), age_grace_hours (48), age_floor · reachability_penalty (15) · serviceability_penalty (10) · fold_size (20) · hina_attempts (3), hina_days (2) · season_start (date) · retention_seasons (2).
+**Settings** (each versioned: value, previous, who, when) — acreage_threshold (20) · contact_promise_hot (24 h), _potential (72 h) · completion_promise_hot (7 d), _potential (14 d) · weights (30/25/20/15/10) · age_decay_per_day (2), age_grace_hours (48), age_floor · reachability_penalty (15) · serviceability_penalty (10) · nearest_franchise_cap_km (50) · fold_size (20) · hina_attempts (3), hina_days (2) · season_start (date) · retention_seasons (2).
 
 **Audit entry** — who · when · action (choice) · record (reference) · before, after (for settings) — append-only, never edited.
 
@@ -1338,6 +1432,7 @@ choice (fixed list) · reference (points at another record) · photo · position
 - Config from environment only, every variable documented in `.env.example` (`CLAUDE.md`; AR-19). No dead code, no swallowed errors (AR-14, AR-20).
 - Residency: all grower data at rest in Pakistan (P6-12) — a Phase 3 hosting constraint.
 - Login: Syngenta email address plus a Synapse password, registration restricted to the Syngenta email domain (P6-16); SSO deferred (6.3.2).
+- Routing: point-in-polygon against the digitised village boundaries (Punjab, Sindh); nearest-point search over BSA franchise coordinates elsewhere with a distance cap; forward geocoding of a complete address through a service that receives the address text only — behind one interface so an internal Syngenta geocoder or an outside provider can sit behind it (P7-14, choice pending). Placement is recorded per lead (method, distance, confidence) — Part 7.
 - Hina: an outbound integration (Synapse → third party: ordered lead batch with attempt limit) and an inbound one (third party → Synapse: structured answers per attempt, summary text); every inbound is idempotent on (lead, attempt); every call is an audit entry (P5-8).
 
 ### A.4 Keeper map — audit §9 behaviours, where each landed

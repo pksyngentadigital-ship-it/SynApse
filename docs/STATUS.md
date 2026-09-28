@@ -1,9 +1,10 @@
 # Synapse status
 
-**Phase 2, session 2.1 done on paper, 2026-09-21.** `docs/SPEC.md` v0.9 —
-six parts, all approved by Ahsan row by row, plus a technical appendix — is on
-`syn-9-session-21-draft-specmd-v09-in-six-parts` (SYN-9, docs-only) as a PR
-awaiting Ahsan's read and merge. Nothing runs yet; no commands until M0.
+**Phase 2, session 2.1 done on paper, 2026-09-28.** `docs/SPEC.md` v0.9 —
+seven parts, all approved by Ahsan row by row, plus a technical appendix — is on
+`syn-9-session-21-draft-specmd-v09-in-six-parts` (SYN-9, docs-only) as PR #4
+awaiting Ahsan's word to merge. Part 7 (geo hierarchy and routing) was added
+2026-09-25/28 from Ahsan's note. Nothing runs yet; no commands until M0.
 
 **Last merged PR:** #3, "docs: Phase 1 Base44 audit of Smart Agro Lite",
 squash-merged to `main` as `304a3be` on 2026-09-15.
@@ -21,12 +22,15 @@ one grower, no split) · D9 (healthy scan is a lead only at or above the
 threshold) · three ranked segments, no cap · two clocks, notify-only · acreage
 threshold 20 as an Admin setting · eight personas · acreage replaces order
 value · Hina, a third-party AI calling agent, fills lead gaps by phone before
-routing (phase 1); AI-SUL role out of scope · scoring details. D8 is unused.
-Ahsan's words are verbatim in `docs/notes/spec-input-2026-09-15.md` to `-18.md`.
+routing (phase 1); AI-SUL role out of scope · scoring details · geo hierarchy
+and routing (coordinate mandatory; digitised boundaries in Punjab and Sindh;
+nearest franchise elsewhere). D8 is unused. Ahsan's words are verbatim in
+`docs/notes/spec-input-2026-09-15.md` to `-18.md` and `-25.md`.
 
 **Open decisions:** D2 (Cropwise access — filed, awaiting reply; recipient and
 date to add) · D3 (campaign convention, M5) · D6 (territory vs franchise) ·
-D7 (conversion value; POS is the intended path).
+D7 (conversion value; POS is the intended path). Pending from Ahsan: the
+address-conversion service, internal or external (SPEC P7-14).
 
 **Carry forward.** Hina was in no document before 2026-09-21; the M8
 "acreage cascade with WhatsApp callback" in `docs/PLAN.md` is now a Hina

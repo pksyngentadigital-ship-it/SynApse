@@ -567,3 +567,36 @@ Ahsan, 2026-09-21.
 **Why.** Each of these was a canvas default that needed an owner or a number
 before the walking skeleton can score; Ahsan supplied them. Hiding the number
 from SULs keeps the argument on reasons, not on a 68 versus a 71.
+
+---
+
+## 2026-09-28 — Geo hierarchy and routing: coordinate mandatory, digitised boundaries in Punjab and Sindh, nearest franchise elsewhere
+
+**Decision.** The sales hierarchy is village → BSA (Basic Sales Unit Area,
+generally one Naya Savera franchisee) → territory (one SUL) → region (one
+RSM) → zone (one Zonal Sales Manager); four zones cover Pakistan: Lahore,
+Multan, Bahawalpur, Hyderabad. A lead is placed only by a coordinate; a
+stream that gives none must give a complete address, which is converted to
+a coordinate. Inside Punjab and Sindh (about 95% of sales area) the
+coordinate is matched to a digitised village boundary, and the village's BSA
+and territory give the SUL. Elsewhere, only franchise and SUL points exist:
+the lead goes to the territory of the nearest franchise point within a
+distance cap (starting setting 50 km, Admin); beyond it, the regional pool.
+A structure gap (village in no BSA, BSA in no territory, territory with no
+SUL) sends the lead to the regional pool and the gap to DBO. The grower's
+location is the most recent coordinate unless an SUL confirmed one. The
+franchise is a property of the BSA, replacing Part 5's separate franchise
+list. DBO owns the structure (zones, regions, territories, BSAs, SUL
+assignment, franchise points), edited in Admin; the digital team (Admin)
+owns the boundary files, the address conversion and the SUL points. Ahsan,
+2026-09-25 and 2026-09-28 (`docs/notes/spec-input-2026-09-25.md`).
+
+**Why.** Routing by text matching was Smart Agro Lite's top cause of
+misrouted leads (audit §7.17). A coordinate against a digitised boundary is
+exact where the boundaries exist, and the nearest franchise is the honest
+fallback where they do not, because the franchise is where the sale happens.
+Ahsan proposed centroids and accepted nearest-franchise-point on being shown
+that centroids misplace leads near the edges of large units.
+
+**Reversal cost.** Low: the fallback rule, the cap and the ownership are
+settings and list edits; the boundary files can be replaced.

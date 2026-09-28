@@ -336,3 +336,267 @@ them would have meant attempting a forbidden tool.
 
 **Un-park trigger for any change:** none expected. Loosening these rules needs
 a dated entry here first, like G1.
+
+---
+
+## 2026-09-15 — D9 decided: a healthy Crop Doctor scan is a lead only at or above the acreage threshold; D8 is unused
+
+**Decision.** A Crop Doctor scan whose diagnosis is "healthy" becomes a lead
+only when the grower's known acreage is at or above the acreage threshold
+(20 acres, an Admin setting — see the 2026-09-16 entry). Below the threshold
+or with acreage unknown, the scan is recorded on the grower's history and no
+lead is created. The number D8 was proposed for the lost-reason code set and
+withdrawn the same day by Ahsan; D8 is not used and must not be re-assigned.
+Decided by Ahsan in session 2.1; recorded 2026-09-17. Source:
+`docs/notes/spec-input-2026-09-16.md`.
+
+**Why.** A healthy scan carries no need and no intent; on its own it is not
+demand. On a large farm it is still worth a conversation. Tying the rule to
+the same threshold as everything else keeps one number for the field to learn.
+
+**Governs.** The Crop Doctor connector's lead-creation rule (M6) and the
+ordering of the acreage follow-up before a healthy scan can become a lead.
+D1 still gates whether a grower may be created from Cropwise data at all.
+
+---
+
+## 2026-09-15 — Three ranked segments replace the canvas's four tiers; no daily cap
+
+**Decision.** SULs see three segments — Hot, Campaign, Potential — ranked by
+score inside each, today's due leads first, low scores below a fold. There is
+no Nurture tier and no daily cap per SUL. Hot is defined by three conditions
+only: clear purchase intent, crop known, acreage at or above the threshold;
+the score orders leads inside Hot and does not gate it. Decided by Ahsan
+2026-09-15 and confirmed 2026-09-17 (`docs/notes/spec-input-2026-09-15.md`,
+`-17.md`).
+
+**Why.** Smart Agro Lite's lesson was clutter: too many buckets, no clarity on
+what to tap next. Ahsan's answer is fewer, clearer segments rather than a cap
+that hides leads. The canvas's Nurture tier and cap were its own anti-clutter
+devices; the spec records that reasoning in its disagreement register so the
+session 2.2 reviewers can challenge the choice with the argument in front of
+them. Reversible: a cap or a fourth segment is an Admin setting away, and
+would need a new entry here.
+
+---
+
+## 2026-09-15 — The lead clock stays; a breach notifies, it never reassigns
+
+**Decision.** Every routed lead carries two promises, both Admin settings: a
+contact promise (Hot within 24 hours, Campaign per the campaign's own
+promise, Potential within 72 hours) and a completion promise (starting
+proposal: Hot 7 days, Campaign per campaign, Potential 14 days). Both clocks
+start when the lead reaches the SUL; the contact clock stops at the first
+contact, the completion clock when the lead is completed or closed. When
+either promise is missed, the SUL, the RSM and the Zonal Manager are all
+notified, and the managers follow up with their direct report inside Synapse.
+No lead is reassigned automatically or by rule. The on-time rate, reported
+for both clocks, is the Pilot's headline number. Clock kept 2026-09-15;
+notify-only path chosen 2026-09-17; second clock added 2026-09-18 when Ahsan
+ruled the clock runs to completion, not first contact
+(`docs/notes/spec-input-2026-09-17.md`, `-18.md`).
+
+**Why.** The clock is what turns a ranked list into changed field behaviour;
+without it the queue is a better-sorted list. Reassignment was rejected
+because a lead moving without a human deciding punishes an SUL who was about
+to visit; visibility up the line, in the product, is the pressure instead.
+The canvas's "reassigned within 24 hours" is recorded as a disagreement.
+
+---
+
+## 2026-09-16 — One acreage threshold, 20 acres, as an Admin setting; leads below it are never routed to an SUL
+
+**Decision.** There is one acreage threshold, 20 acres, held as an Admin
+setting with every change recorded. A lead whose grower's acreage is known and
+below the threshold is never shown to any sales user; it is kept in the portal
+(Admin "below threshold" list), counted in Marketing and Portfolio Manager
+totals labelled "below threshold", and still builds the grower's record. A
+lead with unknown acreage is routed and marked unknown; when the SUL learns
+the acreage they log it, it stays on the grower, and if it is below the
+threshold that grower's next lead is not routed. Ahsan first wrote 15 and 20
+on 2026-09-16 and settled on one threshold at 20 the same day, with the
+explicit provision that the number may change after the Phase 4 stakeholder
+review (`docs/notes/spec-input-2026-09-16.md`, `-17.md`).
+
+**Why.** Acreage is the strongest signal of sale potential Syngenta has, and a
+field force of one SUL per territory cannot visit every two-acre farm. Holding
+the number as a setting, not a constant, is the provision Ahsan asked for.
+
+---
+
+## 2026-09-16 — Eight personas, not six
+
+**Decision.** Synapse serves eight kinds of user: Sales Unit Lead (SUL — the
+canvas's "Sales Officer"), Regional Sales Manager, Zonal Manager, Head of
+Sales, Country Leadership Team, Portfolio Manager (four portfolios:
+insecticides, fungicides, herbicides, biologicals and seed care), Marketing,
+Admin. Head of Sales sees all zones side by side plus the national on-time
+rate; Country Leadership gets a read-only national dashboard and a monthly
+summary. Admin is the digital team on its own login, never combined with a
+sales or marketing role. The stub and the delivery process said six; the
+canvas listed six dashboards. Ahsan, 2026-09-16 and 2026-09-17.
+
+**Why.** The two added roles exist in Syngenta Pakistan today and will read
+the numbers; a persona that is not specified is a dashboard designed last.
+
+---
+
+## 2026-09-17 — Acreage replaces "order value" as a scoring ingredient; the canvas weights stay as the starting point
+
+**Decision.** The Pilot's scorecard uses the canvas's five ingredients and
+four adjustments, changeable in Admin from day one, with one substitution:
+the "opportunity value" ingredient (acreage × dose × price) is replaced by
+acreage itself, carrying a high weight. Indicative PKR value is still shown on
+the lead card where product and price are known, but it is not scored. The
+proposed starting weights are in the spec, marked for Ahsan. Automated
+WhatsApp follow-up goes only to low-scoring leads whose acreage is unknown.
+Personal data is anonymised after two seasons of inactivity (an Admin
+setting; every removal logged). Ahsan, 2026-09-17
+(`docs/notes/spec-input-2026-09-17.md`).
+
+**Why.** Order value depends on a product-and-price master and a dose table
+that do not exist on day one and would make the first score a guess dressed
+as money. Acreage is known or askable, and in Ahsan's words "tells a lot about
+grower sale potential". The other two items are recorded here because they
+are rules about contacting growers and keeping their data, which the canvas
+leaves to a leadership position.
+
+---
+
+## 2026-09-18 — D1 decided: any contact with Syngenta is the consent basis for sales contact
+
+**Decision.** A grower who contacts Syngenta through any stream — a Crop
+Doctor scan, a Savera conversation, a community post, a WhatsApp or social
+message, a campaign form, a call to the centre — has thereby given the consent
+basis for a sales contact about that need. Every lead records which stream
+and date the consent came from. There is no opt-out control for growers or
+SULs in this phase (Ahsan, 2026-09-21); a grower's request to stop is a
+message on the lead, left to the SUL. Cropwise-sourced growers are created and routed
+from day one; the M6 gate in PLAN.md ("no grower is created from Cropwise data
+until D1 is decided") is lifted. Ahsan reports this as Syngenta leadership's
+position, 2026-09-18 (`docs/notes/spec-input-2026-09-18.md`). Who took it and
+on what date is not recorded here; Ahsan may add it.
+
+**Why.** The canvas held D1 open because advisory data used for a sales call
+is a change of purpose that needs a leadership position, not a product
+default. Leadership has now taken the position. INV-1 is unchanged: no grower
+is contacted without a recorded consent basis — the basis is now the contact
+itself, and it is still recorded per lead.
+
+**Reversal cost.** If leadership later narrows this, Cropwise-sourced leads
+already routed stay in the history; new ones are held. The spec's consent
+row cites this entry, so the change is one row and one connector rule.
+
+---
+
+## 2026-09-18 — D4 decided: verified mobile number is the grower's key; one number, one grower; no split action
+
+**Decision.** A grower is identified by their verified mobile number. One
+number belongs to exactly one grower. There is no split action for shared or
+family numbers in this phase; if a number is wrong or has changed, the SUL
+corrects it on the grower's profile, the change is kept in the history with
+who and when, and Admin can undo it. A number that already belongs to another
+grower cannot be saved on a second one. A signal that arrives with no number
+is never routed: it is matched to an existing grower by name, village and
+crop when the match is clear, otherwise held on Admin's "no contact" list,
+counted, and merged into a lead when a later signal brings a number. Ahsan,
+2026-09-18 and 2026-09-21 (the no-number rule was first answered "routed
+anyway" and changed the same day on re-asking).
+
+**Why.** Ahsan's rule for the field is simpler than the canvas's split: one
+grower, one number, corrected by the person who knows. The cost, recorded for
+the session 2.2 reviewers: two growers on one family phone will be one record
+in this phase, and INV-2's "unless an officer explicitly split it" clause has
+no user path yet. INV-2 itself still holds — a verified number maps to at
+most one grower.
+
+**Un-park trigger for a split action:** the field reports shared-number
+growers being merged in error; raised as a change request.
+
+---
+
+## 2026-09-21 — Hina, a third-party AI calling agent, fills lead gaps by phone before routing; an AI first layer of calling in phase 2
+
+**Decision.** Hina is an AI voice agent, developed and managed by a third
+party, that Synapse integrates with. In phase 1, a lead that has a number but
+is missing acreage, crop or purchase intent is held for Hina before any SUL
+sees it: Synapse sends Hina the leads in order (score, then age) with an
+attempt limit (starting setting: 3 calls over 2 days, Admin settings); Hina
+returns structured answers (acreage, crop, intent), the outcome of each
+attempt, and a short plain-words summary, no recording; Synapse then scores
+the lead with what Hina found and routes it into the same three segments, or
+closes it below threshold; the SUL's clocks start at handover. Leads with no
+gap skip Hina. Synapse no longer asks acreage by WhatsApp, and sends no
+automated WhatsApp content in phase 1; Hina is the only automated contact.
+In phase 2, when Hina can close sales, she becomes the first layer of calling
+for every grower before an SUL — an "AI SUL" — with a separate scoring and
+priority layer; that is out of scope for this specification and recorded here
+so it is not forgotten. Ahsan, 2026-09-21 (`docs/notes/spec-input-2026-09-18.md`).
+This was not in the canvas, the audit or Ahsan's earlier notes.
+
+**Why.** Acreage and intent decide Hot and the threshold, and a phone call in
+Urdu reaches growers a WhatsApp template does not. A third party already
+builds the agent. The cost, recorded for the session 2.2 reviewers: a lead
+with a gap waits up to the attempt window before an SUL sees it, which is the
+"model call in the lead path" the canvas warned against; the time limit and
+the "no gap → route at once" rule bound that wait. Consent for an AI call
+rests on D1 (any contact is consent). Every Hina call is an automated read of
+grower data and is logged.
+
+**Un-park trigger for phase 2:** Hina can close a sale end to end on the
+third party's side, proven on real calls; raised as a change request with
+its own spec section.
+
+---
+
+## 2026-09-21 — Scoring details for the Pilot: weights, adjustments, timing table, engine proposals, score visibility
+
+**Decision.** Starting weights, all Admin settings: purchase intent 30,
+acreage 25, crop need 20, season timing 15, grower history 10. Adjustments:
+minus 2 per day after 48 hours with a floor; minus 15 where the grower's
+number has never been confirmed; minus 10 where no franchise is within range,
+which requires a franchise list (name, location, serviceable range) kept in
+Admin; repeat signals merge into the lead and raise its score. The season
+timing table (crop, problem, months) is owned by Marketing and scores neutral
+until a row exists. The engine's proposed weight changes are applied by Admin
+and notified to Head of Sales, ZMs, RSMs and SULs; every change is logged and
+reversible; the scorecard is never switched off. SULs see rank and the top
+three reasons, not the number; managers and Admin see the 0–100 number.
+Ahsan, 2026-09-21.
+
+**Why.** Each of these was a canvas default that needed an owner or a number
+before the walking skeleton can score; Ahsan supplied them. Hiding the number
+from SULs keeps the argument on reasons, not on a 68 versus a 71.
+
+---
+
+## 2026-09-28 — Geo hierarchy and routing: coordinate mandatory, digitised boundaries in Punjab and Sindh, nearest franchise elsewhere
+
+**Decision.** The sales hierarchy is village → BSA (Basic Sales Unit Area,
+generally one Naya Savera franchisee) → territory (one SUL) → region (one
+RSM) → zone (one Zonal Sales Manager); four zones cover Pakistan: Lahore,
+Multan, Bahawalpur, Hyderabad. A lead is placed only by a coordinate; a
+stream that gives none must give a complete address, which is converted to
+a coordinate. Inside Punjab and Sindh (about 95% of sales area) the
+coordinate is matched to a digitised village boundary, and the village's BSA
+and territory give the SUL. Elsewhere, only franchise and SUL points exist:
+the lead goes to the territory of the nearest franchise point within a
+distance cap (starting setting 50 km, Admin); beyond it, the regional pool.
+A structure gap (village in no BSA, BSA in no territory, territory with no
+SUL) sends the lead to the regional pool and the gap to DBO. The grower's
+location is the most recent coordinate unless an SUL confirmed one. The
+franchise is a property of the BSA, replacing Part 5's separate franchise
+list. DBO owns the structure (zones, regions, territories, BSAs, SUL
+assignment, franchise points), edited in Admin; the digital team (Admin)
+owns the boundary files, the address conversion and the SUL points. Ahsan,
+2026-09-25 and 2026-09-28 (`docs/notes/spec-input-2026-09-25.md`).
+
+**Why.** Routing by text matching was Smart Agro Lite's top cause of
+misrouted leads (audit §7.17). A coordinate against a digitised boundary is
+exact where the boundaries exist, and the nearest franchise is the honest
+fallback where they do not, because the franchise is where the sale happens.
+Ahsan proposed centroids and accepted nearest-franchise-point on being shown
+that centroids misplace leads near the edges of large units.
+
+**Reversal cost.** Low: the fallback rule, the cap and the ownership are
+settings and list edits; the boundary files can be replaced.

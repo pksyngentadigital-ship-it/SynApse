@@ -476,3 +476,87 @@ session — an instructed exception to LIN3, since PR #1 merged on 2026-09-11 an
 the integration never moved it.
 
 ---
+
+## 007 · 2026-09-28 · Phase 2, session 2.1 · specification draft (2026-09-15 to 2026-09-28)
+
+**Goal.** Draft `docs/SPEC.md` from the canvas, the Base44 audit and
+INVARIANTS, per `docs/reference/03-delivery-process.md` §Session 2.1 (SYN-9).
+
+**Shipped.** PR #4, "docs: SPEC.md v0.9 — seven parts approved by Ahsan
+(SYN-9)", squash-merged as `5c1bcde` on 2026-09-28: SPEC v0.9 in seven
+plain-language parts plus a technical appendix, five verbatim input notes
+(`docs/notes/spec-input-2026-09-15.md`, `-16`, `-17`, `-18`, `-25`), eleven
+DECISIONS entries, STATUS. Docs-only, 8 files, +2064 −47; scope-differ CLEAN.
+Recorded here because no entry did at the time: PR #3 (the Base44 audit)
+merged between sessions as `304a3be` on 2026-09-15.
+
+**What happened.** `/resume` opened on drift again: PR #3 had merged but STATUS
+still said awaiting merge and no journal entry recorded the merge; the warden
+caught both. The first plan was rejected, and so were the next three, as Ahsan
+reshaped what he wanted — plain language rather than a technical spec, the
+document split into parts he could review one at a time, and every open point
+put to him as a question with options. The fifth plan was approved. After that
+the loop settled: one question at a time, a recommended option and two
+alternatives, his answer saved to a dated note, the rows rewritten, the part
+shown with counts, his approval by name. Parts 1 to 6 were approved on
+2026-09-21. Hina, a third-party AI calling agent that fills lead gaps by phone
+before routing, was in no document before the session and first surfaced in
+the middle of Part 5; the geo hierarchy and routing rules arrived after Part 6
+in Ahsan's 2026-09-25 note. Part 7 was therefore drafted after PR #4 was
+opened — the branch is still named `...-in-six-parts` — and its questions were
+re-asked from the start on 2026-09-28 at his request before he approved it.
+He then said "merge it".
+
+**Went wrong.** The session opened a session behind, as entry 006 had: STATUS
+stale and a merge with no journal record. Four rejected plans cost most of
+15–17 September. Ahsan's raw input came in as chat pastes, against PROCESS X7,
+and was written to `docs/notes/` after the fact rather than before. Answers
+changed on re-asking: the no-number signal went from "routed anyway" to held
+and matched; the outside-data answer, first pressed by accident, was re-asked
+and gained the e-commerce stream; the map answer was revised the same day
+after he read the applied change; list owners were re-asked; and Part 7 was
+re-asked from zero. Each change was cheap to record but meant rewriting rows
+across several parts and the appendix. Two scope facts, Hina and geo routing,
+reached the spec late because they existed only in Ahsan's head; the canvas
+and audit held neither. The 21 September answers were appended to the
+18 September note instead of a new dated file, so that note's filename no
+longer dates all of its contents. Bash heredocs with long single-quoted lines
+failed twice, and the scripts had to go through scratch files. `/pr`'s
+docs-tier merge waits on CI, but no workflow exists before M0-T1, so there
+was nothing to watch; Ahsan's "merge it" stood in for the check.
+
+**Decisions.** 2026-09-15 "D9 decided: a healthy Crop Doctor scan is a lead
+only at or above the acreage threshold; D8 is unused" · 2026-09-15 "Three
+ranked segments replace the canvas's four tiers; no daily cap" · 2026-09-15
+"The lead clock stays; a breach notifies, it never reassigns" (two clocks
+added 2026-09-18) · 2026-09-16 "One acreage threshold, 20 acres, as an Admin
+setting" · 2026-09-16 "Eight personas, not six" · 2026-09-17 "Acreage replaces
+'order value' as a scoring ingredient" · 2026-09-18 "D1 decided" · 2026-09-18
+"D4 decided" · 2026-09-21 "Hina, a third-party AI calling agent, fills lead
+gaps by phone before routing" · 2026-09-21 "Scoring details for the Pilot" ·
+2026-09-28 "Geo hierarchy and routing".
+
+**Learned.** Asking one question at a time, with a recommended option and two
+alternatives, gave 76 recorded answers and eleven decisions with very little
+drift. A plain-language body with a separate technical appendix let the product
+owner mark every row himself, and keeping each input in a dated file made
+every reversal traceable. The cost: scope that lives only in the product
+owner's head, as Hina and geo routing did, turns up late. Ask "what is not in
+the canvas?" before Part 1, not after Part 6.
+
+**Evidence seen by Ahsan.** Each part in session, with its counts: rows,
+assumptions, banned technical words, phone-shaped strings. He approved all
+seven parts by name. The PR #4 body carried the whole-document counts: 275 rows,
+275 traceability rows, 11/11 keepers, 25/25 mistakes, 0 assumptions open. He
+told us to merge PR #4 without a CI run, because no workflow exists yet.
+
+**Open at close.** Session 2.2, the adversarial review to v1.0; its Linear
+issue has not been created. `docs/PLAN.md` M8 still describes the acreage
+cascade that Hina replaces; to change in Phase 5. D2 still needs its recipient
+and date recorded in DECISIONS. Ahsan still has to name the address-conversion
+service (SPEC P7-14). At
+close, the post-merge STATUS rewrite and this entry are uncommitted on `main`.
+Carried from 006 with no record of progress: live proof of the Base44 deny
+rules, and the `/close` skill's conflict with PROCESS A1.
+
+---

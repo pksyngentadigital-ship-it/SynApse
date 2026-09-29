@@ -25,7 +25,11 @@ Updated 2026-09-29. **Fable 5.1 work is finished and logged. Nothing is in fligh
 Counted 2026-09-29 after the last Fable skeptic landed: **166 rows, 123 SURVIVES, 43 REFUTED, no duplicate IDs.** Every finding in R1 to R6 has a row or is merged (see merges.md). R7 rows logged: F-R7-2, 3, 5, 6, 7, 9, 11. 166 logged + 23 to run = 189 distinct claims.
 
 ## Opus 5.5 progress (2026-09-29, second session)
-All 23 Opus 5.5 skeptics (F-R7-12 to F-R7-34) have landed and are logged. Counted after the last one: **189 rows, 136 SURVIVES, 53 REFUTED, no duplicate IDs, no finding without a row or a merge.** Of the 23: 13 SURVIVES, 10 REFUTED. Next: write docs/reviews/spec-r1.md.
+All 23 Opus 5.5 skeptics (F-R7-12 to F-R7-34) have landed and are logged. Counted after the last one: **189 rows, 136 SURVIVES, 53 REFUTED, no duplicate IDs, no finding without a row or a merge.** Of the 23: 13 SURVIVES, 10 REFUTED.
+
+`docs/reviews/spec-r1.md` is written (Opus 5.5): 126 surviving entries after deduplication (4 blocker, 92 major, 30 minor), 44 narrower claims from refuted findings with triage lines, 8 more carried inside surviving entries, 27 rows with zero findings. Committed and pushed on this branch.
+
+**Next:** Ahsan triages in spec-r1.md. `/pr` and `/close` only when he says so. Applying findings and the v1.0 bump are a separate session.
 
 ## Still to run (Opus 5.5)
 F-R7-12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34.

@@ -4,7 +4,7 @@ Updated 2026-09-29. **Fable 5.1 work is finished and logged. Nothing is in fligh
 
 ## Branch and files
 - Branch `pksyngentadigital/syn-11-session-22-adversarial-review-of-specmd-round-1`. Commit 996e1ab holds the brief and the approved plan.
-- Uncommitted, all in `docs/reviews/spec-r1-raw/`: R1.md … R7.md (raw lens reports, 208 findings), merges.md, verdicts.md, STATE.md.
+- Committed in 0fe7a9e, not yet pushed, all in `docs/reviews/spec-r1-raw/`: R1.md … R7.md (raw lens reports, 208 findings), merges.md, verdicts.md, STATE.md.
 - `docs/SPEC.md` has not been edited and must not be.
 
 ## The cut-off

@@ -9,7 +9,7 @@ Collected 2026-09-30 to 2026-10-01 by AskUserQuestion, theme by theme. S-numbers
 | S4 | accept | Add the missing states and a transition table; a reassigned lead gets fresh clocks, rejected episode stays out of the rate |
 | S2 | accept | Device rules go into SPEC as P6-6a |
 | S3 | accept | Leaver path with phone-data expiry after N hours unsynced (Ahsan sets N) |
-| S21, S103 | park | Trigger: before the M8 build of the dashboards and rate (Act scope) |
+| S21, S103 | accept (unparked 2026-10-01) | One formula in P5-31: of the leads whose deadline fell in the period or that were finished in it, the share finished on time; Closed: unreachable counts as finished; follow-up dates don't count; P1-43 points to it; J14.2, J16.1 and J22.1 add "completed on time" |
 | S5, S6, S82 | accept | Phone time: clocks start on phone receipt and stop at the phone's logged time; a synced on-time action withdraws the breach notice; a server re-score never overrides an SUL outcome |
 | S17, S18, S19, S30 | accept | All four closure and gaming fixes; Admin alone still sets settings |
 | S28, S29, S95 | accept | New leads only; a move up restarts clocks under the new promise, a move down keeps earlier due times |
@@ -24,19 +24,19 @@ Collected 2026-09-30 to 2026-10-01 by AskUserQuestion, theme by theme. S-numbers
 | S16 | accept | The tab holds this season's leads from last-season growers (P1-17 matched to P5-19) |
 | S76, S105 | accept | Status = converted if any lead converted that crop year, else latest outcome; tab appears from the first season start after go-live |
 | S13, S14 | accept | Fuller call-centre form and an agent role. Ahsan's words: "call center is the part of DBO; and DBO team looks after it" — so the agent access sits with DBO (see S51) rather than as a separate stakeholder |
-| S61 | park | Trigger: Phase 4 — 2G/3G numbers and the DBO device survey become UX acceptance inputs |
-| S123 | park | Trigger: Phase 4 — accessibility becomes a UX acceptance input |
+| S61 | park (confirmed 2026-10-01) | Trigger: Phase 4 — 2G/3G numbers and the DBO device survey become UX acceptance inputs |
+| S123 | accept (unparked 2026-10-01) | One SPEC row now: SUL app readable at the phone's largest text size, clear in bright sunlight, usable one-handed, voice typing in text boxes |
 | S25 | accept | Flags on a lead (RSM → SUL) or on a territory or region (Head of Sales, ZM, PM → one level down); lead flag answered at the SUL's next action; territory flag when the receiver replies or flags down; flags passed down are linked |
 | S26 | accept, widened | Targets per the recommendation, with Ahsan's additions: Admin/DBO enter targets on Head of Sales' recommendation (he does not enter them); targets also for leads converted, sales value and leads followed up; Admin can change the target rules or disable any target parameter. "Behind" measured against targets on manager views only (P2-11 stands). Needs a DECISIONS entry at apply time; check the sales-value target against D7 (no PKR linked to incentives) |
 | S27 | accept | RSM/ZM breach digest at 08:00 and 14:00 (Admin settings) with counts by SUL, a push only for a breached Hot contact promise, no pushes 21:00–07:00, the manager above sees when each report last opened the breach list |
-| S31 | park | Ahsan: "Synapse is not for managing SULs' own created leads; we may add this at a later stage." Trigger: if SUL-created or walk-in leads are added |
+| S31 | out of scope (cleared 2026-10-01) | Ahsan: "Synapse is not for managing SULs' own created leads; we may add this at a later stage." Listed in 6.3.2 as out of scope, returning on Ahsan's request |
 | S100 | accept, widened | Any weight change, by hand or from a proposal, notifies the same list, and Ahsan adds that all stakeholders are notified |
 | S102 | accept | "Year" and "quarter" are calendar periods; a separate "Season" preset for the crop year; weeks run Monday to Sunday |
 | S32 | accept, amended | Last campaign wins: the most recent campaign signal before first contact gets the credit (not the reviewer's first-touch); other campaigns listed as "also touched"; channel = the stream that carried the credited campaign |
 | S33 | accept | Optional talk-track field on the campaign record, supplied when available |
 | S34 | accept | SUL list shows every campaign with open leads (ended ones marked); PMs see campaigns live or active in the period; a signal after the end date still carries the campaign, labelled "after end" |
 | S35 | accept, reversed | Hold it: a campaign signal whose campaign cannot be read is held until it is read; P4-11 and the D3 rows change to match (the reviewer proposed routing). Consequence to note at apply time: until D3 is agreed in M5, the Pilot's campaign leads are held |
-| S37 | park + scope change | Ahsan: "let's not manage cost per lead type things at this stage; we will do later if required." Cost per lead and cost per converted lead move out of J20.2/P3-16 into 6.3.2, returning when Ahsan asks; spend can still be entered on the campaign |
+| S37 | out of scope (cleared 2026-10-01) | Ahsan: "let's not manage cost per lead type things at this stage; we will do later if required." Cost per lead and cost per converted lead move out of J20.2/P3-16 into 6.3.2, returning when Ahsan asks; spend can still be entered on the campaign |
 | S36 | accept, reframed | After Ahsan's question (answered: "unknown" means the signal carries no readable campaign ID): Admin releases held campaign-unknown signals in one action once readable, each carrying its campaign; Marketing sees a count held per campaign stream |
 | S38 | legal action, no SPEC row | Record as a Syngenta Legal check that the Facebook and TikTok form privacy notices cover follow-up by staff and by Hina; not a SPEC row |
 | S107 | accept, amended | Ahsan: "there could be one or multiple campaigns running at a time; either it's NPI or just a brand campaign; we are just tagging if it's NPI." The Pilot allows one or more campaigns, NPI being a tag. Changes the 2026-09-11 "one NPI campaign" wording, so it needs a DECISIONS entry and a DR at apply time |
@@ -76,7 +76,7 @@ Collected 2026-09-30 to 2026-10-01 by AskUserQuestion, theme by theme. S-numbers
 | S79 | accept | Threshold compared with total acreage across crops; where only per-crop figures exist, their sum |
 | S57 | accept | Pushed no-gap leads within N minutes; pulled streams checked every M minutes (Admin setting per stream), arriving within one check plus N; gap leads arrive at Hina handover; Ahsan sets N and M |
 | S62 | accept | During a burst, no-gap leads reach the SUL within N minutes and the app stays as fast as normal; each SUL's leads appear in the order growers acted; Ahsan sets N |
-| S66 | park | Trigger: before the dashboards and exports are built (with S21) |
+| S66 | accept (unparked 2026-10-01) | After clarification (export = download as spreadsheet): data is incomplete when a connected feed is failing or dashboard figures are older than N hours (Ahsan sets N); the dashboard warning names the cause; downloads stay allowed but the file carries the same warning (P3-8's "export off" changes) |
 | N1 | accept, amended | Ahsan: if the grower's earlier scan and Hina call already meet the handover criteria, Hina does not call again; the new lead goes straight to its segment with the latest activity |
 | N2 | accept | Two lines: window expiry hands the lead over whatever the attempt count; Synapse works with Hina off |
 | N4 | accept | Unmatched no-number messages deleted after N months (Ahsan sets N); Admin "remove" deletes the lead's personal data and keeps only the technical ID that prevents duplicates |
@@ -110,17 +110,19 @@ Collected 2026-09-30 to 2026-10-01 by AskUserQuestion, theme by theme. S-numbers
 | N32 | reject | Ahsan, on being asked for the name and date: "Leadership via Ahsan" is enough |
 | N43 | accept | One line each: the weekly summary is in English; the language setting applies to the SUL app only |
 | N44 | accept, at v1.0 | At the v1.0 cut, "How to mark" becomes "every row was approved with its part; changes after v1.0 are change requests"; P1-27 marked R |
-| N33 | park | Ahsan: Syngenta's recommended tech stack, including cloud hosting, comes in the next phase and will be decided in tech.md. Trigger: Phase 3 tech/hosting decision |
+| N33 | accept (unparked 2026-10-01) | One neutral line in P6-12: the hosting that meets Pakistan storage is decided in tech.md from Syngenta's recommended stack; no hosting choice made now |
 | N34 | reject | No "shared phone" reason; field feedback outside Synapse is enough |
 | N35 | accept | Flagged, overdue and due-today leads are never hidden behind "More leads", even past 20; the four old "low scores below the fold" sentences are tidied |
 | N36 | accept | Product-row notices go to the PM of that product's portfolio; P4-28 reads "each part of a list has one named owner" |
 | N37 | accept | 5.1: a lead is scored on arrival (for Hina's order) and re-scored after Hina |
 | N38 | rule change | Ahsan: "if there is no valid number; we won't route and show the lead to SUL; nothing can be done on it; instead this lead will be closed." Confirmed: the lead is closed as "no valid number" and never routed; a later signal from the same grower with a valid number becomes a normal lead carrying the earlier history. Replaces P4-18's "no contact" hold; at apply time reconcile with S12 (Hina wrong number) and N4(a) (deletion of unmatched messages) |
 | N40 | accept | Lakh grouping (PKR 12,50,000); calculated amounts rounded half up to whole rupees |
-| N41 | park | Same as N33. Trigger: Syngenta stack and hosting decided in tech.md |
+| N41 | accept (unparked 2026-10-01) | The 6.4 D5 row points to P6-12 with the same neutral line (hosting decided in tech.md) |
 | N42 | accept, amended | Ahsan: "same english style everywhere; no urdu style." Western digits and English-style dates and times in both languages |
 | N39 | accept | A.4 K6 uses "reconciliation view" |
 | N3 | accept | Signal.raw marked personal: name and number removed at anonymisation, never in exports |
 | S81 | accept | Lead created at once; routing waits at most N seconds for the intent read, then treats intent as unclear; P4-10 wording corrected; Ahsan sets N |
 
 All rounds finished 2026-10-01: every S1–S126 entry and every narrower claim N1–N44 has a decision. Applying them to SPEC.md is a separate step, on Ahsan's go-ahead.
+
+Parked items reviewed 2026-10-01: S21/S103, S66, S123, N33 and N41 decided; S31 and S37 cleared as out of scope (6.3.2); only S61 stays parked, to Phase 4 by Ahsan's choice. N9 (restore and uptime) goes to the Phase 3 infrastructure document as accepted.

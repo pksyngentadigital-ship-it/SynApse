@@ -2,7 +2,7 @@
 
 **Phase 2, session 2.2 done, 2026-10-01 (SYN-11).** `docs/SPEC.md` is **v1.0**:
 the round 1 adversarial review (`docs/reviews/spec-r1.md`) applied as Ahsan
-triaged it — 170 decisions in `docs/reviews/spec-r1-raw/triage.md`, 18
+triaged it — 170 decisions in `docs/reviews/spec-r1-raw/triage.md`, 19
 DECISIONS entries dated 2026-10-01. From here a SPEC change is a change
 request. The SYN-11 PR is open, unmerged. Nothing runs yet; no commands until M0.
 

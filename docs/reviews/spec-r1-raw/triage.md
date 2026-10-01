@@ -1,6 +1,6 @@
 # Triage answers (SYN-11) — Ahsan's decisions, recorded as given
 
-Collected 2026-09-30 by AskUserQuestion, theme by theme. S-numbers are the entries in `docs/reviews/spec-r1.md`. Nothing here is applied to SPEC.md yet. When all rounds are done, the marks go onto the TRIAGE lines in spec-r1.md.
+Collected 2026-09-30 to 2026-10-01 by AskUserQuestion, theme by theme. S-numbers are the entries in `docs/reviews/spec-r1.md`. Nothing here is applied to SPEC.md yet. When all rounds are done, the marks go onto the TRIAGE lines in spec-r1.md.
 
 | Entries | Decision | Detail |
 |---|---|---|
@@ -73,15 +73,54 @@ Collected 2026-09-30 by AskUserQuestion, theme by theme. S-numbers are the entri
 | S110 | accept | P4-27 and P6-10 read "only what the streams, Hina and the SUL gave, and coordinates converted from a given address" |
 | S48 | accept | Mailbox confirmation link plus IT's list; minimum password length and mailbox reset; lockout after 5 failures; session limits (app incl. offline, portal); second factor for Admin; Ahsan sets numbers |
 | S104 | accept, amended | Marketing and PMs both keep the zone → region → territory drill; nothing finer than territory (no village-level counts or exports) |
-| S32–S38, S104, S107, S91 | one by one, later | Ahsan asked for these to be split and asked one at a time once all rounds are done |
-| S46, S47, S89, S93, S12, S87, S84, S111 | one by one, later | Hina and third parties |
-| S48–S54, S88, S90, S108–S110 | one by one, later | Security and privacy |
-| S63–S65, S74, S75, S78, S92, S94, S67, S68, S112 | one by one, later | Scoring and agronomy |
 | S79 | accept | Threshold compared with total acreage across crops; where only per-crop figures exist, their sum |
-| S57, S62, S66, S81 | one by one, later | Build testability |
-| Narrower claims N1–N13 (2.1) | one by one, later | |
-| Narrower claims N14–N44 (2.2) | one by one, later | |
+| S57 | accept | Pushed no-gap leads within N minutes; pulled streams checked every M minutes (Admin setting per stream), arriving within one check plus N; gap leads arrive at Hina handover; Ahsan sets N and M |
+| S62 | accept | During a burst, no-gap leads reach the SUL within N minutes and the app stays as fast as normal; each SUL's leads appear in the order growers acted; Ahsan sets N |
+| S66 | park | Trigger: before the dashboards and exports are built (with S21) |
+| N1 | accept, amended | Ahsan: if the grower's earlier scan and Hina call already meet the handover criteria, Hina does not call again; the new lead goes straight to its segment with the latest activity |
+| N2 | accept | Two lines: window expiry hands the lead over whatever the attempt count; Synapse works with Hina off |
+| N4 | accept | Unmatched no-number messages deleted after N months (Ahsan sets N); Admin "remove" deletes the lead's personal data and keeps only the technical ID that prevents duplicates |
+| N5 | accept | Admin setting for the minimum confidence for "buy"; starting value proposed with the S74 test |
+| N6 | accept | Weekly WhatsApp summary provided for: sending service and approved template on Connections, staff mobile field, P1-42 names it as the one exception |
+| N7 | scope change | Ahsan: village boundaries are not shown to SULs; SULs get a Google map showing their leads with navigation; boundaries may be shown later if required. Boundaries stay server-side for routing. Changes P7-4 ("drawn on the SUL's map") and the offline map budget; needs a DECISIONS entry at apply time |
+| N8 | accept | Address service health on Connections; unplaced addresses labelled "no match" or "service unavailable, retrying" |
+| N9 | accept, to Phase 3 | Restore requirements (anonymisations stay, audit trail intact, synced phone actions kept) and an uptime target go to the Phase 3 infrastructure document; one SPEC line points there |
+| N10 | reject | No group privacy check or IT sign-off dependency added |
+| N11 | accept | Franchise name and location are business data (public point of sale) owned by DBO |
+| N12 | accept | Every setting gets a minimum and maximum in the spec; a change to Hina's limits applies to leads sent after the change |
+| N13 | accept, amended | Ahsan: Hina always calls in Urdu; the record and summary for the SUL are in English and Urdu |
+| N14 | accept | One journey line showing a late completion counts as completed, but late |
+| N15 | accept | Lead-card rule reworded to "on one screen, without opening another" |
+| N16 | accept | P2-16 reworded: period views are on My summary (managers: P3-7) |
+| N17 | accept | P4-25 reworded: "takes no opt-out action; the message is scored like any other"; D1 unchanged |
+| N18 | accept | J8.2 points to P1-35 and J21.6 (reject as duplicate, Admin merges) |
+| N19 | accept | Unsent receipt photos count inside the 150 MB, compressed to fit |
+| N20 | accept | Pool-assigned lead takes the chosen SUL's territory; village and BSA optional for pool leads |
+| N21 | accept | AR-14 "retried, never dropped" limited to the SUL app; dashboards show a failed action as failed |
+| N22 | accept | "By product" means the lead's recommended product, listed as a derived field on the lead |
+| N23 | accept | One-line note: channel = stream |
+| N24 | accept | Every export carries a definitions sheet or footer for its numbers |
+| N25 | accept | Marketing can split campaign figures by last-season status (bands per S112, geography per S104) |
+| N26 | accept | A reply to Marketing's own WhatsApp campaign is filed under WhatsApp and credited to the campaign; detail settled with D3 in M5 |
+| N27 | accept | One line: Marketing's campaigns use the number its owner names in 4.2; that owner handles opt-out requests outside Synapse; D1 unchanged |
+| N28 | accept | Campaign figures show "closed: below threshold" and "closed: unreachable"; definitions page separates below threshold on arrival from closed below threshold later |
+| N29 | accept, PLAN change | E-commerce purchase stream gets a build milestone in PLAN.md after the Pilot streams |
+| N30 | covered | Answered by the S42 Pilot column; no separate change |
+| N31 | accept | Remove the unused "whether they messaged first" field from the WhatsApp stream |
+| N32 | reject | Ahsan, on being asked for the name and date: "Leadership via Ahsan" is enough |
+| N43 | accept | One line each: the weekly summary is in English; the language setting applies to the SUL app only |
+| N44 | accept, at v1.0 | At the v1.0 cut, "How to mark" becomes "every row was approved with its part; changes after v1.0 are change requests"; P1-27 marked R |
+| N33 | park | Ahsan: Syngenta's recommended tech stack, including cloud hosting, comes in the next phase and will be decided in tech.md. Trigger: Phase 3 tech/hosting decision |
+| N34 | reject | No "shared phone" reason; field feedback outside Synapse is enough |
+| N35 | accept | Flagged, overdue and due-today leads are never hidden behind "More leads", even past 20; the four old "low scores below the fold" sentences are tidied |
+| N36 | accept | Product-row notices go to the PM of that product's portfolio; P4-28 reads "each part of a list has one named owner" |
+| N37 | accept | 5.1: a lead is scored on arrival (for Hina's order) and re-scored after Hina |
+| N38 | rule change | Ahsan: "if there is no valid number; we won't route and show the lead to SUL; nothing can be done on it; instead this lead will be closed." Confirmed: the lead is closed as "no valid number" and never routed; a later signal from the same grower with a valid number becomes a normal lead carrying the earlier history. Replaces P4-18's "no contact" hold; at apply time reconcile with S12 (Hina wrong number) and N4(a) (deletion of unmatched messages) |
+| N40 | accept | Lakh grouping (PKR 12,50,000); calculated amounts rounded half up to whole rupees |
+| N41 | park | Same as N33. Trigger: Syngenta stack and hosting decided in tech.md |
+| N42 | accept, amended | Ahsan: "same english style everywhere; no urdu style." Western digits and English-style dates and times in both languages |
+| N39 | accept | A.4 K6 uses "reconciliation view" |
+| N3 | accept | Signal.raw marked personal: name and number removed at anonymisation, never in exports |
+| S81 | accept | Lead created at once; routing waits at most N seconds for the intent read, then treats intent as unclear; P4-10 wording corrected; Ahsan sets N |
 
-Grouped rounds finished 2026-09-30. One-by-one queue, in order: managers (S25, S26, S27, S31, S100, S102) · Marketing (S32–S38, S104, S107, S91) · Hina and third parties (S12, S46, S47, S84, S87, S89, S93, S111) · security and privacy (S48–S54, S88, S90, S108–S110) · scoring (S63–S65, S67, S68, S74, S75, S78, S92, S94, S112) · testability (S57, S62, S66, S81) · N1–N44.
-
-Still to ask (old list, superseded by the queue above): SUL app; managers; Marketing; Hina and third parties; security and privacy; scoring; testability; the 44 narrower claims; park triggers.
+All rounds finished 2026-10-01: every S1–S126 entry and every narrower claim N1–N44 has a decision. Applying them to SPEC.md is a separate step, on Ahsan's go-ahead.

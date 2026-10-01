@@ -29,7 +29,9 @@ All 23 Opus 5.5 skeptics (F-R7-12 to F-R7-34) have landed and are logged. Counte
 
 `docs/reviews/spec-r1.md` is written (Opus 5.5): 126 surviving entries after deduplication (4 blocker, 92 major, 30 minor), 44 narrower claims from refuted findings with triage lines, 8 more carried inside surviving entries, 27 rows with zero findings. Committed and pushed on this branch.
 
-**Next:** Ahsan triages in spec-r1.md. `/pr` and `/close` only when he says so. Applying findings and the v1.0 bump are a separate session.
+**Triage done (2026-10-01).** Ahsan's decisions on all 126 entries and 44 narrower claims are in `docs/reviews/spec-r1-raw/triage.md` (collected by AskUserQuestion). Several answers change earlier decisions and need DECISIONS entries when applied (S26, S35, S54, S107, N7, N38, the DBO role in S51).
+
+**Next:** on Ahsan's go-ahead, apply triage.md to SPEC.md (separate session, with the v1.0 bump). `/pr` and `/close` only when he says so.
 
 ## Still to run (Opus 5.5)
 F-R7-12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34.

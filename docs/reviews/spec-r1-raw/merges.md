@@ -25,3 +25,5 @@ Two findings are merged when they name the same defect on the same rows. The can
 | F-R1-3 | F-R6-54 | Offline sync "server wins" can discard an SUL outcome |
 
 Kept separate on purpose (related, different claim): F-R1-11 / F-R4-5 (overdue below fold vs month-3 backlog model) · F-R6-17 / F-R3-11 (acreage band definition vs Marketing cuts) · F-R6-58 / F-R3-7 (campaign-unknown segment vs held) · F-R6-66 / F-R7-19 (missing DR vs missing agronomy approver) · F-R7-30 / F-R1-4 (working-day calendar vs Eid clock pause) · F-R6-35 / F-R5-20 (two list owners vs DBO role).
+
+Correction, 2026-10-01: F-R6-38 was later un-merged and given its own skeptic, so 19 findings are merged and 189 distinct claims were judged (not 20 and 188, as the header says). `docs/reviews/spec-r1.md` uses the correct figures.

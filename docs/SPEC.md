@@ -468,7 +468,7 @@ portal and every Admin action is on the record.
 | Step | The RSM does | Synapse shows or does | Came from | Mark |
 |---|---|---|---|---|
 | J14.1 | Opens the app | The region's overdue leads first, grouped by SUL, with which clock is breached; then the week's on-time rates and this week's numbers by SUL | Your input (15 Sept); Canvas (breaches first) | |
-| J14.2 | Opens an SUL | That SUL's numbers for the period (received, labelled supply; contacted on time; completed; completed on time; converted; PKR; overdue now), against their targets (P3-21), their three segment counts, and their rejections, unreachable closures and below-threshold closures | Your input (SUL-wise); Your answers (30 Sept, 1 Oct, review r1) | R |
+| J14.2 | Opens an SUL | That SUL's numbers for the period (received, labelled supply; contacted on time; completed; completed on time; converted; PKR; overdue now), against their targets (P3-21), their three segment counts, and their rejections, unreachable closures, below-threshold closures and share of not-converted leads that were "not worked" (P5-32) | Your input (SUL-wise); Your answers (30 Sept, 1 Oct, review r1) | R |
 | J14.3 | Opens an overdue, flagged or pool lead | The full lead card, grower name and number included; every view of a number is logged. Other leads open without the number (P3-3) | Your answer (18 Sept, manager view); Your answer (1 Oct, review r1) | R |
 | J14.4 | Taps Flag, writes "Visit before Thursday", sets Thursday | The lead sorts to the top of the SUL's list with the note; the SUL's summary shows it; the RSM sees when and how the SUL answered it (P2-23) | Your answer (18 Sept, flag); Your answer (30 Sept, review r1) | R |
 | J14.5 | Switches to territory view | The same numbers by territory, including any territory with no SUL assigned, shown as a gap | Your input (territory-wise) | |
@@ -857,7 +857,7 @@ signal. *Added 1 Oct (review r1, S63).*
 
 | ID | What Synapse does | What you would see | Came from | Mark |
 |---|---|---|---|---|
-| P5-32 | Every completed or closed lead — converted with value, product and quantity; not converted with reason; unreachable; below threshold — is kept as a labelled example with the score, reasons and segment it had. *Revised 1 Oct (review r1, S68): observable added.* | Admin's Connections page shows "Labelled examples: 4,120 (converted 610 · not converted 1,900 · unreachable 1,410 · below threshold 200)", equal to the count of leads closed in those four ways. | Canvas; Your answer (30 Sept, review r1) | R |
+| P5-32 | Every completed or closed lead — converted with value, product and quantity; not converted with reason; unreachable; below threshold — is kept as a labelled example with the score, reasons and segment it had. A not-converted lead that had no reached contact and no visit planned is kept as **"not worked"**, not as a loss: it never feeds the engine's weight proposals (P5-34), and its share per SUL shows on the RSM's SUL view (J14.2). *Revised 1 Oct (review r1, S68, S22).* | Admin's Connections page shows "Labelled examples: 4,120 (converted 610 · not converted 1,900 · unreachable 1,410 · below threshold 200)", equal to the count of leads closed in those four ways. | Canvas; Your answer (30 Sept, review r1) | R |
 | P5-33 | Conversion by segment, by source, by campaign, by crop, by acreage band (A.2 Settings) and by district is watched continuously. Leadership's "does the engine beat a plain list" compares conversion by score tenth among leads the SUL contacted within the contact promise, against the plain list — arrival order — so attention does not create the gap; the share of each tenth that was contacted is shown beside it, and a tenth with fewer than 30 contacted leads shows "too few to compare". *Revised 1 Oct (review r1, S40, S112).* | J18.1. | Canvas (model lift); Your answer (30 Sept, review r1) | R |
 | P5-34 | After a season, the engine may **propose** weight changes with the evidence. Admin applies or rejects; every stakeholder is notified of an applied change, as for any weight change (P5-14); every change is logged and reversible. Nothing retunes itself. *Revised 1 Oct (review r1, S100).* | "Scoring weights changed on 1 Mar: acreage 25 → 30. Reason: …" on every user's notifications. | Your answer (21 Sept, engine + score); Canvas (no silent self-retuning); Your answer (30 Sept, review r1) | R |
 | P5-35 | The SUL's one-tap intent confirmation and Hina's answers are kept as examples that improve intent reading. *Revised 1 Oct (review r1, S68): observable added.* | Admin's Connections page shows the number of new intent examples each week. | Your answer (21 Sept, unsure intent); Your answer (30 Sept, review r1) | R |
@@ -1095,9 +1095,10 @@ r1 triage and its reversals (1 Oct).
 ### 6.7 Open at v1.0
 
 Values and actions this specification needs that are not yet settled. Each
-has an owner and the point it is due by; `docs/PLAN.md` has no calendar
-dates yet, so the due point is a milestone or phase. Nothing here is built on
-an assumed value: a row that depends on one waits for it. *Added 1 Oct
+has an owner and the point it is due by. `docs/PLAN.md` has no calendar
+dates yet, so a milestone or phase stands in for a date until PLAN gets a
+calendar in Phase 3 (DECISIONS 2026-10-01). Nothing here is built on an
+assumed value: a row that depends on one waits for it. *Added 1 Oct
 (review r1).*
 
 | # | What is open | Rows | Owner | Due by |
@@ -1123,7 +1124,7 @@ an assumed value: a row that depends on one waits for it. *Added 1 Oct
 | O-19 | The Urdu and English reason sentences | P5-11 | Marketing or Admin | M8 |
 | O-20 | Timing-table rows by zone; preventive product rows | 4.5, P2-7 | The Portfolio Managers | Before go-live |
 | O-21 | Training for SULs, RSMs and ZMs in the Pilot zones | 6.8 | DBO | Before go-live |
-| O-22 | Open decisions D2, D3, D6, D7 | 6.4 | As in 6.4 | D2 at M6 (fallback in 6.8); D3 in M5; D6 before rollout; D7 with finance |
+| O-22 | Open decisions D2, D3, D6, D7 | 6.4 | As in 6.4 | D2 at M6 (fallback in 6.8); D3 in M5; D6 before rollout; D7 before any PKR figure is linked to incentives, reviewed at the Pilot exit |
 | O-23 | 2G/3G numbers and the field phone survey (parked, Linear SYN-12) | P2-10, P6-8 | Ahsan; DBO surveys | Phase 4 |
 | O-24 | Restore rules, uptime target and key storage (parked, Linear SYN-13); hosting that meets P6-12, in tech.md | P6-12, P6-23 | Ahsan | Phase 3 |
 

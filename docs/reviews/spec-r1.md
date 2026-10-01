@@ -23,6 +23,8 @@ Date: 2026-09-29 · Task: SYN-11 · Document: `docs/SPEC.md` v0.9 (not edited by
 
 Process note: PROCESS.md §8 assigns document-review skeptics to the strongest model. Running the last 23 on Opus 5.5 was Ahsan's decision after usage limits stopped the run four times. Each entry below names the model of its skeptic.
 
+**Triage.** Every TRIAGE line below carries Ahsan's decision, copied from `docs/reviews/spec-r1-raw/triage.md` (collected 30 Sept to 1 Oct; the record of his words). Applied in SPEC.md v1.0.
+
 **How to read an entry.** Rows, the quoted line, the consequence and the proposed fix come from the raw lens report. Where the skeptic showed a raw sentence to be false, that sentence has been replaced and the change is stated under "Changed from the raw report". Severity is as filed; where the skeptic questioned it, both views are given. Proposed fixes are the reviewer's drafts, not decisions; several need Ahsan's call and say so.
 
 Contents: 1 Surviving findings · 2 Narrower claims from refuted findings · 3 Refuted, and why · 4 Coverage · 5 Requirements with zero findings · 6 D1–D9 touched · 7 Top 5 by severity
@@ -55,7 +57,8 @@ Second line: J2.4 "Taps "No answer": one failed attempt logged; the lead stays w
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats). Label: "absent rule" fits better than "contradiction". The raw "two behaviours" sentence is replaced because J2.4 reads consistently. The blocker grading stands.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Reached only: Contacted and the contact clock stop only when the SUL marks "Reached"; the rate counts reached contacts
 
 #### S2 · F-R5-12 · BLOCKER · R5 Trust
 **Claim.** The SUL's personal phone holds the whole territory offline with no encryption, app lock, screenshot rule or lost-phone procedure
@@ -81,7 +84,8 @@ The same applies to RSM phones opening full cards with numbers (J14.3). Views ar
 
 **Skeptic's caveats.** Severity and the P6-6a wording are the author's proposals
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Device rules go into SPEC as P6-6a
 
 #### S3 · F-R5-13 · BLOCKER · R5 Trust · R7 Open
 **Claim.** No offboarding path: nobody is named to deactivate a leaver, and nothing purges the phone, so a moved or departed SUL keeps out-of-scope data (INV-7)
@@ -108,7 +112,8 @@ A resigned SUL who never syncs again keeps the territory's growers indefinitely,
 
 **See also.** F-R5-21 (S52) is the periodic review that would catch what this misses; F-R5-12 (S2) is the device side.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Leaver path with phone-data expiry after N hours unsynced (Ahsan sets N)
 
 #### S4 · F-R6-47 + F-R6-48 + F-R6-49 · BLOCKER · R6 Build
 **Claim.** The lead state model is incomplete: states some leads need are missing, transitions the journeys use are not drawn, and a reassigned lead has no clock rule
@@ -179,7 +184,8 @@ Second line: "J21.6 | … Admin reassigns to a territory, merges with another le
 **Skeptic's caveats.** Keep the clock rule here and the gaming angle under F-R2-3; land with F-R6-47 (state a reassigned lead re-enters); fix should also cover reassignment back to the same SUL
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Add the missing states and a transition table; a reassigned lead gets fresh clocks, rejected episode stays out of the rate
 
 ### Majors (92)
 
@@ -203,7 +209,8 @@ Second line: J1.1 "Home with three segments and counts from last night's sync; "
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats). The rule is definite (a server event), so the shortfall is deterministic, not a builder's guess.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Phone time: clocks start on phone receipt and stop at the phone's logged time; a synced on-time action withdraws the breach notice; a server re-score never overrides an SUL outcome
 
 #### S6 · F-R1-2 · MAJOR · R1 Field · R2 Sales leadership
 **Claim.** A contact logged offline has no stop time, and managers get a breach notice for a call made on time
@@ -225,7 +232,8 @@ Second line: J9.2 "Each is saved on the phone at once with "will send when onlin
 
 **See also.** F-R6-54 (S82) is the record-conflict half of the same offline sync rule; the clock-time half is here.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Phone time: clocks start on phone receipt and stop at the phone's logged time; a synced on-time action withdraws the breach notice; a server re-score never overrides an SUL outcome
 
 #### S7 · F-R1-4 · MAJOR · R1 Field
 **Claim.** Sunday-only pause guarantees breaches over Eid, and nothing can add a pause day
@@ -245,7 +253,8 @@ Second line: A.2 "**Settings** (each versioned: value, previous, who, when) — 
 
 **Skeptic's caveats.** Label should read "present rule, absent setting"; the fix reverses an Ahsan answer, so it is a question for him
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Holiday list: Admin keeps yearly pause days that clocks also skip; working week defined once; changes logged (amends 5.10 Q13)
 
 #### S8 · F-R1-5 · MAJOR · R1 Field · R6 Build
 **Claim.** A manager's flag has no way to be answered or cleared, so flagged leads stay at the top for good
@@ -265,7 +274,8 @@ Second line: 2.2 Act and log "Call, WhatsApp, Navigate; log contact, visit plann
 
 **Also raised as** (merged before the skeptic pass; the verdict covers them): F-R6-11 (R6 Build, major) — P3-4: "actioned" is undefined for a flag.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): All SUL-app fixes, including the receipt duplicate check and RSM sampling
 
 #### S9 · F-R1-8 · MAJOR · R1 Field · R6 Build
 **Claim.** "Two taps" is false for follow-up and not converted as the journeys describe them, and "one tap" is false for reject
@@ -289,7 +299,8 @@ Second line: J3.1 "Three choices: Converted · Not converted · Follow-up needed
 
 **Also raised as** (merged before the skeptic pass; the verdict covers them): F-R6-18 (R6 Build, minor) — P2-3 two-tap count contradicts the journeys it cites.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): All SUL-app fixes, including the receipt duplicate check and RSM sampling
 
 #### S10 · F-R1-11 · MAJOR · R1 Field
 **Claim.** Overdue leads are not in the ranking, so they can fall below the fold on the SUL's list while at the top of the RSM's
@@ -308,7 +319,8 @@ Second line: J3.1 "Three choices: Converted · Not converted · Follow-up needed
 
 **See also.** F-R4-5 (R4, refuted) left the same narrower claim: P5-20's "today's due" tier excludes leads overdue since before today. It is carried here.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): All SUL-app fixes, including the receipt duplicate check and RSM sampling
 
 #### S11 · F-R1-16 · MAJOR · R1 Field
 **Claim.** "Wrong contact" is both a not-converted reason and a reject reason, with different clock and rate effects
@@ -326,7 +338,8 @@ Second line: P1-35 "not my territory · duplicate of another lead · internal or
 
 **Skeptic (Fable 5.1).** Survived. "wrong contact" (P1-32) and "wrong contact details" (P1-35) are two live SUL actions with different clock and denominator effects; D4 covers only the SUL who knows the right number.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): One wrong-number path; Admin merge with a surviving record, logged and undoable; a typed number matching a grower with a different name or village held as a possible match; a written match rule; "verified" defined in one line; keeps D4
 
 #### S12 · F-R1-17 · MAJOR · R1 Field · R5 Trust
 **Claim.** Hina's "wrong number" and "refused" outcomes have no rule; the only named mark says "no answer"
@@ -350,7 +363,8 @@ Second line: P5-6 "A lead Hina could not reach is routed anyway, with its gaps s
 
 **Also raised as** (merged before the skeptic pass; the verdict covers them): F-R5-4 (R5 Trust, major) — Hina's "refused" outcome has no rule: she may call twice more, and the SUL is not told.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Hina "wrong number" ends her attempts and the lead goes to the no-contact list; "refused" ends her attempts and the lead routes marked "Grower refused Hina's call, <date>"
 
 #### S13 · F-R1-18 · MAJOR · R1 Field
 **Claim.** The call-centre form lacks name, location and a stated intent, so every call-centre lead is called again by Hina
@@ -370,7 +384,8 @@ Second line: P7-5 "A stream that gives none must give a complete address — vil
 
 **Skeptic's caveats.** Applies to the P4-14 fallback form, not the platform feed
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Fuller call-centre form and an agent role. Ahsan's words: "call center is the part of DBO; and DBO team looks after it" — so the agent access sits with DBO (see S51) rather than as a separate stakeholder
 
 #### S14 · F-R1-19 · MAJOR · R1 Field · R7 Open
 **Claim.** The call-centre agent has no role or login, and never sees what became of the lead
@@ -394,7 +409,8 @@ Second line: P6-16 "Staff register and log in with their Syngenta email address 
 
 **Also raised as** (merged before the skeptic pass; the verdict covers them): F-R7-10 (R7 Open, major) — The call-centre fallback form creates a ninth user with no role, scope or login.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Fuller call-centre form and an agent role. Ahsan's words: "call center is the part of DBO; and DBO team looks after it" — so the agent access sits with DBO (see S51) rather than as a separate stakeholder
 
 #### S15 · F-R1-20 · MAJOR · R1 Field
 **Claim.** Data strings on SUL screens have no language rule, and an Urdu search for a village may find nothing
@@ -421,7 +437,8 @@ Second line: J12.1 "The SUL searches by name, number or village and opens the gr
 
 **See also.** F-R6-15 (S111) keeps the length bound of Hina's summary; its language half is folded in here.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Cross-script name and village search; Hina summary in Urdu and English; flag notes, talk tracks, product names shown as written and marked
 
 #### S16 · F-R1-23 · MAJOR · R1 Field
 **Claim.** S23: the "Last season" tab is a list of growers to start the season in P1-17, but a list of this season's leads in P5-19
@@ -441,7 +458,8 @@ Second line: P5-19 "Inside it, "Last season" holds this season's leads from grow
 
 **Skeptic's caveats.** Fix direction is a question for Ahsan, not a copy-edit
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): The tab holds this season's leads from last-season growers (P1-17 matched to P5-19)
 
 #### S17 · F-R2-2 · MAJOR · R2 Sales leadership
 **Claim.** Three "No answer" taps in ten minutes close a lead as unreachable
@@ -463,7 +481,8 @@ Second line: P5-2 "with what limit: **3 attempts over 2 days**, both Admin setti
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats). Two overstatements removed: P5-2 is a ceiling window, not a minimum spacing; P1-34 closes the lead, not the grower.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): All four closure and gaming fixes; Admin alone still sets settings
 
 #### S18 · F-R2-3 · MAJOR · R2 Sales leadership
 **Claim.** Rejecting a lead removes its breach from the on-time rate, and rejections are never counted per SUL
@@ -487,7 +506,8 @@ Second line: P1-35 "Rejections are counted per source."
 
 **See also.** The state-model entry (S4) holds the clock rule for a reassigned lead (F-R6-49); the gaming angle stays here.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): All four closure and gaming fixes; Admin alone still sets settings
 
 #### S19 · F-R2-4 · MAJOR · R2 Sales leadership
 **Claim.** Logging 12 acres closes the lead, may erase its breach, and drops the grower for good; nobody can undo it and no manager sees it
@@ -513,7 +533,8 @@ Second line: J21.5 "Every lead held back for known acreage under the threshold, 
 
 **Skeptic's caveats.** Mechanism does not need Hina; the state change is in the lead history, the gap is undo and manager visibility; denominator sub-point overlaps F-R2-3/F-R2-6
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): All four closure and gaming fixes; Admin alone still sets settings
 
 #### S20 · F-R2-5 · MAJOR · R2 Sales leadership
 **Claim.** Any receipt photo is accepted and nobody is told to check it
@@ -531,7 +552,8 @@ Second line: P6-14 "A receipt photo can be opened by the SUL who logged it and b
 
 **Skeptic (Fable 5.1).** Survived. J3.2 permits gallery images; no duplicate-image rule, sampling or comparison anywhere; P6-14 logs openings but names no check; D7 leaves who checks unspecified and the plan names this attack.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): All SUL-app fixes, including the receipt duplicate check and RSM sampling
 
 #### S21 · F-R2-6 · MAJOR · R2 Sales leadership · R6 Build
 **Claim.** The headline on-time rate has two denominators, "due" has three meanings, and the numerator's "completed" is undefined (S12)
@@ -558,7 +580,8 @@ Second line: P5-31 "contacted within the contact promise ÷ leads that reached t
 
 **See also.** F-R2-1 (S1) decides what counts as contacted; F-R2-24 (S103) lists the views that drop the completion rate.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept (unparked 2026-10-01)): One formula in P5-31: of the leads whose deadline fell in the period or that were finished in it, the share finished on time; Closed: unreachable counts as finished; follow-up dates don't count; P1-43 points to it; J14.2, J16.1 and J22.1 add "completed on time"
 
 #### S22 · F-R2-7 · MAJOR · R2 Sales leadership
 **Claim.** The completion promises cannot be checked against the stated volume; the spec gives no Pilot headcount, and at plausible numbers only two-tap "no need" meets them
@@ -585,7 +608,8 @@ Second line: P1-38 "**Completion:** Hot within 7 days, Campaign per campaign, Po
 
 **Skeptic's caveats.** The 48-SUL arithmetic uses the plan's persona, not a spec number (stated as such)
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Pilot column in A.1 plus a Pilot section: zones named before M8, training, last sync to RSMs, exit and Wave 2 gate (no duplicate of Phase 9), D2 fallback, SUL headcount, "not live" zones; Ahsan marks Pilot rows Second half: Applied 2026-10-01 after the SYN-11 scope check: a not-converted lead with no reached contact and no visit planned is kept as "not worked", never feeds the engine's weight proposals, and its share per SUL shows on the RSM's SUL view (SPEC P5-32, J14.2)
 
 #### S23 · F-R2-8 · MAJOR · R2 Sales leadership
 **Claim.** No human path covers the open leads of an SUL on leave or who has resigned
@@ -608,7 +632,8 @@ Second line: P1-29 "Only the SUL who owns the lead, or Admin, can move it. Manag
 
 **Skeptic's caveats.** The "covering SUL holds a second territory" clause of the fix bends P1-3/P7-2 and the 2026-09-28 decision
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Human moves only: Admin moves open leads on the RSM's request, logged; territory SUL optional; no-location lead goes to Hina first; bulk re-place after a bad boundary file; queues show oldest item and alert
 
 #### S24 · F-R2-9 · MAJOR · R2 Sales leadership
 **Claim.** Moving an SUL to another territory orphans their open leads (P2-17 vs P3-19 and P7-11) (S14)
@@ -628,7 +653,8 @@ Second line: P3-19 "Admin's territory edits (zones, regions, territories, BSAs, 
 
 **Skeptic's caveats.** The proposed automatic pass-to-next-SUL is rule-based reassignment and must be weighed against the 2026-09-15 decision
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Human moves only: Admin moves open leads on the RSM's request, logged; territory SUL optional; no-location lead goes to Hina first; bulk re-place after a bad boundary file; queues show oldest item and alert
 
 #### S25 · F-R2-11 · MAJOR · R2 Sales leadership
 **Claim.** A flag is defined as a flag on a lead, but Head of Sales, ZMs and PMs cannot see leads and flag territories
@@ -654,7 +680,8 @@ A builder must either expose leads (breaking P3-3 and DR-17) or invent a record.
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats).
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Flags on a lead (RSM → SUL) or on a territory or region (Head of Sales, ZM, PM → one level down); lead flag answered at the SUL's next action; territory flag when the receiver replies or flags down; flags passed down are linked
 
 #### S26 · F-R2-12 · MAJOR · R2 Sales leadership · R3 Marketing
 **Claim.** Managers have no target or reference, and "behind" is undefined in three rows
@@ -678,7 +705,8 @@ Second line: J16.2 "Sees Region B behind | Two numbers set apart: leads received
 
 **See also.** F-R2-13 (refuted) left the narrower claim that J22.1 must say which number "most behind" uses and whether the named unit is an SUL or a territory; this entry's fix answers it.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept, widened): Targets per the recommendation, with Ahsan's additions: Admin/DBO enter targets on Head of Sales' recommendation (he does not enter them); targets also for leads converted, sales value and leads followed up; Admin can change the target rules or disable any target parameter. "Behind" measured against targets on manager views only (P2-11 stands). Needs a DECISIONS entry at apply time; check the sales-value target against D7 (no PKR linked to incentives)
 
 #### S27 · F-R2-14 · MAJOR · R2 Sales leadership
 **Claim.** RSMs and ZMs get one push per breached lead per clock, round the clock, and nothing detects muting
@@ -700,7 +728,8 @@ Second line: J5.4 "Has not completed a Hot lead in 7 days | "Overdue: completion
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats).
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): RSM/ZM breach digest at 08:00 and 14:00 (Admin settings) with counts by SUL, a push only for a breached Hot contact promise, no pushes 21:00–07:00, the manager above sees when each report last opened the breach list
 
 #### S28 · F-R2-15 · MAJOR · R2 Sales leadership · R6 Build
 **Claim.** Raising the threshold gives an existing 22-acre Hot lead three possible fates, and nobody below Head of Sales is told (S24)
@@ -726,7 +755,8 @@ P5-14's "for new scores" does not list the threshold. Only Head of Sales is noti
 
 **Also raised as** (merged before the skeptic pass; the verdict covers them): F-R6-56 (R6 Build, major) — Threshold change: "for new scores" plus the daily re-score re-segments every lead within a day.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): New leads only; a move up restarts clocks under the new promise, a move down keeps earlier due times
 
 #### S29 · F-R2-16 · MAJOR · R2 Sales leadership · R6 Build
 **Claim.** No row says which promise applies after a lead changes segment, which gives SULs a reason not to confirm intent
@@ -748,7 +778,8 @@ Second line: P5-27 "Both clocks start when the lead reaches the SUL (routing, po
 
 **Also raised as** (merged before the skeptic pass; the verdict covers them): F-R6-57 (R6 Build, major) — A segment move does not say whether the lead's promises change.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): New leads only; a move up restarts clocks under the new promise, a move down keeps earlier due times
 
 #### S30 · F-R2-17 · MAJOR · R2 Sales leadership
 **Claim.** Marketing sets campaign promises that feed the sales force's single on-time rate, with no floor and no split by segment
@@ -768,7 +799,8 @@ Second line: P3-5 "Two on-time rates, contact and completion, contact first, at 
 
 **Skeptic's caveats.** The fix's "agreed by Head of Sales" reintroduces a second approver against 3.6 Q7; reword
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): All four closure and gaming fixes; Admin alone still sets settings
 
 #### S31 · F-R2-20 · MAJOR · R2 Sales leadership
 **Claim.** Walk-in sales make good SULs look idle, and routing walk-ins through WhatsApp inflates the numbers
@@ -790,7 +822,8 @@ Second line: J14.2 "That SUL's numbers for the period (received, contacted on ti
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats).
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** ( ) accept  (x) reject — reason: Ahsan: "Synapse is not for managing SULs' own created leads; we may add this at a later stage." Listed in 6.3.2 as out of scope, returning on Ahsan's request  ( ) park — trigger:  
+**Ahsan's decision** (out of scope (cleared 2026-10-01)): Ahsan: "Synapse is not for managing SULs' own created leads; we may add this at a later stage." Listed in 6.3.2 as out of scope, returning on Ahsan's request
 
 #### S32 · F-R3-1 · MAJOR · R3 Marketing
 **Claim.** A merged lead keeps one stream and one campaign, and nothing says which campaign or channel gets the credit
@@ -817,7 +850,8 @@ Second line: P1-24: "Any new signal on an existing lead re-scores it and can mov
 
 **Skeptic's caveats.** The two-campaign branch cannot arise in the single-campaign Pilot, but the non-campaign-first/campaign-second branch does; the "which promise" sub-point is R2/R6's
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept, amended): Last campaign wins: the most recent campaign signal before first contact gets the credit (not the reviewer's first-touch); other campaigns listed as "also touched"; channel = the stream that carried the credited campaign
 
 #### S33 · F-R3-5 · MAJOR · R3 Marketing
 **Claim.** J6.3 shows a talk track that no record holds and no journey supplies
@@ -837,7 +871,8 @@ Second line: J20.3: "Gives Admin the name (brand-level or a crop programme), por
 
 **Skeptic's caveats.** Severity fairly minor (J6.3 is conditional)
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Optional talk-track field on the campaign record, supplied when available
 
 #### S34 · F-R3-6 · MAJOR · R3 Marketing
 **Claim.** Leads of an ended campaign stay in the Campaign segment but vanish from the list of campaigns
@@ -862,7 +897,8 @@ Second line: P5-17: "**Campaign**: the lead carries a campaign → Campaign segm
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats). The raw sentence tying this to 1.1's "never hides a lead behind a cap" is stretched and is dropped. Evidence label is better "undefined term ('live') plus absent rule".
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): SUL list shows every campaign with open leads (ended ones marked); PMs see campaigns live or active in the period; a signal after the end date still carries the campaign, labelled "after end"
 
 #### S35 · F-R3-7 · MAJOR · R3 Marketing
 **Claim.** "Campaign unknown" is a held reason in the records, but P4-11 says the lead still arrives
@@ -882,7 +918,8 @@ Second line: A.2 Signal: "held_reason (choice: none, no_number, campaign_unknown
 
 **Skeptic's caveats.** "possibly blocker" overstated; major is right (three rows say arrives against two record descriptions)
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept, reversed): Hold it: a campaign signal whose campaign cannot be read is held until it is read; P4-11 and the D3 rows change to match (the reviewer proposed routing). Consequence to note at apply time: until D3 is agreed in M5, the Pilot's campaign leads are held
 
 #### S36 · F-R3-8 · MAJOR · R3 Marketing
 **Claim.** Campaign-unknown leads are never re-attributed, and Marketing is never told how many there were
@@ -906,7 +943,8 @@ Second line: P3-8: "unresolved rows (unmatched village, unknown acreage) counted
 
 **See also.** F-R6-58 (refuted) proposed a fix that conflicts with this one; put the choice to Ahsan once, here.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept, reframed): After Ahsan's question (answered: "unknown" means the signal carries no readable campaign ID): Admin releases held campaign-unknown signals in one action once readable, each carrying its campaign; Marketing sees a count held per campaign stream
 
 #### S37 · F-R3-9 · MAJOR · R3 Marketing
 **Claim.** Cost per lead has no defined numerator period and no defined denominator
@@ -928,7 +966,8 @@ Second line: J20.1: "Every campaign: leads (routed and below threshold, labelled
 
 **Skeptic's caveats.** The fix's divisor and "lifetime not period" are Ahsan's choice
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** ( ) accept  (x) reject — reason: Ahsan: "let's not manage cost per lead type things at this stage; we will do later if required." Cost per lead and cost per converted lead move out of J20.2/P3-16 into 6.3.2, returning when Ahsan asks; spend can still be entered on the campaign  ( ) park — trigger:  
+**Ahsan's decision** (out of scope (cleared 2026-10-01)): Ahsan: "let's not manage cost per lead type things at this stage; we will do later if required." Cost per lead and cost per converted lead move out of J20.2/P3-16 into 6.3.2, returning when Ahsan asks; spend can still be entered on the campaign
 
 #### S38 · F-R3-15 · MAJOR · R3 Marketing
 **Claim.** Lead-form data is used for purposes the forms' own privacy notice must cover, and no row makes Marketing's forms say so
@@ -948,7 +987,8 @@ Second line: P5-1: "A lead that has a number and is missing acreage, crop, clear
 
 **Skeptic (Fable 5.1).** Survived. No row mentions a privacy notice or platform terms; P4-13's "to confirm with the system owner" is a connection-proof step; D1 settles Synapse's recorded basis, not the ad form's notice; the plan commissioned this attack.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (legal action, no SPEC row): Record as a Syngenta Legal check that the Facebook and TikTok form privacy notices cover follow-up by staff and by Hina; not a SPEC row
 
 #### S39 · F-R4-1 · MAJOR · R4 Product
 **Claim.** The Pilot designates no sales-outcome measure and no baseline; its only success number is a process metric
@@ -970,7 +1010,8 @@ Second line: 1.1 "What the SUL logs — contacted, visited, converted with a PKR
 
 **Changed from the raw report.** The claim and consequence were edited where the skeptic showed the raw text false or overstated (see the caveats). "No sales-outcome measure" overstated: outcomes are measured, not designated. The gap is inherited from the canvas.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Outcome measure against a pre-go-live baseline, plain list = arrival order among contacted leads, signal-to-first-contact time, monthly summary contents, previous-period comparison; Ahsan sets targets
 
 #### S40 · F-R4-2 · MAJOR · R4 Product
 **Claim.** "Engine versus a plain list" never defines the plain list, and P5-33's proxy is biased toward the engine by the fold and by the segment rules
@@ -994,7 +1035,8 @@ Second line: P5-20 "The first **20** leads are on the list; the rest sit under "
 
 **Skeptic's caveats.** The "contradiction" label is inherited from the canvas's own wording, not spec-internal
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Outcome measure against a pre-go-live baseline, plain list = arrival order among contacted leads, signal-to-first-contact time, monthly summary contents, previous-period comparison; Ahsan sets targets
 
 #### S41 · F-R4-3 · MAJOR · R4 Product · R7 Open
 **Claim.** No number measures how long a grower waits; Hina's hold sits outside every clock and outside the headline
@@ -1020,7 +1062,8 @@ Second line: P5-10 "Hina's contact does not count as the SUL's contact; the SUL'
 
 **See also.** F-R7-6 (S87) is the same out-of-hours scenario seen from support hours; kept separate because the defect differs (no alert, against no measure).
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Outcome measure against a pre-go-live baseline, plain list = arrival order among contacted leads, signal-to-first-contact time, monthly summary contents, previous-period comparison; Ahsan sets targets
 
 #### S42 · F-R4-6 · MAJOR · R4 Product
 **Claim.** The Pilot has no row-level scope: everything it needs is "Post-Capture", in a build scope that has no milestones
@@ -1057,7 +1100,8 @@ Scope verdicts (Pilot = Crop Doctor + WhatsApp + one campaign, two zones):
 
 **Skeptic's caveats.** The per-capability scope table is proposal material; some "No" verdicts push against Ahsan's 18/21 Sept row answers
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Pilot column in A.1 plus a Pilot section: zones named before M8, training, last sync to RSMs, exit and Wave 2 gate (no duplicate of Phase 9), D2 fallback, SUL headcount, "not live" zones; Ahsan marks Pilot rows
 
 #### S43 · F-R4-9 · MAJOR · R4 Product
 **Claim.** No rollout or adoption rules: Pilot zones unnamed, no training, no adoption owner, no exit criteria, no Wave 2 gate
@@ -1092,7 +1136,8 @@ P2-11 removes points, and the spec offers nothing else the SUL gains. That makes
 
 **See also.** F-R4-15 (refuted) left a narrower claim carried here: no row ties go-live to data readiness (boundaries, village-to-BSA assignment, franchise points, an SUL per territory), and P7-14's converter is unnamed with no date.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Pilot column in A.1 plus a Pilot section: zones named before M8, training, last sync to RSMs, exit and Wave 2 gate (no duplicate of Phase 9), D2 fallback, SUL headcount, "not live" zones; Ahsan marks Pilot rows
 
 #### S44 · F-R4-10 · MAJOR · R4 Product
 **Claim.** The monthly leadership summary's contents are undefined; "the unflattering numbers" cannot be tested
@@ -1111,7 +1156,8 @@ P2-11 removes points, and the spec offers nothing else the SUL gains. That makes
 
 **Skeptic's caveats.** The fix's extra items (P5-31a, queue counts, deltas) have no input behind them and need Ahsan's mark
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Outcome measure against a pre-go-live baseline, plain list = arrival order among contacted leads, signal-to-first-contact time, monthly summary contents, previous-period comparison; Ahsan sets targets
 
 #### S45 · F-R4-14 · MAJOR · R4 Product
 **Claim.** No row says what the Pilot is if D2 stays open and Crop Doctor cannot connect
@@ -1133,7 +1179,8 @@ Second line: 4.6 D2 "The three Cropwise streams cannot be connected until answer
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats). "Campaign blocked by D3" was overstated. The fix has cosmetic errors: no P1-44 exists, and "at M6" is a Capture milestone.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Pilot column in A.1 plus a Pilot section: zones named before M8, training, last sync to RSMs, exit and Wave 2 gate (no duplicate of Phase 9), D2 fallback, SUL headcount, "not live" zones; Ahsan marks Pilot rows
 
 #### S46 · F-R5-3 + F-R7-12 · MAJOR · R5 Trust · R7 Open
 **Claim.** Nobody at Syngenta governs what Hina says in Syngenta's name: no disclosure rule, no script or persona approval, no way to stop a script
@@ -1179,7 +1226,8 @@ Under PTA's regulations on unsolicited and telemarketing communication (Protecti
 **Skeptic (Opus 5.5).** Survived. P5-2 gives Hina call conduct and DECISIONS 2026-09-21 says a third party runs her, but no decision, DR (23, 24, 28) or 6.3.2 entry takes script or persona approval away from Syngenta; P5-8 and the Admin portal only show Hina's health, with no stop control.
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept, amended): Ahsan: no disclosure concern. What Hina says is controlled and approved by Marketing for campaign leads, and by Admin/DBO for non-campaign leads; approved version recorded, and they can stop it. No required disclosure line
 
 #### S47 · F-R5-7 · MAJOR · R5 Trust
 **Claim.** There is no processor rule for any third party that receives grower data: Hina's vendor, the intent reader, the WhatsApp provider, the address service
@@ -1211,7 +1259,8 @@ No row requires a data processing agreement or states where each party keeps the
 
 **See also.** F-R5-8 (refuted) left a narrower claim carried here: P7-14 should cross-reference this entry's P6-12a so an outside address service cannot be chosen before its entry exists. F-R7-11 (S89) is the same data-handling gap for the Hina vendor alone (seam S18).
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Vendor register in Admin: what each third party receives, where and how long it keeps it, signed processing agreement (Legal signs; recordings deleted within N days); no connection goes live without its entry
 
 #### S48 · F-R5-14 · MAJOR · R5 Trust
 **Claim.** "Email plus a Synapse password" has no rules: no proof the registrant owns the email, no password policy, no lockout, no session length, no offline session limit, no MFA
@@ -1235,7 +1284,8 @@ No row requires a data processing agreement or states where each party keeps the
 
 **Skeptic's caveats.** J21.1 "IT gives the login" contradicts P6-16's self-registration (seam S8, R6)
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Mailbox confirmation link plus IT's list; minimum password length and mailbox reset; lockout after 5 failures; session limits (app incl. offline, portal); second factor for Admin; Ahsan sets numbers
 
 #### S49 · F-R5-15 · MAJOR · R5 Trust
 **Claim.** The receipt photo (personal) is taken "camera or gallery", so copies land in the phone's gallery and cloud photo backup
@@ -1256,7 +1306,8 @@ No row requires a data processing agreement or states where each party keeps the
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats).
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** ( ) accept  (x) reject — reason: Keep receipt capture from both gallery and camera  ( ) park — trigger:  
+**Ahsan's decision** (reject): Keep receipt capture from both gallery and camera
 
 #### S50 · F-R5-18 + F-R7-22 · MAJOR · R5 Trust · R7 Open
 **Claim.** The retention period can be changed by one Admin with no bounds, no preview, no delay and no recovery
@@ -1305,7 +1356,8 @@ Second line: P3-10 "Settings changes … are made by Admin alone, take effect at
 **Changed from the raw report.** The claim and consequence were edited where the skeptic showed the raw text false or overstated (see the caveats). "Anonymises at once" is an inference: P3-10's "take effect at once" names threshold, promises, weights and campaign promises, not retention. The rest holds whatever the timing.
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Retention range 1–3 seasons; preview of growers affected before saving; a shorter period applies from the next season start and can be reverted until then; Admin alone decides
 
 #### S51 · F-R5-20 · MAJOR · R5 Trust
 **Claim.** DBO works the Admin portal every day but has no role, and P1-5 says Admin is the digital team
@@ -1325,7 +1377,8 @@ Second line: P6-17 "DBO watches the portal daily and handles the below-threshold
 
 **Skeptic's caveats.** "Decision check: none" is wrong: a ninth role touches the 2026-09-16 eight-personas decision, so the fix needs a DECISIONS entry or a permission set under admin
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Own "dbo" role: sales structure and village-to-BSA, daily lists, targets on Head of Sales' recommendation (S26), non-campaign Hina scripts (S46), call-centre access (S13/S14); no settings, exports, number undo, removals or audit trail. Needs a DECISIONS entry (eight personas)
 
 #### S52 · F-R5-21 · MAJOR · R5 Trust · R6 Build
 **Claim.** No access review: nobody periodically confirms who still holds which role and scope
@@ -1350,7 +1403,8 @@ Second line: P6-17 "DBO watches the portal daily and handles the below-threshold
 
 **See also.** F-R5-13 (S3) is the leaver path.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** ( ) accept  (x) reject — reason: Ahsan: Admin manages all role changes, additions and removals, based on the communications received; no periodic review. (The canvas's access review stays dropped; whether to note it in the DR register is open for apply time)  ( ) park — trigger:  
+**Ahsan's decision** (reject): Ahsan: Admin manages all role changes, additions and removals, based on the communications received; no periodic review. (The canvas's access review stays dropped; whether to note it in the DR register is open for apply time)
 
 #### S53 · F-R5-22 · MAJOR · R5 Trust
 **Claim.** The audit lists leave out role, scope and activation changes, merges, match confirmations and reassignments, and User keeps no change history
@@ -1375,7 +1429,8 @@ A.2 User has no change history, unlike Settings and Sales structure. The most se
 
 **Skeptic's caveats.** SUL territory assignment is covered by Sales structure history; Admin's action on a rejected lead is partly on the lead; the "one list" fix should be built from every "logged" row
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): One audit list used everywhere, adding role, scope and active changes, merges, reassignments, removals and match confirmations; user accounts keep a change history
 
 #### S54 · F-R5-23 · MAJOR · R5 Trust
 **Claim.** An RSM can open any grower's number in the region; the view is logged, but nothing limits it and nobody is required to read the log
@@ -1394,7 +1449,8 @@ A.2 User has no change history, unlike Settings and Sales structure. The most se
 
 **Skeptic's caveats.** Narrowing P3-3 cuts across Ahsan's 18 Sept "full card for RSM is fine" and P6-14, so that half needs his decision; severity arguable
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept, narrow): After clarification: RSMs see a grower's number only on overdue, flagged or pool leads. Changes Ahsan's 18 Sept "full card for RSM is fine", so it needs a DECISIONS entry at apply time
 
 #### S55 · F-R5-25 · MAJOR · R5 Trust
 **Claim.** Admin can "merge" a rejected duplicate, but no rule covers merging two growers who both have numbers
@@ -1420,7 +1476,8 @@ Merge is also not in the audit list (F-R5-22).
 
 **Skeptic's caveats.** Label should be "absent rule"; P4-20 partly covers value conflicts; the fix's "known alternate" number conflicts with "one per grower" and needs a DECISIONS entry
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): One wrong-number path; Admin merge with a surviving record, logged and undoable; a typed number matching a grower with a different name or village held as a possible match; a written match rule; "verified" defined in one line; keeps D4
 
 #### S56 · F-R5-26 · MAJOR · R5 Trust
 **Claim.** D4 keys the grower on a verified number, but the spec keys it on any number, so a mistyped form number attaches a stranger's signal to an existing grower
@@ -1440,7 +1497,8 @@ Second line: 5.3 Reachability "−15 while the grower's number has never been co
 
 **Skeptic's caveats.** Frequency likely rare; the fix's "name or village differs" trigger would also catch the family-phone case D4 accepted; needs a one-line clarification of "verified" from Ahsan
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): One wrong-number path; Admin merge with a surviving record, logged and undoable; a typed number matching a grower with a different name or village held as a possible match; a written match rule; "verified" defined in one line; keeps D4
 
 #### S57 · F-R6-1 + F-R6-25 · MAJOR · R6 Build
 **Claim.** P4-3's delivery promise has no number for pushed streams, no schedule for pulled ones, and was never scoped for Hina's hold
@@ -1487,7 +1545,8 @@ Second line: "P5-5 | … | Two days after arrival at most, the lead is on the SU
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats). "Cannot tell which rule governs" overstated; 4.1 is not itself contradictory. One edit to P4-3 closes this and F-R6-1.
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Pushed no-gap leads within N minutes; pulled streams checked every M minutes (Admin setting per stream), arriving within one check plus N; gap leads arrive at Hina handover; Ahsan sets N and M
 
 #### S58 · F-R6-2 · MAJOR · R6 Build
 **Claim.** P4-19 "only when it is clear" has no match rule
@@ -1506,7 +1565,8 @@ Second line: "P5-5 | … | Two days after arrival at most, the lead is on the SU
 
 **Skeptic's caveats.** "INV-2 territory" is loose (not a literal INV-2 breach); the fix points to Appendix transliteration rules that do not exist yet
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): One wrong-number path; Admin merge with a surviving record, logged and undoable; a typed number matching a grower with a different name or village held as a possible match; a written match rule; "verified" defined in one line; keeps D4
 
 #### S59 · F-R6-3 + F-R6-37 · MAJOR · R6 Build
 **Claim.** A converted address has no rule for a low-confidence or ambiguous result, so it can place a lead in the wrong village
@@ -1551,7 +1611,8 @@ Second line: "P7-5 | A stream that gives none must give a complete address — v
 **Skeptic's caveats.** The fix's "or none" is already covered by P5-23; sits close to F-R6-3 (one row could close both); chak and tehsil name repetition should be confirmed with DBO
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Ambiguous or coarse addresses go to the pool with candidates; franchise change swept through 5.3, 5.9, 6.4 and 6.3.1 (Ahsan picks the serviceability test); confirm-location action with history; name the held list
 
 #### S60 · F-R6-4 + F-R6-23 + F-R6-27 · MAJOR · R6 Build
 **Claim.** Part 7's franchise-point change was not swept back through 5.3 serviceability, the D6 decision rows and 6.3.1
@@ -1619,7 +1680,8 @@ Second line: "A.1 | P7-3 | … | Capture: M3 (routing), M7 (masters); boundaries
 **Skeptic's caveats.** The franchise half is a hard contradiction; the serviceability half is weaker (A.1 has no row for it); same root cause as F-R6-23 and F-R6-4
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Ambiguous or coarse addresses go to the pool with candidates; franchise change swept through 5.3, 5.9, 6.4 and 6.3.1 (Ahsan picks the serviceability test); confirm-location action with history; name the held list
 
 #### S61 · F-R6-5 · MAJOR · R6 Build
 **Claim.** P2-10/P6-8: "usable on 2G/3G" and "the field's current phones" are unmeasured
@@ -1638,7 +1700,8 @@ Second line: "A.1 | P7-3 | … | Capture: M3 (routing), M7 (masters); boundaries
 
 **Skeptic's caveats.** The fix's numbers are the reviewer's; severity not assessed (P2-10 is Post-Capture, P6-8 is M8)
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** ( ) accept  ( ) reject — reason:  (x) park — trigger: Trigger: Phase 4 — 2G/3G numbers and the DBO device survey become UX acceptance inputs  
+**Ahsan's decision** (park (confirmed 2026-10-01)): Trigger: Phase 4 — 2G/3G numbers and the DBO device survey become UX acceptance inputs
 
 #### S62 · F-R6-6 · MAJOR · R6 Build
 **Claim.** P6-9 "slows nothing the SUL sees" and "in order" are undefined
@@ -1659,7 +1722,8 @@ Second line: "A.1 | P7-3 | … | Capture: M3 (routing), M7 (masters); boundaries
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats). The fix's numbers are the reviewer's and need Ahsan; the fix's "normal response time" is itself unmeasured.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): During a burst, no-gap leads reach the SUL within N minutes and the app stays as fast as normal; each SUL's leads appear in the order growers acted; Ahsan sets N
 
 #### S63 · F-R6-7 + F-R6-41 · MAJOR · R6 Build
 **Claim.** The scorecard cannot be computed from the spec: no points per level, no value for "large" or the age floor, no rule for missing crop-need severity
@@ -1708,7 +1772,8 @@ Second line: "A.2 Settings | … age_decay_per_day (2), age_grace_hours (48), ag
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats). Write the fix together with F-R6-7 so 5.3 gets one table.
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept, deferred detail): The builder proposes the points-per-level table (including missing severity and age origin) during the build, for Ahsan's approval; SPEC records that the table is required
 
 #### S64 · F-R6-8 · MAJOR · R6 Build
 **Claim.** Weights are editable one at a time with no sum rule; the spec's own example breaks 0–100
@@ -1728,7 +1793,8 @@ Second line: "5.3 | 0 to 100 from five ingredients, then four adjustments."
 
 **Skeptic's caveats.** Label should be "absent rule plus canvas departure"; weights are one versioned set, so validate-on-save fits; the clamp is needed independently of the sum rule
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Weights saved only when they total 100; final score clamped to 0–100
 
 #### S65 · F-R6-9 · MAJOR · R6 Build
 **Claim.** P5-11: no rule for which three reasons are "top", or where their text comes from
@@ -1749,7 +1815,8 @@ Second line: "5.3 | 0 to 100 from five ingredients, then four adjustments."
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats). "INV-8 cannot be tested" overstated (A.2 Score supplies version and breakdown). The fix's choices need Ahsan.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Three largest positive contributions plus the largest penalty over 10 points; fixed Urdu/English sentence per level with values filled in; Marketing or Admin owns the wording
 
 #### S66 · F-R6-12 · MAJOR · R6 Build
 **Claim.** P3-8/P6-19: "incomplete data" has no definition, yet it switches exports off
@@ -1770,7 +1837,8 @@ Second line: "5.3 | 0 to 100 from five ingredients, then four adjustments."
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats). "Unmatched village" and "unsynced phone" dropped from the candidate meanings. The fix's one-hour numbers are Ahsan's; "any failing stream switches exports off" sits awkwardly beside P4-6 and INV-9.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept (unparked 2026-10-01)): After clarification (export = download as spreadsheet): data is incomplete when a connected feed is failing or dashboard figures are older than N hours (Ahsan sets N); the dashboard warning names the cause; downloads stay allowed but the file carries the same warning (P3-8's "export off" changes)
 
 #### S67 · F-R6-13 · MAJOR · R6 Build
 **Claim.** P4-27a: whether an e-commerce purchase can create a lead is not stated
@@ -1791,7 +1859,8 @@ Second line: "5.3 | 0 to 100 from five ingredients, then four adjustments."
 
 **See also.** Fix together with F-R6-26 (S113): the stream count depends on whether a purchase can create a lead.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): A purchase never creates a lead: timeline, history score, re-scores an open lead; streams read "9 lead streams + 1 purchase stream"
 
 #### S68 · F-R6-14 + F-R6-16 · MAJOR · R6 Build
 **Claim.** Four rows have a "What you would see" that nobody can watch (P5-32, P4-12, P6-18, P5-35)
@@ -1839,7 +1908,8 @@ Second line: "P6-18 | **No clutter.** Every SUL screen answers one question"
 **Skeptic's caveats.** P4-12 is mostly cosmetic (P1-25 covers the lead/no-lead half); could merge with F-R6-14; "Decision check" should say touches D9
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Connections shows learning-example counts by outcome and intent examples per week; P4-12 gets a timeline example; P6-18 lists each screen's question or drops the phrase
 
 #### S69 · F-R6-19 · MAJOR · R6 Build
 **Claim.** P1-2 allows automated WhatsApp to growers, which P5-9 forbids; P1-2 omits Hina (S1)
@@ -1859,7 +1929,8 @@ Second line: "P5-9 | Synapse sends **no automated WhatsApp message** to growers 
 
 **Skeptic's caveats.** "DR check: none" inaccurate (DR-24/25 record the canvas departure; this is spec-vs-spec); severity may be a stale-row wording defect rather than major
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Document hygiene, accepted in chat
 
 #### S70 · F-R6-21 · MAJOR · R6 Build
 **Claim.** 2.5 still shows D1 open and suppresses Cropwise leads (S3)
@@ -1879,7 +1950,8 @@ Second line: "4.6 | D1 | … | **Decided 2026-09-18** — any contact with Synge
 
 **Skeptic's caveats.** The harmful behaviour arises only if a builder implements 2.5's gloss of P2-19 as a source filter; the numbered rows alone would show the leads
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Document hygiene, accepted in chat
 
 #### S71 · F-R6-22 · MAJOR · R6 Build
 **Claim.** 1.7 and 2.5 still show D4 open, and 1.7 promises a split action (S3)
@@ -1901,7 +1973,8 @@ Second line: "4.6 | D4 | … | **Decided 2026-09-18** — one number, one grower
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats). Builder impact is limited as above; severity arguably minor.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Document hygiene, accepted in chat
 
 #### S72 · F-R6-24 · MAJOR · R6 Build
 **Claim.** "Exactly one SUL" is a schema constraint, yet a territory with no SUL is a routing case (S4)
@@ -1921,7 +1994,8 @@ Second line: "P7-9 | A **structure gap** — … a territory with no SUL — sen
 
 **Skeptic's caveats.** A.2 does not mark `sul` as req, so a Part 7 reader would build it nullable (severity); the fix must keep "every SUL owns exactly one territory" and also touch 7.1 and P5-22
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Human moves only: Admin moves open leads on the RSM's request, logged; territory SUL optional; no-location lead goes to Hina first; bulk re-place after a bad boundary file; queues show oldest item and alert
 
 #### S73 · F-R6-30 · MAJOR · R6 Build
 **Claim.** List order has three definitions
@@ -1943,7 +2017,8 @@ Second line: "P5-17 | … tagged "meets Hot conditions" and first in its campaig
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats). The follow-up "third claimant" is already inside P5-20's due tier, so there are two claimants, not three. The gap is untestable for campaign lists only; grouping by product or crop leaves "first" ambiguous too.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): All SUL-app fixes, including the receipt duplicate check and RSM sampling
 
 #### S74 · F-R6-39 · MAJOR · R6 Build
 **Claim.** Intent reading in regional and transliterated Urdu has no accuracy target or sample test
@@ -1962,7 +2037,8 @@ Second line: "P5-17 | … tagged "meets Hot conditions" and first in its campaig
 
 **Skeptic's caveats.** The false-"buy" direction (INV-4 exposure) is the more serious one and is missing from the finding; fix numbers need Ahsan; "real anonymised messages" must be reconciled with PROCESS §12; the gate belongs in M4
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Intent reading tested before the Pilot on anonymised real messages labelled by the field, split by language, with accuracy and "unclear" bars Ahsan sets; gate in M4
 
 #### S75 · F-R6-42 · MAJOR · R6 Build
 **Claim.** The timing table has no region; one set of months cannot fit Hyderabad and Lahore
@@ -1981,7 +2057,8 @@ Second line: "P5-17 | … tagged "meets Hot conditions" and first in its campaig
 
 **Skeptic's caveats.** "Decision check" should cite DECISIONS 2026-09-21 (table shape), so the fix is an amendment for Ahsan; the agronomic premise is not verifiable in the repo; severity depends on the Pilot zones
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Timing table gets a zone (or province) column; missing zone falls back to the national row
 
 #### S76 · F-R6-43 · MAJOR · R6 Build
 **Claim.** "Last season's status" is undefined for a grower with more than one lead in a crop year
@@ -2001,7 +2078,8 @@ Second line: "P6-13 | **Season.** One season a year: a crop year of twelve month
 
 **Skeptic's caveats.** Divergence risk is between Grower.last_season_status and Lead.last_season_tag; no Pilot consequence unless the Pilot spans a season start (see F-R4-8); "sum of PKR" in the fix needs Ahsan
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Status = converted if any lead converted that crop year, else latest outcome; tab appears from the first season start after go-live
 
 #### S77 · F-R6-44 · MAJOR · R6 Build
 **Claim.** Healthy-scan leads (D9) have no recommended product, yet P2-7 promises one on every card
@@ -2023,7 +2101,8 @@ Second line: "J2.1 | … recommended product where known (no PKR estimate)"
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats). "Nothing to offer" is answered by D9's reason and is replaced. Preventive Product rows are new scope for Ahsan. The gap also covers "diagnosis unknown" scans.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): All SUL-app fixes, including the receipt duplicate check and RSM sampling
 
 #### S78 · F-R6-45 · MAJOR · R6 Build
 **Claim.** No registration or label check on product recommendations
@@ -2044,7 +2123,8 @@ Second line: "J2.1 | … recommended product where known (no PKR estimate)"
 
 **See also.** F-R7-19 (S92) asks for an agronomic approver on the same list.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** ( ) accept  (x) reject — reason: Ahsan: "SULs should allow off label recommendations." No registration check on product suggestions  ( ) park — trigger:  
+**Ahsan's decision** (reject): Ahsan: "SULs should allow off label recommendations." No registration check on product suggestions
 
 #### S79 · F-R6-46 · MAJOR · R6 Build
 **Claim.** Threshold on total acreage or per-crop acreage is not stated (S22)
@@ -2066,7 +2146,8 @@ Second line: "J7.2 | … Enters a number, optionally per crop; saved as **confir
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats). "Permanent exclusion" slightly strong, as above. A per-crop sum can exceed farm size where crops share land across seasons, so the basis is Ahsan's decision.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Threshold compared with total acreage across crops; where only per-crop figures exist, their sum
 
 #### S80 · F-R6-50 · MAJOR · R6 Build
 **Claim.** A lead with no location: Hina first or pool first, and which region's pool? (S13)
@@ -2086,7 +2167,8 @@ Second line: "P5-1 | A lead that has a number and is missing … a usable locati
 
 **Skeptic's caveats.** Bites only for growers with no location on record; the fix departs from Ahsan's 28 Sept "pool and Hina" answer and needs his decision
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Human moves only: Admin moves open leads on the RSM's request, logged; territory SUL optional; no-location lead goes to Hina first; bulk re-place after a bad boundary file; queues show oldest item and alert
 
 #### S81 · F-R6-52 · MAJOR · R6 Build
 **Claim.** "Reading intent never delays a lead", yet routing waits on the reading
@@ -2106,7 +2188,8 @@ Second line: "P5-1 | … A lead with no gap is routed at once."
 
 **Skeptic's caveats.** The fix's 60 seconds is the reviewer's number; the fix must also touch AR-25 and P4-10's observable
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Lead created at once; routing waits at most N seconds for the intent read, then treats intent as unclear; P4-10 wording corrected; Ahsan sets N
 
 #### S82 · F-R6-54 · MAJOR · R1 Field · R6 Build
 **Claim.** Offline sync: "server's version wins" is undefined per server change, and clocks have no event time
@@ -2133,7 +2216,8 @@ Second line: "A.3 | … sync on reconnect, server timestamp wins on the record"
 
 **See also.** F-R1-2 (S6) holds the clock-time half.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Phone time: clocks start on phone receipt and stop at the phone's logged time; a synced on-time action withdraws the breach notice; a server re-score never overrides an SUL outcome
 
 #### S83 · F-R6-55 · MAJOR · R6 Build
 **Claim.** P7-10's SUL-confirmed location has no action, field or history (S25)
@@ -2153,7 +2237,8 @@ Second line: "2.2 | **Act and log** | Call, WhatsApp, Navigate; log contact, vis
 
 **Skeptic's caveats.** True of the confirmed branch and history clause only; the default branch (most recent coordinate) is buildable
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Ambiguous or coarse addresses go to the pool with candidates; franchise change swept through 5.3, 5.9, 6.4 and 6.3.1 (Ahsan picks the serviceability test); confirm-location action with history; name the held list
 
 #### S84 · F-R6-65 · MAJOR · R6 Build
 **Claim.** Per-source credential vault and webhook signature verification are absent from A.3
@@ -2177,7 +2262,8 @@ Second line: "per-source credentials in the vault" · "signature verification pe
 
 **See also.** F-R7-11 (S89) covers the Hina vendor's contract; this entry covers authenticating what Hina sends.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): After a plain-language explanation: every inbound feed, Hina's included, must carry a valid signature or is rejected and counted on Connections; key storage goes to Phase 3 INFRA.md; "rotated by Admin" dropped
 
 #### S85 · F-R7-3 · MAJOR · R7 Open
 **Claim.** A wrong boundary file: no bulk or Admin-initiated way to find and re-place the leads placed under it
@@ -2199,7 +2285,8 @@ Second line: A.2 "**Lead placement** — lead · method (choice: boundary, conve
 
 **Changed from the raw report.** The claim and consequence were edited where the skeptic showed the raw text false or overstated (see the caveats). Title and consequence narrowed: a one-at-a-time path exists via P1-35 and J21.6, and file_version is one fix, not the only one. The bulk re-place is an exception to P3-19 (R-marked), P7-11 and P5-26 and needs Ahsan's decision.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Human moves only: Admin moves open leads on the RSM's request, logged; territory SUL optional; no-location lead goes to Hina first; bulk re-place after a bad boundary file; queues show oldest item and alert
 
 #### S86 · F-R7-5 · MAJOR · R7 Open
 **Claim.** The manual queues have no age, no backlog alert and no bound on their size
@@ -2219,7 +2306,8 @@ Second line: P6-9 "A campaign launch of 10,000 leads in twenty minutes loses not
 
 **Skeptic's caveats.** Burst pool load is smaller than implied (P7-6 also sends the gap to Hina); "shows its count" already exists; scope "overdue" to items a person can act on; the no-clock pool point is R2's
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Human moves only: Admin moves open leads on the RSM's request, logged; territory SUL optional; no-location lead goes to Hina first; bulk re-place after a bad boundary file; queues show oldest item and alert
 
 #### S87 · F-R7-6 · MAJOR · R7 Open
 **Claim.** Support hours leave failures after 18:00 and on non-working days unnoticed until the next working morning
@@ -2243,7 +2331,8 @@ Second line: P6-17 (What you would see) "A failing stream is noticed by DBO the 
 
 **See also.** F-R4-3 (S41) measures the wait; F-R7-30 (S124) defines the working day this entry depends on.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Failure over one hour alerts the digital team's on-call contact at any hour; each third party's escalation contact and response time recorded on Connections
 
 #### S88 · F-R7-9 · MAJOR · R7 Open
 **Claim.** The spec assumes every field SUL has a Syngenta email; nothing confirms it and there is no fallback
@@ -2265,7 +2354,8 @@ Second line: P6-16 "a non-Syngenta address cannot register."
 
 **See also.** F-R5-14 (S48) covers the rules for the login this depends on. J21.1 "IT gives the login" and P1-6 self-registration describe two joining paths (seam S8).
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept, as fact): Ahsan confirms every field SUL and RSM has a Syngenta email; state it in SPEC as a fact (no fallback needed)
 
 #### S89 · F-R7-11 · MAJOR · R7 Open
 **Claim.** The Hina vendor has no name, capacity, service level, data-handling terms or exit
@@ -2287,7 +2377,8 @@ Second line: P6-17 "the digital team (Admin) owns settings and is the escalation
 
 **See also.** The data-handling half (what the vendor keeps) is F-R5-7's defect for one party (S47). Capacity links to the narrower claims of F-R4-13, F-R4-4 and F-R6-38 (section 2); volumes to F-R7-20 (S93). Authenticating Hina's inbound is F-R6-65 (S84).
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Hina connection records vendor name, calls per day, time to first attempt, storage and retention, deletion on anonymisation, and an exit: Admin can turn Hina off and held leads route at once
 
 #### S90 · F-R7-16 · MAJOR · R7 Open
 **Claim.** Required receipts build a record of each franchisee's selling prices that no one decided to hold
@@ -2308,7 +2399,8 @@ Second line: P6-17 "the digital team (Admin) owns settings and is the escalation
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats). The Competition Act s.4 point is for Legal to confirm, not proven; holding invoices is not itself a prohibited agreement.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Ahsan: "we just need an evidence of sale in shape of receipts; no need to go into prices." Receipts are evidence only; prices never extracted, reported or used; franchisees told receipts are photographed; Legal confirms before the Pilot
 
 #### S91 · F-R7-17 · MAJOR · R7 Open
 **Claim.** "No stock at the franchise" is captured but appears on no specified view, which defeats DR-1's stated reason
@@ -2330,7 +2422,8 @@ Second line: P1-32 "requires one reason from a fixed list — no need · no budg
 
 **Changed from the raw report.** The claim and consequence were edited where the skeptic showed the raw text false or overstated (see the caveats).
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept, amended): Ahsan: no inventory threshold. All not-converted reasons are logged and reported to all stakeholders (counts by area); no alert
 
 #### S92 · F-R7-19 · MAJOR · R7 Open
 **Claim.** No agronomic owner: Marketing owns the "treats" list and the timing table
@@ -2354,7 +2447,8 @@ Second line: 4.5 "Owner: Marketing with the Portfolio Managers; Admin enters cha
 
 **See also.** F-R6-45 (S78) covers registration checks on the same list; F-R6-66 (S121) records the canvas departure on ownership.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept, amended): PMs own and approve the agronomy (treats list and timing table); DBO manages if required. No separate agronomy lead
 
 #### S93 · F-R7-20 · MAJOR · R7 Open
 **Claim.** No row budgets any running cost; Hina alone can reach 90,000 call attempts a month
@@ -2376,7 +2470,8 @@ Second line: P5-2 "**3 attempts over 2 days**, both Admin settings."
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats).
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** ( ) accept  (x) reject — reason: Budgets are managed outside Synapse  ( ) park — trigger:  
+**Ahsan's decision** (reject): Budgets are managed outside Synapse
 
 #### S94 · F-R7-23 · MAJOR · R7 Open
 **Claim.** Moving the season start silently re-buckets every "last season" rule; stored tags go stale
@@ -2398,7 +2493,8 @@ Second line: A.2 Lead "… last_season_tag …"
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats). "Stored tags and the tab disagree" overstated: the tab may derive from the stored tag.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): A season-start change applies from the next season; existing tags kept; tabs and retention use each lead's creation season
 
 #### S95 · F-R7-24 · MAJOR · R7 Open
 **Claim.** "Take effect at once" for a changed promise does not say what happens to open leads' deadlines
@@ -2416,7 +2512,8 @@ Second line: A.2 Lead "contact_clock, completion_clock (start, promise_at, stopp
 
 **Skeptic (Opus 5.5).** Survived. The spec states an in-flight rule for threshold (P1-19), weights (P5-14) and structure (P7-11, P3-19) but none for clock promises; promise_at is stored (A.2) and "take effect at once" (P3-10) reads either way; no decision or DR settles it.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): New leads only; a move up restarts clocks under the new promise, a move down keeps earlier due times
 
 #### S96 · F-R7-31 · MAJOR · R7 Open
 **Claim.** "phase 1 / phase 2 / this phase / second phase" break the naming decision; a builder would look up the wrong thing (seam S30)
@@ -2442,7 +2539,8 @@ Second line: DECISIONS 2026-09-11 ""Phase" means a delivery phase 0–11 and not
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats). "Nothing says whether … stay out through Wave 2 and Wave 3" overstated and replaced; only the "phase" wording in the conditions is ambiguous.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Document hygiene, accepted in chat
 
 ### Minors (30)
 
@@ -2461,7 +2559,8 @@ Second line: DECISIONS 2026-09-11 ""Phase" means a delivery phase 0–11 and not
 
 **Skeptic (Fable 5.1).** Survived. A.2 Outcome holds one product and a unitless whole number; Product has no pack size; D7 and DR-14 fix "required", not shape.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): All SUL-app fixes, including the receipt duplicate check and RSM sampling
 
 #### S98 · F-R1-10 · MINOR · R1 Field
 **Claim.** J2.1 puts a score on the SUL card; P5-12 forbids any score number on SUL screens
@@ -2481,7 +2580,8 @@ Second line: P5-12 "No score number on any SUL screen"
 
 **Skeptic's caveats.** Plan §9 would class this major, filed as minor
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): All SUL-app fixes, including the receipt duplicate check and RSM sampling
 
 #### S99 · F-R1-22 · MINOR · R1 Field
 **Claim.** The SUL's notification list leaves out the scoring-weight notice that P5-34 sends to SULs
@@ -2499,7 +2599,8 @@ Second line: P5-34 "Head of Sales, ZMs, RSMs and SULs are all notified of an app
 
 **Skeptic (Fable 5.1).** Survived. P2-15 and the 2.2 Notifications row give the SUL four notification types; P5-34 (21 Sept decision) adds a weight-change notice to SULs; never reconciled.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): All SUL-app fixes, including the receipt duplicate check and RSM sampling
 
 #### S100 · F-R2-18 · MINOR · R2 Sales leadership
 **Claim.** A weight change notifies different people depending on who made it
@@ -2517,7 +2618,8 @@ Second line: P5-34 "Admin applies or rejects; Head of Sales, ZMs, RSMs and SULs 
 
 **Skeptic (Fable 5.1).** Survived. The two recipient lists come from two Ahsan answers (3.6 Q7 on 18 Sept; 21 Sept for applied proposals), neither a D-decision or DR; no row says a hand-made weight change deserves fewer recipients.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept, widened): Any weight change, by hand or from a proposal, notifies the same list, and Ahsan adds that all stakeholders are notified
 
 #### S101 · F-R2-21 · MINOR · R2 Sales leadership
 **Claim.** Two Pilot zones on a four-zone "national" view
@@ -2535,7 +2637,8 @@ Second line: J17.1 "All zones side by side on the same numbers, plus national on
 
 **Skeptic (Fable 5.1).** Survived. P3-8, P7-2 and P6-20 each key on a different condition (incomplete data, unassigned person, missing value); none fires for a staffed zone with no Pilot streams; no live/active attribute on a zone.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Pilot column in A.1 plus a Pilot section: zones named before M8, training, last sync to RSMs, exit and Wave 2 gate (no duplicate of Phase 9), D2 fallback, SUL headcount, "not live" zones; Ahsan marks Pilot rows
 
 #### S102 · F-R2-22 · MINOR · R2 Sales leadership
 **Claim.** "Year" and "quarter" are not tied to the crop year
@@ -2555,7 +2658,8 @@ Second line: P6-13 "One season a year: a crop year of twelve months from a start
 
 **Skeptic's caveats.** "Pakistan time" in the fix is already P6-5
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): "Year" and "quarter" are calendar periods; a separate "Season" preset for the crop year; weeks run Monday to Sunday
 
 #### S103 · F-R2-24 · MINOR · R2 Sales leadership
 **Claim.** The completion on-time rate is missing from views that P3-5 says show both rates
@@ -2575,7 +2679,8 @@ Second line: J16.1 "leads received, contacted on time, completed, converted, PKR
 
 **Skeptic's caveats.** J16.1 is mitigated by J16.2/P3-6 (consistency edit only)
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept (unparked 2026-10-01)): One formula in P5-31: of the leads whose deadline fell in the period or that were finished in it, the share finished on time; Closed: unreachable counts as finished; follow-up dates don't count; P1-43 points to it; J14.2, J16.1 and J22.1 add "completed on time"
 
 #### S104 · F-R3-12 · MINOR · R3 Marketing
 **Claim.** "Never … village" does not say whether an aggregate count by village is allowed
@@ -2595,7 +2700,8 @@ Second line: J20.5: "Aggregate figures to a spreadsheet, never a grower's name, 
 
 **Skeptic's caveats.** The fix as drafted in P1-4 would break the PM's territory drill; scope it to Marketing or exports
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept, amended): Marketing and PMs both keep the zone → region → territory drill; nothing finer than territory (no village-level counts or exports)
 
 #### S105 · F-R4-8 · MINOR · R4 Product
 **Claim.** The "Last season" tab and tag are empty until the first season start after go-live, because nothing can bring last season in
@@ -2619,7 +2725,8 @@ Second line: P4-27 "Nothing is stored about a grower that no stream or SUL gave.
 
 **See also.** F-R1-23 (S16) asks what the tab is; F-R6-43 (S76) what "last season's status" means.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Status = converted if any lead converted that crop year, else latest outcome; tab appears from the first season start after go-live
 
 #### S106 · F-R4-11 · MINOR · R4 Product
 **Claim.** Leadership's "whether the funnel is growing" has no growth number
@@ -2638,7 +2745,8 @@ Second line: P4-27 "Nothing is stored about a grower that no stream or SUL gave.
 
 **Skeptic's caveats.** The "no comparison (17 Sept)" answer binds J10 only
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Outcome measure against a pre-go-live baseline, plain list = arrival order among contacted leads, signal-to-first-contact time, monthly summary contents, previous-period comparison; Ahsan sets targets
 
 #### S107 · F-R4-16 · MINOR · R4 Product
 **Claim.** 1.1 changes the Pilot's "one NPI campaign" to "one campaign" with no DR
@@ -2660,7 +2768,8 @@ Second line: DECISIONS 2026-09-11 "The Pilot is Crop Doctor + WhatsApp + one NPI
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats).
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept, amended): Ahsan: "there could be one or multiple campaigns running at a time; either it's NPI or just a brand campaign; we are just tagging if it's NPI." The Pilot allows one or more campaigns, NPI being a tag. Changes the 2026-09-11 "one NPI campaign" wording, so it needs a DECISIONS entry and a DR at apply time
 
 #### S108 · F-R5-6 · MINOR · R5 Trust
 **Claim.** The consent basis is "one per lead" in 6.1 but a column on "every grower row" in A.3
@@ -2678,7 +2787,8 @@ Second line: A.3 "Consent basis is a NOT NULL column derived from the signal (A6
 
 **Skeptic (Fable 5.1).** Survived. Three placements of the consent basis (6.1 per lead, A.2 on Signal, A.3 on every grower row) cannot be one schema; D1 entry says per lead.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept, amended): Consent per lead. Ahsan adds: "any incoming lead will be considered with the consent done; no need to keep and manage the consent separately." Confirmed reading: consent = the incoming contact, auto-stamped (stream and date) on every lead; no manual consent management; INV-1 holds
 
 #### S109 · F-R5-11 · MINOR · R5 Trust
 **Claim.** E-commerce "does not enter Synapse" cannot hold unless the filter runs on the e-commerce side, and the spec does not say where it runs
@@ -2699,7 +2809,8 @@ Second line: A.3 "Consent basis is a NOT NULL column derived from the signal (A6
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats). "Must receive every purchase" overstated (Synapse can ask by number); the logs leg is covered by A.3. The fix sends eligible numbers outward, itself a personal-data flow.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Keep the pull; orders from buyers who are not confirmed growers at or above the threshold are discarded on arrival, never stored or logged
 
 #### S110 · F-R5-19 · MINOR · R5 Trust
 **Claim.** "Only what the streams and SULs gave" leaves out Hina and the geocoder, both of which put data on the grower
@@ -2719,7 +2830,8 @@ Second line: P5-4 "Acreage from Hina is marked **confirmed by Hina** and treated
 
 **Skeptic's caveats.** The record list Legal reads already contains Hina data, so the defect is the two rule sentences; the geocoder half rests on inference; P4-27 carries Ahsan's R mark, so the amendment needs his sign-off
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): P4-27 and P6-10 read "only what the streams, Hina and the SUL gave, and coordinates converted from a given address"
 
 #### S111 · F-R6-15 · MINOR · R6 Build
 **Claim.** P5-3 "short plain-words summary" has no length
@@ -2740,7 +2852,8 @@ Second line: P5-4 "Acreage from Hina is marked **confirmed by Hina** and treated
 
 **Changed from the raw report.** The claim and consequence were edited where the skeptic showed the raw text false or overstated (see the caveats). The language half is folded into F-R1-20; this entry keeps the length bound. The fix's "300 characters, in Urdu, rejects longer" needs Ahsan and must not drop the structured answers.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Hina's summary has a maximum length Ahsan sets; longer ones rejected and logged; structured answers unaffected
 
 #### S112 · F-R6-17 · MINOR · R6 Build
 **Claim.** "Acreage band" is used twice and never defined
@@ -2759,7 +2872,8 @@ Second line: P5-4 "Acreage from Hina is marked **confirmed by Hina** and treated
 
 **Skeptic's caveats.** Band edges are Ahsan's decision; a changeable setting needs a rule for bands already written into anonymised records
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Band edges one Admin setting (starting: under threshold · threshold–49 · 50–99 · 100+); bands already in anonymised records stay as written
 
 #### S113 · F-R6-26 · MINOR · R6 Build
 **Claim.** Nine streams versus ten (S6)
@@ -2781,7 +2895,8 @@ Second line: "A.2 | Signal — id · stream (choice: the ten in 4.2)"
 
 **See also.** Fix together with F-R6-13 (S67).
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Document hygiene, accepted in chat
 
 #### S114 · F-R6-28 · MINOR · R6 Build · R7 Open
 **Claim.** A.1's "verbatim" Came-from column has drifted on seven rows, one to the opposite decision (S8)
@@ -2811,7 +2926,8 @@ Second line: "P6-16 | … | Your answer (21 Sept, login); Canvas (SSO where avai
 
 **Also raised as** (merged before the skeptic pass; the verdict covers them): F-R7-35 (R7 Open, minor) — A.1 says its "Came from" column is verbatim; at least seven rows differ.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Document hygiene, accepted in chat
 
 #### S115 · F-R6-32 · MINOR · R6 Build
 **Claim.** Hina attempts are an Admin setting but hard-coded 1–3 in the schema
@@ -2833,7 +2949,8 @@ Second line: "P5-2 | … **3 attempts over 2 days**, both Admin settings."
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats). Re-anchored from AR-15 to A.3 and P5-14. No Pilot consequence unless Admin changes the setting.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Document hygiene, accepted in chat
 
 #### S116 · F-R6-34 · MINOR · R6 Build
 **Claim.** "Six clock promises" in settings; A.2 Settings holds four
@@ -2853,7 +2970,8 @@ Second line: "A.2 | Settings … contact_promise_hot (24 h), _potential (72 h) �
 
 **Skeptic's caveats.** The fix must also correct 4.5 and 6.1, not only P1-38; the plan itself repeats "six promises" at R7-A4
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Document hygiene, accepted in chat
 
 #### S117 · F-R6-59 · MINOR · R6 Build
 **Claim.** P7-9 sends out-of-Pakistan coordinates to "Admin's list" without naming one
@@ -2872,7 +2990,8 @@ Second line: "A.2 | Settings … contact_promise_hot (24 h), _potential (72 h) �
 
 **Skeptic's caveats.** The finding omits the Connections held list as a candidate; label choice ("location invalid" vs new) is Ahsan's and A.2 held_reason must match
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Ambiguous or coarse addresses go to the pool with candidates; franchise change swept through 5.3, 5.9, 6.4 and 6.3.1 (Ahsan picks the serviceability test); confirm-location action with history; name the held list
 
 #### S118 · F-R6-60 · MINOR · R6 Build
 **Claim.** Unreachable: three attempts instead of two, and "Closed" instead of "returns to the pool" — no DR
@@ -2892,7 +3011,8 @@ Second line: "**Unreachable → nurture** | After two failed contact attempts. R
 
 **Skeptic's caveats.** The "→ nurture" half follows from DR-4; contact quality is partly kept via P1-35/P1-32 reasons, so the DR should not imply it is lost entirely
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Document hygiene, accepted in chat
 
 #### S119 · F-R6-61 · MINOR · R6 Build
 **Claim.** Grower 360 fields dropped without a DR: CNIC key, UC, franchise affinity
@@ -2912,7 +3032,8 @@ Second line: "Secondary: name + village + crop (fuzzy); CNIC where available." /
 
 **Skeptic's caveats.** "Decision check" should cite D4 and the 17 Sept location answer; only the CNIC part of the secondary key is gone
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Document hygiene, accepted in chat
 
 #### S120 · F-R6-63 · MINOR · R6 Build
 **Claim.** Model monitoring cut to lift only; PM score distribution per campaign dropped
@@ -2932,7 +3053,8 @@ Second line: "Model monitoring: lift, drift, score distribution over time"
 
 **Skeptic's caveats.** Only the score-distribution half of the Z04 phrase is missing (converted value is present); P5-33 also watches six conversion breakdowns; DR number assigned at consolidation
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Document hygiene, accepted in chat
 
 #### S121 · F-R6-66 · MINOR · R6 Build
 **Claim.** Agronomy removed as owner of window table and weights; timing inputs cut to months — no DR
@@ -2954,7 +3076,8 @@ Second line: "Inputs: Crop Doctor diagnosis, crop calendar, sowing date, weather
 
 **See also.** F-R7-19 (S92) asks who approves the table's content today.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Document hygiene, accepted in chat
 
 #### S122 · F-R6-67 · MINOR · R6 Build
 **Claim.** Need severity and value weights swapped (25↔20) with no DR
@@ -2974,7 +3097,8 @@ Second line: "**25** | Need severity" · "**20** | Opportunity value"
 
 **Skeptic's caveats.** The spec's weights match DECISIONS 2026-09-21; only the register entry is missing
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Document hygiene, accepted in chat
 
 #### S123 · F-R7-29 · MINOR · R7 Open
 **Claim.** No accessibility row for the SUL app
@@ -2993,7 +3117,8 @@ Second line: "**25** | Need severity" · "**20** | Opportunity value"
 
 **Skeptic's caveats.** The Phase 4 guide (03-delivery-process.md) already plans low-end Android constraints and field-officer sessions, so the fix is a Phase 4 acceptance input, consistent with minor
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept (unparked 2026-10-01)): One SPEC row now: SUL app readable at the phone's largest text size, clear in bright sunlight, usable one-handed, voice typing in text boxes
 
 #### S124 · F-R7-30 · MINOR · R7 Open
 **Claim.** "Working day" is undefined and no holiday calendar exists, although rows depend on one
@@ -3016,7 +3141,8 @@ Second line: "**25** | Need severity" · "**20** | Opportunity value"
 
 **See also.** F-R7-6 (S87) depends on this definition.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Holiday list: Admin keeps yearly pause days that clocks also skip; working week defined once; changes logged (amends 5.10 Q13)
 
 #### S125 · F-R7-32 · MINOR · R7 Open
 **Claim.** Part 7 was added, but the header, the DR index and the question-log index were not updated (seam S9)
@@ -3038,7 +3164,8 @@ Second line: header "A technical appendix follows Part 6 and can be skipped."
 
 **Skeptic (Opus 5.5).** Survived. Header says the appendix "follows Part 6", A.6 stops at DR-31 though DR-32/33 exist in 7.6, and A.7 omits 7.5 and -25.md, which exists and is cited in the header; A.7's "session 2.1" wording does not exclude Part 7; no decision or DR excuses the stale indexes.
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Document hygiene, accepted in chat
 
 #### S126 · F-R7-33 · MINOR · R7 Open
 **Claim.** Part 2 numbering is out of order
@@ -3059,7 +3186,8 @@ Second line: header "A technical appendix follows Part 6 and can be skipped."
 
 **Changed from the raw report.** The consequence was edited where the skeptic showed the raw text false or overstated (see the caveats).
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Document hygiene, accepted in chat
 
 ---
 
@@ -3075,7 +3203,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** No per-grower frequency cap across successive leads: after closure P1-34 makes a new lead with an intent gap, so a weekly scanner is held for Hina again (minor absent rule)
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept, amended): Ahsan: if the grower's earlier scan and Hina call already meet the handover criteria, Hina does not call again; the new lead goes straight to its segment with the latest activity
 
 #### N2 · from F-R4-13 (R4 Product, filed blocker; skeptic Fable 5.1)
 **Parent claim (refuted).** If Hina is not connected, down or behind, gap leads are held with no time limit: the "bound" is stated in attempts, not time
@@ -3085,7 +3214,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Note.** Also covers F-R6-51 and F-R7-1 (merged into F-R4-13) and the first residue of F-R6-38.
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Two lines: window expiry hands the lead over whatever the attempt count; Synapse works with Hina off
 
 #### N3 · from F-R5-16 (R5 Trust, filed major; skeptic Fable 5.1)
 **Parent claim (refuted).** Retention removes "name, number, location and receipts", but the raw signal, grower words, Hina summaries and old-number history are kept "unchanged"
@@ -3093,7 +3223,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** MAJOR narrower claim: Signal.raw ("the original as received, unchanged") carries name and number but has no (personal)/PII mark, so retention and P6-3 do not reach it; mark `raw` personal or strip it at retention
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Signal.raw marked personal: name and number removed at anonymisation, never in exports
 
 #### N4 · from F-R5-17 (R5 Trust, filed major; skeptic Fable 5.1)
 **Parent claim (refuted).** No retention for personal data outside an inactive grower: "no contact" signals, removed and rejected leads, an active grower's old PII, the audit trail, learning examples
@@ -3101,7 +3232,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** MAJOR-to-minor narrower claim: (1) an unmatched "no contact" signal holds name, village and words with no grower, so P6-11 can never fire on it; (2) Admin "removal" (P1-36) is undefined — what is deleted, what is kept for INV-3
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Unmatched no-number messages deleted after N months (Ahsan sets N); Admin "remove" deletes the lead's personal data and keeps only the technical ID that prevents duplicates
 
 #### N5 · from F-R6-10 (R6 Build, filed major; skeptic Fable 5.1)
 **Parent claim (refuted).** P1-14 "clear purchase intent" has three examples and no rule; the franchise example has no object
@@ -3109,7 +3241,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** MAJOR-ish narrower claim: P4-9's "when Synapse is unsure" is unmeasured — A.2 stores an intent confidence number but no row or setting gives the cut-off at which "buy" becomes "unclear"; fix belongs on P4-9 plus A.2 Settings
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Admin setting for the minimum confidence for "buy"; starting value proposed with the S74 test
 
 #### N6 · from F-R6-20 (R6 Build, filed major; skeptic Fable 5.1)
 **Parent claim (refuted).** No WhatsApp to staff in the Pilot versus a weekly WhatsApp summary to managers (S2)
@@ -3117,7 +3250,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** (1) MAJOR-ish absent rule: the weekly summary is Synapse's only outbound WhatsApp and nothing provides for it — no provider row, no template, no A.3 line, no staff mobile field on A.2 User; (2) P1-42 wording could point at P3-17
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Weekly WhatsApp summary provided for: sending service and approved template on Connections, staff mobile field, P1-42 names it as the one exception
 
 #### N7 · from F-R6-36 (R6 Build, filed major; skeptic Fable 5.1)
 **Parent claim (refuted).** Village boundaries: no source, format, licence or late-arrival rule
@@ -3125,7 +3259,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** (1) no row records provenance or usage rights of the boundary files, incl. shipping them to SUL phones (question for Ahsan); (2) P7-7 "inside Punjab and Sindh" vs P4-29 "inside a digitised village boundary" wording
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (scope change): Ahsan: village boundaries are not shown to SULs; SULs get a Google map showing their leads with navigation; boundaries may be shown later if required. Boundaries stay server-side for routing. Changes P7-4 ("drawn on the SUL's map") and the offline map budget; needs a DECISIONS entry at apply time
 
 #### N8 · from F-R7-2 (R7 Open, filed major; skeptic Fable 5.1)
 **Parent claim (refuted).** Address-to-coordinate service failure: no rule, and no health line
@@ -3133,7 +3268,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** (1) address conversion has no health line on Connections and is not among P6-17's escalation third parties; (2) hold-and-retry exists only in A.3's technical words, and P7-17's "unmatched addresses" does not separate "no match" from "service unavailable". Rests on appendix text, not a numbered row
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Address service health on Connections; unplaced addresses labelled "no match" or "service unavailable, retrying"
 
 #### N9 · from F-R7-7 (R7 Open, filed major; skeptic Fable 5.1)
 **Parent claim (refuted).** No row sets uptime, backup, restore or incident handling
@@ -3143,7 +3279,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Note.** Carry part (1) forward to docs/INFRA.md at Phase 3.
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept, to Phase 3): Restore requirements (anonymisations stay, audit trail intact, synced phone actions kept) and an uptime target go to the Phase 3 infrastructure document; one SPEC line points there
 
 #### N10 · from F-R7-13 (R7 Open, filed minor; skeptic Opus 5.5)
 **Parent claim (refuted).** No IT security review or group privacy sign-off before go-live
@@ -3151,7 +3288,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** No document requires a check against Syngenta's group privacy standard before the Pilot goes live; the Phase 9 security review is an agent review with an IT lens, not Syngenta IT's own, and IT signs only "if involved"; neither is a dependency with an owner and date
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** ( ) accept  (x) reject — reason: No group privacy check or IT sign-off dependency added  ( ) park — trigger:  
+**Ahsan's decision** (reject): No group privacy check or IT sign-off dependency added
 
 #### N11 · from F-R7-18 (R7 Open, filed minor; skeptic Opus 5.5)
 **Parent claim (refuted).** Franchise name and coordinate are not tagged personal although franchisees are often sole proprietors
@@ -3161,7 +3299,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Note.** A classification question for R5 or Ahsan; DBO already owns the data.
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Franchise name and location are business data (public point of sale) owned by DBO
 
 #### N12 · from F-R7-25 (R7 Open, filed minor; skeptic Opus 5.5)
 **Parent claim (refuted).** The other settings have no valid range, no rule for work in flight, and three have no change notification
@@ -3171,7 +3310,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Note.** Part (1)'s floor overlaps the retention entry (S50).
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Every setting gets a minimum and maximum in the spec; a change to Hina's limits applies to leads sent after the change
 
 #### N13 · from F-R7-27 (R7 Open, filed major; skeptic Opus 5.5)
 **Parent claim (refuted).** Hina's calling language is unspecified, and the grower's language can only be Urdu or English
@@ -3179,7 +3319,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** No SPEC row states Hina calls in Urdu (only the decision rationale); the Hina outbound batch (A.3) does not pass the grower's recorded language (P4-21), so that field has no consumer on the Hina path; minor wording and seam gap
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept, amended): Ahsan: Hina always calls in Urdu; the record and summary for the SUL are in English and Urdu
 
 ### 2.2 Small (wording, cross-references, minor gaps)
 
@@ -3189,7 +3330,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** J5 has no step showing a late completion after J5.4 (minor)
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): One journey line showing a late completion counts as completed, but late
 
 #### N15 · from F-R1-9 (R1 Field, filed major; skeptic Fable 5.1)
 **Parent claim (refuted).** The lead card's acceptance line cannot be tested, and puts the history both on the card and one tap away
@@ -3197,7 +3339,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** Reword "without scrolling to another screen" to 2.2's "on one screen, without opening another"
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Lead-card rule reworded to "on one screen, without opening another"
 
 #### N16 · from F-R1-12 (R1 Field, filed minor; skeptic Fable 5.1)
 **Parent claim (refuted).** "Period views everywhere a number is shown" would put a period picker on the home screen
@@ -3205,7 +3348,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** P2-16 wording could say "on My summary (managers: P3-7)"
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): P2-16 reworded: period views are on My summary (managers: P3-7)
 
 #### N17 · from F-R1-14 (R1 Field, filed major; skeptic Fable 5.1)
 **Parent claim (refuted).** "Band karo" is said to trigger no action, but the spec's signal rules push the lead up, reset its age, or make a new lead
@@ -3213,7 +3357,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** P4-25 "takes no action" could read "takes no opt-out action; scored like any other signal" (wording)
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): P4-25 reworded: "takes no opt-out action; the message is scored like any other"; D1 unchanged
 
 #### N18 · from F-R1-15 (R1 Field, filed major; skeptic Fable 5.1)
 **Parent claim (refuted).** When the grower's real number is already on another grower, J8.2 refuses and leaves the SUL with no next step
@@ -3221,7 +3366,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** J8.2 could cross-reference P1-35 and J21.6 in one line
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): J8.2 points to P1-35 and J21.6 (reject as duplicate, Admin merges)
 
 #### N19 · from F-R1-21 (R1 Field, filed major; skeptic Fable 5.1)
 **Parent claim (refuted).** The 150 MB limit cannot be tested: no size is given for the map, photos, boundaries or history it must hold
@@ -3229,7 +3375,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** P2-10/P6-8 do not say whether the unsent photo outbox counts inside the 150 MB (minor)
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Unsent receipt photos count inside the 150 MB, compressed to fit
 
 #### N20 · from F-R2-10 (R2 Sales leadership, filed major; skeptic Fable 5.1)
 **Parent claim (refuted).** Assigning a lead from the pool puts it on an SUL whose scope excludes it
@@ -3237,7 +3384,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** P3-11/J15.2 could state in words that a pool-assigned placement takes the chosen SUL's territory; A.2 marks village/bsa non-optional though a pool lead has none
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Pool-assigned lead takes the chosen SUL's territory; village and BSA optional for pool leads
 
 #### N21 · from F-R2-23 (R2 Sales leadership, filed minor; skeptic Fable 5.1)
 **Parent claim (refuted).** A flag written without signal has no defined behaviour on the "phone first" RSM app
@@ -3245,7 +3393,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** AR-14's unscoped "retried, never dropped" sits uneasily beside P3-20 (wording scope)
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): AR-14 "retried, never dropped" limited to the SUL app; dashboards show a failed action as failed
 
 #### N22 · from F-R3-3 (R3 Marketing, filed major; skeptic Fable 5.1)
 **Parent claim (refuted).** A campaign holds one product and one crop, yet its leads are "grouped by product and by crop", and a lead has no product (seam S15)
@@ -3253,7 +3402,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** P1-15/J6.2/J19.2 do not say whether "by product" keys on the lead's recommended product or the campaign's; recommended product is not listed as a derived value on A.2 Lead (minor absent rule)
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): "By product" means the lead's recommended product, listed as a derived field on the lead
 
 #### N23 · from F-R3-4 (R3 Marketing, filed major; skeptic Fable 5.1)
 **Parent claim (refuted).** "NPI campaign" and "Brand campaign" are streams while Facebook and TikTok also carry campaigns, so "by channel" has no field
@@ -3261,7 +3411,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** A one-line gloss "channel = stream" at J20.1 or A.2 would close the vocabulary gap
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): One-line note: channel = stream
 
 #### N24 · from F-R3-10 (R3 Marketing, filed major; skeptic Fable 5.1)
 **Parent claim (refuted).** PKR on Marketing's screen is self-declared, and no row makes the screen say so
@@ -3269,7 +3420,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** Exports (J20.5) carry no number definitions in the file (minor)
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Every export carries a definitions sheet or footer for its numbers
 
 #### N25 · from F-R3-11 (R3 Marketing, filed major; skeptic Fable 5.1)
 **Parent claim (refuted).** Marketing's analytics cannot answer Marketing's one stated goal: no geography, crop, acreage band or last-season cut
@@ -3277,7 +3429,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** (a) "acreage band" (P5-33, P6-11) is defined nowhere and survives anonymisation, so bands must be specified once (see F-R6-17); (b) Marketing is the only analytics persona with no geographic or last-season cut (minor, unspecified)
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Marketing can split campaign figures by last-season status (bands per S112, geography per S104)
 
 #### N26 · from F-R3-13 (R3 Marketing, filed major; skeptic Fable 5.1)
 **Parent claim (refuted).** Replies to Marketing's own WhatsApp campaigns have no stream that carries a campaign
@@ -3285,7 +3438,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** Which 4.2 stream such a reply is recorded under is unstated and affects J20.1's channel cut (minor, resolve with D3)
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): A reply to Marketing's own WhatsApp campaign is filed under WhatsApp and credited to the campaign; detail settled with D3 in M5
 
 #### N27 · from F-R3-14 (R3 Marketing, filed blocker; skeptic Fable 5.1)
 **Parent claim (refuted).** A STOP sent to Syngenta's WhatsApp Business number is seen only by Synapse, which tells nobody; the number is then in breach of WhatsApp's opt-out rule
@@ -3293,7 +3447,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** P5-9/4.2 do not say which number Marketing's outside campaigns use or that opt-out duties sit with its owner
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): One line: Marketing's campaigns use the number its owner names in 4.2; that owner handles opt-out requests outside Synapse; D1 unchanged
 
 #### N28 · from F-R3-17 (R3 Marketing, filed major; skeptic Fable 5.1)
 **Parent claim (refuted).** The "below threshold" count mixes three origins and hides unknown acreage, so Marketing cannot tell a small-farmer campaign from a form with no acreage field
@@ -3301,7 +3456,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** J20.1 lists routed outcomes as only contacted/converted/PKR, so Closed: below threshold / unreachable are invisible in campaign analytics; the definitions page should distinguish the P5-16 total from the routed Closed state (minor)
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Campaign figures show "closed: below threshold" and "closed: unreachable"; definitions page separates below threshold on arrival from closed below threshold later
 
 #### N29 · from F-R4-7 (R4 Product, filed minor; skeptic Fable 5.1)
 **Parent claim (refuted).** The e-commerce stream is scheduled into Capture although the Pilot does not use it
@@ -3309,7 +3465,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** The tenth stream has no build milestone in PLAN.md (S6, R6's — see F-R6-26)
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept, PLAN change): E-commerce purchase stream gets a build milestone in PLAN.md after the Pilot streams
 
 #### N30 · from F-R4-12 (R4 Product, filed minor; skeptic Fable 5.1)
 **Parent claim (refuted).** Marketing's goal cannot be answered in the Pilot, and the spec does not say what Marketing gets from it
@@ -3317,7 +3474,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** No Pilot-versus-Wave-2 mapping of screens for any stakeholder (general gap, belongs with F-R4-6/F-R4-9)
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (covered): Answered by the S42 Pilot column; no separate change
 
 #### N31 · from F-R5-1 (R5 Trust, filed major; skeptic Fable 5.1)
 **Parent claim (refuted).** "The grower's own contact" is not defined for signals Syngenta started (call-backs, replies to Marketing's outbound WhatsApp)
@@ -3325,7 +3483,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** 4.2 WhatsApp inbound captures "whether they messaged first" and no row consumes it (minor dangling datum)
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Remove the unused "whether they messaged first" field from the WhatsApp stream
 
 #### N32 · from F-R5-5 (R5 Trust, filed blocker; skeptic Fable 5.1)
 **Parent claim (refuted).** A STOP on Syngenta's WhatsApp Business number is held with no action and no Legal confirmation of the position is recorded
@@ -3333,7 +3492,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** D1's record names no individual or date beyond "leadership via Ahsan" — housekeeping already assigned, not a spec row
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** ( ) accept  (x) reject — reason: Ahsan, on being asked for the name and date: "Leadership via Ahsan" is enough  ( ) park — trigger:  
+**Ahsan's decision** (reject): Ahsan, on being asked for the name and date: "Leadership via Ahsan" is enough
 
 #### N33 · from F-R5-9 (R5 Trust, filed major; skeptic Fable 5.1)
 **Parent claim (refuted).** P6-12 residency has no scope (backups, queues, logs, the offline phone) and no fallback when the host has no Pakistan region
@@ -3341,7 +3501,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** P6-12's "Confirmed in Phase 3" cell could state that the AWS default will need a D5 substitution (editorial)
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept (unparked 2026-10-01)): One neutral line in P6-12: the hosting that meets Pakistan storage is decided in tech.md from Syngenta's recommended stack; no hosting choice made now
 
 #### N34 · from F-R5-24 (R5 Trust, filed major; skeptic Fable 5.1)
 **Parent claim (refuted).** Nothing detects or counts a shared-number merge in error, so the un-park trigger for a split can never fire; Hina's "wrong number" has no rule
@@ -3349,7 +3510,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** No reason code or count separates "two people on one phone" from "wrong number" (minor measurement gap); Hina "wrong number" is F-R1-17's
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** ( ) accept  (x) reject — reason: No "shared phone" reason; field feedback outside Synapse is enough  ( ) park — trigger:  
+**Ahsan's decision** (reject): No "shared phone" reason; field feedback outside Synapse is enough
 
 #### N35 · from F-R6-31 (R6 Build, filed minor; skeptic Fable 5.1)
 **Parent claim (refuted).** The fold is "low scores" in two rows and "the first 20" in another
@@ -3357,7 +3519,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** (a) stale "low scores below a fold" wording in P1-23, P2-2, 2.2 and DR-4 (tidy); (b) P5-20 does not say whether due or flagged leads beyond position 20 sit under "more leads"
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Flagged, overdue and due-today leads are never hidden behind "More leads", even past 20; the four old "low scores below the fold" sentences are tidied
 
 #### N36 · from F-R6-35 (R6 Build, filed minor; skeptic Fable 5.1)
 **Parent claim (refuted).** "One named owner" per list, but two lists name two owners
@@ -3365,7 +3528,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** Products "Marketing with the Portfolio Managers" spans two roles with no per-part split, so the notice recipient is undetermined (minor); P4-28's "one named owner" wording is literally untrue of the location row
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Product-row notices go to the PM of that product's portfolio; P4-28 reads "each part of a list has one named owner"
 
 #### N37 · from F-R6-53 (R6 Build, filed minor; skeptic Fable 5.1)
 **Parent claim (refuted).** Hina's queue is ordered by a score that 5.1 says does not exist yet
@@ -3373,7 +3537,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** 5.1 does not say in words that a lead is scored on arrival (one-clause wording fix)
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): 5.1: a lead is scored on arrival (for Hina's order) and re-scored after Hina
 
 #### N38 · from F-R6-62 (R6 Build, filed minor; skeptic Fable 5.1)
 **Parent claim (refuted).** The reachability adjustment is redefined with no opt-in input and no DR
@@ -3381,7 +3546,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** No DR names the reachability adjustment and the row credits the canvas for wording it does not use (one clause on DR-19)
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (rule change): Ahsan: "if there is no valid number; we won't route and show the lead to SUL; nothing can be done on it; instead this lead will be closed." Confirmed: the lead is closed as "no valid number" and never routed; a later signal from the same grower with a valid number becomes a normal lead carrying the earlier history. Replaces P4-18's "no contact" hold; at apply time reconcile with S12 (Hina wrong number) and N4(a) (deletion of unmatched messages)
 
 #### N39 · from F-R7-14 (R7 Open, filed minor; skeptic Opus 5.5)
 **Parent claim (refuted).** Finance owns none of the money figures: the reconciliation view has no sign-off, spend has no source
@@ -3389,7 +3555,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** A.4 K6 uses the audit's page name "a sign-off page" with Note "—" and does not say P3-2 calls it the reconciliation view; minor wording
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): A.4 K6 uses "reconciliation view"
 
 #### N40 · from F-R7-15 (R7 Open, filed minor; skeptic Opus 5.5)
 **Parent claim (refuted).** PKR display rules are incomplete: grouping, large totals and fractional figures
@@ -3397,7 +3564,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** No rule picks thousand (1,250,000) or lakh (12,50,000) grouping, and none gives a rounding method for derived money such as cost per lead and cost per converted lead (J20.2); minor; one clause in P6-5
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): Lakh grouping (PKR 12,50,000); calculated amounts rounded half up to whole rupees
 
 #### N41 · from F-R7-21 (R7 Open, filed major; skeptic Opus 5.5)
 **Parent claim (refuted).** The D5 row says "Nothing here", but the residency rule forces a change to the default AWS stack
@@ -3405,7 +3573,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** The 6.4 D5 row's "Nothing here" does not cross-refer to P6-12, though the Phase 3 stack revisit is where the residency hosting choice is made (missing cross-reference, no content change)
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept (unparked 2026-10-01)): The 6.4 D5 row points to P6-12 with the same neutral line (hosting decided in tech.md)
 
 #### N42 · from F-R7-26 (R7 Open, filed major; skeptic Opus 5.5)
 **Parent claim (refuted).** "In Urdu" has no localisation rules: direction, script, digits, date format
@@ -3413,7 +3582,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** The only Urdu display example (P2-5 "Contact by Tue 09:00 · Complete by Mon 25th") is English-style and no row picks Western or Urdu digits; a minor choice for UX.md in Phase 4
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept, amended): Ahsan: "same english style everywhere; no urdu style." Western digits and English-style dates and times in both languages
 
 #### N43 · from F-R7-28 (R7 Open, filed minor; skeptic Opus 5.5)
 **Parent claim (refuted).** Manager-side language is undefined: RSM lead-card reasons, the WhatsApp summary, and User.language (seam S27)
@@ -3421,7 +3591,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** The weekly WhatsApp summary (J22.1, P3-17) is a message, not a screen, and no row states its language (English only by inference from Q11); User.language is set for every role but has an effect only for SULs (P2-9); fix is to state both, not add a setting
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept): One line each: the weekly summary is in English; the language setting applies to the SUL app only
 
 #### N44 · from F-R7-34 (R7 Open, filed minor; skeptic Opus 5.5)
 **Parent claim (refuted).** The Mark column is empty on 162 of 189 numbered rows while the header's marking rules still read as live
@@ -3429,7 +3600,8 @@ A refuted finding stays refuted. Where its skeptic recorded a smaller claim that
 **Narrower claim.** The "How to mark" paragraph is drafting-time instruction that will be stale at the v1.0 cut, with no step recorded to retire it (tidy-up for the v1.0 edit); P1-27 is in the 1.8 Q7 answer list but its Mark cell is blank while the other five carry R (cosmetic)
 
 
-**TRIAGE:** ( ) accept  ( ) reject — reason:  ( ) park — trigger:
+**TRIAGE:** (x) accept  ( ) reject — reason:  ( ) park — trigger:  
+**Ahsan's decision** (accept, at v1.0): At the v1.0 cut, "How to mark" becomes "every row was approved with its part; changes after v1.0 are change requests"; P1-27 marked R
 
 ### 2.3 Already carried inside a surviving entry
 

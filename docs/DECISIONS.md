@@ -905,3 +905,16 @@ SPEC. Ahsan, 2026-10-01. Linear SYN-13.
 
 **Un-park trigger:** Phase 3 begins drafting docs/ARCHITECTURE.md and
 docs/INFRA.md.
+
+---
+
+## 2026-10-01 — Until PLAN.md has a calendar, a milestone or phase is an open item's due date
+
+**Decision.** The open items in SPEC 6.7 carry an owner and a due point that
+is a milestone or phase (for example "before M8", "Phase 3"), which stands in
+for a calendar date until PLAN.md gets a calendar in Phase 3. D7 is due before
+any PKR figure is linked to incentives, and is reviewed at the Pilot exit.
+Ahsan, 2026-10-01, on the SYN-11 scope check.
+
+**Why.** The Phase 2 gate asks every open item for an owner and a date, and
+PLAN.md has no dates yet; inventing calendar dates would be a guess.

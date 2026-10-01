@@ -600,3 +600,321 @@ that centroids misplace leads near the edges of large units.
 
 **Reversal cost.** Low: the fallback rule, the cap and the ownership are
 settings and list edits; the boundary files can be replaced.
+
+---
+
+## 2026-10-01 — SPEC.md review round 1 triaged: 170 decisions, recorded in the review folder
+
+**Decision.** Ahsan decided every finding of the Tier A review of SPEC.md v0.9
+(SYN-11): 126 surviving entries and 44 narrower claims. 156 are accepted
+(17 with his own changes, 2 as scope or rule changes), 7 rejected, 2 out of
+scope for now, 1 a Legal action with no SPEC row, 1 covered by another
+decision, 1 parked. The full record, with his words where he gave them, is
+`docs/reviews/spec-r1-raw/triage.md`; the findings are
+`docs/reviews/spec-r1.md`. The entries below record each answer that reverses
+an earlier dated decision or answer, and each park. Collected by question
+from 2026-09-30 to 2026-10-01.
+
+Rejected, so the spec keeps its current text: S49 (receipts from camera or
+gallery stay), S52 (no periodic access review; Admin acts on the
+communications received), S78 (no registration check on suggested products;
+off-label suggestions allowed), S93 (running costs budgeted outside
+Synapse), N10 (no group privacy or Syngenta IT go-live dependency), N32 (D1
+stays "leadership via Ahsan"), N34 (no "shared phone" reason). Out of scope
+for now, in SPEC 6.3.2, returning on Ahsan's request: S31 (leads SULs create
+themselves) and S37 (cost per lead; see below). S38 is a Syngenta Legal check
+of the Facebook and TikTok form privacy notices, not a SPEC row.
+
+**Why.** PROCESS §9 Tier A: Ahsan triages every surviving finding. Answers
+that only fill a gap the spec left open go into SPEC.md under C4 without an
+entry of their own; answers that overturn something decided go here first,
+with the reason (C3).
+
+---
+
+## 2026-10-01 — Contact means the grower was reached; the clocks run on the phone's time
+
+**Decision.** A call or WhatsApp from a lead logs an attempt; the lead moves
+to Contacted and the contact clock stops only when the SUL marks the attempt
+"Reached" (S1). Both clocks start when the SUL's phone receives the lead and
+stop at the time the action was logged on the phone; a synced action that met
+its promise withdraws the breach notice already sent; a server re-score never
+overrides an outcome the SUL logged, and only Admin removal or a territory
+change does, sending the entry to Admin's review (S5, S6, S82). Ahsan,
+2026-09-30.
+
+**Reverses.** The 2026-09-15 clock entry's "both clocks start when the lead
+reaches the SUL" (read as routed on the server) and its "contact clock stops
+at the first contact" (read by J2.2 as the first dial).
+
+**Why.** With a dial as contact, an SUL who dials and hangs up is 100% on
+time, so the Pilot's headline number would measure dialling. With server
+time, an SUL who works out of signal all day loses hours of every promise and
+gets breach notices for calls made on time.
+
+---
+
+## 2026-10-01 — A settings change applies to leads that reach an SUL after it
+
+**Decision.** A change to the threshold or to a clock promise applies to leads
+that reach an SUL after the change; open leads keep their segment and due
+times. A lead that moves up a segment restarts both clocks under the new
+promise; a move down keeps the earlier due times (S28, S29, S95). Ahsan,
+2026-09-30.
+
+**Reverses.** The 2026-09-16 threshold entry's "a lead below the threshold is
+never shown to any sales user", for leads already routed when the threshold
+is raised: they stay with their SUL.
+
+**Why.** Otherwise one threshold raise gives an open Hot lead three possible
+fates, including vanishing from the SUL's phone after a visit was planned,
+and one shortened promise makes every open lead overdue overnight with a
+notification each.
+
+---
+
+## 2026-10-01 — Clocks also pause on holidays Admin lists; the working week is defined once
+
+**Decision.** Admin keeps a yearly list of pause days (Eid and similar) that
+the clocks skip as well as Sundays, and the working week used by support
+hours and the monthly summary is defined once; every change is logged (S7,
+S124). Ahsan, 2026-09-30.
+
+**Reverses.** SPEC 5.10 Q13 (21 Sept): "clocks pause on Sundays only".
+
+**Why.** With Sundays only, every lead due over a multi-day Eid either takes
+a holiday call or breaches, and managers are notified during Eid.
+
+---
+
+## 2026-10-01 — Managers get targets, entered by Admin or DBO on Head of Sales' recommendation
+
+**Decision.** Targets exist for the on-time rates, leads converted, sales
+value and leads followed up. Head of Sales recommends them; Admin or DBO
+enter them ("head of sales won't be doing the entries himself"). Admin can
+change the target rules or switch any target parameter off. "Behind" is
+measured against the targets on manager views only; SULs still see no
+ranking (P2-11 stands). Ahsan, 2026-09-30 (S26).
+
+**Reverses.** Nothing recorded; the spec had no targets. Recorded here
+because it adds a sales-value target while D7 is open. A target is not an
+incentive: D7 still forbids linking any PKR figure to incentives until it is
+decided.
+
+**Why.** Without a target, "behind" and "short" are a builder's guess, and
+the Monday summary names an SUL on a rule nobody chose.
+
+---
+
+## 2026-10-01 — DBO has its own login role, and the call centre sits under DBO
+
+**Decision.** A `dbo` role: edit the sales structure and village-to-BSA
+assignment, work the below-threshold, rejected and pool lists, enter targets
+(entry above), approve Hina's script for non-campaign leads (entry below),
+and give call-centre agents the capture form. It cannot change settings,
+export, undo number changes, remove leads or read the audit trail. In
+Ahsan's words, "call center is the part of DBO; and DBO team looks after it".
+Ahsan, 2026-09-30 and 2026-10-01 (S51, S13, S14).
+
+**Amends.** The 2026-09-16 "Eight personas" entry, whose role list gave the
+portal only to Admin, the digital team. The eight stakeholders are
+unchanged; DBO and its call-centre agents get a role, not a ninth persona.
+
+**Why.** DBO works the portal daily. Without a role it either logs in as
+Admin, with settings, exports and the audit trail, or cannot do its job.
+
+---
+
+## 2026-10-01 — RSMs see a grower's number only on overdue, flagged or pool leads
+
+**Decision.** An RSM opens a grower's full card with the phone number only
+from an overdue, flagged or pool lead. Every opening is still logged. Ahsan,
+2026-10-01, after the risk was explained (S54).
+
+**Reverses.** SPEC P3-3 and the 18 Sept answer "full card for RSM is fine".
+
+**Why.** With open access and a log nobody must read, an RSM could collect a
+region's numbers one card at a time; Ahsan chose to narrow access rather
+than add a log review.
+
+---
+
+## 2026-10-01 — The Pilot may run one or more campaigns; "NPI" is a tag
+
+**Decision.** In Ahsan's words: "there could be one or multiple campaigns
+running at a time; either it's NPI or just a brand campaign; we are just
+tagging if it's NPI". Ahsan, 2026-09-30 (S107).
+
+**Reverses.** The 2026-09-11 naming entry: "The Pilot is Crop Doctor +
+WhatsApp + one NPI campaign, two zones, Engine v1". The Pilot is now Crop
+Doctor + WhatsApp + campaigns (NPI or brand), two zones, Engine v1.
+
+**Why.** Marketing runs brand and NPI campaigns side by side; the NPI flag
+already exists on the campaign record.
+
+---
+
+## 2026-10-01 — A campaign signal whose campaign cannot be read is held until it can be
+
+**Decision.** A campaign signal whose campaign Synapse cannot read is held,
+not routed. When the campaign becomes readable (D3 agreed, or a mapping
+fixed), Admin releases the held signals in one action, each carrying its
+campaign, and Marketing sees how many are held per campaign stream. Ahsan,
+2026-09-30 (S35, S36).
+
+**Reverses.** SPEC P4-11 and the D3 rows in 3.5, 4.6 and 6.4: "the lead
+still arrives, marked campaign unknown". That text came from the canvas, not
+from an earlier answer of Ahsan's. D3 itself stays open, decided in M5.
+
+**Consequence.** Until D3 is agreed in M5, campaign leads whose signal does
+not carry a readable campaign reference wait instead of reaching SULs.
+
+**Why.** A lead routed without its campaign is never credited to it, which
+understates the campaign Marketing has to defend.
+
+---
+
+## 2026-10-01 — SULs see their leads on a Google map; village boundaries are not shown to SULs
+
+**Decision.** In Ahsan's words: "we are not exposing villages boundaries to
+SULs; instead we are giving a google map visibility so that they can see the
+leads on map and navigate to them; village boundaries can be shown later if
+required". The digitised boundaries stay in Synapse for routing (the
+2026-09-28 entry is unchanged). Ahsan, 2026-10-01 (N7).
+
+**Reverses.** SPEC P7-4 (25 and 28 Sept): the boundaries "are held in
+Synapse and drawn on the SUL's map".
+
+**Consequence.** The Google Maps integration is built and managed by the
+team itself; it is not treated as a vendor on the register accepted as S47.
+Where a lead has no location, the location may come back from Hina, whose
+vendor is on that register (S47, S89). The phone no longer stores boundary
+polygons, which eases the 150 MB budget. Ahsan, 2026-10-01.
+
+---
+
+## 2026-10-01 — A lead with no valid number is closed, not held for later matching
+
+**Decision.** In Ahsan's words: "if there is no valid number; we won't route
+and show the lead to SUL; nothing can be done on it; instead this lead will
+be closed". The lead is closed as "no valid number". If the same grower later
+sends a signal with a valid number, that signal becomes a normal lead
+carrying the earlier history. Ahsan, 2026-10-01 (N38).
+
+**Reverses.** The 2026-09-18 D4 entry: a signal with no number "is matched
+to an existing grower by name, village and crop when the match is clear,
+otherwise held on Admin's 'no contact' list, counted, and merged into a lead
+when a later signal brings a number".
+
+**Follows from it.** Hina's "wrong number" (S12) closes the lead the same
+way. Closed no-number leads with no grower are deleted after the period
+accepted in N4. D4's one number, one grower rule is unchanged.
+
+---
+
+## 2026-10-01 — What Hina says is approved by Marketing for campaign leads and by Admin or DBO for the rest
+
+**Decision.** Hina's script and persona are controlled and approved by
+Marketing for campaign leads and by Admin or DBO for non-campaign leads; the
+approved version is recorded on the connection, and they can stop it. No
+disclosure line is required: Ahsan, "we shouldn't have an concern on this".
+Ahsan, 2026-09-30 (S46).
+
+**Reverses.** SPEC P5-2 (21 Sept, Hina 4): "Hina decides only how she runs
+each call".
+
+**Why.** Hina speaks to growers in Syngenta's name, so Syngenta, not the
+third party, decides what she says.
+
+---
+
+## 2026-10-01 — Portfolio Managers own and approve the agronomy lists
+
+**Decision.** The product "treats" list and the season-timing table are
+owned and approved by the Portfolio Managers; DBO maintains them if
+required. Product-row notices go to the PM of that product's portfolio.
+Ahsan, 2026-09-30 and 2026-10-01 (S92, N36).
+
+**Reverses.** The 2026-09-21 scoring entry: "The season timing table (crop,
+problem, months) is owned by Marketing".
+
+**Why.** The lists drive every lead card's suggestion and the timing score;
+the PMs own the portfolios they describe.
+
+---
+
+## 2026-10-01 — Every scoring-weight change notifies every stakeholder
+
+**Decision.** A change to the scoring weights, whether Admin types it or
+applies an engine proposal, notifies all stakeholders. Ahsan, 2026-09-30
+(S100).
+
+**Amends.** The 2026-09-21 scoring entry, under which proposals notified
+Head of Sales, ZMs, RSMs and SULs, and hand-made changes (P5-14) notified
+Head of Sales only.
+
+---
+
+## 2026-10-01 — Cost per lead leaves the Pilot
+
+**Decision.** In Ahsan's words: "let's not manage cost per lead type things
+at this stage; we will do later if required". Cost per lead and cost per
+converted lead leave J20.2 and P3-16 and are listed in 6.3.2; Marketing can
+still enter spend on a campaign. Ahsan, 2026-09-30 and 2026-10-01 (S37).
+
+**Reverses.** SPEC 3.6 Q6 (18 Sept): "cost per lead shown".
+
+---
+
+## 2026-10-01 — The "Last season" tab holds this season's leads from last season's growers
+
+**Decision.** The tab lists this season's leads from growers who converted
+or were never reached last season; it lists no grower without a lead this
+season. It appears from the first season start after go-live. Ahsan,
+2026-09-30 (S16, S105).
+
+**Reverses.** SPEC P1-17 (17 Sept): a tab of "last season's growers" so the
+SUL can "start the season from known ground", in favour of P5-19 (21 Sept).
+
+**Why.** SULs cannot create leads (J12.2), so a grower with no lead this
+season would sit on a list with nothing to act on.
+
+---
+
+## 2026-10-01 — PARKED: SUL app 2G/3G numbers and the field phone survey (S61)
+
+**Decision.** P2-10 and P6-8 keep the principle ("usable on 2G/3G", "the
+field's current phones"). The numbers (action send time, first-sync size,
+daily sync size) and a DBO survey of the Pilot zones' phones become Phase 4
+UX acceptance inputs. Ahsan, 2026-09-30, confirmed 2026-10-01. Linear SYN-12.
+
+**Un-park trigger:** Phase 4 starts writing docs/UX.md, or a Phase 4 session
+sets the low-end Android constraints, whichever comes first.
+
+---
+
+## 2026-10-01 — PARKED: restore rules, uptime target and secrets storage go to INFRA.md (N9, S84)
+
+**Decision.** After any restore, anonymised growers stay anonymised, the
+audit trail stays intact and phone actions already synced are kept; an
+uptime target is named; each inbound feed's signing keys are stored in a
+secrets vault. These are Phase 3 infrastructure requirements, and SPEC.md
+carries one line pointing to INFRA.md. The SPEC half of S84, that every
+inbound feed including Hina's must carry a valid signature, is accepted into
+SPEC. Ahsan, 2026-10-01. Linear SYN-13.
+
+**Un-park trigger:** Phase 3 begins drafting docs/ARCHITECTURE.md and
+docs/INFRA.md.
+
+---
+
+## 2026-10-01 — Until PLAN.md has a calendar, a milestone or phase is an open item's due date
+
+**Decision.** The open items in SPEC 6.7 carry an owner and a due point that
+is a milestone or phase (for example "before M8", "Phase 3"), which stands in
+for a calendar date until PLAN.md gets a calendar in Phase 3. D7 is due before
+any PKR figure is linked to incentives, and is reviewed at the Pilot exit.
+Ahsan, 2026-10-01, on the SYN-11 scope check.
+
+**Why.** The Phase 2 gate asks every open item for an owner and a date, and
+PLAN.md has no dates yet; inventing calendar dates would be a guess.

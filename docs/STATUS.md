@@ -4,12 +4,13 @@
 the round 1 adversarial review (`docs/reviews/spec-r1.md`) applied as Ahsan
 triaged it — 170 decisions in `docs/reviews/spec-r1-raw/triage.md`, 19
 DECISIONS entries dated 2026-10-01. From here a SPEC change is a change
-request. The SYN-11 PR is open, unmerged. Nothing runs yet; no commands until M0.
+request. Nothing runs yet; no commands until M0.
 
-**Last merged PR:** #5, "docs: session 2.1 close — STATUS and JOURNAL entry
-007 (SYN-10)", squash-merged to `main` as `f000743` on 2026-10-01.
+**Last merged PR:** #6, "docs: SPEC.md v1.0 — session 2.2 adversarial review,
+triaged and applied (SYN-11)", which carries this file; squash-merged to
+`main` on 2026-10-01 on Ahsan's approval. Before it: #5 (`f000743`).
 
-**Next task:** merge the SYN-11 PR on Ahsan's word; then Phase 3, session 3.1 —
+**Next task:** Phase 3, session 3.1 —
 substitutions and the architecture docs, from Syngenta's recommended stack
 (tech.md; CLAUDE.md Stack stays PENDING until then). Create its Linear issue
 at the start of that session (none exists yet).

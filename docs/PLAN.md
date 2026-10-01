@@ -52,7 +52,9 @@ and STATUS says so.
 ## M7 — Remaining connectors
 TikTok lead forms, NPI campaigns, brand campaigns, call-centre capture, all
 from the template using the M5 attribution convention. Nine connectors on a
-health page. The one place parallel agents are safe.
+health page. The one place parallel agents are safe. Then, after the Pilot
+streams, the e-commerce purchase stream: a signal-only connector that never
+creates a lead (SPEC P4-27a; added from the SPEC r1 review, N29).
 
 ## M8 — Harden Capture
 Production-shaped synthetic data, the 10,000-event burst with zero loss and p95
